@@ -6,6 +6,9 @@ export default defineConfig({
   title: "MuleSoft Forge",
   description: "Community-contributed connectors and modules for MuleSoft",
 
+  // Enable dead link checking - all links in Part D validation passed
+  // ignoreDeadLinks removed to catch future broken link regressions
+
   // Theme configuration
   themeConfig: {
     // Site logo - TODO: Add logo in Phase 1.2

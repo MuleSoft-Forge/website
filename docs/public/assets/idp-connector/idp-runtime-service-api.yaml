@@ -1,0 +1,1460 @@
+openapi: 3.0.4
+info:
+  title: MuleSoft IDP Universal 🌐 REST Smart Connector 🔌
+  version: v1
+  description: '**MuleSoft IDP Universal REST Smart Connector**
+
+
+    This API provides a unified interface for interacting with MuleSoft Intelligent
+    Document Processing (IDP) actions, mitigating challenges associated with connector
+    sprawl and reconfiguration overhead when integrating IDP with Anypoint Studio.
+
+
+    **Key Benefits:    **
+
+    * **Reduced Connector Sprawl:** Consolidates multiple IDP actions into a single
+    connector interface.
+
+    * **Simplified Configuration:** Minimizes reconfiguration needs in Anypoint projects
+    when action versions change.
+
+    * **Enhanced Flexibility:** Designed to support potentially undocumented functionalities.
+
+    * **Scalability:** Enables rapid onboarding of new document actions for enterprise
+    scale.
+
+
+    See the official documentation: [Integrating IDP with Anypoint Studio](https://docs.mulesoft.com/idp/integrating-idp-with-anypoint-studio)
+
+
+    *Note: Change history has been moved to version control/external documentation.*
+
+    '
+tags:
+  - name: idp-services
+    description: MuleSoft IDP Runtime Services
+  - name: platform-services
+    description: Anypoint Platform IDP Services
+
+
+paths:
+
+### IDP Runtime Services
+  /api/v1/organizations/{organizationId}/actions/{actionId}/versions/{versionSemantic}/executions:
+    servers:
+      - url: https://{region}.anypoint.mulesoft.com
+        description: MuleSoft IDP Runtime Services
+        variables:
+          region:
+            description: Select the region for the IDP Runtime Service.
+            default: idp-rt.us-east-1
+            enum:
+              - idp-rt.us-east-1
+              - idp-rt.eu-central-1
+    parameters:
+      - in: path
+        name: organizationId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-orgId'
+      - in: path
+        name: actionId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-actionId'
+      - in: path
+        name: versionSemantic
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-actionVersion'
+    post:
+      security:
+        - mulesoft-connectedApp-oauth: []
+      summary: postDocumentActionExecution Execute a versioned Action with a File or Base64 payload
+      description: 'Submits a file for IDP processing using a specific document action
+        and version.
+
+        Example URL: `https://idp-rt.us-east-1.anypoint.mulesoft.com/api/v1/organizations/{YOUR_ORG_ID}/actions/c333413d-6593-4423-b3d4-f8ff4bf88917/versions/1.2.0/executions`
+
+        '
+      operationId: 🌐 Service IDP - Execution - Submit
+      parameters: 
+        - in: header
+          description: Use a Different Salesforce Org to Execute Your Document Actions https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#use-a-different-salesforce-org-to-execute-your-document-actions
+          required: false
+          name: x-sfdc-core-tenant-id
+          schema: 
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Base64ActionExecutionRequest'
+          multipart/form-data:
+            schema:
+              description: "\n## Dataweave Example\n```\n\n  %dw 2.0\n  output java\n\
+                \  ---\n  {\n    parts: {\n      callback : {\n        headers: {\n  \
+                \        \"Content-Type\": \"text/plain\"\n        },\n          content\
+                \ : '{\"noAuthUrl\": \"https://your-callback-endpoint.example.com\"}' // Note\
+                \ SINGLE quotes\n        },\n      file: {\n        headers: {\n     \
+                \     \"Content-Disposition\": {\n            name: \"file\",\n      \
+                \      filename: \"IDP-PO-CD656092-BurlingtonTextiles.pdf\",\n       \
+                \     subtype: \"form-data\"\n          },\n          \"Content-Type\"\
+                : \"application/octet-stream\"\n        },\n        content: readUrl(\"\
+                classpath://IDP-PO-CD656092-BurlingtonTextiles.pdf\", \"application/octet-stream\"\
+                ).\n      }\n    }\n  }\n```\n\n\n## OR Dataweave Example\n```\n\n  %dw\
+                \ 2.0\n  output java\n  import * from dw::core::Binaries\n  ---\n  {\n\
+                \    parts: {\n      callback : {\n        headers: {\n          \"Content-Type\"\
+                : \"text/plain\"\n        },\n          content : '{\"noAuthUrl\": \"\
+                https://your-callback-endpoint.example.com\"}'\n        },\n      file: {\n\
+                \        headers: {\n          \"Content-Disposition\": {\n          \
+                \  name: \"file\",\n            filename: \"IDP-PO-CD656092-BurlingtonTextiles.pdf\"\
+                ,\n            subtype: \"form-data\"\n          },\n          \"Content-Type\"\
+                : \"application/octet-stream\"    \n        },\n        content: fromBase64(\"\
+                JVBERi0xLjcNCiW...deleted for brevity.....0YNCg==\")\n      }\n    }\n\
+                \  }\n```\n\n\n## Would BOTH produce the following Multipart Example\n\
+                ```\n  ------WebKitFormBoundary2Iqii0OMIdEA33iA\n  Content-Disposition:\
+                \ form-data; name=\"callback\"\n  Content-Type: text/plain\n\n  {\"noAuthUrl\"\
+                : \"https://your-callback-endpoint.example.com\"}\n  ------WebKitFormBoundary2Iqii0OMIdEA33iA\n\
+                \  Content-Disposition: form-data; name=\"file\"; filename=\"IDP-PO-CD656092-BurlingtonTextiles.pdf\"\
+                \n  Content-Type: application/pdf\n\n  %PDF-1.7\n  …… DELETED for BREVITY…\
+                …\n  %����\n  1 0 obj\n  <</Pages 2 0 R /Type/Catalog>>\n  %%EOF\n\n \
+                \ ------WebKitFormBoundary2Iqii0OMIdEA33iA--\n\n```\n"
+              type: object
+              properties:
+                callback:
+                  type: string
+                  description: Callback URL
+                  default: '{"noAuthUrl":"callbackURL"}'
+                file:
+                  $ref: '#/components/schemas/Part'
+              required:
+                - file
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/postExecutionResponse'
+          description: Created
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+          description: Bad Request
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+          description: Internal Server Error
+      tags: 
+        - idp-services
+  /api/v1/organizations/{organizationId}/actions/{actionId}/versions/{versionSemantic}/executions/{executionId}:
+    servers:
+      - url: https://{region}.anypoint.mulesoft.com
+        description: MuleSoft IDP Runtime Services
+        variables:
+          region:
+            description: Select the region for the IDP Runtime Service.
+            default: idp-rt.us-east-1
+            enum:
+              - idp-rt.us-east-1
+              - idp-rt.eu-central-1
+    parameters:
+      - in: path
+        name: organizationId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-orgId'
+      - in: path
+        name: actionId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-actionId'
+      - in: path
+        name: versionSemantic
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-actionVersion'
+      - in: path
+        name: executionId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-executionId'
+    get:
+      security:
+        - mulesoft-connectedApp-oauth: []
+      summary: Get an execution of a published action by a given action Id and action version
+      description: 'Retrieves the State & Result Data of a specific document action execution.
+
+        See getDocumentActionExecutionResult https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#retrieve-the-results-of-the-execution
+        After a document action successfully processes a document, or after a reviewer verifies and submits a document queued for review, the results are available for consumption.
+        When you use the IDP API to execute your document actions, retrieve the results by calling the /executions endpoint and providing an executionId,
+        Example URL: `https://idp-rt.us-east-1.anypoint.mulesoft.com/api/v1/organizations/{YOUR_ORG_ID}/actions/c333413d-6593-4423-b3d4-f8ff4bf88917/versions/1.2.0/executions/ba9c0735-c95c-4d92-84f1-d72599900552`
+
+        '
+      operationId: 🌐 Service IDP - Execution Result - Retrieve
+      parameters:
+        - description: Only keep the extracted value of the given field, remove confidenceScore and geometry from the response body
+          in: query
+          name: valueOnly
+          required: false
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/object-DocumentExecutionGetResponse'
+          description: Success
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+          description: Internal Server Error
+      tags: 
+        - idp-services
+  /api/v1/organizations/{organizationId}/reviews:
+    servers:
+      - url: https://{region}.anypoint.mulesoft.com
+        description: MuleSoft IDP Runtime Services
+        variables:
+          region:
+            description: Select the region for the IDP Runtime Service.
+            default: idp-rt.us-east-1
+            enum:
+              - idp-rt.us-east-1
+              - idp-rt.eu-central-1
+    parameters:
+      - in: path
+        name: organizationId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-orgId'
+    get:
+      security: 
+        - mulesoft-basic-login: []
+      summary: Get a list of all executions requiring manual review, across actions, that the requesting user has permission to review
+      description: 'Get a list of all executions requiring manual review, across actions, that the requesting user has permission to review.
+
+        Example URL: `https://idp-rt.us-east-1.anypoint.mulesoft.com/api/v1/organizations/{YOUR_ORG_ID}/reviews?page=0&size=20`
+
+        '
+      operationId: 🌐 Service IDP - ReviewTask - List
+      parameters:
+        - description: Zero Based page index.
+          in: query
+          name: page
+          schema:
+            default: 0
+            format: int32
+            type: integer
+        - description: Number of items per page.
+          in: query
+          name: size
+          schema:
+            default: 20
+            format: int32
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReviewItem'
+          description: Success
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+          description: Internal Server Error
+      tags: 
+        - idp-services
+  /api/v1/organizations/{organizationId}/actions/{actionId}/reviews/{executionId}:
+    servers:
+      - url: https://{region}.anypoint.mulesoft.com
+        description: MuleSoft IDP Runtime Services
+        variables:
+          region:
+            description: Select the region for the IDP Runtime Service.
+            default: idp-rt.us-east-1
+            enum:
+              - idp-rt.us-east-1
+              - idp-rt.eu-central-1
+    parameters:
+      - in: path
+        name: organizationId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-orgId'
+      - in: path
+        name: actionId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-actionId'
+      - in: path
+        name: executionId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-executionId'
+    delete:
+      security: 
+        - mulesoft-basic-login: []
+      summary: Delete a review task (Execution Status is updated as SUCCEEDED without changing the execution result)
+      operationId: 🌐 Service IDP - Review Task - Delete
+      responses:
+        '200':
+          description: Success
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+          description: Internal Server Error
+      tags: 
+        - idp-services
+    get:
+      security: 
+        - mulesoft-basic-login: []
+      summary: Get a list of low-confidence fields by Execution Id
+      operationId: 🌐 Service IDP - Review Task - Retrieve
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentActionLowConfidenceExecution'
+          description: Success
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+          description: Internal Server Error
+      tags: 
+        - idp-services
+    patch:
+      security: 
+        - mulesoft-basic-login: []
+      summary: Patch a list of low-confidence fields by Execution Id
+      operationId: 🌐 Service IDP - Review Task - updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentActionLowConfidenceExecution'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentActionLowConfidenceExecution'
+          description: Success
+        '400':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+          description: Bad Request
+        '500':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+          description: Internal Server Error
+      tags: 
+        - idp-services
+
+### Anypoint Platform Services for IDP
+  /idp/api/v1/organizations/{organizationId}/actions:
+    servers:
+      - url: https://{anypointControlPlane}
+        description: Anypoint Platform IDP Services
+        variables:
+          anypointControlPlane:
+            description: https://docs.mulesoft.com/hosting-home/#control-plane-hosting-options
+            default: anypoint.mulesoft.com
+            enum:
+              - anypoint.mulesoft.com
+              - eu1.anypoint.mulesoft.com
+    parameters:
+      - in: path
+        name: organizationId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-orgId'
+    get:
+      security: 
+        - mulesoft-basic-login: []
+      summary: Platform API - List IDP Actions
+      description: 'Retrieves a list of published IDP Actions within the specified
+        organization from the Anypoint Platform.
+
+        Example URL: `https://anypoint.mulesoft.com/idp/api/v1/organizations/{orgId}/actions?page=0&size=5&sort=type,desc`
+
+        '
+      operationId: ⚙️ Platform IDP - Actions - List
+      parameters:
+      - description: Zero Based page index.
+        in: query
+        name: page
+        schema:
+          default: 0
+          format: int32
+          type: integer
+      - description: Number of items per page.
+        in: query
+        name: size
+        schema:
+          default: 20
+          format: int32
+          type: integer
+      - description: Sorting criteria (field,direction).
+        in: query
+        name: sort
+        schema:
+          default: updatedAt,desc
+          enum:
+          - updatedAt,desc
+          - updatedAt,asc
+          - name,desc
+          - name,asc
+          - type,desc
+          - type,asc
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/object-actionsList'
+          description: Success - List of IDP actions retrieved.
+      tags: 
+      - platform-services
+  /idp/api/v1/organizations/{organizationId}/actions/{actionId}:
+    servers:
+      - url: https://{anypointControlPlane}
+        description: Anypoint Platform IDP Services
+        variables:
+          anypointControlPlane:
+            description: https://docs.mulesoft.com/hosting-home/#control-plane-hosting-options
+            default: anypoint.mulesoft.com
+            enum:
+              - anypoint.mulesoft.com
+              - eu1.anypoint.mulesoft.com
+    parameters:
+      - in: path
+        name: organizationId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-orgId'
+      - in: path
+        name: actionId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-actionId'
+    get:
+      security: 
+        - mulesoft-basic-login: []
+      summary: Platform API - Get IDP Action Details
+      description: 'Retrieves high-level details for a specific IDP Action from the
+        Anypoint Platform. Note: This endpoint might retrieve details associated with
+        a default or specific version (e.g., 1.0.0 as mentioned in the original spec).
+
+        Example URL: `https://anypoint.mulesoft.com/idp/api/v1/organizations/{orgId}/actions/{actionId}`
+
+        '
+      operationId: ⚙️ Platform IDP - Action Detail - Retrieve
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/object-action'
+          description: Success - IDP action details retrieved.
+        '404':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/object-commonError'
+          description: Not Found - Action ID not found.
+      tags: 
+      - platform-services
+  /idp/api/v1/organizations/{organizationId}/actions/{actionId}/reviewers:
+    servers:
+      - url: https://{anypointControlPlane}
+        description: Anypoint Platform IDP Services
+        variables:
+          anypointControlPlane:
+            description: https://docs.mulesoft.com/hosting-home/#control-plane-hosting-options
+            default: anypoint.mulesoft.com
+            enum:
+              - anypoint.mulesoft.com
+              - eu1.anypoint.mulesoft.com
+    parameters:
+      - in: path
+        name: organizationId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-orgId'
+      - in: path
+        name: actionId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-actionId'
+    get:
+      security: 
+        - mulesoft-basic-login: []
+      summary: Platform API - List IDP Action Reviewers
+      description: 'Retrieves a list of users or teams assigned as reviewers for a
+        specific IDP Action from the Anypoint Platform.
+
+        Example URL: `https://anypoint.mulesoft.com/idp/api/v1/organizations/{orgId}/actions/{actionId}/reviewers`
+
+        '
+      operationId: ⚙️ Platform IDP - Action Reviewers - List
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/object-Reviewer'
+                type: array
+          description: Success - List of reviewers retrieved.
+        '404':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/object-commonError'
+          description: Not Found - Action ID not found.
+      tags: 
+        - platform-services
+  /idp/api/v1/organizations/{organizationId}/actions/{actionId}/versions:
+    servers:
+      - url: https://{anypointControlPlane}
+        description: Anypoint Platform IDP Services
+        variables:
+          anypointControlPlane:
+            description: https://docs.mulesoft.com/hosting-home/#control-plane-hosting-options
+            default: anypoint.mulesoft.com
+            enum:
+              - anypoint.mulesoft.com
+              - eu1.anypoint.mulesoft.com
+    parameters:
+      - in: path
+        name: organizationId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-orgId'
+      - in: path
+        name: actionId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-actionId'
+    get:
+      security: 
+        - mulesoft-basic-login: []
+      summary: Platform API - List IDP Action Versions
+      description: 'Retrieves a list of available versions for a specific IDP Action
+        from the Anypoint Platform.
+
+        Example URL: `https://anypoint.mulesoft.com/idp/api/v1/organizations/{orgId}/actions/{actionId}/versions?page=0&size=10&sort=version,desc`
+
+        '
+      operationId: ⚙️ Platform IDP - Action Versions - List
+      parameters:
+      - description: Zero Based page index.
+        in: query
+        name: page
+        schema:
+          default: 0
+          format: int32
+          type: integer
+      - description: Number of items per page.
+        in: query
+        name: size
+        schema:
+          default: 20
+          format: int32
+          type: integer
+      - description: Sorting criteria (currently only 'version,desc' seems implied
+          by example, confirm other options).
+        in: query
+        name: sort
+        schema:
+          default: version,desc
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/object-actionVersion'
+                type: array
+          description: Success - List of action versions retrieved.
+        '404':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/object-commonError'
+          description: Not Found - Action ID not found.
+      tags: 
+        - platform-services
+  /idp/api/v1/organizations/{organizationId}/actions/{actionId}/versions/{versionSemantic}:
+    servers:
+      - url: https://{anypointControlPlane}
+        description: Anypoint Platform IDP Services
+        variables:
+          anypointControlPlane:
+            description: https://docs.mulesoft.com/hosting-home/#control-plane-hosting-options
+            default: anypoint.mulesoft.com
+            enum:
+              - anypoint.mulesoft.com
+              - eu1.anypoint.mulesoft.com
+    parameters:
+      - in: path
+        name: organizationId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-orgId'
+      - in: path
+        name: actionId
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-actionId'
+      - in: path
+        description: The specific semantic version of the action (e.g., 1.2.0).
+        name: versionSemantic
+        required: true
+        schema:
+          $ref: '#/components/schemas/field-actionVersion'
+    get:
+      security: 
+        - mulesoft-basic-login: []
+      summary: Platform API - Get IDP Action Version Details
+      description: 'Retrieves detailed information for a specific version of an IDP
+        Action from the Anypoint Platform.
+
+        Example URL: `https://anypoint.mulesoft.com/idp/api/v1/organizations/{orgId}/actions/{actionId}/versions/{versionSemantic}`
+
+        '
+      operationId: ⚙️ Platform IDP - Action Version Details - Retrieve
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/object-actionVersion'
+          description: Success - Action version details retrieved.
+        '404':
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/object-commonError'
+          description: Not Found - Action ID or Version not found.
+      tags: 
+        - platform-services
+
+components:
+  securitySchemes:
+    mulesoft-connectedApp-oauth:
+      description: "MuleSoft Connected App using OAuth 2.0 Client Credentials flow.\n\
+        Requires `client_id` and `client_secret` from a configured Connected App with\
+        \ appropriate IDP scopes/permissions.\nSee: [Configure Connected Apps](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#create-a-connected-app)\n\
+        \n**Token Request Example:**\n```bash\ncurl --location --request POST 'https://{mulesoftAnypointRegion}/accounts/api/v2/oauth2/token'\
+        \ \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n  \"grant_type\"\
+        : \"client_credentials\",\n  \"client_id\": \"<your-connected-app-client-id>\"\
+        ,\n  \"client_secret\": \"<your-connected-app-client-secret>\"\n}'\n```\n"
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: /accounts/api/v2/oauth2/token
+      type: oauth2
+    mulesoft-basic-login:
+      description: MuleSoft Anypoint Platform Basic Authentication using username
+        and password. Generally less preferred than Connected Apps for programmatic
+        access.
+      scheme: basic
+      type: http
+
+
+  schemas:
+    Base64ActionExecutionRequest:
+      required:
+        - file
+      type: object
+      properties:
+        callback:
+          type: string
+          description: Callback Url
+          example: '{"noAuthUrl":"callbackURL"}'
+        file:
+          type: string
+          description: File content in base64 string format
+          example: JVBERi0xLjMKMyAwIG9iago8PC9UeXBlIC9QYWdlCi9QYXJlbnQgMSAwIFIKL1Jlc291cm5lcyAyIDAgUgovQ29udGVudHMgNCAwIFI+PgplbmRvYmoKNCAwIG9iago8PC9GaWx0ZXIgL0ZsYXRlRGVjb2RlIC9MZW5ndGggNzE+PgpzdHJlYW0KeJwzUvDiMtAzNVco53IKUdB3M1Sw0DMwUAhJU3ANAYkYG+oZWihYGJjoGZgphKQoaBQn5qQWp+UXJadqKoRkgVQBAO5BEAMKZW5kc3RyZWFtCmVuZG9iagoxIDAgb2JqCjw8L1R5cGUgL1BhZ2VzCi9LaWRzIFszIDAgUiBdCi9Db3VudCAxCi9NZWRpYUJveCBbMCAwIDU5NS4yOCA4NDEuODldCj4+CmVuZG9iago1IDAgb2JqCjw8L1R5cGUgL0ZvbnQKL0Jhc2VGb250IC9IZWx2ZXRpY2EKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9Qcm9jU2V0IFsvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJXQovRm9udCA8PAovRjEgNSAwIFIKPj4KL1hPYmplY3QgPDwKPj4KPj4KZW5kb2JqCjYgMCBvYmoKPDwKL1Byb2R1Y2VyIChQeUZQREYgMS43LjIgaHR0cDovL3B5ZnBkZi5nb29nbGVjb2RlLmNvbS8pCi9DcmVhdGlvbkRhdGUgKEQ6MjAyNTAxMDgwNDU4MzgpCj4+CmVuZG9iago3IDAgb2JqCjw8Ci9UeXBlIC9DYXRhbG9nCi9QYWdlcyAxIDAgUgovT3BlbkFjdGlvbiBbMyAwIFIgL0ZpdEggbnVsbF0KL1BhZ2VMYXlvdXQgL09uZUNvbHVtbgo+PgplbmRvYmoKeHJlZgowIDgKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMjI3IDAwMDAwIG4gCjAwMDAwMDA0MTAgMDAwMDAgbiAKMDAwMDAwMDAwOSAwMDAwMCBuIAowMDAwMDAwMDg3IDAwMDAwIG4gCjAwMDAwMDAzMTQgMDAwMDAgbiAKMDAwMDAwMDUxNCAwMDAwMCBuIAowMDAwMDAwNjIzIDAwMDAwIG4gCnRyYWlsZXIKPDwKL1NpemUgOAovUm9vdCA3IDAgUgovSW5mbyA2IDAgUgo+PgpzdGFydHhyZWYKNzI2CiUlRU9GCg==
+        fileName:
+          type: string
+          description: File name provided by user
+          example: testFile.pdf
+      description: Request object for executing an action with a Base64-encoded file
+    object-DocumentExecutionPostRequestBase64:
+      description: Request object for submitting a document action execution with
+        the file content encoded in Base64.
+      properties:
+        callback:
+          description: Optional callback configuration to notify upon completion.
+          example:
+            noAuthUrl: https://my.service.com/idp/callback/{executionId}
+          properties:
+            noAuthUrl:
+              description: The URL to call back without authentication.
+              format: url
+              type: string
+          type: object
+        file:
+          description: Base64 encoded string of the file content.
+          example: JVBERi0xLjQKJeLjz9MKMyAwIG9iago8PCAv...
+          format: byte
+          type: string
+        fileName:
+          description: The name of the file being submitted, including extension (e.g.,
+            'invoice.pdf').
+          example: purchase_order_123.pdf
+          type: string
+      required:
+      - fileName
+      - file
+      title: Document Execution Request (Base64)
+      type: object
+    DocumentActionLowConfidenceExecution:
+      required:
+        - analyzersResults
+        - queriesResults
+        - results
+        - signaturesResults
+      type: object
+      properties:
+        analyzersResults:
+          type: array
+          description: Analyzers that need review
+          items:
+            $ref: '#/components/schemas/FilteredLlmAnalyzerLowConfidenceResult'
+          default: []
+        queriesResults:
+          $ref: '#/components/schemas/Json'
+        results:
+          $ref: '#/components/schemas/Json'
+        signaturesResults:
+          $ref: '#/components/schemas/Json'
+      description: Low Confidence Items/Queries/Analyzers/Signatures
+    FilteredLlmAnalyzerLowConfidenceResult:
+      required:
+        - confidenceScore
+        - id
+        - name
+        - query
+        - result
+      type: object
+      properties:
+        confidenceScore:
+          type: number
+          format: float
+        id:
+          type: string
+          format: uuid
+        isValidated:
+          type: boolean
+        name:
+          type: string
+        query:
+          type: string
+        result:
+          type: string
+      description: Analyzers that need review
+    Json:
+      type: object
+      description: Signatures with Low Confidence Scores
+    JsonNode:
+      type: object
+    Pageable:
+      type: object
+      properties:
+        page:
+          minimum: 0
+          type: integer
+          format: int32
+        size:
+          minimum: 1
+          type: integer
+          format: int32
+        sort:
+          type: array
+          items:
+            type: string
+    Part:
+      type: object
+    Problem:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Human-readable explanation specific to this occurrence of the problem
+        status:
+          type: integer
+          description: Number indicating the HTTP status code generated by the origin server for this occurrence of the problem
+          format: int32
+        title:
+          type: string
+          description: Short, human-readable summary of the problem type
+        type:
+          type: string
+          description: URI reference that identifies the problem type
+          format: uri
+      description: Problem details response object
+    ReviewItem:
+      type: object
+      properties:
+        docActionId:
+          type: string
+          description: Document Action Id
+        docFileId:
+          type: string
+          description: Document File Id
+          format: uuid
+        docFileName:
+          type: string
+          description: Document FileName
+        docOperationCreationDate:
+          type: string
+          description: Document Operation Creation Date
+          format: date-time
+        docOperationId:
+          type: string
+          description: Document Operation Id
+          format: uuid
+      description: Review Item Response
+    postExecutionResponse:
+      type: object
+      properties:
+        documentName:
+          type: string
+        id:
+          type: string
+        status:
+          type: string
+      description: Response to POST execution
+    Prompt:
+      description: Configuration for a single prompt within an IDP Action.
+      properties:
+        confidenceThreshold:
+          description: The minimum confidence score (0-100) required to avoid manual
+            review for this prompt.
+          example: 70
+          format: int32
+          type: integer
+        hidden:
+          description: Whether the prompt is hidden in the UI.
+          example: false
+          type: boolean
+        prompt:
+          description: The question asked by the prompt.
+          example: What is the purchase order number?
+          type: string
+        required:
+          description: Whether an answer to this prompt is considered required.
+          example: true
+          type: boolean
+        source:
+          description: Where the prompt primarily gets its answer (LLM-generated or
+            extracted directly from document).
+          enum:
+          - llm
+          - document
+          example: document
+          type: string
+      required:
+      - hidden
+      - prompt
+      - source
+      - required
+      - confidenceThreshold
+      title: IDP Action Prompt Detail
+      type: object
+    Prompts:
+      additionalProperties:
+        $ref: '#/components/schemas/Prompt'
+      description: A map of prompt configurations used in the action. The key is the
+        prompt ID/name.
+      title: IDP Action Prompts Configuration
+      type: object
+    field-ExecutionStatus:
+      description: 'Indicates the current state of the document processing execution.
+
+        See: [Execution Results Reference](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#execution-status-reference).
+
+        Possible values:
+
+        - `ACKNOWLEDGED`: Request received.
+
+        - `IN_PROGRESS`: Execution started.
+
+        - `RESULTS_PENDING`: Execution finished, processing results.
+
+        - `MANUAL_VALIDATION_REQUIRED`: Finished, needs manual validation.
+
+        - `FAILED`: Execution failed.
+
+        - `PARTIAL_SUCCESS`: Finished, some sub-tasks failed.
+
+        - `SUCCEEDED`: Execution finished successfully.
+
+        '
+      enum:
+      - ACKNOWLEDGED
+      - IN_PROGRESS
+      - RESULTS_PENDING
+      - MANUAL_VALIDATION_REQUIRED
+      - FAILED
+      - PARTIAL_SUCCESS
+      - SUCCEEDED
+      example: SUCCEEDED
+      title: IDP Execution Status
+      type: string
+    field-actionId:
+      description: The unique identifier (UUID) of the published Document Action.
+      example: {YOUR_ACTION_ID}
+      format: uuid
+      title: IDP Document Action ID
+      type: string
+    field-actionVersion:
+      description: The semantic version of the Document Action (e.g., 1.0.0, 1.1.0).
+      example: 1.1.0
+      title: IDP Document Action Version
+      type: string
+    field-executionId:
+      description: The unique identifier (UUID) for a document processing execution,
+        returned after successful submission.
+      example: 022c61de-9bfc-4a94-8a9c-43c5f8ac153e
+      format: uuid
+      title: IDP Execution ID
+      type: string
+    field-orgId:
+      description: 'Your Anypoint Organisation ID (UUID).
+
+        See: [Find your Organization ID](https://docs.mulesoft.com/access-management/organization#find-your-organization-id).
+
+        '
+      example: {YOUR_ORG_ID}
+      format: uuid
+      title: MuleSoft Anypoint Organization ID
+      type: string
+    field-uuid:
+      description: A universally unique identifier.
+      example: {YOUR_ID}
+      format: uuid
+      title: Unique Identifier (UUID)
+      type: string
+    object-Document-Field:
+      description: Represents the extracted value and metadata for a field or prompt
+        answer.
+      properties:
+        confidenceScore:
+          description: Confidence score (0-100 or 0.0-1.0 depending on API) of the
+            extraction.
+          example: 95.5
+          format: float
+          type: number
+        geometry:
+          description: Positional information of the extracted value on the page.
+          properties:
+            height:
+              format: float
+              type: number
+            left:
+              format: float
+              type: number
+            top:
+              format: float
+              type: number
+            width:
+              format: float
+              type: number
+          type: object
+        value:
+          description: The extracted value.
+      title: IDP Execution Response Field Detail
+      type: object
+    object-Document-Page:
+      description: Contains extracted fields, tables, and prompt answers for a single
+        page.
+      properties:
+        fields:
+          additionalProperties:
+            $ref: '#/components/schemas/object-Document-Field'
+          description: Map of extracted standard fields on this page. Key is field
+            name.
+          type: object
+        page:
+          description: The page number (usually 1-based).
+          format: int32
+          type: integer
+        prompts:
+          additionalProperties:
+            $ref: '#/components/schemas/object-Document-Prompt'
+          description: Map of prompt answers relevant to this page. Key is prompt
+            ID/name.
+          type: object
+        tables:
+          additionalProperties:
+            items:
+              additionalProperties:
+                $ref: '#/components/schemas/object-Document-Field'
+              type: object
+            type: array
+          description: Map of extracted tables on this page. Key is table name.
+          type: object
+      title: IDP Execution Response Page Detail
+      type: object
+    object-Document-Prompt:
+      description: Contains the answer and metadata for a specific prompt during execution.
+      properties:
+        answer:
+          $ref: '#/components/schemas/object-Document-Field'
+        prompt:
+          description: The original prompt question.
+          type: string
+        source:
+          description: Source of the answer (llm or document).
+          type: string
+      title: IDP Execution Response Prompt Answer
+      type: object
+    object-DocumentActionLowConfidenceExecution:
+      description: Container for fields, queries, analyzers, and signatures with low
+        confidence scores requiring review. Structure needs confirmation.
+      example:
+        analyzersResults:
+        - confidenceScore: 65.2
+          id: prompt_po_number
+          isValidated: false
+          name: Purchase Order Number
+          query: What is the PO Number?
+          result: PO-12345
+        queriesResults: {}
+        results: {}
+        signaturesResults: {}
+      properties:
+        analyzersResults:
+          description: List of analyzer results flagged for review.
+          items:
+            $ref: '#/components/schemas/object-FilteredLlmAnalyzerLowConfidenceResult'
+          type: array
+        queriesResults:
+          $ref: '#/components/schemas/object-Json'
+        results:
+          $ref: '#/components/schemas/object-Json'
+        signaturesResults:
+          $ref: '#/components/schemas/object-Json'
+      title: Low Confidence Execution Details
+      type: object
+    object-DocumentExecutionGetResponse:
+      description: Contains the results and status of a document processing execution.
+      properties:
+        documentName:
+          description: The name of the processed document.
+          type: string
+        id:
+          $ref: '#/components/schemas/field-executionId'
+        pages:
+          description: Results broken down by page.
+          items:
+            $ref: '#/components/schemas/object-Document-Page'
+          type: array
+        prompts:
+          additionalProperties:
+            $ref: '#/components/schemas/object-Document-Prompt'
+          type: object
+        status:
+          $ref: '#/components/schemas/field-ExecutionStatus'
+      title: IDP Retrieve Execution Response
+      type: object
+    object-DocumentExecutionPostResponse:
+      additionalProperties: false
+      description: Response received after successfully submitting a document for
+        processing.
+      example:
+        documentName: IDP-PO-CD656092-BurlingtonTextiles.pdf
+        id: af78b8b2-3867-4073-aac6-d24e01f48ae2
+        status: ACKNOWLEDGED
+      properties:
+        documentName:
+          description: The name of the document submitted.
+          example: IDP-PO-CD656092-BurlingtonTextiles.pdf
+          type: string
+        id:
+          $ref: '#/components/schemas/field-executionId'
+        status:
+          $ref: '#/components/schemas/field-ExecutionStatus'
+      required:
+      - id
+      - documentName
+      - status
+      title: IDP Document Submission Response
+      type: object
+    object-FilteredLlmAnalyzerLowConfidenceResult:
+      description: Details of an LLM analyzer result flagged for review due to low
+        confidence.
+      properties:
+        confidenceScore:
+          description: The confidence score associated with the result.
+          format: float
+          type: number
+        id:
+          description: Unique ID of the analyzer or prompt instance.
+          type: string
+        isValidated:
+          description: Flag indicating if this specific item has been manually validated/corrected.
+          type: boolean
+        name:
+          description: Name of the analyzer or prompt.
+          type: string
+        query:
+          description: The query or prompt text used.
+          type: string
+        result:
+          description: The result generated by the analyzer.
+          type: string
+      required:
+      - id
+      - name
+      - query
+      - result
+      - confidenceScore
+      title: Low Confidence Analyzer Result
+      type: object
+    object-Json:
+      additionalProperties: true
+      description: Represents an arbitrary JSON object. Define specific structure
+        if possible.
+      title: JSON Object
+      type: object
+    object-JsonNode:
+      additionalProperties: true
+      description: Represents an arbitrary JSON node (object, array, string, number,
+        boolean, null). Define specific structure if possible.
+      title: JSON Node
+      type: object
+    object-ReviewItem:
+      description: Summary information for an execution requiring manual review (used
+        in the list view).
+      properties:
+        docActionId:
+          $ref: '#/components/schemas/field-actionId'
+        docFileId:
+          description: Identifier associated with the document file (purpose unclear).
+          type: string
+        docFileName:
+          description: The name of the document file that requires review.
+          type: string
+        docOperationCreationDate:
+          description: Timestamp related to the execution (e.g., when it entered review
+            state or was created).
+          format: date-time
+          type: string
+        docOperationId:
+          $ref: '#/components/schemas/field-executionId'
+      title: Review Item Summary
+      type: object
+    object-Reviewer:
+      description: Represents a user or team assigned as a reviewer for an IDP action.
+      properties:
+        email:
+          example: george@composableforce.com
+          format: email
+          type: string
+        id:
+          $ref: '#/components/schemas/field-uuid'
+        name:
+          example: Document Review Team
+          type: string
+        type:
+          description: The type of reviewer (User or Team).
+          enum:
+          - USER
+          - TEAM
+          example: USER
+          type: string
+        username:
+          description: Username (for users) or potentially team identifier.
+          example: george@composableforce.com
+          type: string
+      required:
+      - id
+      - name
+      - type
+      title: IDP Action Reviewer
+      type: object
+    object-action:
+      description: Represents the details of a published IDP Action.
+      properties:
+        configuration:
+          $ref: '#/components/schemas/object-actionConfiguration'
+        createdAt:
+          example: '2024-06-24T16:56:37.372612Z'
+          format: date-time
+          type: string
+        createdBy:
+          $ref: '#/components/schemas/field-uuid'
+        description:
+          example: CD656092-BurlingtonTextiles Purchase Order
+          type: string
+        empowerWith:
+          enum:
+          - NLP
+          example: NLP
+          type: string
+        id:
+          $ref: '#/components/schemas/field-actionId'
+        name:
+          example: IDP-PO-CD656092-BurlingtonTextiles
+          type: string
+        organizationId:
+          $ref: '#/components/schemas/field-orgId'
+        registration:
+          properties:
+            message:
+              description: Optional message related to registration status.
+              example: ''
+              type: string
+            status:
+              enum:
+              - REGISTERED
+              example: REGISTERED
+              type: string
+          type: object
+        type:
+          enum:
+          - GENERIC
+          - INVOICE
+          - PURCHASE_ORDER
+          example: GENERIC
+          type: string
+        updatedAt:
+          example: '2024-06-24T17:03:55.950227Z'
+          format: date-time
+          type: string
+      required:
+      - id
+      - organizationId
+      - name
+      - type
+      - configuration
+      - createdBy
+      - createdAt
+      - registration
+      title: IDP Action Details
+      type: object
+    object-actionConfiguration:
+      description: Contains the configuration details (fields, tables, prompts) for
+        an IDP Action, typically tied to a specific version.
+      properties:
+        content:
+          properties:
+            output:
+              properties:
+                fields:
+                  additionalProperties: {}
+                  description: Schema definition for standard extracted fields.
+                  type: object
+                prompts:
+                  $ref: '#/components/schemas/Prompts'
+                tables:
+                  additionalProperties: {}
+                  description: Schema definition for extracted tables.
+                  type: object
+              required:
+              - fields
+              - tables
+              - prompts
+              type: object
+          required:
+          - output
+          type: object
+        version:
+          $ref: '#/components/schemas/field-actionVersion'
+      required:
+      - content
+      - version
+      title: IDP Action Configuration
+      type: object
+    object-actionOperation:
+      description: Represents a historical operation performed on an action version
+        (e.g., publication).
+      properties:
+        createdAt:
+          example: '2024-06-24T16:56:37.372612Z'
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/field-uuid'
+        info:
+          description: Additional information related to the operation.
+          properties:
+            baseUrl:
+              example: https://idp-rt.us-east-1.anypoint.mulesoft.com
+              format: url
+              type: string
+          type: object
+        result:
+          description: Result message or details of the operation.
+          type: string
+        status:
+          example: SUCCESS
+          type: string
+        type:
+          enum:
+          - EXCHANGE_PUBLICATION
+          - RUNTIME_PUBLICATION
+          example: RUNTIME_PUBLICATION
+          type: string
+        updatedAt:
+          example: '2024-06-24T17:03:55.950227Z'
+          format: date-time
+          type: string
+      required:
+      - id
+      - type
+      - status
+      - createdAt
+      title: IDP Action Operation History
+      type: object
+    object-actionVersion:
+      description: Represents the details of a specific version of an IDP Action.
+      properties:
+        actionId:
+          $ref: '#/components/schemas/field-actionId'
+        configuration:
+          $ref: '#/components/schemas/object-actionConfiguration'
+        createdAt:
+          example: '2024-06-24T16:56:37.372612Z'
+          format: date-time
+          type: string
+        operations:
+          description: History of operations performed on this version.
+          items:
+            $ref: '#/components/schemas/object-actionOperation'
+          type: array
+        organizationId:
+          $ref: '#/components/schemas/field-orgId'
+        status:
+          description: The status of this action version (e.g., related to publication).
+          example: SUCCESS
+          type: string
+        updatedAt:
+          example: '2024-06-24T17:03:55.950227Z'
+          format: date-time
+          type: string
+        version:
+          $ref: '#/components/schemas/field-actionVersion'
+      required:
+      - organizationId
+      - actionId
+      - version
+      - status
+      - configuration
+      - operations
+      - createdAt
+      title: IDP Action Version Details
+      type: object
+    object-actionsList:
+      description: Contains a list of IDP actions and the total count.
+      properties:
+        actions:
+          items:
+            $ref: '#/components/schemas/object-action'
+          type: array
+        total:
+          description: Total number of actions available in the organization matching
+            the query.
+          example: 6
+          format: int32
+          type: integer
+      required:
+      - actions
+      - total
+      title: List of IDP Actions
+      type: object
+    object-commonError:
+      additionalProperties: false
+      description: Standard error format based on RFC 7807 Problem Details for HTTP
+        APIs.
+      example:
+        detail: 'Action Id: {YOUR_ACTION_ID}, Version: 1.1.0,
+          Execution Id: 022c61de-9bfc-4a94-8a9c-43c5f8ac1531 not found.'
+        status: 404
+        title: Not Found
+        type: /errors/not-found
+      properties:
+        detail:
+          description: A human-readable explanation specific to this occurrence of
+            the problem.
+          example: Execution Id 022c61de-9bfc-4a94-8a9c-43c5f8ac1531 not found for
+            Action Id {YOUR_ACTION_ID}, Version 1.1.0.
+          type: string
+        status:
+          description: The HTTP status code generated by the origin server for this
+            occurrence of the problem.
+          example: 404
+          format: int32
+          type: integer
+        title:
+          description: A short, human-readable summary of the problem type.
+          example: Not Found
+          type: string
+        type:
+          description: A URI reference that identifies the problem type.
+          example: /errors/not-found
+          format: uri
+          type: string
+      required:
+      - title
+      - status
+      title: IDP Common Error Response
+      type: object
+    object-reviewTask:
+      description: Represents the data associated with an execution requiring manual
+        review. Structure needs confirmation based on actual API response for GET/PATCH
+        on `/reviews/{executionId}`.
+      example:
+        actionId: {YOUR_ACTION_ID}
+        actionVersion: 1.1.0
+        documentName: invoice_needs_review.pdf
+        executionId: 022c61de-9bfc-4a94-8a9c-43c5f8ac153e
+        lowConfidenceFields: {}
+        status: MANUAL_VALIDATION_REQUIRED
+      properties:
+        actionId:
+          $ref: '#/components/schemas/field-actionId'
+        actionVersion:
+          $ref: '#/components/schemas/field-actionVersion'
+        documentName:
+          type: string
+        executionId:
+          $ref: '#/components/schemas/field-executionId'
+        lowConfidenceFields:
+          $ref: '#/components/schemas/object-DocumentActionLowConfidenceExecution'
+        status:
+          $ref: '#/components/schemas/field-ExecutionStatus'
+      title: IDP Review Task Details
+      type: object

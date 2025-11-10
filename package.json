@@ -1,0 +1,24 @@
+{
+  "name": "mulesoftforge-website",
+  "version": "1.0.0",
+  "description": "MuleSoft Forge community documentation website",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "keywords": [
+    "mulesoft",
+    "documentation",
+    "vitepress",
+    "forge"
+  ],
+  "author": "MuleSoft Forge Community",
+  "license": "MIT",
+  "devDependencies": {
+    "vitepress": "^1.0.0",
+    "vitepress-plugin-tabs": "^0.5.0",
+    "vue": "^3.4.0"
+  }
+}

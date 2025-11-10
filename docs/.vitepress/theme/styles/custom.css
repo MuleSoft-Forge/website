@@ -1,0 +1,95 @@
+/**
+ * Customize default theme styling by overriding CSS variables:
+ * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
+ */
+
+/**
+ * Colors
+ * -------------------------------------------------------------------------- */
+
+:root {
+  /* Brand colors - MuleSoft inspired blue palette */
+  --vp-c-brand-1: #00a3e0;
+  --vp-c-brand-2: #0091c9;
+  --vp-c-brand-3: #007fa3;
+  --vp-c-brand-soft: rgba(0, 163, 224, 0.14);
+
+  /* Component spacing adjustments */
+  --vp-custom-component-spacing: 24px;
+}
+
+.dark {
+  --vp-c-brand-1: #4a9eff;
+  --vp-c-brand-2: #3d8aeb;
+  --vp-c-brand-3: #3078d7;
+  --vp-c-brand-soft: rgba(74, 158, 255, 0.16);
+}
+
+/**
+ * Component spacing
+ * -------------------------------------------------------------------------- */
+
+/* Add consistent spacing between custom components */
+.vp-doc .hint + .hint,
+.vp-doc .hint + .stepper,
+.vp-doc .stepper + .hint,
+.vp-doc .stepper + .stepper {
+  margin-top: var(--vp-custom-component-spacing);
+}
+
+/* Ensure tabs have proper spacing */
+.vp-doc .plugin-tabs {
+  margin: 16px 0;
+}
+
+/**
+ * Typography refinements
+ * -------------------------------------------------------------------------- */
+
+.vp-doc h2 {
+  margin-top: 48px;
+  margin-bottom: 16px;
+}
+
+.vp-doc h3 {
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+/**
+ * Code block adjustments
+ * -------------------------------------------------------------------------- */
+
+.vp-doc div[class*='language-'] {
+  margin: 16px 0;
+}
+
+/**
+ * Mobile responsive adjustments
+ * -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  :root {
+    --vp-custom-component-spacing: 16px;
+  }
+
+  .vp-doc .hint {
+    padding: 12px;
+    font-size: 13px;
+  }
+}
+
+/**
+ * Print styles
+ * -------------------------------------------------------------------------- */
+
+@media print {
+  .hint {
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+
+  .step {
+    page-break-inside: avoid;
+  }
+}

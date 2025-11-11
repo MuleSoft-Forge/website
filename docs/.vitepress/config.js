@@ -20,12 +20,90 @@ export default defineConfig({
       { text: 'Examples', link: '/examples/components' }
     ],
 
-    // Sidebar navigation
+    // Sidebar navigation - Complete navigation structure (Phase 1.3 Part A)
     sidebar: [
+      // Getting Started
       {
         text: 'Getting Started',
+        collapsed: false,
         items: [
-          { text: 'Examples', link: '/examples/components' }
+          { text: 'Home', link: '/' },
+          { text: 'Component Examples', link: '/examples/components' }
+        ]
+      },
+
+      // MuleSoft Forge Initiative
+      {
+        text: 'MuleSoft Forge Initiative',
+        collapsed: false,
+        items: [
+          { text: 'Overview', link: '/forge-initiative/overview' },
+          { text: 'How to Contribute', link: '/forge-initiative/how-to-contribute' }
+        ]
+      },
+
+      // Connectors
+      {
+        text: 'Connectors',
+        collapsed: false,
+        items: [
+          {
+            text: 'mule-idp-connector',
+            collapsed: false,
+            items: [
+              { text: 'Overview', link: '/connectors/mule-idp-connector/' },
+              { text: 'Set Up', link: '/connectors/mule-idp-connector/set-up' },
+              {
+                text: 'Operations',
+                collapsed: true,
+                items: [
+                  { text: 'Operations Overview', link: '/connectors/mule-idp-connector/operations/' },
+                  { text: 'Service IDP - Execution - Submit', link: '/connectors/mule-idp-connector/operations/service-idp-execution-submit' },
+                  { text: 'Service IDP - Execution Result - Retrieve', link: '/connectors/mule-idp-connector/operations/service-idp-execution-result-retrieve' },
+                  { text: 'Service IDP - Review Tasks - List', link: '/connectors/mule-idp-connector/operations/service-idp-review-tasks-list' },
+                  { text: 'Service IDP - Review Task - Delete', link: '/connectors/mule-idp-connector/operations/service-idp-review-task-delete' },
+                  { text: 'Service IDP - Review Task - Update', link: '/connectors/mule-idp-connector/operations/service-idp-review-task-update' },
+                  { text: 'Platform IDP - Actions - List', link: '/connectors/mule-idp-connector/operations/platform-idp-actions-list' },
+                  { text: 'Platform IDP - Action Versions - List', link: '/connectors/mule-idp-connector/operations/platform-idp-action-versions-list' },
+                  { text: 'Deprecated 1.0.1 - Utils IDP - PDF - ExtractText', link: '/connectors/mule-idp-connector/operations/deprecated-1.0.1-utils-idp-pdf-extracttext' },
+                  { text: 'Deprecated 1.0.1 - Utils IDP - PDF - RemovePages', link: '/connectors/mule-idp-connector/operations/deprecated-1.0.1-utils-idp-pdf-removepages' }
+                ]
+              },
+              { text: '📚 Official Documentation', link: 'https://docs.mulesoft.com/idp/' },
+              { text: 'Universal REST Smart Connector', link: '/connectors/mule-idp-connector/mulesoft-idp-universal-rest-smart-connector' },
+              { text: 'Dataweave', link: '/connectors/mule-idp-connector/dataweave' }
+            ]
+          }
+        ]
+      },
+
+      // Modules
+      {
+        text: 'Modules',
+        collapsed: false,
+        items: [
+          {
+            text: 'mule-pdfbox-module',
+            collapsed: false,
+            items: [
+              { text: 'Overview', link: '/modules/mule-pdfbox-module/' },
+              { text: 'Set Up', link: '/modules/mule-pdfbox-module/set-up' },
+              {
+                text: 'Operations',
+                collapsed: true,
+                items: [
+                  { text: 'Operations Overview', link: '/modules/mule-pdfbox-module/operations/' },
+                  { text: 'Apache PDFBox - Extract Text', link: '/modules/mule-pdfbox-module/operations/apache-pdfbox-extract-text' },
+                  { text: 'Apache PDFBox - Filter Pages', link: '/modules/mule-pdfbox-module/operations/apache-pdfbox-filter-pages' },
+                  { text: 'Apache PDFBox - Get Info', link: '/modules/mule-pdfbox-module/operations/apache-pdfbox-get-info' },
+                  { text: 'Apache PDFBox - Merge PDFs', link: '/modules/mule-pdfbox-module/operations/apache-pdfbox-merge-pdfs' },
+                  { text: 'Apache PDFBox - Rotate Pages', link: '/modules/mule-pdfbox-module/operations/apache-pdfbox-rotate-pages' },
+                  { text: 'Apache PDFBox - Split Pages', link: '/modules/mule-pdfbox-module/operations/apache-pdfbox-split-pages' },
+                  { text: 'Apache PDFBox - Image to PDF', link: '/modules/mule-pdfbox-module/operations/apache-pdfbox-image-to-pdf' }
+                ]
+              }
+            ]
+          }
         ]
       }
     ],

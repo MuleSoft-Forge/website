@@ -17,7 +17,15 @@ export default defineConfig({
     // Navigation
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/examples/components' }
+      { text: 'Examples', link: '/examples/components' },
+      {
+        text: 'Community',
+        items: [
+          { text: 'GitHub Organization', link: 'https://github.com/MuleSoft-Forge' },
+          { text: 'How to Contribute', link: '/forge-initiative/how-to-contribute' },
+          { text: 'Report an Issue', link: 'https://github.com/MuleSoft-Forge/website/issues' }
+        ]
+      }
     ],
 
     // Sidebar navigation - Complete navigation structure (Phase 1.3 Part A)
@@ -110,12 +118,24 @@ export default defineConfig({
 
     // Social links
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/MuleSoft-Forge/website' }
+      { icon: 'github', link: 'https://github.com/MuleSoft-Forge' }
     ],
+
+    // Table of contents configuration
+    outline: {
+      level: [2, 3],
+      label: 'On this page'
+    },
+
+    // Edit link configuration
+    editLink: {
+      pattern: 'https://github.com/MuleSoft-Forge/website/edit/main/docs/:path',
+      text: 'Edit this page on GitHub'
+    },
 
     // Footer
     footer: {
-      message: 'Released under the MIT License.',
+      message: 'Released under the <a href="https://github.com/MuleSoft-Forge/website/blob/main/LICENSE">MIT License</a>.',
       copyright: 'Copyright © 2025 MuleSoft Forge Community'
     },
 

@@ -9,10 +9,24 @@ export default defineConfig({
   // Enable dead link checking - all links in Part D validation passed
   // ignoreDeadLinks removed to catch future broken link regressions
 
+  // Head tags for SEO, favicon, and social sharing
+  head: [
+    ['link', { rel: 'icon', href: '/images/mulesoftdevelopers_logo.jpeg' }],
+    ['meta', { name: 'theme-color', content: '#00a3e0' }],
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:title', content: 'MuleSoft Forge Documentation' }],
+    ['meta', { property: 'og:description', content: 'Community-contributed connectors and modules for MuleSoft' }],
+    ['meta', { property: 'og:image', content: '/images/mulesoftdevelopers_logo.jpeg' }],
+    ['meta', { property: 'og:url', content: 'https://docs.mulesoftforge.com' }],
+    ['meta', { name: 'twitter:card', content: 'summary' }],
+    ['meta', { name: 'twitter:title', content: 'MuleSoft Forge Documentation' }],
+    ['meta', { name: 'twitter:description', content: 'Community-contributed connectors and modules for MuleSoft' }]
+  ],
+
   // Theme configuration
   themeConfig: {
-    // Site logo - TODO: Add logo in Phase 1.2
-    // logo: '/logo.svg',
+    // Site logo
+    logo: '/images/mulesoftdevelopers_logo.jpeg',
 
     // Navigation
     nav: [

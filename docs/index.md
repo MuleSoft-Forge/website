@@ -28,10 +28,6 @@ features:
     link: /connectors/mule-idp-connector/
     linkText: Learn More →
 
-## Test PR Preview
-
-This is a test of the PR preview deployment system. This content should be visible on the preview URL provided by the bot comment.
-
   - icon: 📄
     title: MuleSoft PDFBox Module
     details: Comprehensive PDF manipulation operations including text extraction, page filtering, rotation, splitting, merging, and conversion powered by Apache PDFBox
@@ -44,6 +40,10 @@ This is a test of the PR preview deployment system. This content should be visib
     link: /forge-initiative/overview
     linkText: Learn About Forge Initiative →
 ---
+
+## Test PR Preview
+
+This is a test of the PR preview deployment system. This content should be visible on the preview URL provided by the bot comment.
 
 ## Welcome to MuleSoftForge
 

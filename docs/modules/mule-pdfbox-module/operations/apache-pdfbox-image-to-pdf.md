@@ -5,14 +5,14 @@ description: Convert image files to PDF format
 
 # Apache PDFBox - Image to PDF
 
-#### 🔧 Operation Name
+#### Operation Name
 
 **Apache PDFBox – Image to PDF**
 `imageToPdf`
 
 ---
 
-#### 🧾 Description
+#### Description
 
 Converts a single image (e.g., JPG, PNG, GIF, BMP) into a one-page PDF document.
 The resulting PDF has a single page sized to match the dimensions of the source image.
@@ -21,14 +21,14 @@ Perfect for embedding scanned receipts, screenshots, or images into a PDF workfl
 
 ---
 
-#### ✅ Inputs
+#### Inputs
 
 * **Image File [Binary]** (`InputStream`)
   Binary content of the image (JPEG, PNG, etc.).
 
 ---
 
-#### 📤 Output
+#### Output
 
 * **Payload**: `InputStream` (binary stream)
   A one-page PDF containing the provided image.
@@ -37,7 +37,7 @@ Perfect for embedding scanned receipts, screenshots, or images into a PDF workfl
 
 ---
 
-#### 🔍 Notes
+#### Notes
 
 * The generated page is automatically **sized to the image's pixel dimensions** (no scaling).
 * You can adjust scaling or margins later by combining this with other operations (e.g., rotatePages, filterPages).

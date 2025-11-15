@@ -5,7 +5,7 @@ description: Guide for contributing to MuleSoft Forge projects
 
 # How to Contribute
 
-We 👋🏼 welcome contributions to enhance any Asset for:
+We welcome contributions to enhance any Asset for:
 
 * Testing
 * Error Handling
@@ -79,8 +79,6 @@ Your pull request will be reviewed by the maintainers. You might be asked to mak
 
 ## License
 
-<Hint type="success">
-The MuleSoft Forge initiative is licensed under the Apache License 2.0. This means that you are free to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, provided that you include the original copyright and license notice in any copy of the Software that you distribute.
+The MuleSoft Forge initiative is licensed under the Apache License 2.0. You may use, copy, modify, merge, publish, distribute, sublicense, and sell copies of the software, provided you include the original copyright and license notice in any distributed copies.
 
 For more details, see the [LICENSE](https://github.com/MuleSoft-Forge/.github/blob/main/LICENSE) file.
-</Hint>

@@ -107,7 +107,7 @@ Here is a complete Postman Collection:
 == Anypoint Studio
 
 <Stepper>
-<Step title="⚙️ Create Global Element Connector Configuration">
+<Step title="Create Global Element Connector Configuration">
 
 Choose Global Type, restricting on "idp"
 
@@ -115,7 +115,7 @@ Choose Global Type, restricting on "idp"
 
 </Step>
 
-<Step title="⚙️ Default Config Settings">
+<Step title="Default Config Settings">
 
 MuleSoft IDP Config default settings are as follows:
 
@@ -123,7 +123,7 @@ MuleSoft IDP Config default settings are as follows:
 
 </Step>
 
-<Step title="⚙️ Enter your Settings">
+<Step title="Enter your Settings">
 
 <Hint type="warning">
 
@@ -202,7 +202,7 @@ The IDP obtained access tokens are stored in an `ObjectStore`. By default, the S
 :::
 
 <Stepper>
-<Step title="✅ Test Connection">
+<Step title="Test Connection">
 
 ![Test Connection](/images/idp-connector/screenshot-2025-03-25-09-36-58.png)
 
@@ -216,7 +216,7 @@ Of course you can use [Configuring Properties - Property Placeholders](https://d
 == Anypoint Code Builder
 
 <Stepper>
-<Step title="⚙️ Create Global Element Connector Configuration">
+<Step title="Create Global Element Connector Configuration">
 
 Currently ACB does not have a dedicated Global Configuration Elements UI, so create the configuration as part of the configuration of the first IDP Operation configuration of the project
 
@@ -224,7 +224,7 @@ Currently ACB does not have a dedicated Global Configuration Elements UI, so cre
 
 </Step>
 
-<Step title="⚙️ Enter your Settings">
+<Step title="Enter your Settings">
 
 ::: tabs
 
@@ -304,7 +304,7 @@ The IDP obtained access tokens are stored in an `ObjectStore`. By default, the S
 
 </Step>
 
-<Step title="✅ Test Connection">
+<Step title="Test Connection">
 
 ![ACB Test Connection](/images/idp-connector/screenshot-2025-03-25-17-19-00.png)
 

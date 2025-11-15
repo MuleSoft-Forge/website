@@ -5,30 +5,30 @@ description: Rotate PDF pages by 90, 180, or 270 degrees
 
 # Apache PDFBox - Rotate Pages
 
-### 🔧 Operation Name
+### Operation Name
 
 **Apache PDFBox - Rotate Pages**
 `rotatePages`
 
 ---
 
-### 🧾 Description
+### Description
 
 Rotates one or more pages in a PDF document clockwise by 90, 180, or 270 degrees. You can optionally limit the rotation to specific pages using a page range.
 
 ---
 
-### ✅ Inputs
+### Inputs
 
 | Parameter | Type | Required | Description |
 | --------- | ---- | -------- | ----------- |
-| `PDF File [Binary]` | `InputStream` (Binary) | ✅ | The PDF file to rotate. |
-| `Degrees` | `Integer` | ✅ | The rotation angle: must be one of `90`, `180`, or `270`. |
-| `Page Range` | `String` | ❌ (Optional) | A comma-separated list of pages and/or ranges to rotate (e.g., `1,3,5-6`). If not provided, all pages will be rotated. |
+| `PDF File [Binary]` | `InputStream` (Binary) | Required | The PDF file to rotate. |
+| `Degrees` | `Integer` | Required | The rotation angle: must be one of `90`, `180`, or `270`. |
+| `Page Range` | `String` | Optional | A comma-separated list of pages and/or ranges to rotate (e.g., `1,3,5-6`). If not provided, all pages will be rotated. |
 
 ---
 
-### 📤 Output
+### Output
 
 * **Payload**: `InputStream` (Binary)
   A new binary PDF stream with the specified pages rotated.
@@ -39,7 +39,7 @@ Rotates one or more pages in a PDF document clockwise by 90, 180, or 270 degrees
 
 ---
 
-### 🧪 MuleSoft Flow Example
+### MuleSoft Flow Example
 
 This example uses both Filter and Rotate as our [test pdf](https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf) is password protected so we use a filter to effectively make a copy.
 
@@ -97,7 +97,7 @@ output text
 
 ---
 
-### 🔍 Notes
+### Notes
 
 * **Rotation is cumulative**: If you run this operation multiple times on the same PDF, rotations stack.
 * **Valid angles**: Only `90`, `180`, `270` degrees are supported (clockwise).

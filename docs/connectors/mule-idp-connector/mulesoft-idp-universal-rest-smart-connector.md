@@ -3,7 +3,7 @@ title: IDP Runtime Service REST API
 description: OpenAPI specification for the IDP Runtime Service REST connector
 ---
 
-# MuleSoft IDP Universal 🌐 REST Smart Connector 🔌
+# MuleSoft IDP Universal REST Smart Connector
 
 This page documents the REST API connector for MuleSoft IDP Runtime Service, based on the [REST Connect Connector Generator](https://docs.mulesoft.com/exchange/to-deploy-using-rest-connect).
 

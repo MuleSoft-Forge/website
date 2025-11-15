@@ -5,28 +5,28 @@ description: Extract metadata and structural details from PDF
 
 # Apache PDFBox - Get Info
 
-### 🔧 Operation Name
+### Operation Name
 
 **Apache PDFBox - Get Info**
 `extractInfo`
 
 ---
 
-### 🧾 Description
+### Description
 
 Extracts metadata and structural details from a PDF document. This includes properties like author, title, number of pages, creation/modification dates, and file size.
 
 ---
 
-### ✅ Inputs
+### Inputs
 
 | Parameter | Type | Required | Description |
 | --------- | ---- | -------- | ----------- |
-| `PDF File [Binary]` | `InputStream` (Binary) | ✅ | The PDF document for which to extract information. |
+| `PDF File [Binary]` | `InputStream` (Binary) | Required | The PDF document for which to extract information. |
 
 ---
 
-### 📤 Output
+### Output
 
 * **Attributes**: `PdfBoxFileAttributes`
   A custom object containing metadata and structural details:
@@ -46,7 +46,7 @@ Extracts metadata and structural details from a PDF document. This includes prop
 
 ---
 
-### 🧪 MuleSoft Flow Example
+### MuleSoft Flow Example
 
 Here's how to call this operation in a MuleSoft flow:
 
@@ -99,7 +99,7 @@ output text
 
 ---
 
-### 🔍 Notes
+### Notes
 
 * The operation does **not** modify the PDF—only reads metadata.
 * Ideal for **auditing**, **indexing**, or **validating** PDFs before further processing.

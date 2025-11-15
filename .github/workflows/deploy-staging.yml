@@ -1,24 +1,10 @@
-name: Deploy to GitHub Pages (Staging)
+name: Deploy to Cloudflare Pages (Staging)
 
 on:
-  # Trigger on push to staging branch
   push:
     branches:
       - staging
-
-  # Allow manual trigger
   workflow_dispatch:
-
-# Permissions for GitHub Pages deployment
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Prevent concurrent deployments
-concurrency:
-  group: pages
-  cancel-in-progress: false
 
 jobs:
   build:
@@ -26,8 +12,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Needed for lastUpdated feature
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -47,12 +31,26 @@ jobs:
           path: docs/.vitepress/dist
 
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     needs: build
+    runs-on: ubuntu-latest
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: ./dist
+
+      - name: Extract artifact
+        run: |
+          cd dist
+          tar -xvf artifact.tar
+          rm artifact.tar
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: mulesoftforge-staging
+          directory: ./dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

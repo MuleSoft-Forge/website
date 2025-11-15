@@ -49,7 +49,7 @@ Empower your MuleSoft flows with native PDF manipulation powered by [Apache PDFB
 * Designed using MuleSoft Java SDK
 * Input/output via standard Java streams
 
-**🧱 Under the Hood**
+**Under the Hood**
 
 * Built using [Apache PDFBox](https://pdfbox.apache.org/)
 * Fully compatible with Mule 4.x
@@ -62,14 +62,14 @@ Empower your MuleSoft flows with native PDF manipulation powered by [Apache PDFB
 * **Purpose:** Extracts document metadata such as number of pages, author, title, subject, and version.
 * **Input:** InputStream of the PDF.
 * **Output:** POJO with document properties.
-* **🧱 Under the Hood -** [**PDFDocumentInformation**](https://javadoc.io/static/org.apache.pdfbox/pdfbox/3.0.3/org/apache/pdfbox/pdmodel/PDDocumentInformation.html)
+* **Under the Hood -** [**PDFDocumentInformation**](https://javadoc.io/static/org.apache.pdfbox/pdfbox/3.0.3/org/apache/pdfbox/pdmodel/PDDocumentInformation.html)
 
 **2. `extractTextByPageRange`**
 
 * **Purpose:** Extracts plain text from a given page range.
 * **Input:** PDF stream + optional startPage / endPage.
 * **Output:** Extracted text as a string.
-* **🧱 Under the Hood -**  [PDFTextStripper](https://javadoc.io/static/org.apache.pdfbox/pdfbox/3.0.5/org/apache/pdfbox/text/PDFTextStripper.html)
+* **Under the Hood -**  [PDFTextStripper](https://javadoc.io/static/org.apache.pdfbox/pdfbox/3.0.5/org/apache/pdfbox/text/PDFTextStripper.html)
 
 **3. `filterPages`**
 
@@ -83,7 +83,7 @@ Empower your MuleSoft flows with native PDF manipulation powered by [Apache PDFB
 * **Purpose:** Rotates pages within a specified range clockwise or counterclockwise.
 * **Parameters:** Page range, rotation direction.
 * **Output:** Modified PDF stream.
-* **🧱 Under the Hood -** [setRotation](https://pdfbox.apache.org/docs/2.0.2/javadocs/org/apache/pdfbox/pdmodel/PDPage.html#setRotation\(int\))
+* **Under the Hood -** [setRotation](https://pdfbox.apache.org/docs/2.0.2/javadocs/org/apache/pdfbox/pdmodel/PDPage.html#setRotation\(int\))
 
 **5. `splitPages`**
 
@@ -95,4 +95,4 @@ Empower your MuleSoft flows with native PDF manipulation powered by [Apache PDFB
 * **Purpose:** Combines two or more PDF documents into one.
 * **Input:** A list of PDF InputStreams.
 * **Output:** A single merged PDF stream with extracted metadata.
-* 🧱 _Under the Hood_: `PDFMergerUtility + RandomAccessReadBuffer`
+* _Under the Hood_: `PDFMergerUtility + RandomAccessReadBuffer`

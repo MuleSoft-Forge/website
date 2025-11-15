@@ -60,11 +60,9 @@ jobs:
 
       - name: Notify Slack
         if: success()
-        uses: slackapi/slack-github-action@v1
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        with:
-          payload: |
-            {
-              "text": "Staging Deployed: \"${{ github.event.head_commit.message }}\"\nAuthor: ${{ github.event.head_commit.author.name }}\nSite: https://mulesoftforge.nonprod.app\nCommit: ${{ github.event.head_commit.url }}"
-            }
+        run: |
+          COMMIT_MSG=$(echo "${{ github.event.head_commit.message }}" | head -1 | jq -Rs .)
+          AUTHOR=$(echo "${{ github.event.head_commit.author.name }}" | jq -Rs .)
+          curl -X POST ${{ secrets.SLACK_WEBHOOK_URL }} \
+            -H 'Content-Type: application/json' \
+            -d "{\"text\":\"Staging Deployed: $COMMIT_MSG\nAuthor: $AUTHOR\nSite: https://mulesoftforge.nonprod.app\nCommit: ${{ github.event.head_commit.url }}\"}"

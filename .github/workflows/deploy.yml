@@ -1,9 +1,9 @@
-name: Deploy to Cloudflare Pages (Staging)
+name: Deploy to Cloudflare Pages
 
 on:
   push:
     branches:
-      - staging
+      - main
   workflow_dispatch:
 
 jobs:

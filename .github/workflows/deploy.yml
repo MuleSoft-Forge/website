@@ -57,3 +57,13 @@ jobs:
           projectName: mulesoftforge-staging
           directory: ./dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Notify Slack
+        if: success()
+        uses: slackapi/slack-github-action@v1
+        with:
+          webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          payload: |
+            {
+              "text": "Staging Deployed: \"${{ github.event.head_commit.message }}\"\nAuthor: ${{ github.event.head_commit.author.name }}\nSite: https://mulesoftforge.nonprod.app\nCommit: ${{ github.event.head_commit.url }}"
+            }

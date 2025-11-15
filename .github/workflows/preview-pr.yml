@@ -2,12 +2,13 @@ name: Deploy PR Preview to Cloudflare Pages
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, closed]
     branches:
       - main
 
 jobs:
   build:
+    if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -98,4 +99,27 @@ jobs:
                 issue_number: prNumber,
                 body: body
               });
+            }
+
+      - name: Notify Slack
+        if: success()
+        uses: slackapi/slack-github-action@v1
+        with:
+          webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          payload: |
+            {
+              "text": "PR Preview Ready: #${{ github.event.number }} \"${{ github.event.pull_request.title }}\"\nAuthor: @${{ github.event.pull_request.user.login }}\nPreview: https://pr-${{ github.event.number }}.mulesoftforge-staging.pages.dev\nGitHub: ${{ github.event.pull_request.html_url }}"
+            }
+
+  notify-merged:
+    if: github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Slack
+        uses: slackapi/slack-github-action@v1
+        with:
+          webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          payload: |
+            {
+              "text": "PR Merged: #${{ github.event.number }} \"${{ github.event.pull_request.title }}\"\nAuthor: @${{ github.event.pull_request.user.login }}\nMerged by: @${{ github.event.pull_request.merged_by.login }}\nGitHub: ${{ github.event.pull_request.html_url }}"
             }

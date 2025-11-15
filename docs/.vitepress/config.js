@@ -49,8 +49,7 @@ export default defineConfig({
         text: 'Getting Started',
         collapsed: false,
         items: [
-          { text: 'Home', link: '/' },
-          { text: 'Component Examples', link: '/examples/components' }
+          { text: 'Home', link: '/' }
         ]
       },
 
@@ -60,7 +59,8 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: 'Overview', link: '/forge-initiative/overview' },
-          { text: 'How to Contribute', link: '/forge-initiative/how-to-contribute' }
+          { text: 'How to Contribute', link: '/forge-initiative/how-to-contribute' },
+          { text: 'Component Examples', link: '/examples/components' }
         ]
       },
 

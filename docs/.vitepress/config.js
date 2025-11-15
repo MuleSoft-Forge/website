@@ -91,7 +91,7 @@ export default defineConfig({
                   { text: 'Deprecated 1.0.1 - Utils IDP - PDF - RemovePages', link: '/connectors/mule-idp-connector/operations/deprecated-1.0.1-utils-idp-pdf-removepages' }
                 ]
               },
-              { text: '📚 Official Documentation', link: 'https://docs.mulesoft.com/idp/' },
+              { text: 'Official Documentation', link: 'https://docs.mulesoft.com/idp/' },
               { text: 'Universal REST Smart Connector', link: '/connectors/mule-idp-connector/mulesoft-idp-universal-rest-smart-connector' },
               { text: 'Dataweave', link: '/connectors/mule-idp-connector/dataweave' }
             ]

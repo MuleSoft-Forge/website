@@ -80,7 +80,7 @@ jobs:
               comment.body.includes('Preview deployment')
             );
 
-            const body = `🚀 **Preview deployment ready!**\n\n📝 Preview URL: ${deploymentUrl}\n\n✅ All changes from this PR are deployed and ready for review.\n\n---\n*This preview will update automatically when you push new commits to this PR.*`;
+            const body = `**Preview deployment:** ${deploymentUrl}\n\nThis preview updates automatically with new commits.`;
 
             if (botComment) {
               // Update existing comment

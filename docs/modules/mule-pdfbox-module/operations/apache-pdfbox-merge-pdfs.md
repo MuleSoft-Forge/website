@@ -5,14 +5,14 @@ description: Combine multiple PDF documents into one
 
 # Apache PDFBox - Merge PDFs
 
-## 🔧 Operation Name
+## Operation Name
 
 **Apache PDFBox - Merge PDFs**
 `mergePdfs`
 
 ---
 
-## 🧾 Description
+## Description
 
 Combines two or more PDF documents into a single unified PDF.
 Each input file is processed in-memory using PDFBox's random-access buffering to ensure full compatibility with PDFBox 3.0.x.
@@ -21,7 +21,7 @@ Ideal for combining related documents before delivery, archiving, or downstream 
 
 ---
 
-## ✅ Inputs
+## Inputs
 
 * **PDF Files [List of Binary]** (`List<InputStream>`)
   A list of PDF streams to merge. Must contain at least two.
@@ -29,7 +29,7 @@ Ideal for combining related documents before delivery, archiving, or downstream 
 
 ---
 
-## 📤 Output
+## Output
 
 * **Payload**: `InputStream` (binary stream)
   A single merged PDF containing all input documents, in the order provided.
@@ -38,7 +38,7 @@ Ideal for combining related documents before delivery, archiving, or downstream 
 
 ---
 
-### 🧪 MuleSoft Flow Example
+### MuleSoft Flow Example
 
 ::: tabs
 
@@ -96,7 +96,7 @@ output text
 
 ---
 
-### 🔍 Notes
+### Notes
 
 * **Order matters**: PDFs will be merged in the order they appear in the input list.
 * **Minimum 2 PDFs**: The operation requires at least two PDFs to merge.

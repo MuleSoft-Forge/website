@@ -34,16 +34,16 @@ Empower your MuleSoft flows with native PDF manipulation powered by [Apache PDFB
 
 ### Value Adds
 
-**🔍 Key Features**
+**Key Features**
 
-* 📄 **Metadata Extraction** – Get author, title, number of pages, and more.
-* ✂️ **Text Extraction** – Pull text from a specific range of pages.
-* 🧹 **Blank Page Removal** – Clean your documents before delivery.
-* 🔁 **Page Rotation** – Rotate document pages as needed.
-* 🧩 **PDF Splitting** – Break large PDFs into separate single-page files.
-* 📎 **PDF Merging** – Combine multiple PDFs into a single cohesive document
+* **Metadata Extraction** – Get author, title, number of pages, and more.
+* **Text Extraction** – Pull text from a specific range of pages.
+* **Blank Page Removal** – Clean your documents before delivery.
+* **Page Rotation** – Rotate document pages as needed.
+* **PDF Splitting** – Break large PDFs into separate single-page files.
+* **PDF Merging** – Combine multiple PDFs into a single cohesive document
 
-**🔧 Built For Developers**
+**Built For Developers**
 
 * Lightweight, single-dependency module
 * Designed using MuleSoft Java SDK
@@ -90,7 +90,7 @@ Empower your MuleSoft flows with native PDF manipulation powered by [Apache PDFB
 * **Purpose:** Splits a PDF into individual pages.
 * **Output:** A list of InputStreams, each containing a single-page PDF.
 
-**6. `mergePdfs` ✅ (New 1.0.1)**
+**6. `mergePdfs` (New 1.0.1)**
 
 * **Purpose:** Combines two or more PDF documents into one.
 * **Input:** A list of PDF InputStreams.

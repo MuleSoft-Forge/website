@@ -5,14 +5,14 @@ description: Extract text content from PDF pages
 
 # Apache PDFBox - Extract Text
 
-### 🔧 Operation Name
+### Operation Name
 
 **Apache PDFBox - Extract Text**
 `extractTextWithPageRange`
 
 ---
 
-### 🧾 Description
+### Description
 
 Extracts text content from one or more selected pages in a PDF. You can optionally define specific pages or ranges using a string like `"1,3,5-7"`.
 
@@ -23,16 +23,16 @@ Utilize [Apache PDFBox®](https://pdfbox.apache.org/) to extract the text of PDF
 
 ---
 
-### ✅ Inputs
+### Inputs
 
 | Parameter | Type | Required | Description |
 | --------- | ---- | -------- | ----------- |
-| `PDF File [Binary]` | `InputStream` (Binary) | ✅ | The PDF file whose text content you want to extract. |
-| `Page Range` | `String` | ❌ (Optional) | Comma-separated list of individual pages and ranges (e.g., `2,4,9-12`). If omitted, **all pages** are used. |
+| `PDF File [Binary]` | `InputStream` (Binary) | Required | The PDF file whose text content you want to extract. |
+| `Page Range` | `String` | Optional | Comma-separated list of individual pages and ranges (e.g., `2,4,9-12`). If omitted, **all pages** are used. |
 
 ---
 
-### 📤 Output
+### Output
 
 * **Payload**: `String`
   Contains the **extracted text** from the specified pages.
@@ -45,7 +45,7 @@ Utilize [Apache PDFBox®](https://pdfbox.apache.org/) to extract the text of PDF
 
 ---
 
-### 🧪 MuleSoft Flow Example
+### MuleSoft Flow Example
 
 Here's how to call this operation in a MuleSoft flow:
 
@@ -102,7 +102,7 @@ output text
 
 ---
 
-### 🔍 Notes
+### Notes
 
 * **Page Indexing**: Page numbers are **1-based** (i.e., `1` = first page).
 * **If `pageRange` is omitted**, the connector will extract text from **all pages**.

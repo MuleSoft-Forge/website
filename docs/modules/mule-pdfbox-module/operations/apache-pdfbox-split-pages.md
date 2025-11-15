@@ -5,14 +5,14 @@ description: Split PDF into multiple smaller PDFs
 
 # Apache PDFBox - Split Pages
 
-### 🔧 Operation Name
+### Operation Name
 
 **Apache PDFBox - Split Pages**
 `splitPages`
 
 ---
 
-### 🧾 Description
+### Description
 
 Splits a PDF document into multiple smaller PDFs. You can:
 
@@ -21,16 +21,16 @@ Splits a PDF document into multiple smaller PDFs. You can:
 
 ---
 
-### ✅ Inputs
+### Inputs
 
 | Parameter | Type | Required | Description |
 | --------- | ---- | -------- | ----------- |
-| `PDF File [Binary]` | `InputStream` (Binary) | ✅ | The PDF document to be split. |
-| `Page Increment` | `Integer` | ❌ (Optional) | How many pages per chunk. Default is `1` (split into single-page PDFs). Set to e.g. `3` to split every 3 pages into one part. |
+| `PDF File [Binary]` | `InputStream` (Binary) | Required | The PDF document to be split. |
+| `Page Increment` | `Integer` | Optional | How many pages per chunk. Default is `1` (split into single-page PDFs). Set to e.g. `3` to split every 3 pages into one part. |
 
 ---
 
-### 📤 Output
+### Output
 
 * **Payload**: `List<InputStream>` (List of binary streams)
   A list of split PDFs (each with `pageIncrement` number of pages, except the last chunk which may have fewer).
@@ -39,7 +39,7 @@ Splits a PDF document into multiple smaller PDFs. You can:
 
 ---
 
-### 🧪 MuleSoft Flow Example
+### MuleSoft Flow Example
 
 ::: tabs
 
@@ -100,7 +100,7 @@ output text
 
 ---
 
-### 🔍 Notes
+### Notes
 
 * **Default behavior** (`pageIncrement=1`): Each output PDF will contain one page.
 * **Custom chunks** (`pageIncrement=3`): Each output PDF will contain up to 3 pages.

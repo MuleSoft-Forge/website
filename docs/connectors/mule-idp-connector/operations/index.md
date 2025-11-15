@@ -13,7 +13,7 @@ description: Available operations for the MuleSoft IDP Connector
 
 **Purpose:**
 
-To create a MuleSoft IDP Universal Connector (using Mule SDK for Java) that wraps **Two REST API** and adds value-add functionality such as Apache PDFBox®. Based on the MuleSoft IDP Universal 🌐 Rest Smart Connector 🔌
+To create a MuleSoft IDP Universal Connector (using Mule SDK for Java) that wraps two REST APIs and adds value-add functionality such as Apache PDFBox, based on the MuleSoft IDP Universal Rest Smart Connector.
 
 YES - unusual to expose Two rest endpoints in one connector but honestly they go hand in hand, arguably it could be said it was a design fault to have them separate so lets combine and simplify as a connector should be all about.
 
@@ -37,9 +37,9 @@ YES - unusual to expose Two rest endpoints in one connector but honestly they go
 
 ---
 
-**📣 Surface the MuleSoft IDP Runtime Services**
+**Surface the MuleSoft IDP Runtime Services**
 
-1. ** 🚀 Submit Document to MuleSoft IDP** see [Execute the Published Document Actions](https://docs.mulesoft.com/idp/integrating-idp-with-anypoint-studio#submit-a-document-to-idp)
+1. **Submit Document to MuleSoft IDP** see [Execute the Published Document Actions](https://docs.mulesoft.com/idp/integrating-idp-with-anypoint-studio#submit-a-document-to-idp)
    * Support [Base64 Interface](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#upload-base64-file) including [Input MetaData](https://docs.mulesoft.com/mule-sdk/latest/metadata-input)
    * Support [Multipart Interface](https://docs.mulesoft.com/idp/integrating-idp-with-anypoint-studio#submit-a-document-to-idp) including [Input MetaData](https://docs.mulesoft.com/mule-sdk/latest/metadata-input)
    * Support Response [Output MetaData](https://docs.mulesoft.com/mule-sdk/latest/metadata-output)
@@ -49,52 +49,52 @@ YES - unusual to expose Two rest endpoints in one connector but honestly they go
      * Submit only selected pdf pages ie 1,3,10,11 or 1-3,6,8-12
      * Remove Blank Pages (Apache PDFBox may not support)
    * Value Add: Debate Validate for [Limits](https://docs.mulesoft.com/idp/quotas-and-limits) in Connector (hard coding really)
-2. ** 🚀 Retrieve Results from MuleSoft IDP** see [Retrieve the Results of the Execution](https://docs.mulesoft.com/idp/integrating-idp-with-anypoint-studio#submit-a-document-to-idp)
+2. **Retrieve Results from MuleSoft IDP** see [Retrieve the Results of the Execution](https://docs.mulesoft.com/idp/integrating-idp-with-anypoint-studio#submit-a-document-to-idp)
    * Support valueOnly Query parameter - Only keep the extracted value of the given field, remove confidenceScore and geometry from the response body
    * Major Work: Support Response [Output MetaData](https://docs.mulesoft.com/mule-sdk/latest/metadata-output) using MuleSoft Platform Services for IDP to interrogate Action Version schema at design time
 
 ---
 
-**📣 Additional MuleSoft IDP Runtime Services**
+**Additional MuleSoft IDP Runtime Services**
 
 See MuleSoft IDP Runtime Services
 
-1. ** 🚀 List All Review Tasks from MuleSoft IDP**
+1. **List All Review Tasks from MuleSoft IDP**
    * Description: list of all executions requiring manual review, across all actions, that the **requesting user has permission to review** - So login details are important here
    * Support Response [Output MetaData](https://docs.mulesoft.com/mule-sdk/latest/metadata-output)
-2. ** 🚀 Delete a Review Task from MuleSoft IDP**
+2. **Delete a Review Task from MuleSoft IDP**
    * Description: Delete a Review Task by Execution Id (Execution Status is updated as SUCCEEDED without changing the execution result)
    * Support Response [Output MetaData](https://docs.mulesoft.com/mule-sdk/latest/metadata-output)
-3. ** 🚀 Get Low Confidence fields for an Execution in Review from MuleSoft IDP**
+3. **Get Low Confidence fields for an Execution in Review from MuleSoft IDP**
    * Description: Get a list of low-confidence fields by Execution Id
    * Support Response [Output MetaData](https://docs.mulesoft.com/mule-sdk/latest/metadata-output)
-4. ** 🚀 Update the Low Confidence fields for an Execution in Review from MuleSoft IDP**
+4. **Update the Low Confidence fields for an Execution in Review from MuleSoft IDP**
    * Description: Patch a list of low-confidence fields by Execution Id
    * Support Request [Input MetaData](https://docs.mulesoft.com/mule-sdk/latest/metadata-input)
    * Support Response [Output MetaData](https://docs.mulesoft.com/mule-sdk/latest/metadata-output)
 
 ---
 
-**⚙️ Surface the MuleSoft Platform Services for IDP**
+**Surface the MuleSoft Platform Services for IDP**
 
-1. ** 🚀 List All Document Actions for an Organization**
+1. **List All Document Actions for an Organization**
    * Description: Get a list of low-confidence fields by Execution Id
    * Support Response [Output MetaData](https://docs.mulesoft.com/mule-sdk/latest/metadata-output)
-2. ** 🚀 Get an Action Detail**
+2. **Get an Action Detail**
    * Description: Get a list of low-confidence fields by Execution Id
    * Support Response [Output MetaData](https://docs.mulesoft.com/mule-sdk/latest/metadata-output)
-3. ** 🚀 List an Action's Versions**
+3. **List an Action's Versions**
    * Description: Get a list of low-confidence fields by Execution Id
    * Support Response [Output MetaData](https://docs.mulesoft.com/mule-sdk/latest/metadata-output)
-4. ** 🚀 List an Action's Reviewers**
+4. **List an Action's Reviewers**
    * Description: Get a list of low-confidence fields by Execution Id
    * Support Response [Output MetaData](https://docs.mulesoft.com/mule-sdk/latest/metadata-output)
 
 ---
 
-**⚙️ Universal Service for IDP**
+**Universal Service for IDP**
 
-1. ** 🚀 Universal Http Resource **
+1. **Universal Http Resource**
    * Experimental: How about we create a resource that can have json in json out and the developer configures the URL but reuses all the hard work of configuration/connectivity. Therefore the Connector does not become obsolete so quickly, ie we can support other services for the host.
 
 ---

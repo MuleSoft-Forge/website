@@ -5,14 +5,14 @@ description: Filter pages from PDF based on page range or blank page removal
 
 # Apache PDFBox - Filter Pages
 
-### 🔧 Operation Name
+### Operation Name
 
 **Apache PDFBox - Filter Pages**
 `filterPages`
 
 ---
 
-### 🧾 Description
+### Description
 
 Filters pages from a PDF document based on two optional criteria:
 
@@ -23,17 +23,17 @@ This is useful for preprocessing documents by cleaning up whitespace or extracti
 
 ---
 
-### ✅ Inputs
+### Inputs
 
 | Parameter | Type | Required | Description |
 | --------- | ---- | -------- | ----------- |
-| `PDF File [Binary]` | `InputStream` (Binary) | ✅ | The input PDF document to be filtered. |
-| `Remove Blank Pages` | `Boolean` | ❌ (Optional) | If `true`, pages without visible text, images, or annotations will be removed. |
-| `Page Range` | `String` | ❌ (Optional) | Comma-separated list of page numbers or ranges to retain (e.g., `1,3,5-7`). If not provided, all pages are considered. |
+| `PDF File [Binary]` | `InputStream` (Binary) | Required | The input PDF document to be filtered. |
+| `Remove Blank Pages` | `Boolean` | Optional | If `true`, pages without visible text, images, or annotations will be removed. |
+| `Page Range` | `String` | Optional | Comma-separated list of page numbers or ranges to retain (e.g., `1,3,5-7`). If not provided, all pages are considered. |
 
 ---
 
-### 📤 Output
+### Output
 
 * **Payload**: `InputStream` (Binary)
   A new filtered PDF stream containing only the selected (and non-blank) pages.
@@ -42,7 +42,7 @@ This is useful for preprocessing documents by cleaning up whitespace or extracti
 
 ---
 
-### 🧪 MuleSoft Flow Example
+### MuleSoft Flow Example
 
 ::: tabs
 
@@ -97,7 +97,7 @@ output text
 
 ---
 
-### 🔍 Notes
+### Notes
 
 * **Page Indexing**: 1-based (e.g., `1` = first page).
 * **If both options are omitted**, the PDF is returned unmodified.

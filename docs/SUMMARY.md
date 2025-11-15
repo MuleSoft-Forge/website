@@ -22,7 +22,7 @@
     * [Deprecated 1.0.1 - Utils IDP - PDF - ExtractText](connectors/mule-idp-connector/operations/deprecated-1.0.1-utils-idp-pdf-extracttext.md)
     * [Deprecated 1.0.1 - Utils IDP - PDF - RemovePages](connectors/mule-idp-connector/operations/deprecated-1.0.1-utils-idp-pdf-removepages.md)
   * [docs.mulesoft.com](https://docs.mulesoft.com/idp/)
-  * [MuleSoft IDP Universal 🌐 REST Smart Connector 🔌](connectors/mule-idp-connector/mulesoft-idp-universal-rest-smart-connector.md)
+  * [MuleSoft IDP Universal REST Smart Connector](connectors/mule-idp-connector/mulesoft-idp-universal-rest-smart-connector.md)
   * [Dataweave](connectors/mule-idp-connector/dataweave.md)
 
 ## Modules

@@ -6,7 +6,7 @@ description: Community-Driven MuleSoft Assets
 hero:
   name: MuleSoftForge
   text: Community-Driven MuleSoft Assets
-  tagline: The unified, open-source hub for powerful MuleSoft connectors and modules, built by the community for the community
+  tagline: Open-source MuleSoft connectors and modules, built by the community for the community
   image:
     src: /images/mulesoftdevelopers_logo.jpeg
     alt: MuleSoft Developers
@@ -46,13 +46,13 @@ features:
 <Stepper>
 <Step title="Purpose: The one-stop shop for Community Assets">
 
-Imagine a single, vibrant space where powerful MuleSoft assets, crafted by our community, lives and thrives. We know there are **already wonderful contributions out there**, scattered across the ecosystem. **Let's bring them together**. MuleSoftForge is the unified, open-source hub, built for us, by us – the definitive destination for all community contributions, both existing and future.
+MuleSoftForge is a centralized open-source repository for community-contributed MuleSoft assets. This hub consolidates connectors, modules, and other resources that have been scattered across the ecosystem, providing a single location for both existing and future community contributions.
 
 </Step>
 
 <Step title="Your invitation to Build">
 
-Join us on [GitHub](https://github.com/MuleSoft-Forge). Your skills, your passion, your contributions – they're the foundation of MuleSoftForge. Be part of creating a **vital resource center** for the entire MuleSoft community. **Let's build this together.**
+Join us on [GitHub](https://github.com/MuleSoft-Forge). Your contributions help build a valuable resource for the entire MuleSoft community.
 
 ![We Need You](/images/weneedyou.png)
 
@@ -106,4 +106,4 @@ MuleSoftForge is maintained by the MuleSoft community:
 
 ---
 
-**Together, let's build the definitive resource center for the MuleSoft community. 🚀**
+**Join us in building a comprehensive resource center for the MuleSoft community.**

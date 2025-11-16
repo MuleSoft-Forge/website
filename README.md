@@ -263,15 +263,16 @@ Main configuration is in `docs/.vitepress/config.js`. Key settings:
 
 ## Deployment
 
-The site can be deployed to any static hosting platform:
+This site is deployed to **Cloudflare Pages** with automatic deployments:
 
-- **GitHub Pages** - Free hosting for public repositories
-- **Netlify** - Continuous deployment with previews
-- **Vercel** - Zero-config deployment
-- **AWS S3 + CloudFront** - Enterprise hosting
+- **Staging**: Automatically deploys from `main` branch to https://mulesoftforge.nonprod.app
+- **Production**: Manually deployed after approval
+- **PR Previews**: Every pull request gets a unique preview URL
 
 Build command: `npm run docs:build`
 Output directory: `docs/.vitepress/dist`
+
+The site uses GitHub Actions for CI/CD. See `.github/workflows/` for deployment configuration.
 
 ## Technology Stack
 
@@ -289,16 +290,18 @@ Output directory: `docs/.vitepress/dist`
 
 ## Contributing
 
-Contributions are welcome! This repository will become public in Milestone 3 of the migration project.
+We welcome contributions from the community! Please see our [Contributing Guide](CONTRIBUTING.md) for details on:
 
-For now, if you have suggestions or find issues:
-1. Check existing issues on GitHub
-2. Create a detailed issue report
-3. For bugs, include steps to reproduce
+- How to set up your development environment
+- Content guidelines and style standards
+- How to submit changes
+- Issue and pull request templates
+
+For quick fixes (typos, broken links), feel free to open a PR directly. For larger changes, please open an issue first to discuss your proposed changes.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
 ## Resources
 
@@ -316,4 +319,4 @@ For questions or support:
 
 ---
 
-Built with ❤️ by the MuleSoft Forge Community
+**MuleSoft Forge** - Community-driven MuleSoft connectors and modules

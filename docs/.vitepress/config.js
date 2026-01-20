@@ -70,6 +70,22 @@ export default defineConfig({
         collapsed: false,
         items: [
           {
+            text: 'mule-chunking-connector',
+            collapsed: false,
+            items: [
+              { text: 'Overview', link: '/connectors/mule-chunking-connector/' },
+              { text: 'Set Up', link: '/connectors/mule-chunking-connector/set-up' },
+              {
+                text: 'Operations',
+                collapsed: true,
+                items: [
+                  { text: 'Operations Overview', link: '/connectors/mule-chunking-connector/operations/' },
+                  { text: 'read-chunked', link: '/connectors/mule-chunking-connector/operations/read-chunked' }
+                ]
+              }
+            ]
+          },
+          {
             text: 'mule-idp-connector',
             collapsed: false,
             items: [

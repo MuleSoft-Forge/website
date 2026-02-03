@@ -263,16 +263,47 @@ Main configuration is in `docs/.vitepress/config.js`. Key settings:
 
 ## Deployment
 
-This site is deployed to **Cloudflare Pages** with automatic deployments:
+This site is deployed to **Cloudflare Pages** with a multi-environment deployment pipeline:
 
-- **Staging**: Automatically deploys from `main` branch to https://mulesoftforge.nonprod.app
-- **Production**: Manually deployed after approval
-- **PR Previews**: Every pull request gets a unique preview URL
+### Environments
+
+- **Production**: https://mulesoftforge.pages.dev (and custom domains)
+  - Manual deployment with approval required
+  - 4 designated approvers (any one can approve)
+  - Triggered via GitHub Actions workflow
+
+- **Staging**: https://mulesoftforge.nonprod.app
+  - Automatically deploys on merge to `main` branch
+  - Used for testing before production deployment
+
+- **PR Previews**: `https://pr-{number}.mulesoftforge-staging.pages.dev`
+  - Every pull request gets a unique preview URL
+  - Automatically updates with new commits
+
+### Deploying to Production
+
+**Who can deploy**: Anyone with write access to the repository
+**Who can approve**: Ryan Hoegg, George Jeffcock, Ryan Carter, or Matthias Transier
+
+**Steps to deploy**:
+
+1. Go to [GitHub Actions](https://github.com/MuleSoft-Forge/website/actions)
+2. Select "Deploy to Production" workflow
+3. Click "Run workflow" button
+4. Optionally add a deployment reason
+5. Click "Run workflow" to start
+6. Wait for approval from one of the designated reviewers
+7. After approval, deployment proceeds automatically
+
+**Deployment flow**: `PR → Staging (auto) → Production (manual + approval)`
+
+For detailed deployment documentation, see [DEPLOYMENT.md](DEPLOYMENT.md).
+
+### Technical Details
 
 Build command: `npm run docs:build`
 Output directory: `docs/.vitepress/dist`
-
-The site uses GitHub Actions for CI/CD. See `.github/workflows/` for deployment configuration.
+CI/CD: GitHub Actions (see `.github/workflows/`)
 
 ## Technology Stack
 

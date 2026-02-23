@@ -70,7 +70,7 @@ export default defineConfig({
         collapsed: false,
         items: [
           {
-            text: 'mule-chunking-connector',
+            text: 'Chunking Connector',
             collapsed: false,
             items: [
               { text: 'Overview', link: '/connectors/mule-chunking-connector/' },
@@ -86,7 +86,7 @@ export default defineConfig({
             ]
           },
           {
-            text: 'mule-idp-connector',
+            text: 'IDP Connector',
             collapsed: false,
             items: [
               { text: 'Overview', link: '/connectors/mule-idp-connector/' },
@@ -111,6 +111,33 @@ export default defineConfig({
               { text: 'Universal REST Smart Connector', link: '/connectors/mule-idp-connector/mulesoft-idp-universal-rest-smart-connector' },
               { text: 'Dataweave', link: '/connectors/mule-idp-connector/dataweave' }
             ]
+          },
+          {
+            text: 'Lettuce Redis Connector',
+            collapsed: false,
+            items: [
+              { text: 'Overview', link: '/connectors/mule-lettuce-redis-connector/' },
+              { text: 'Set Up', link: '/connectors/mule-lettuce-redis-connector/set-up' },
+              {
+                text: 'Operations',
+                collapsed: true,
+                items: [
+                  { text: 'Operations Overview', link: '/connectors/mule-lettuce-redis-connector/operations/' },
+                  { text: 'Server', link: '/connectors/mule-lettuce-redis-connector/operations/server' },
+                  { text: 'Key / Value', link: '/connectors/mule-lettuce-redis-connector/operations/key-value' },
+                  { text: 'Hash', link: '/connectors/mule-lettuce-redis-connector/operations/hash' },
+                  { text: 'List', link: '/connectors/mule-lettuce-redis-connector/operations/list' },
+                  { text: 'Set', link: '/connectors/mule-lettuce-redis-connector/operations/set' },
+                  { text: 'Sorted Set', link: '/connectors/mule-lettuce-redis-connector/operations/sorted-set' },
+                  { text: 'Geospatial', link: '/connectors/mule-lettuce-redis-connector/operations/geospatial' },
+                  { text: 'Stream', link: '/connectors/mule-lettuce-redis-connector/operations/stream' },
+                  { text: 'Channel', link: '/connectors/mule-lettuce-redis-connector/operations/channel' },
+                  { text: 'Send Command', link: '/connectors/mule-lettuce-redis-connector/operations/send-command' },
+                  { text: 'Search Operations', link: '/connectors/mule-lettuce-redis-connector/operations/search-operations' }
+                ]
+              },
+              { text: 'Sources (Listeners)', link: '/connectors/mule-lettuce-redis-connector/sources' }
+            ]
           }
         ]
       },
@@ -121,7 +148,7 @@ export default defineConfig({
         collapsed: false,
         items: [
           {
-            text: 'mule-pdfbox-module',
+            text: 'PDFBox Module',
             collapsed: false,
             items: [
               { text: 'Overview', link: '/modules/mule-pdfbox-module/' },

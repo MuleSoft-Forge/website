@@ -111,6 +111,33 @@ export default defineConfig({
               { text: 'Universal REST Smart Connector', link: '/connectors/mule-idp-connector/mulesoft-idp-universal-rest-smart-connector' },
               { text: 'Dataweave', link: '/connectors/mule-idp-connector/dataweave' }
             ]
+          },
+          {
+            text: 'forge-lettuce-redis',
+            collapsed: false,
+            items: [
+              { text: 'Overview', link: '/connectors/forge-lettuce-redis/' },
+              { text: 'Set Up', link: '/connectors/forge-lettuce-redis/set-up' },
+              {
+                text: 'Operations',
+                collapsed: true,
+                items: [
+                  { text: 'Operations Overview', link: '/connectors/forge-lettuce-redis/operations/' },
+                  { text: 'Server', link: '/connectors/forge-lettuce-redis/operations/server' },
+                  { text: 'Key / Value', link: '/connectors/forge-lettuce-redis/operations/key-value' },
+                  { text: 'Hash', link: '/connectors/forge-lettuce-redis/operations/hash' },
+                  { text: 'List', link: '/connectors/forge-lettuce-redis/operations/list' },
+                  { text: 'Set', link: '/connectors/forge-lettuce-redis/operations/set' },
+                  { text: 'Sorted Set', link: '/connectors/forge-lettuce-redis/operations/sorted-set' },
+                  { text: 'Geospatial', link: '/connectors/forge-lettuce-redis/operations/geospatial' },
+                  { text: 'Stream', link: '/connectors/forge-lettuce-redis/operations/stream' },
+                  { text: 'Channel', link: '/connectors/forge-lettuce-redis/operations/channel' },
+                  { text: 'Send Command', link: '/connectors/forge-lettuce-redis/operations/send-command' },
+                  { text: 'Search Operations', link: '/connectors/forge-lettuce-redis/operations/search-operations' }
+                ]
+              },
+              { text: 'Sources (Listeners)', link: '/connectors/forge-lettuce-redis/sources' }
+            ]
           }
         ]
       },

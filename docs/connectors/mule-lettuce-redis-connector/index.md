@@ -3,7 +3,7 @@ title: Mule Lettuce Redis Connector
 description: Direct access to Redis commands from Mule applications, built on the Lettuce reactive Redis client.
 ---
 
-# forge-lettuce-redis
+# Lettuce Redis Connector
 
 A low-level connector providing Mule applications with direct access to Redis commands, built on the [Lettuce](https://lettuce.io/) reactive Redis client library. Published on Maven Central under `cloud.anypoint`.
 

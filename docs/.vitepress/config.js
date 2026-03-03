@@ -3,7 +3,7 @@ import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "MuleSoft Forge",
+  title: "MuleSoftForge",
   description: "Community-contributed connectors and modules for MuleSoft",
 
   // Enable dead link checking - all links in Part D validation passed
@@ -11,12 +11,13 @@ export default defineConfig({
 
   // Head tags for SEO, favicon, and social sharing
   head: [
-    ['link', { rel: 'icon', href: '/images/mulesoftdevelopers_logo.jpeg' }],
+    ['link', { rel: 'icon', href: '/images/favicon.png', type: 'image/png' }],
+    ['link', { rel: 'apple-touch-icon', href: '/images/favicon.png' }],
     ['meta', { name: 'theme-color', content: '#00a3e0' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: 'MuleSoft Forge Documentation' }],
     ['meta', { property: 'og:description', content: 'Community-contributed connectors and modules for MuleSoft' }],
-    ['meta', { property: 'og:image', content: '/images/mulesoftdevelopers_logo.jpeg' }],
+    ['meta', { property: 'og:image', content: '/images/favicon.png' }],
     ['meta', { property: 'og:url', content: 'https://docs.mulesoftforge.com' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
     ['meta', { name: 'twitter:title', content: 'MuleSoft Forge Documentation' }],
@@ -26,7 +27,7 @@ export default defineConfig({
   // Theme configuration
   themeConfig: {
     // Site logo
-    logo: '/images/mulesoftdevelopers_logo.jpeg',
+    logo: '/images/favicon.png',
 
     // Navigation
     nav: [
@@ -110,6 +111,26 @@ export default defineConfig({
               { text: 'Official Documentation', link: 'https://docs.mulesoft.com/idp/' },
               { text: 'Universal REST Smart Connector', link: '/connectors/mule-idp-connector/mulesoft-idp-universal-rest-smart-connector' },
               { text: 'Dataweave', link: '/connectors/mule-idp-connector/dataweave' }
+            ]
+          },
+          {
+            text: 'Informatica MDM Connector',
+            collapsed: false,
+            items: [
+              { text: 'Overview', link: '/connectors/mule-infa-mdm-connector/' },
+              { text: 'Design Concept', link: '/connectors/mule-infa-mdm-connector/concept' },
+              { text: 'Set Up', link: '/connectors/mule-infa-mdm-connector/set-up' },
+              {
+                text: 'Operations',
+                collapsed: true,
+                items: [
+                  { text: 'Operations Overview', link: '/connectors/mule-infa-mdm-connector/operations/' },
+                  { text: 'INFA MDM - Master Read', link: '/connectors/mule-infa-mdm-connector/operations/master-read' },
+                  { text: 'INFA MDM - Master Search', link: '/connectors/mule-infa-mdm-connector/operations/search' },
+                  { text: 'INFA MDM - Source Read', link: '/connectors/mule-infa-mdm-connector/operations/source-read' },
+                  { text: 'INFA MDM - Source Submit', link: '/connectors/mule-infa-mdm-connector/operations/source-submit' }
+                ]
+              }
             ]
           },
           {

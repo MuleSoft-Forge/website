@@ -69,6 +69,55 @@
 }
 
 /**
+ * Home page — "New" feature card highlight (first card = Informatica MDM only)
+ * -------------------------------------------------------------------------- */
+
+.VPFeatures .items .item:first-child .VPFeature {
+  position: relative;
+  border: 2px solid #00a3e0;
+  background: linear-gradient(145deg, rgba(0, 163, 224, 0.08) 0%, rgba(0, 163, 224, 0.02) 100%);
+  box-shadow: 0 4px 20px rgba(0, 163, 224, 0.15);
+}
+
+.VPFeatures .items .item:first-child .VPFeature:hover {
+  border-color: #0091c9;
+  box-shadow: 0 6px 24px rgba(0, 163, 224, 0.22);
+}
+
+.VPFeatures .items .item:first-child .VPFeature::before {
+  content: 'NEW';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background: linear-gradient(135deg, #f26a21 0%, #e55a10 100%);
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(242, 106, 33, 0.4);
+  z-index: 1;
+}
+
+.dark .VPFeatures .items .item:first-child .VPFeature {
+  border-color: #4a9eff;
+  background: linear-gradient(145deg, rgba(74, 158, 255, 0.12) 0%, rgba(74, 158, 255, 0.04) 100%);
+  box-shadow: 0 4px 20px rgba(74, 158, 255, 0.2);
+}
+
+.dark .VPFeatures .items .item:first-child .VPFeature:hover {
+  border-color: #3d8aeb;
+  box-shadow: 0 6px 24px rgba(74, 158, 255, 0.28);
+}
+
+.dark .VPFeatures .items .item:first-child .VPFeature::before {
+  background: linear-gradient(135deg, #ff8c42 0%, #f26a21 100%);
+  color: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(255, 140, 66, 0.5);
+}
+
+/**
  * Typography
  * -------------------------------------------------------------------------- */
 

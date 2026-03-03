@@ -17,7 +17,7 @@ description: Installation and configuration guide for the MuleSoft IDP Connector
 
 <details>
 
-<summary><a href="https://central.sonatype.com/artifact/io.github.mulesoft-forge/mule-idp-connector/overview"><img src="https://img.shields.io/maven-central/v/io.github.mulesoft-ai-chain-project/mule4-agentforce-connector" alt="Maven Central"></a></summary>
+<summary><a href="https://central.sonatype.com/artifact/io.github.mulesoft-forge/mule-idp-connector/overview"><img src="https://img.shields.io/maven-central/v/io.github.mulesoft-forge/mule-idp-connector" alt="Maven Central"></a></summary>
 
 [Serving Open Source Components Since 2002](https://central.sonatype.org/pages/about/) The Central Repository is the largest collection of Java and other open source components. It provides the easiest way to access and distribute your software components to millions of developers.
 

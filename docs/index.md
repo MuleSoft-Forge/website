@@ -7,13 +7,10 @@ hero:
   name: MuleSoftForge
   text: Community-Driven MuleSoft Assets
   tagline: Open-source MuleSoft connectors and modules, built by the community for the community
-  image:
-    src: /images/mulesoftdevelopers_logo.jpeg
-    alt: MuleSoft Developers
   actions:
     - theme: brand
       text: Browse Connectors
-      link: /connectors/mule-idp-connector/
+      link: /connectors/mule-infa-mdm-connector/
     - theme: alt
       text: Get Involved
       link: /forge-initiative/how-to-contribute
@@ -22,19 +19,33 @@ hero:
       link: https://github.com/MuleSoft-Forge
 
 features:
-  - icon: 🤖
+  - icon:
+      src: /images/infa-mdm-connector-icon.svg
+      alt: Informatica MDM - B360 Connector
+    title: "Informatica MDM - B360 Connector"
+    details: "Native MuleSoft connector for Informatica MDM Business 360 REST API — Master Read, Search, Source Read, and Source Submit with full DataSense support"
+    link: /connectors/mule-infa-mdm-connector/
+    linkText: Learn More →
+
+  - icon:
+      src: /images/idp-connector-icon.svg
+      alt: MuleSoft IDP Connector
     title: MuleSoft IDP Connector
     details: Intelligent Document Processing for extracting structured data from PDFs, images, and scanned documents using AI-powered classification and extraction
     link: /connectors/mule-idp-connector/
     linkText: Learn More →
 
-  - icon: 📄
+  - icon:
+      src: /images/pdfbox-module-icon.svg
+      alt: MuleSoft PDFBox Module
     title: MuleSoft PDFBox Module
     details: Comprehensive PDF manipulation operations including text extraction, page filtering, rotation, splitting, merging, and conversion powered by Apache PDFBox
     link: /modules/mule-pdfbox-module/
     linkText: Learn More →
 
-  - icon: 🔧
+  - icon:
+      src: /images/community-icon.png
+      alt: MuleSoft Community
     title: Open Source & Community-Driven
     details: All assets are open source and maintained by the MuleSoft community. Contributions, bug reports, and feature requests are welcome!
     link: /forge-initiative/overview
@@ -42,6 +53,12 @@ features:
 ---
 
 ## Welcome to MuleSoftForge
+
+<Hint type="success">
+
+**New** — **[Informatica MDM - B360 Connector](./connectors/mule-infa-mdm-connector/)** — Native MuleSoft connector for Informatica MDM Business 360. Master Read, Search, Source Read, and Source Submit with full DataSense. [Get started →](./connectors/mule-infa-mdm-connector/)
+
+</Hint>
 
 <Stepper>
 <Step title="Purpose: The one-stop shop for Community Assets">
@@ -64,6 +81,11 @@ Join us on [GitHub](https://github.com/MuleSoft-Forge). Your contributions help 
 ## Available Assets
 
 ### Connectors
+
+- **[Informatica MDM - B360 Connector](./connectors/mule-infa-mdm-connector/)** — *New* — Informatica MDM Business 360 REST API integration
+  - Master Read, Search, Source Read, and Source Submit operations
+  - Dynamic DataSense with entity-aware metadata resolution
+  - Automatic IICS authentication and JWT session management
 
 - **[MuleSoft IDP Connector](./connectors/mule-idp-connector/)** - Intelligent Document Processing with AI-powered extraction and classification
   - Extract structured data from PDFs, images, and scans
@@ -97,6 +119,8 @@ Join us on [GitHub](https://github.com/MuleSoft-Forge). Your contributions help 
 ---
 
 ## Community
+
+![MuleSoft Community](/images/community-icon.png)
 
 MuleSoftForge is maintained by the MuleSoft community:
 

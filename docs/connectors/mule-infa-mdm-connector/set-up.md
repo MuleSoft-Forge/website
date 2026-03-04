@@ -7,7 +7,7 @@ description: Installation and configuration guide for the Informatica MDM - Busi
 
 | Version | Min runtime version | Compatible Java versions | Description |
 | ------- | ------------------- | ------------------------ | ----------- |
-| 1.0.x | 4.6.0 | Java 17, Java 11, Java 8 | Initial release |
+| [1.0.0](https://central.sonatype.com/artifact/com.mulesoftforge/mule-infa-b360-connector/1.0.0) | 4.6.0 | Java 17, Java 11, Java 8 | Initial release |
 
 ## Requirements
 
@@ -44,7 +44,9 @@ The connector authenticates via the [Informatica Cloud (IICS) V3 Login API](http
 ![Global Element Properties — Informatica MDM Business 360 Configuration](/images/infa-mdm-connector/global-element-properties.png)
 
 ```xml
-<b360:config name="B360_Config">
+<b360:config name="Informatica_MDM_Business_360_Configuration"
+        doc:name="Informatica MDM - Business 360 Configuration"
+        doc:id="9cd76a86-6b67-4edb-bf97-81bcaf01fa88">
     <b360:basic-connection
         baseUrl="https://dmp-us.informaticacloud.com/saas/public/core/v3/login"
         username="${iics.username}"
@@ -228,7 +230,7 @@ Always use Mule property placeholders or secure configuration properties to keep
 
 ### DataSense Not Loading
 
-**Problem**: Business Entity or Source System drop-downs are empty
+**Problem**: Business Entity Internal Id or Source System drop-downs are empty
 
 **Solutions**:
 1. Ensure the IICS user has permissions to access the MDM Business 360 datamodel
@@ -243,7 +245,7 @@ Always use Mule property placeholders or secure configuration properties to keep
 
 **Solutions**:
 1. In the connector project, run `mvn clean install` to install to your local Maven repository
-2. In your Mule app's `pom.xml`, ensure the dependency uses the same `groupId`/`artifactId` and the version you built (e.g. `1.0.90-SNAPSHOT`)
+2. In your Mule app's `pom.xml`, ensure the dependency uses the same `groupId`/`artifactId` and the version you built (e.g. `1.0.0`)
 3. Studio will resolve it from the local repository
 4. If the app was created from Exchange, replace the Exchange dependency with the local artifact coordinates
 

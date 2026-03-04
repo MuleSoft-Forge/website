@@ -20,7 +20,7 @@ The Informatica MDM - Business 360 Connector provides four operations covering t
 
 All operations support dynamic metadata resolution:
 
-- **Business Entity** and **Source System** fields provide drop-down value providers populated from your B360 tenant datamodel
+- **Business Entity Internal Id** and **Source System** fields provide drop-down value providers populated from your B360 tenant datamodel
 - **Output metadata** is resolved dynamically based on the selected business entity, giving you entity-aware DataWeave autocompletion
 - **Input metadata** (Source Submit) resolves the expected record payload structure for the selected entity
 
@@ -40,7 +40,7 @@ All operations can throw the following error types:
 ```xml
 <try>
     <b360:master-read config-ref="B360_Config"
-        businessEntity="Person"
+        businessEntity="c360.person"
         businessId="12345" />
 
     <error-handler>

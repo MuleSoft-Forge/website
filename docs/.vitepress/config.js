@@ -72,6 +72,7 @@ export default defineConfig({
         items: [
           {
             text: 'Chunking Connector',
+            icon: '/images/chunking-connector-icon.png',
             collapsed: false,
             items: [
               { text: 'Overview', link: '/connectors/mule-chunking-connector/' },
@@ -88,6 +89,7 @@ export default defineConfig({
           },
           {
             text: 'IDP Connector',
+            icon: '/images/idp-connector-icon.svg',
             collapsed: false,
             items: [
               { text: 'Overview', link: '/connectors/mule-idp-connector/' },
@@ -115,6 +117,7 @@ export default defineConfig({
           },
           {
             text: 'Informatica MDM Connector',
+            icon: '/images/infa-mdm-connector-icon.svg',
             collapsed: false,
             items: [
               { text: 'Overview', link: '/connectors/mule-infa-mdm-connector/' },
@@ -135,6 +138,7 @@ export default defineConfig({
           },
           {
             text: 'Lettuce Redis Connector',
+            icon: '/images/lettuce-redis-connector-icon.png',
             collapsed: false,
             items: [
               { text: 'Overview', link: '/connectors/mule-lettuce-redis-connector/' },
@@ -170,6 +174,7 @@ export default defineConfig({
         items: [
           {
             text: 'PDFBox Module',
+            icon: '/images/pdfbox-module-icon.svg',
             collapsed: false,
             items: [
               { text: 'Overview', link: '/modules/mule-pdfbox-module/' },

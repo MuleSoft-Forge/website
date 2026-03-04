@@ -2,6 +2,7 @@
 import { h } from 'vue'
 import DefaultTheme from 'vitepress/theme'
 import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
+import Layout from './Layout.vue'
 
 // Import custom components
 import Hint from './components/Hint.vue'
@@ -13,11 +14,7 @@ import './styles/custom.css'
 
 export default {
   extends: DefaultTheme,
-  Layout: () => {
-    return h(DefaultTheme.Layout, null, {
-      // https://vitepress.dev/guide/extending-default-theme#layout-slots
-    })
-  },
+  Layout,
   enhanceApp({ app, router, siteData }) {
     // Register custom components globally
     app.component('Hint', Hint)

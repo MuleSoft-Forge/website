@@ -7,16 +7,6 @@ description: Search across business entities in Informatica MDM Business 360
 
 Searches master (golden) records in B360 via the [Search API](https://onlinehelp.informatica.com/IICS/prod/b360/en/wz-b360-rest-api/Search_API.html), with support for full-text search, field-level search, filtering, sorting, and pagination. Supports English and Japanese locales.
 
-## XML Signature
-
-```xml
-<b360:search config-ref="B360_Config"
-    entityType="Person"
-    search="John Smith"
-    recordsToReturn="10"
-    recordOffset="0" />
-```
-
 ## Parameters
 
 ### Pagination
@@ -33,7 +23,7 @@ Searches master (golden) records in B360 via the [Search API](https://onlinehelp
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `entityType` | String | Yes | Business entity internal ID to search (value provider drop-down, e.g. `c360.person`, `c360.organization`) |
+| `entityType` | String | Yes | Business Entity Internal Id (value provider drop-down, e.g. `c360.person`, `c360.organization`) |
 | `search` | String | Conditional | Full-text search query. Mutually exclusive with `fields`. |
 | `fields` | Object | Conditional | Search specific fields by name/value (e.g. first name `"J*"`). Mutually exclusive with `search`. |
 
@@ -152,62 +142,6 @@ After editing record and field privileges or data access rules, users with custo
 </Hint>
 
 See the [Search API documentation](https://onlinehelp.informatica.com/IICS/prod/b360/en/wz-b360-rest-api/Search_API.html) for the full request/response specification.
-
-## Examples
-
-### Full-Text Search
-
-```xml
-<b360:search config-ref="B360_Config"
-    entityType="Person"
-    search="John Smith"
-    recordsToReturn="25"
-    recordOffset="0" />
-
-<logger level="INFO"
-    message="Found #[attributes.hits] results" />
-
-<foreach>
-    <logger level="INFO" message="Record: #[payload]" />
-</foreach>
-```
-
-### Paginated Results
-
-```xml
-<!-- Page 1 -->
-<b360:search config-ref="B360_Config"
-    entityType="Organization"
-    search="Acme"
-    recordsToReturn="10"
-    recordOffset="0" />
-
-<!-- Page 2 -->
-<b360:search config-ref="B360_Config"
-    entityType="Organization"
-    search="Acme"
-    recordsToReturn="10"
-    recordOffset="10" />
-```
-
-### Error Handling
-
-```xml
-<try>
-    <b360:search config-ref="B360_Config"
-        entityType="Person"
-        search="#[vars.query]"
-        recordsToReturn="50"
-        recordOffset="0" />
-
-    <error-handler>
-        <on-error-continue type="B360:CLIENT_ERROR">
-            <logger level="WARN"
-                message="Invalid search request: #[error.description]" />
-        </on-error-continue>
-    </error-handler>
-</try>
-```
 
 ## See Also
 

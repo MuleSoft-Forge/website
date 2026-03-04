@@ -5,18 +5,9 @@ description: Read a cross-reference (source) record from Informatica MDM Busines
 
 # INFA MDM - Source Read
 
-Reads a cross-reference (source) record from B360 by Business Entity, Source System, and Source Primary Key. This returns a single source system's contribution — not the blended golden record. See [Design Concept](../concept) for the distinction between source records and golden records.
+Reads a cross-reference (source) record from B360 by Business Entity Internal Id, Source System, and Source Primary Key. This returns a single source system's contribution — not the blended golden record. See [Design Concept](../concept) for the distinction between source records and golden records.
 
 **Informatica docs:** [Source Record API](https://onlinehelp.informatica.com/IICS/prod/b360/en/index.htm#page/wz-b360-rest-api/Source_record_API.html)
-
-## XML Signature
-
-```xml
-<b360:source-read config-ref="B360_Config"
-    businessEntity="Person"
-    sourceSystem="CRM"
-    sourcePKey="CRM-001" />
-```
 
 ## Parameters
 
@@ -24,7 +15,7 @@ Reads a cross-reference (source) record from B360 by Business Entity, Source Sys
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `businessEntity` | String | Yes | Business entity name (value provider drop-down) |
+| `businessEntity` | String | Yes | Business Entity Internal Id (value provider drop-down, e.g. `c360.person`) |
 | `sourceSystem` | String | Yes | Source system name (value provider drop-down, scoped to entity) |
 | `sourcePKey` | String | Yes | Source primary key |
 
@@ -59,7 +50,7 @@ When a data quality rule applies, the response includes a `dataEnhancementRule` 
 | Attribute | Type | Description |
 |-----------|------|-------------|
 | `businessId` | String | B360 master record ID this source record contributes to |
-| `businessEntity` | String | Business entity name |
+| `businessEntity` | String | Business Entity Internal Id |
 | `createdBy` | String | User who created the source record |
 | `creationDate` | String | Record creation timestamp |
 | `updatedBy` | String | User who last updated the record |
@@ -79,55 +70,8 @@ GET <baseApiUrl>/business-entity/public/api/v1/entity-xref/{businessEntity}/{sou
 ```
 
 ::: tip Dependent Drop-downs
-The **Business Entity** and **Source System** fields use dependent value providers. When you select a Business Entity, the Source System drop-down refreshes to show only the source systems configured for that entity in your B360 tenant datamodel.
+The **Business Entity Internal Id** and **Source System** fields use dependent value providers. When you select a Business Entity Internal Id, the Source System drop-down refreshes to show only the source systems configured for that entity in your B360 tenant datamodel.
 :::
-
-## Examples
-
-### Basic Source Read
-
-```xml
-<b360:source-read config-ref="B360_Config"
-    businessEntity="Person"
-    sourceSystem="CRM"
-    sourcePKey="CRM-001" />
-
-<logger level="INFO"
-    message="Source record for Business ID: #[attributes.businessId]" />
-```
-
-### With Crosswalk Resolution
-
-```xml
-<b360:source-read config-ref="B360_Config"
-    businessEntity="Organization"
-    sourceSystem="ERP"
-    sourcePKey="ERP-ORG-100"
-    resolveCrosswalk="true" />
-```
-
-### Error Handling
-
-```xml
-<try>
-    <b360:source-read config-ref="B360_Config"
-        businessEntity="#[vars.entity]"
-        sourceSystem="#[vars.system]"
-        sourcePKey="#[vars.key]" />
-
-    <error-handler>
-        <on-error-continue type="B360:CLIENT_ERROR">
-            <logger level="WARN"
-                message="Source record not found: #[error.description]" />
-        </on-error-continue>
-
-        <on-error-continue type="B360:TIMEOUT">
-            <logger level="ERROR"
-                message="B360 timed out reading source record" />
-        </on-error-continue>
-    </error-handler>
-</try>
-```
 
 ## See Also
 

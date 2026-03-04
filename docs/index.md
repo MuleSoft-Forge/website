@@ -44,6 +44,22 @@ features:
     linkText: Learn More →
 
   - icon:
+      src: /images/chunking-connector-icon.png
+      alt: Mule Chunking Connector
+    title: Mule Chunking Connector
+    details: Stream large binary files into chunks for streaming processing in Mule, maintaining constant memory regardless of incoming stream size. Ideal for S3 multipart upload, ETL, and checksums.
+    link: /connectors/mule-chunking-connector/
+    linkText: Learn More →
+
+  - icon:
+      src: /images/lettuce-redis-connector-icon.png
+      alt: Lettuce Redis Connector
+    title: Lettuce Redis Connector
+    details: Direct access to Redis commands from Mule applications, built on the Lettuce reactive client. Full coverage of strings, hashes, lists, sets, streams, Pub/Sub sources, and arbitrary commands.
+    link: /connectors/mule-lettuce-redis-connector/
+    linkText: Learn More →
+
+  - icon:
       src: /images/community-icon.png
       alt: MuleSoft Community
     title: Open Source & Community-Driven
@@ -91,6 +107,14 @@ Join us on [GitHub](https://github.com/MuleSoft-Forge). Your contributions help 
   - Extract structured data from PDFs, images, and scans
   - Pre-built actions for common document types (invoices, receipts, forms)
   - Custom training for specialized document workflows
+
+- **[Mule Chunking Connector](./connectors/mule-chunking-connector/)** - Stream large binary files into chunks for constant-memory processing
+  - True streaming with lazy iteration and raw binary access
+  - Use cases: S3 multipart upload, streaming ETL, checksum calculation
+
+- **[Lettuce Redis Connector](./connectors/mule-lettuce-redis-connector/)** - Direct Redis access from Mule via the Lettuce reactive client
+  - Dedicated operations for keys, hashes, lists, sets, sorted sets, streams, Pub/Sub
+  - Send Command for arbitrary Redis commands; search operations with cursor handling
 
 ### Modules
 

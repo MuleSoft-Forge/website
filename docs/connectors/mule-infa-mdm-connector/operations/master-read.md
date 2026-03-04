@@ -9,21 +9,13 @@ Reads a golden (master) record — the fully blended, survived "Best Version of 
 
 **Informatica docs:** [Read Master Record by Business ID](https://onlinehelp.informatica.com/IICS/prod/b360/en/index.htm#page/wz-b360-rest-api/Business_entity_record_APIs.html#ww3_6_40_11_1) | [Read Master Record by SourcePKey](https://onlinehelp.informatica.com/IICS/prod/b360/en/index.htm#page/wz-b360-rest-api/Business_entity_record_APIs.html#ww3_6_40_14_1)
 
-## XML Signature
-
-```xml
-<b360:master-read config-ref="B360_Config"
-    businessEntity="Person"
-    businessId="12345" />
-```
-
 ## Parameters
 
 ### Record Lookup
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `businessEntity` | String | Yes | Business entity name (value provider drop-down) |
+| `businessEntity` | String | Yes | Business Entity Internal Id (value provider drop-down, e.g. `c360.person`) |
 | `businessId` | String | Conditional | B360 master record ID. Required if `sourceSystem` and `sourcePKey` are not provided. |
 | `sourceSystem` | String | Conditional | Source system name. Required (with `sourcePKey`) if `businessId` is not provided. |
 | `sourcePKey` | String | Conditional | Source primary key. Required (with `sourceSystem`) if `businessId` is not provided. |
@@ -65,7 +57,7 @@ The response includes a `states` object (within `_meta`) with the following stat
 | Attribute | Type | Description |
 |-----------|------|-------------|
 | `businessId` | String | B360 master record ID |
-| `businessEntity` | String | Business entity name |
+| `businessEntity` | String | Business Entity Internal Id |
 | `state` | String | Record lifecycle state (e.g. `ACTIVE`) |
 | `validation` | String | Validation status (e.g. `PASSED`, `FAILED`, `PENDING`) |
 | `consolidation` | String | Consolidation status (e.g. `CONSOLIDATED`) |
@@ -86,62 +78,6 @@ GET /business-entity/public/api/v1/entity/{businessEntity}/{businessId}
 **Endpoint (by Source Key)**:
 ```
 GET /business-entity/public/api/v1/entity/{businessEntity}/{sourceSystem}/{sourcePKey}
-```
-
-## Examples
-
-### Read by Business ID
-
-```xml
-<b360:master-read config-ref="B360_Config"
-    businessEntity="Person"
-    businessId="12345" />
-
-<logger level="INFO"
-    message="Record: #[payload] | Status: #[attributes.state]" />
-```
-
-### Read by Source System Key
-
-```xml
-<b360:master-read config-ref="B360_Config"
-    businessEntity="Person"
-    sourceSystem="CRM"
-    sourcePKey="CRM-001" />
-
-<logger level="INFO"
-    message="Business ID: #[attributes.businessId]" />
-```
-
-### With Content Metadata
-
-```xml
-<b360:master-read config-ref="B360_Config"
-    businessEntity="Organization"
-    businessId="67890"
-    showContentMeta="true" />
-```
-
-### Error Handling
-
-```xml
-<try>
-    <b360:master-read config-ref="B360_Config"
-        businessEntity="Person"
-        businessId="#[vars.recordId]" />
-
-    <error-handler>
-        <on-error-continue type="B360:CLIENT_ERROR">
-            <logger level="WARN"
-                message="Record not found: #[error.description]" />
-        </on-error-continue>
-
-        <on-error-continue type="B360:TIMEOUT">
-            <logger level="ERROR"
-                message="B360 timed out reading master record" />
-        </on-error-continue>
-    </error-handler>
-</try>
 ```
 
 ## See Also

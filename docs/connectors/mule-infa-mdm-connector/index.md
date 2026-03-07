@@ -29,6 +29,8 @@ A MuleSoft Java SDK Connector (ain't no REST wrapper ;) ) for the [Informatica M
 | [Search](./operations/search) | INFA MDM - Master Search | Full-text or field-level search across business entities |
 | [Source Read](./operations/source-read) | INFA MDM - Source Read | Read a cross-reference (source) record |
 | [Source Submit](./operations/source-submit) | INFA MDM - Source Submit | Create or update a source record |
+| [MetaData Read](./operations/metadata-read) | INFA MDM - MetaData Read | Read schema, entity blueprints, or relationship metadata |
+| [Http Request](./operations/http-request) | INFA MDM - Http Request | Send an HTTP request to any B360/MDM endpoint with the connector's session |
 
 ## Use Cases
 
@@ -55,6 +57,10 @@ Before creating a new account or contact, **Search** MDM to check if a matching 
 ### Cross-Reference Resolution
 
 Given a source system key (e.g., SAP customer number), use **Source Read** to find the corresponding master record and then resolve to another source system's key — effectively translating IDs across systems.
+
+### MDM SaaS APIs and common use cases — case study and demo
+
+**[MDM SaaS APIs and Common Use Cases with Case Study and Demo (PDF)](/downloads/MDM-SaaS-APIs-and-Common-UseCases-with-Case-Study-and-Demo.pdf)** — End-to-end use cases, case study, and demo walkthrough for the B360 REST API and this connector.
 
 ## Supported Error Types
 

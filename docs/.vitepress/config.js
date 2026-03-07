@@ -73,7 +73,7 @@ export default defineConfig({
           {
             text: 'Chunking Connector',
             icon: '/images/chunking-connector-icon.png',
-            collapsed: false,
+            collapsed: true,
             items: [
               { text: 'Overview', link: '/connectors/mule-chunking-connector/' },
               { text: 'Set Up', link: '/connectors/mule-chunking-connector/set-up' },
@@ -90,7 +90,7 @@ export default defineConfig({
           {
             text: 'IDP Connector',
             icon: '/images/idp-connector-icon.svg',
-            collapsed: false,
+            collapsed: true,
             items: [
               { text: 'Overview', link: '/connectors/mule-idp-connector/' },
               { text: 'Set Up', link: '/connectors/mule-idp-connector/set-up' },
@@ -118,7 +118,7 @@ export default defineConfig({
           {
             text: 'Informatica MDM Connector',
             icon: '/images/infa-mdm-connector-icon.svg',
-            collapsed: false,
+            collapsed: true,
             items: [
               { text: 'Overview', link: '/connectors/mule-infa-mdm-connector/' },
               { text: 'Design Concept', link: '/connectors/mule-infa-mdm-connector/concept' },
@@ -131,7 +131,9 @@ export default defineConfig({
                   { text: 'INFA MDM - Master Read', link: '/connectors/mule-infa-mdm-connector/operations/master-read' },
                   { text: 'INFA MDM - Master Search', link: '/connectors/mule-infa-mdm-connector/operations/search' },
                   { text: 'INFA MDM - Source Read', link: '/connectors/mule-infa-mdm-connector/operations/source-read' },
-                  { text: 'INFA MDM - Source Submit', link: '/connectors/mule-infa-mdm-connector/operations/source-submit' }
+                  { text: 'INFA MDM - Source Submit', link: '/connectors/mule-infa-mdm-connector/operations/source-submit' },
+                  { text: 'INFA MDM - MetaData Read', link: '/connectors/mule-infa-mdm-connector/operations/metadata-read' },
+                  { text: 'INFA MDM - Http Request', link: '/connectors/mule-infa-mdm-connector/operations/http-request' }
                 ]
               }
             ]
@@ -139,7 +141,7 @@ export default defineConfig({
           {
             text: 'Lettuce Redis Connector',
             icon: '/images/lettuce-redis-connector-icon.png',
-            collapsed: false,
+            collapsed: true,
             items: [
               { text: 'Overview', link: '/connectors/mule-lettuce-redis-connector/' },
               { text: 'Set Up', link: '/connectors/mule-lettuce-redis-connector/set-up' },
@@ -175,7 +177,7 @@ export default defineConfig({
           {
             text: 'PDFBox Module',
             icon: '/images/pdfbox-module-icon.svg',
-            collapsed: false,
+            collapsed: true,
             items: [
               { text: 'Overview', link: '/modules/mule-pdfbox-module/' },
               { text: 'Set Up', link: '/modules/mule-pdfbox-module/set-up' },

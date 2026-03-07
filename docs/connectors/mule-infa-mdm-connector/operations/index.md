@@ -5,7 +5,7 @@ description: Available operations for the Informatica MDM - Business 360 Connect
 
 # Operations
 
-The Informatica MDM - Business 360 Connector provides four operations covering the core B360 REST API capabilities. The operation names use **canonical Application Integration naming** rather than raw Informatica MDM terminology — see [Design Concept](../concept) to understand why and how they map to the underlying APIs.
+The Informatica MDM - Business 360 Connector provides six operations covering the core B360 REST API and metadata. The operation names use **canonical Application Integration naming** rather than raw Informatica MDM terminology — see [Design Concept](../concept) to understand why and how they map to the underlying APIs.
 
 ## Available Operations
 
@@ -15,6 +15,8 @@ The Informatica MDM - Business 360 Connector provides four operations covering t
 | [Search](./search) | INFA MDM - Master Search | `POST /search/.../search` | Full-text or field-level search with filtering, sorting, and pagination |
 | [Source Read](./source-read) | INFA MDM - Source Read | `GET /business-entity/.../entity-xref/{entity}/{system}/{key}` | Read a cross-reference (source) record |
 | [Source Submit](./source-submit) | INFA MDM - Source Submit | `POST /business-entity/.../entity/{businessEntity}` | Create or update a source record in B360 |
+| [MetaData Read](./metadata-read) | INFA MDM - MetaData Read | `GET /metadata/api/v2/objects/...` | Read schema, entity blueprints, or relationship metadata |
+| [Http Request](./http-request) | INFA MDM - Http Request | Any B360 path | Send an HTTP request to any B360/MDM endpoint with the connector's session |
 
 ## DataSense Support
 

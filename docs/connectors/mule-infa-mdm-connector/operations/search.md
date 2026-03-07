@@ -47,6 +47,26 @@ The `search` parameter supports fuzzy search, wildcards, and exact matching:
 
 **Supported wildcards:** `*`, `~`, `&&`, `||`
 
+#### Fuzzy search patterns (SAAS Search Scenarios)
+
+Extended patterns useful for MCP/agent planning and rich search UX. Source: [SAAS Search Scenarios](https://knowledge.informatica.com/s/article/SAAS-Search-Scenario-s?language=en_US&type=external).
+
+| Example search string | Search behaviour |
+|------------------------|------------------|
+| `John Smith` | Records that contain John, Smith, or any variations of John or Smith as a field value. |
+| `"John Smith"` | Records that contain John Smith as a field value. |
+| `John*` | Records that contain a value that starts with John (e.g. Johnson, Johnny). |
+| `Jo*n` | Values that start with Jo and end with n (e.g. Johansson, Jordan). |
+| `*` | Returns all records. |
+| `Jo?n` | Single character between Jo and n (e.g. John, Joan). Use `?` multiple times per word. |
+| `The Washington Post` | Stopword *The* is ignored; searches Washington, Post, or variations. |
+| `-John*` | Records that do **not** start with John or variations (e.g. Johnson, Johnny). |
+| `+Manager +Janet*` | Records containing Manager and a value starting with Janet (e.g. Janet Williams, designation Manager). |
+| `Joan~` | Similar values; up to two characters can differ (e.g. John, Donn). |
+| `Hans && Williams` | Records containing both Hans and Williams in the same record. |
+| `(Janet* \|\| John*) && Manager` | Manager and any variation of Janet or John (e.g. Johnny + Manager). |
+| `/Joan_([0-9]+)/` | Joan_ followed by digits (e.g. Joan_123). Slashes escape the pattern. |
+
 <Hint type="info">
 
 **Dates** must use the `YYYY-MM-DD` format. **Keywords as values** — when searching for the literal words AND, OR, or NOT, specify them as `"\"OR\""`, `"\"AND\""`, `"\"NOT\""`. System fields support only exact match (no fuzzy), but wildcards still work. A search string containing only whitespace returns no results.

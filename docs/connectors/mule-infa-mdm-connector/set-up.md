@@ -8,6 +8,7 @@ description: Installation and configuration guide for the Informatica MDM - Busi
 | Version | Min runtime version | Compatible Java versions | Description |
 | ------- | ------------------- | ------------------------ | ----------- |
 | [1.0.0](https://central.sonatype.com/artifact/com.mulesoftforge/mule-infa-b360-connector/1.0.0) | 4.6.0 | Java 17, Java 11, Java 8 | Initial release |
+| [1.0.4](https://central.sonatype.com/artifact/com.mulesoftforge/mule-infa-b360-connector/1.0.4) | 4.6.0 | Java 17, Java 11, Java 8 | Passthrough auth, 401 auto-reconnect, MetaData Read, Http Request (renamed from Generic) |
 
 ## Requirements
 
@@ -39,7 +40,12 @@ Add the following dependency to your Mule application's `pom.xml`:
 
 ### Step 2: Configure the Connector
 
-The connector authenticates via the [Informatica Cloud (IICS) V3 Login API](https://docs.informatica.com/cloud-common-services/administrator/current-version/rest-api-reference/platform-rest-api-version-3-resources/login.html) using username and password credentials.
+The connector supports two connection providers:
+
+- **Basic Auth** — Performs login via the IICS V3 Login API with username/password. The connector manages the full session lifecycle (login, session refresh, base URL derivation). On **HTTP 401** (session expired), it automatically re-authenticates and replays the request once with the new session.
+- **Passthrough Auth** — Accepts a pre-obtained session ID and B360 MDM base URL at runtime. The connector does **not** manage login, refresh, or logout; the caller is responsible for the token. On 401, the response is returned as-is (no re-login).
+
+The connector authenticates via the [Informatica Cloud (IICS) V3 Login API](https://docs.informatica.com/cloud-common-services/administrator/current-version/rest-api-reference/platform-rest-api-version-3-resources/login.html) using username and password credentials for the **Basic Auth** provider.
 
 ![Global Element Properties — Informatica MDM Business 360 Configuration](/images/infa-mdm-connector/global-element-properties.png)
 
@@ -124,6 +130,22 @@ If you don't know the name of the POD that your organization uses, contact your 
 | `responseBufferSize` | Integer | No | -1 (default) | Response buffer size in bytes |
 | `bypassMetadataCache` | boolean | No | false | Skip the datamodel metadata cache |
 
+#### Passthrough Auth Connection Provider (optional)
+
+For API-led or external token management, use the **Passthrough** provider. The connector does not call the login API; you supply a session ID and B360 MDM base URL (e.g. from an upstream System API or vault). Session ID and base URL support DataWeave expressions. Configure an **Expiration Policy** (e.g. `maxIdleTime="5" timeUnit="MINUTES"`) to avoid unbounded connection growth when tokens vary per request.
+
+```xml
+<b360:config name="B360_Passthrough">
+    <b360:passthrough-connection
+        sessionId="#[vars.idsSessionId]"
+        baseApiUrl="#[vars.b360MdmBaseUrl]">
+        <expiration-policy maxIdleTime="5" timeUnit="MINUTES" />
+    </b360:passthrough-connection>
+</b360:config>
+```
+
+To derive the B360 MDM base URL from a login response: remove `/saas` from `baseApiUrl`, then replace the first host segment with `{segment}-mdm` (e.g. `use4` → `use4-mdm`). See the connector repo doc [1_Authentication](https://github.com/MuleSoft-Forge/mule-infa-mdm-connector/blob/main/docs/1_Authentication.md) for a DataWeave example.
+
 #### Proxy Configuration (Optional)
 
 | Parameter | Type | Required | Default | Description |
@@ -161,6 +183,7 @@ The connector handles authentication automatically:
 3. **Base URL**: Derives the B360 MDM API host from the `baseApiUrl` in the login response (see [Base URL Transformation](#base-url-transformation) below)
 4. **Header**: Sends the session ID or JWT in the **IDS-SESSION-ID** header on all subsequent requests
 5. **Refresh**: Monitors JWT expiration and re-authenticates proactively (see [Session ID vs JWT](#session-id-vs-jwt) below)
+6. **401 reconnect**: If any request returns HTTP 401 (session expired), the connector (Basic Auth only) automatically re-authenticates and replays the request once with the new session
 
 <Hint type="warning">
 
@@ -245,7 +268,7 @@ Always use Mule property placeholders or secure configuration properties to keep
 
 **Solutions**:
 1. In the connector project, run `mvn clean install` to install to your local Maven repository
-2. In your Mule app's `pom.xml`, ensure the dependency uses the same `groupId`/`artifactId` and the version you built (e.g. `1.0.0`)
+2. In your Mule app's `pom.xml`, ensure the dependency uses the same `groupId`/`artifactId` and the version you built (e.g. `1.0.4`)
 3. Studio will resolve it from the local repository
 4. If the app was created from Exchange, replace the Exchange dependency with the local artifact coordinates
 
@@ -265,3 +288,5 @@ Always use Mule property placeholders or secure configuration properties to keep
 - [Search](./operations/search) — Search across business entities
 - [Source Read](./operations/source-read) — Read source/cross-reference records
 - [Source Submit](./operations/source-submit) — Create or update source records
+- [MetaData Read](./operations/metadata-read) — Read schema and relationship metadata
+- [Http Request](./operations/http-request) — Call any B360 endpoint

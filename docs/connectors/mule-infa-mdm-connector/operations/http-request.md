@@ -43,9 +43,9 @@ The connector injects **IDS-SESSION-ID** and **Accept: application/json** automa
 - **3xx / 4xx / 5xx:** Body and attributes returned — **no exception**. Check `attributes.statusCode` in DataWeave.
 - **Network / timeout:** Throws `B360:CONNECTIVITY` or `B360:TIMEOUT`.
 
-### Transparent 401 reconnect
+### Transparent 401 reconnect (async, non-blocking)
 
-With **Basic Auth**, if the API returns **401**, the connector re-authenticates and replays the request once with the new session. With **Passthrough**, 401 is returned as-is; the caller must supply a fresh token.
+With **Basic Auth**, if the API returns **401**, the connector re-authenticates asynchronously (via refreshAsync/performLoginAsync with sendAsync). The HTTP requester thread is no longer blocked in performLogin() → HttpClient.send(); the flow that triggered the 401 completes once the async login and retry finish. With **Passthrough**, 401 is returned as-is; the caller must supply a fresh token.
 
 ## Mule XML examples
 

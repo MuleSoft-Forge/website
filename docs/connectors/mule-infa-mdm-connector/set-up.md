@@ -9,6 +9,7 @@ description: Installation and configuration guide for the Informatica MDM - Busi
 | ------- | ------------------- | ------------------------ | ----------- |
 | [1.0.0](https://central.sonatype.com/artifact/com.mulesoftforge/mule-infa-b360-connector/1.0.0) | 4.6.0 | Java 17, Java 11, Java 8 | Initial release |
 | [1.0.4](https://central.sonatype.com/artifact/com.mulesoftforge/mule-infa-b360-connector/1.0.4) | 4.6.0 | Java 17, Java 11, Java 8 | Passthrough auth, 401 auto-reconnect, MetaData Read, Http Request (renamed from Generic) |
+| [1.0.5](https://central.sonatype.com/artifact/com.mulesoftforge/mule-infa-b360-connector/1.0.5) | 4.6.0 | Java 17, Java 11, Java 8 | Async 401 re-auth: re-authentication runs asynchronously (non-blocking); HTTP requester thread no longer blocked; flow completes when async login and retry finish |
 
 ## Requirements
 
@@ -42,7 +43,7 @@ Add the following dependency to your Mule application's `pom.xml`:
 
 The connector supports two connection providers:
 
-- **Basic Auth** — Performs login via the IICS V3 Login API with username/password. The connector manages the full session lifecycle (login, session refresh, base URL derivation). On **HTTP 401** (session expired), it automatically re-authenticates and replays the request once with the new session.
+- **Basic Auth** — Performs login via the IICS V3 Login API with username/password. The connector manages the full session lifecycle (login, session refresh, base URL derivation). On **HTTP 401** (session expired), re-authentication runs asynchronously (via refreshAsync/performLoginAsync); the HTTP requester thread is not blocked, and the flow completes once the async login and retry finish.
 - **Passthrough Auth** — Accepts a pre-obtained session ID and B360 MDM base URL at runtime. The connector does **not** manage login, refresh, or logout; the caller is responsible for the token. On 401, the response is returned as-is (no re-login).
 
 The connector authenticates via the [Informatica Cloud (IICS) V3 Login API](https://docs.informatica.com/cloud-common-services/administrator/current-version/rest-api-reference/platform-rest-api-version-3-resources/login.html) using username and password credentials for the **Basic Auth** provider.
@@ -183,7 +184,7 @@ The connector handles authentication automatically:
 3. **Base URL**: Derives the B360 MDM API host from the `baseApiUrl` in the login response (see [Base URL Transformation](#base-url-transformation) below)
 4. **Header**: Sends the session ID or JWT in the **IDS-SESSION-ID** header on all subsequent requests
 5. **Refresh**: Monitors JWT expiration and re-authenticates proactively (see [Session ID vs JWT](#session-id-vs-jwt) below)
-6. **401 reconnect**: If any request returns HTTP 401 (session expired), the connector (Basic Auth only) automatically re-authenticates and replays the request once with the new session
+6. **401 reconnect**: If any request returns HTTP 401 (session expired), the connector (Basic Auth only) re-authenticates asynchronously (refreshAsync/performLoginAsync); the HTTP requester thread is not blocked, and the flow completes once the async login and retry finish
 
 <Hint type="warning">
 
@@ -268,7 +269,7 @@ Always use Mule property placeholders or secure configuration properties to keep
 
 **Solutions**:
 1. In the connector project, run `mvn clean install` to install to your local Maven repository
-2. In your Mule app's `pom.xml`, ensure the dependency uses the same `groupId`/`artifactId` and the version you built (e.g. `1.0.4`)
+2. In your Mule app's `pom.xml`, ensure the dependency uses the same `groupId`/`artifactId` and the version you built (e.g. `1.0.5`)
 3. Studio will resolve it from the local repository
 4. If the app was created from Exchange, replace the Exchange dependency with the local artifact coordinates
 

@@ -60,6 +60,14 @@ features:
     linkText: Learn More →
 
   - icon:
+      src: /images/json-logger.svg
+      alt: JSON Logger
+    title: JSON Logger
+    details: Drop-in replacement for the standard MuleSoft logger, enabling unified logging in JSON format. Also supports seamless log forwarding to Anypoint MQ, JMS, or AMQP destinations.
+    link: /modules/json-logger/
+    linkText: Learn More →
+
+  - icon:
       src: /images/community-icon.png
       alt: MuleSoft Community
     title: Open Source & Community-Driven
@@ -117,6 +125,10 @@ Join us on [GitHub](https://github.com/MuleSoft-Forge). Your contributions help 
   - Send Command for arbitrary Redis commands; search operations with cursor handling
 
 ### Modules
+
+- **[MuleSoft JSON Logger](./modules/json-logger/)** - Powerful logger replacement
+  - Log in a unified JSON format
+  - Forward logs to Anypoint MQ, JMS, or AMQP destinations
 
 - **[MuleSoft PDFBox Module](./modules/mule-pdfbox-module/)** - Complete PDF manipulation toolkit
   - Extract text and metadata from PDFs

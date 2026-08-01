@@ -175,6 +175,31 @@ export default defineConfig({
         collapsed: false,
         items: [
           {
+            text: 'JSON Logger',
+            icon: '/images/json-logger.svg',
+            collapsed: true,
+            items: [
+              { text: 'Overview', link: '/modules/json-logger/' },
+              { text: 'Set Up', link: '/modules/json-logger/set-up' },
+              {
+                text: 'Operations',
+                collapsed: true,
+                items: [
+                  { text: 'Operations Overview', link: '/modules/json-logger/operations/' },
+                  { text: 'JSON Logger - Logger', link: '/modules/json-logger/operations/json-logger-logger' }
+                ]
+              },
+              {
+                text: 'Scopes',
+                collapsed: true,
+                items: [
+                  { text: 'Scopes Overview', link: '/modules/json-logger/scopes/' },
+                  { text: 'JSON Logger - Logger Scope', link: '/modules/json-logger/scopes/json-logger-logger-scope' }
+                ]
+              }
+            ]
+          },
+          {
             text: 'PDFBox Module',
             icon: '/images/pdfbox-module-icon.svg',
             collapsed: true,

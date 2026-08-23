@@ -69,11 +69,13 @@
 }
 
 /**
- * Home page — "New" feature card highlight (first card = Informatica MDM only)
+ * Home page — "New" feature card highlight (first two cards = Agent Network
+ * Studio & Salesforce UserInfo Claims Enrichment Policy)
  * -------------------------------------------------------------------------- */
 
 .VPFeatures .items .item:first-child .VPFeature,
-.VPHomeFeaturesCarousel .carousel-track .carousel-card:first-child .card-box {
+.VPFeatures .items .item:nth-child(2) .VPFeature,
+.VPHomeFeaturesCarousel .carousel-track .carousel-card:nth-child(-n+2) .card-box {
   position: relative;
   border: 2px solid #00a3e0;
   background: linear-gradient(145deg, rgba(0, 163, 224, 0.08) 0%, rgba(0, 163, 224, 0.02) 100%);
@@ -81,13 +83,15 @@
 }
 
 .VPFeatures .items .item:first-child .VPFeature:hover,
-.VPHomeFeaturesCarousel .carousel-track .carousel-card:first-child:hover .card-box {
+.VPFeatures .items .item:nth-child(2) .VPFeature:hover,
+.VPHomeFeaturesCarousel .carousel-track .carousel-card:nth-child(-n+2):hover .card-box {
   border-color: #0091c9;
   box-shadow: 0 6px 24px rgba(0, 163, 224, 0.22);
 }
 
 .VPFeatures .items .item:first-child .VPFeature::before,
-.VPHomeFeaturesCarousel .carousel-track .carousel-card:first-child .card-box::before {
+.VPFeatures .items .item:nth-child(2) .VPFeature::before,
+.VPHomeFeaturesCarousel .carousel-track .carousel-card:nth-child(-n+2) .card-box::before {
   content: 'NEW';
   position: absolute;
   top: 12px;
@@ -104,20 +108,23 @@
 }
 
 .dark .VPFeatures .items .item:first-child .VPFeature,
-.dark .VPHomeFeaturesCarousel .carousel-track .carousel-card:first-child .card-box {
+.dark .VPFeatures .items .item:nth-child(2) .VPFeature,
+.dark .VPHomeFeaturesCarousel .carousel-track .carousel-card:nth-child(-n+2) .card-box {
   border-color: #4a9eff;
   background: linear-gradient(145deg, rgba(74, 158, 255, 0.12) 0%, rgba(74, 158, 255, 0.04) 100%);
   box-shadow: 0 4px 20px rgba(74, 158, 255, 0.2);
 }
 
 .dark .VPFeatures .items .item:first-child .VPFeature:hover,
-.dark .VPHomeFeaturesCarousel .carousel-track .carousel-card:first-child:hover .card-box {
+.dark .VPFeatures .items .item:nth-child(2) .VPFeature:hover,
+.dark .VPHomeFeaturesCarousel .carousel-track .carousel-card:nth-child(-n+2):hover .card-box {
   border-color: #3d8aeb;
   box-shadow: 0 6px 24px rgba(74, 158, 255, 0.28);
 }
 
 .dark .VPFeatures .items .item:first-child .VPFeature::before,
-.dark .VPHomeFeaturesCarousel .carousel-track .carousel-card:first-child .card-box::before {
+.dark .VPFeatures .items .item:nth-child(2) .VPFeature::before,
+.dark .VPHomeFeaturesCarousel .carousel-track .carousel-card:nth-child(-n+2) .card-box::before {
   background: linear-gradient(135deg, #ff8c42 0%, #f26a21 100%);
   color: #1a1a1a;
   box-shadow: 0 2px 8px rgba(255, 140, 66, 0.5);

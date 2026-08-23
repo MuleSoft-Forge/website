@@ -20,6 +20,22 @@ hero:
 
 features:
   - icon:
+      src: /images/agent-network-studio-icon.png
+      alt: Agent Network Studio
+    title: "Agent Network Studio"
+    details: "Build, ship, and observe MuleSoft Agent Networks from the browser — visually compose brokers, publish and deploy with the real Anypoint CLI lifecycle, then trace every task, hop, and LLM decision live."
+    link: https://www.agentnetworktracer.com
+    linkText: Launch Studio →
+
+  - icon:
+      src: /images/salesforce-userinfo-claims-enrichment-icon.png
+      alt: Salesforce UserInfo Claims Enrichment Policy
+    title: "Salesforce UserInfo Claims Enrichment Policy"
+    details: "Flex Gateway PDK policy that enriches the Authentication principal with per-user Salesforce custom attributes from the UserInfo endpoint — the missing piece for per-user MCP tool authorization and ABAC, since Salesforce doesn't put custom attributes in access tokens."
+    link: https://p4a.up.railway.app/dashboard/policies/bb58ed5d-6881-440a-a08b-69160eab5b37
+    linkText: View on P4A →
+
+  - icon:
       src: /images/infa-mdm-connector-icon.svg
       alt: Informatica MDM - B360 Connector
     title: "Informatica MDM - B360 Connector"
@@ -72,7 +88,7 @@ features:
 
 <Hint type="success">
 
-**New** — **[Informatica MDM - B360 Connector](./connectors/mule-infa-mdm-connector/)** — Native MuleSoft connector for Informatica MDM Business 360. Master Read, Search, Source Read, and Source Submit with full DataSense. [Get started →](./connectors/mule-infa-mdm-connector/)
+**New** — **[Salesforce UserInfo Claims Enrichment Policy](https://p4a.up.railway.app/dashboard/policies/bb58ed5d-6881-440a-a08b-69160eab5b37)** — Flex Gateway PDK policy enriching the Authentication principal with per-user Salesforce custom attributes, for MCP tool authorization and ABAC. [View on P4A →](https://p4a.up.railway.app/dashboard/policies/bb58ed5d-6881-440a-a08b-69160eab5b37)
 
 </Hint>
 
@@ -123,6 +139,13 @@ Join us on [GitHub](https://github.com/MuleSoft-Forge). Your contributions help 
   - Filter, rotate, split, and merge PDF documents
   - Convert images to PDF format
   - Built on Apache PDFBox 3.x
+
+### Policies
+
+- **[Salesforce UserInfo Claims Enrichment Policy](https://p4a.up.railway.app/dashboard/policies/bb58ed5d-6881-440a-a08b-69160eab5b37)** — *New* — Flex Gateway PDK policy for per-user authorization with Salesforce
+  - Calls the Salesforce UserInfo endpoint to pull custom attributes not present in access tokens
+  - Enriches `principal.properties` for downstream ABAC/Cedar rules (e.g. per-user MCP tool access)
+  - Smart caching bounded by token expiry, fail-safe error handling, structured observability
 
 ---
 

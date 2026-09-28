@@ -56,6 +56,31 @@ function renderIcon(icon: unknown) {
 const featureIcons = computed(() =>
   features.value.map((f) => renderIcon(f.icon))
 )
+
+function renderVideo(video: unknown) {
+  if (!video || typeof video !== 'object') return null
+  const o = video as Record<string, unknown>
+  const src = typeof o.src === 'string' ? o.src : ''
+  if (!src) return null
+  return {
+    src,
+    title: typeof o.title === 'string' ? o.title : 'Why Jev',
+    heading: typeof o.heading === 'string' ? o.heading : 'Why Jev',
+  }
+}
+
+const featureVideos = computed(() =>
+  features.value.map((f) => renderVideo(f.video))
+)
+
+function cardBind(feature: { link?: string; target?: string; rel?: string; video?: unknown }) {
+  if (feature.video) return {}
+  return {
+    href: feature.link || '#',
+    target: feature.target,
+    rel: feature.rel,
+  }
+}
 </script>
 
 <template>
@@ -76,13 +101,12 @@ const featureIcons = computed(() =>
         class="carousel-track"
         @scroll="onScroll"
       >
-        <a
+        <component
+          :is="feature.video ? 'div' : 'a'"
           v-for="(feature, i) in features"
           :key="feature.title + i"
           class="carousel-card"
-          :href="feature.link || '#'"
-          :target="feature.target"
-          :rel="feature.rel"
+          v-bind="cardBind(feature)"
         >
           <article class="card-box">
             <template v-if="featureIcons[i]">
@@ -108,14 +132,36 @@ const featureIcons = computed(() =>
             </template>
             <h2 class="card-title" v-html="feature.title" />
             <p v-if="feature.details" class="card-details" v-html="feature.details" />
+            <div v-if="featureVideos[i]" class="card-video">
+              <p class="card-video-heading">{{ featureVideos[i].heading }}</p>
+              <div class="card-video-frame">
+                <iframe
+                  :src="featureVideos[i].src"
+                  :title="featureVideos[i].title"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                />
+              </div>
+            </div>
             <div v-if="feature.linkText" class="card-link-text">
-              <span class="card-link-value">
+              <a
+                v-if="feature.video"
+                class="card-link-value"
+                :href="feature.link || '#'"
+                :target="feature.target"
+                :rel="feature.rel"
+              >
+                {{ feature.linkText }}
+                <span class="vpi-arrow-right card-link-icon" />
+              </a>
+              <span v-else class="card-link-value">
                 {{ feature.linkText }}
                 <span class="vpi-arrow-right card-link-icon" />
               </span>
             </div>
           </article>
-        </a>
+        </component>
       </div>
 
       <button
@@ -296,8 +342,41 @@ const featureIcons = computed(() =>
   margin: 0;
 }
 
+.card-video {
+  padding-top: 12px;
+}
+
+.card-video-heading {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--vp-c-text-1);
+}
+
+.card-video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--vp-c-bg);
+}
+
+.card-video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 .card-link-text {
   padding-top: 8px;
+}
+
+.card-link-text a.card-link-value {
+  text-decoration: none;
 }
 
 .card-link-value {

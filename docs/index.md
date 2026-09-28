@@ -10,7 +10,7 @@ hero:
   actions:
     - theme: brand
       text: Browse Connectors
-      link: /connectors/mule-infa-mdm-connector/
+      link: /connectors/mule4-typesafe-connector/
     - theme: alt
       text: Get Involved
       link: /forge-initiative/how-to-contribute
@@ -19,6 +19,18 @@ hero:
       link: https://github.com/MuleSoft-Forge
 
 features:
+  - icon:
+      src: /images/typesafe-connector-icon.svg
+      alt: TypeSafe Connector for Mule 4
+    title: "TypeSafe Connector for Mule 4"
+    details: "Think: Smart If Statements. Jev turns JSON state into a typed value your flow can branch on — Noul, Choice, and Score across TypeSafe, OpenRouter, Vercel, Cloudflare, compatible gateways, or a local mock."
+    video:
+      heading: Why Jev
+      src: https://www.youtube.com/embed/FJ5od66CSEs
+      title: "Rick & Morty Explain Jev AI: Stop Using LLMs for Tiny Decisions!"
+    link: /connectors/mule4-typesafe-connector/
+    linkText: Learn More →
+
   - icon:
       src: /images/agent-network-studio-icon.png
       alt: Agent Network Studio
@@ -88,6 +100,8 @@ features:
 
 <Hint type="success">
 
+**New** — **[TypeSafe Connector for Mule 4](./connectors/mule4-typesafe-connector/)** — Think: Smart If Statements. [Jev](https://docs.typesafe.ai/introduction) returns a typed decision; the flow owns the if. [Explore the connector →](./connectors/mule4-typesafe-connector/)
+
 **New** — **[Salesforce UserInfo Claims Enrichment Policy](https://p4a.up.railway.app/dashboard/policies/bb58ed5d-6881-440a-a08b-69160eab5b37)** — Flex Gateway PDK policy enriching the Authentication principal with per-user Salesforce custom attributes, for MCP tool authorization and ABAC. [View on P4A →](https://p4a.up.railway.app/dashboard/policies/bb58ed5d-6881-440a-a08b-69160eab5b37)
 
 </Hint>
@@ -113,6 +127,11 @@ Join us on [GitHub](https://github.com/MuleSoft-Forge). Your contributions help 
 ## Available Assets
 
 ### Connectors
+
+- **[TypeSafe Connector for Mule 4](./connectors/mule4-typesafe-connector/)** — *New* — Think: Smart If Statements with [Jev](https://docs.typesafe.ai/introduction)
+  - Noul, Choice, and Score decisions with native DataSense
+  - TypeSafe, OpenRouter, Vercel, Cloudflare, compatible, and mock routes
+  - Provider failover, local policy routing, batch evaluation, budgets, and drift sources
 
 - **[Informatica MDM - B360 Connector](./connectors/mule-infa-mdm-connector/)** — *New* — Informatica MDM Business 360 REST API integration
   - Master Read, Search, Source Read, and Source Submit operations

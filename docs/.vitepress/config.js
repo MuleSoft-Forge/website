@@ -71,6 +71,34 @@ export default defineConfig({
         collapsed: false,
         items: [
           {
+            text: 'TypeSafe Connector',
+            icon: '/images/typesafe-connector-icon.svg',
+            collapsed: true,
+            items: [
+              { text: 'Overview', link: '/connectors/mule4-typesafe-connector/' },
+              { text: 'Set Up', link: '/connectors/mule4-typesafe-connector/set-up' },
+              {
+                text: 'Operations',
+                collapsed: true,
+                items: [
+                  { text: 'Operations Overview', link: '/connectors/mule4-typesafe-connector/operations/' },
+                  { text: '[Decide] Evaluate', link: '/connectors/mule4-typesafe-connector/operations/evaluate' },
+                  { text: '[Decide] Ask Yes/No', link: '/connectors/mule4-typesafe-connector/operations/ask-noul' },
+                  { text: '[Decide] Choose', link: '/connectors/mule4-typesafe-connector/operations/choose' },
+                  { text: '[Decide] Score', link: '/connectors/mule4-typesafe-connector/operations/score' },
+                  { text: '[Select] Candidate', link: '/connectors/mule4-typesafe-connector/operations/select-candidate' },
+                  { text: '[Decide] Evaluate Batch', link: '/connectors/mule4-typesafe-connector/operations/evaluate-batch' },
+                  { text: '[Select] Filter', link: '/connectors/mule4-typesafe-connector/operations/filter' },
+                  { text: '[Policy] Apply', link: '/connectors/mule4-typesafe-connector/operations/apply-policy' },
+                  { text: '[Util] Connection Get Capabilities', link: '/connectors/mule4-typesafe-connector/operations/connection-get-capabilities' },
+                  { text: '[Util] Connection List Models', link: '/connectors/mule4-typesafe-connector/operations/connection-list-models' },
+                  { text: '[Util] Validate Question Set', link: '/connectors/mule4-typesafe-connector/operations/validate-question-set' }
+                ]
+              },
+              { text: 'Sources', link: '/connectors/mule4-typesafe-connector/sources' }
+            ]
+          },
+          {
             text: 'Chunking Connector',
             icon: '/images/chunking-connector-icon.png',
             collapsed: true,

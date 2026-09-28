@@ -9,6 +9,22 @@
 
 ## Connectors
 
+* [mule4-typesafe-connector](connectors/mule4-typesafe-connector/index.md)
+  * [Set Up](connectors/mule4-typesafe-connector/set-up.md)
+  * [Operations](connectors/mule4-typesafe-connector/operations/index.md)
+    * [\[Decide\] Evaluate](connectors/mule4-typesafe-connector/operations/evaluate.md)
+    * [\[Decide\] Ask Yes/No](connectors/mule4-typesafe-connector/operations/ask-noul.md)
+    * [\[Decide\] Choose](connectors/mule4-typesafe-connector/operations/choose.md)
+    * [\[Decide\] Score](connectors/mule4-typesafe-connector/operations/score.md)
+    * [\[Select\] Candidate](connectors/mule4-typesafe-connector/operations/select-candidate.md)
+    * [\[Decide\] Evaluate Batch](connectors/mule4-typesafe-connector/operations/evaluate-batch.md)
+    * [\[Select\] Filter](connectors/mule4-typesafe-connector/operations/filter.md)
+    * [\[Policy\] Apply](connectors/mule4-typesafe-connector/operations/apply-policy.md)
+    * [\[Util\] Connection Get Capabilities](connectors/mule4-typesafe-connector/operations/connection-get-capabilities.md)
+    * [\[Util\] Connection List Models](connectors/mule4-typesafe-connector/operations/connection-list-models.md)
+    * [\[Util\] Validate Question Set](connectors/mule4-typesafe-connector/operations/validate-question-set.md)
+  * [Sources](connectors/mule4-typesafe-connector/sources.md)
+
 * [mule-idp-connector](connectors/mule-idp-connector/index.md)
   * [Set Up](connectors/mule-idp-connector/set-up.md)
   * [Operations](connectors/mule-idp-connector/operations/index.md)

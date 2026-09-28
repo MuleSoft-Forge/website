@@ -125,8 +125,6 @@ Do not log state, raw provider responses, or keys. `includeRawResponse` is disab
 
 Create `src/main/resources/questions/support-ticket-triage.json`:
 
-Use an application-specific file name. Connector `1.0.1` contains its own `ticket-triage.json` sample, which can take precedence over an application file with the same classpath path. This collision is tracked in [connector issue 15](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/issues/15).
-
 ```json
 {
   "id": "support-ticket-triage",
@@ -206,7 +204,7 @@ State text is not stored in budget or drift statistics.
 
 ### Connector does not appear in the palette
 
-1. Confirm `com.mulesoftforge:mule4-typesafe-connector:1.0.1` is on the classpath (from [Maven Central](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.1) or Exchange).
+1. Confirm `com.mulesoftforge:mule4-typesafe-connector:1.0.1` is on the classpath from [Maven Central](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.1).
 2. Confirm the dependency includes `<classifier>mule-plugin</classifier>`.
 3. Run **Maven → Update Project**, then clean the Mule application.
 

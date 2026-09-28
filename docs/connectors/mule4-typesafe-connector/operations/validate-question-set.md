@@ -89,8 +89,6 @@ Validate a classpath file:
     questionSet="support-ticket-triage.json" />
 ```
 
-Use an application-specific file name. Connector `1.0.1` ships a bundled `ticket-triage.json` sample that can take precedence over an application file with the same classpath path ([issue 15](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/issues/15)).
-
 Validate an inline Questions object:
 
 ```xml

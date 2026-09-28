@@ -107,7 +107,7 @@ None. The operation is deterministic and runs entirely inside Mule. It does not 
 </choice>
 ```
 
-The question-set file must declare a `policy` block. Use an application-specific file name; connector `1.0.1` ships a bundled `ticket-triage.json` that can shadow an app file with the same path ([issue 15](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/issues/15)).
+The question-set file must declare a `policy` block.
 
 ## See also
 

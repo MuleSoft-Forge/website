@@ -133,8 +133,6 @@ See the [TypeSafe API](https://docs.typesafe.ai/api).
 </typesafe:evaluate-batch>
 ```
 
-Use an application-specific question-set file name. Connector `1.0.1` ships a bundled `ticket-triage.json` that can shadow an app file with the same path ([issue 15](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/issues/15)).
-
 ## See also
 
 - [Evaluate](./evaluate)

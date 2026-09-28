@@ -1,19 +1,26 @@
 ---
 title: Set Up the TypeSafe Connector
-description: Install the TypeSafe Connector for Mule 4 with the Maven Central coordinates and configure a Jev route.
+description: Install TypeSafe Connector 1.0.0 from Maven Central or Anypoint Exchange and configure a Jev route.
 ---
 
 # Set Up
 
-## Release coordinates
+## Release 1.0.0
 
-| Version | Distribution | Minimum Mule Runtime | Java |
-| --- | --- | --- | --- |
-| [1.0.0](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.0) | Publishing to Maven Central | 4.9.0 | 17 |
+| Channel | Coordinates / location | Notes |
+| --- | --- | --- |
+| **Maven Central** | [`com.mulesoftforge:mule4-typesafe-connector:1.0.0`](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.0) (`mule-plugin`) | Open Maven coordinate for apps and CI |
+| **Anypoint Exchange** | Search **TypeSafe Connector - Mule 4** in your Anypoint org | Studio / ACB install surface. Private org smoke uses Exchange **1.0.1** with the same bits as Central **1.0.0** (Exchange cannot reuse a hard-deleted `1.0.0` version). |
 
-## Install the connector
+| Version | Minimum Mule Runtime | Java |
+| --- | --- | --- |
+| **1.0.0** | 4.9.0 | 17 |
 
-Maven Central is still publishing `1.0.0`. The dependency that will resolve is:
+Full operation docs on this site are the source of truth. Exchange Home only points here.
+
+## Install from Maven Central
+
+Add the dependency to the Mule app `pom.xml`:
 
 ```xml
 <dependency>
@@ -24,15 +31,29 @@ Maven Central is still publishing `1.0.0`. The dependency that will resolve is:
 </dependency>
 ```
 
-Those coordinates match the connector build: [`com.mulesoftforge:mule4-typesafe-connector:1.0.0`](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.0) with the `mule-plugin` classifier.
+In Anypoint Studio, run **Maven → Update Project** after the dependency resolves.
 
-While that publish finishes, install the same coordinates from the [GitHub repository](https://github.com/MuleSoft-Forge/mule4-typesafe-connector):
+### Local build (optional)
+
+From the [GitHub repository](https://github.com/MuleSoft-Forge/mule4-typesafe-connector) on the `1.0.0` release:
 
 ```bash
 mvn clean install
 ```
 
-In Anypoint Studio, run **Maven → Update Project** after the dependency is available.
+## Install from Anypoint Exchange
+
+Use this when you want Studio or Anypoint Code Builder to pull the connector from your org’s Exchange (private or public asset), not from Central.
+
+1. In Studio / ACB, open **Add Modules** / **Search in Exchange**.
+2. Select your organization (the asset is published under that org’s id as `groupId`).
+3. Search for **TypeSafe Connector - Mule 4**, version **1.0.0**.
+4. Add it to the project.
+
+The Exchange card should show the TypeSafe icon. If Studio still shows a generic plug after add, refresh modules / restart Studio — the palette icon comes from the packed `icon/icon.svg` inside the `mule-plugin`.
+
+Maintainer publish steps (Facade v3, icon PUT, Home pointer): see the connector repo
+[`docs/exchange-publish.md`](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/blob/develop/docs/exchange-publish.md).
 
 ## Configure a route
 
@@ -84,8 +105,25 @@ Defaults:
 
 Every hosted route supports response timeout, idle timeout, connection-pool, custom-header, and ordered fallback settings. Fallback routes are used only for connectivity, timeout, rate-limit, and overload failures.
 
-::: warning Connection test behavior
-The current connection validation does not make a remote request. A successful **Test Connection** confirms that Mule created the connection object, not that the API key is accepted. Use [Connection List Models](./operations/connection-list-models) or a small Evaluate flow for an end-to-end check.
+::: tip Connection test behavior
+**Test Connection** validates the API key with one vanilla Noul decision on the configured route. It does **not** use List Models (OpenRouter's catalog is public and returns HTTP 200 without a valid key).
+
+Keyed routes (TypeSafe, OpenRouter, Vercel, Cloudflare, compatible) call `POST /{apiVersion}/systemone` — or the Cloudflare model path — with the connection's model, base URL, API version, and key, and a minimal ping question:
+
+```json
+{
+  "state": {},
+  "questions": {
+    "ping": {
+      "type": "noul",
+      "instructions": "Is the connection accepted?",
+      "criteria": { "true": "yes", "false": "no" }
+    }
+  }
+}
+```
+
+A rejected or missing key fails with `UNAUTHORIZED (HTTP 401/403): …` and shows the credential-free method and URL (for example `POST https://openrouter.ai/api/v1/systemone`). A successful test logs the same target and spends one small decision. The mock route stays local and does not call a host.
 :::
 
 ## Protect credentials
@@ -104,11 +142,13 @@ Do not log state, raw provider responses, or keys. `includeRawResponse` is disab
 
 ## Add a reusable question set
 
-Create `src/main/resources/questions/ticket-triage.json`:
+Create `src/main/resources/questions/support-ticket-triage.json`:
+
+Use an application-specific file name. Connector `1.0.0` contains its own `ticket-triage.json` sample, which can take precedence over an application file with the same classpath path. This collision is tracked in [connector issue 15](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/issues/15).
 
 ```json
 {
-  "id": "ticket-triage",
+  "id": "support-ticket-triage",
   "version": "1.0.0",
   "questions": {
     "team": {
@@ -139,13 +179,27 @@ Run **[Util] Validate Question Set** before the first billed call to catch malfo
 
 ## First flow
 
+This flow runs once when the application starts and then once per hour. Evaluate makes a billed provider call.
+
 ```xml
 <flow name="triage">
-    <http:listener config-ref="HTTP_Listener_config" path="/triage" />
+    <scheduler>
+        <scheduling-strategy>
+            <fixed-frequency frequency="1" timeUnit="HOURS" />
+        </scheduling-strategy>
+    </scheduler>
+
+    <set-payload
+        mimeType="application/json"
+        value='#[output application/json --- {
+            id: "T-1001",
+            subject: "Production checkout outage",
+            body: "Customers cannot pay and revenue is being lost. Please respond immediately."
+        }]' />
 
     <typesafe:evaluate
         config-ref="TypeSafe_Config"
-        questionSet="ticket-triage.json"
+        questionSet="support-ticket-triage.json"
         step="triage">
         <typesafe:state>#[payload]</typesafe:state>
     </typesafe:evaluate>
@@ -171,7 +225,7 @@ State text is not stored in budget or drift statistics.
 
 ### Connector does not appear in the palette
 
-1. Confirm `com.mulesoftforge:mule4-typesafe-connector:1.0.0` is on the classpath. While [Maven Central](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.0) is still publishing, that copy comes from a local `mvn clean install`.
+1. Confirm `com.mulesoftforge:mule4-typesafe-connector:1.0.0` is on the classpath (from [Maven Central](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.0) or Exchange).
 2. Confirm the dependency includes `<classifier>mule-plugin</classifier>`.
 3. Run **Maven → Update Project**, then clean the Mule application.
 

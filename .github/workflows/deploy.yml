@@ -50,13 +50,12 @@ jobs:
           rm artifact.tar
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: mulesoftforge-staging
-          directory: ./dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: pages deploy ./dist --project-name=mulesoftforge-staging --branch=main --commit-dirty=true
 
       - name: Notify Slack
         if: success()

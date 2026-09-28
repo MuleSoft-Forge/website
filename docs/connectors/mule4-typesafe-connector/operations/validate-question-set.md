@@ -20,17 +20,40 @@ The **Question set** selector lists JSON files under `src/main/resources/questio
 
 ## Output
 
+The payload is a JSON object with `valid`, `errors`, and `warnings`. Output attributes are null. `valid` is `true` only when `errors` is empty; warnings alone do not fail validation.
+
+### Happy path — Set Up sample
+
+Validating the [Set Up](../set-up#add-a-reusable-question-set) file `support-ticket-triage.json`:
+
 ```json
 {
   "valid": true,
   "errors": [],
-  "warnings": [
-    "Question 'team' defines more than 20 choice options"
-  ]
+  "warnings": []
 }
 ```
 
-Output attributes are null.
+### Errors and warnings together
+
+A deliberately broken file can return both arrays. Example payload from `support-ticket-triage-error.json`:
+
+```json
+{
+  "valid": false,
+  "errors": [
+    "broken: type must be one of noul, choice, score",
+    "broken: instructions are required",
+    "broken: 'options' is not a TypeSafe question field; put it under 'criteria'"
+  ],
+  "warnings": [
+    "team: choice has no no-match option; consider adding one",
+    "team: option 'technical' has an empty description",
+    "team: duplicate option description 'Payments'",
+    "sentiment: score has fewer than 3 levels"
+  ]
+}
+```
 
 ## Validation behavior
 
@@ -63,8 +86,10 @@ Validate a classpath file:
 ```xml
 <typesafe:validate-question-set
     config-ref="TypeSafe_Config"
-    questionSet="ticket-triage.json" />
+    questionSet="support-ticket-triage.json" />
 ```
+
+Use an application-specific file name. Connector `1.0.1` ships a bundled `ticket-triage.json` sample that can take precedence over an application file with the same classpath path ([issue 15](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/issues/15)).
 
 Validate an inline Questions object:
 

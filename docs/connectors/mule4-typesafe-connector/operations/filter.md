@@ -5,7 +5,7 @@ description: Retain JSON items whose TypeSafe Noul probability meets a threshold
 
 # [Select] Filter
 
-Asks one yes/no question about every item and keeps the items whose Noul probability reaches the configured threshold.
+Asks one yes/no question about every item and keeps the items whose Noul probability reaches the configured threshold. Call the operation once per connection when you want to compare routes side by side.
 
 ## Inputs
 
@@ -19,28 +19,92 @@ Asks one yes/no question about every item and keeps the items whose Noul probabi
 | Max concurrency | No | `4` | Concurrent chunks, clamped to 1–32. |
 | Request options | No | — | Shared model, response, cache, and trace settings. |
 
+Incoming message attributes are explicit null metadata and are not read.
+
 ## Output
+
+The payload partitions the original items into `kept` and `dropped`, and lists a `scores` row per input index. Batch attributes report `total` (input size), `succeeded` (**kept count** on this operation), `failed`, `skippedBudget`, `cached`, token usage, and estimated cost.
+
+The examples below use two tickets — an outage (`T-1001`) and a routine password request (`T-1002`) — with `question="Is this ticket urgent?"`, `threshold=0.7`, and `textField="body"`.
+
+### TypeSafe
+
+Payload:
 
 ```json
 {
   "kept": [
-    { "id": "T-1001", "priority": "high" }
+    {
+      "id": "T-1001",
+      "subject": "Production checkout outage",
+      "body": "Customers cannot pay and revenue is being lost. Please respond immediately."
+    }
   ],
   "dropped": [
-    { "id": "T-1002", "priority": "low" }
+    {
+      "id": "T-1002",
+      "subject": "How do I change my password?",
+      "body": "I forgot my password and would like a reset link when you have a moment."
+    }
   ],
   "scores": [
-    { "index": 0, "noul": 0.91, "kept": true },
-    { "index": 1, "noul": 0.24, "kept": false }
+    { "index": 0, "noul": 0.88, "kept": true },
+    { "index": 1, "noul": 0.21, "kept": false }
   ]
 }
 ```
 
-Batch attributes report totals, token usage, and estimated cost.
+Attributes:
 
-## Provider calls
+```json
+{
+  "total": 2,
+  "succeeded": 1,
+  "failed": 0,
+  "skippedBudget": 0,
+  "cached": 0,
+  "usage": {
+    "inputTokens": 318,
+    "outputTokens": 38
+  },
+  "estimatedCostUsd": 0.000013356
+}
+```
 
-Each chunk becomes one decision request containing one Noul question per item. Any chunk failure fails the operation. A budget refusal during filtering raises `TYPESAFE:BUDGET_EXCEEDED`.
+### OpenRouter
+
+Payload:
+
+```json
+{
+  "kept": [
+    {
+      "id": "T-1001",
+      "subject": "Production checkout outage",
+      "body": "Customers cannot pay and revenue is being lost. Please respond immediately."
+    }
+  ],
+  "dropped": [
+    {
+      "id": "T-1002",
+      "subject": "How do I change my password?",
+      "body": "I forgot my password and would like a reset link when you have a moment."
+    }
+  ],
+  "scores": [
+    { "index": 0, "noul": 0.9, "kept": true },
+    { "index": 1, "noul": 0.21, "kept": false }
+  ]
+}
+```
+
+Attributes matched TypeSafe on this run (`total` 2, `succeeded` 1, same usage). Noul floats can differ slightly between routes; the keep/drop decision agreed.
+
+## HTTP call
+
+`POST /{apiVersion}/systemone` once per chunk (up to **Chunk size** items per call, **Max concurrency** chunks in flight). The API version comes from the connection configuration and defaults to `v1`. Any chunk failure fails the operation. A budget refusal during filtering raises `TYPESAFE:BUDGET_EXCEEDED`.
+
+See the [TypeSafe API](https://docs.typesafe.ai/api).
 
 ## XML example
 
@@ -60,3 +124,4 @@ Each chunk becomes one decision request containing one Noul question per item. A
 
 - [Ask Yes/No](./ask-noul)
 - [Evaluate Batch](./evaluate-batch)
+- [Set Up](../set-up)

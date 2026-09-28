@@ -5,7 +5,7 @@ description: Grade JSON state against an ordered TypeSafe Score rubric.
 
 # [Decide] Score
 
-Grades one state against ordered rubric levels. Use it for sentiment, severity, quality, priority, or any decision where order matters.
+Grades one state against ordered rubric levels. Use it for sentiment, severity, quality, priority, or any decision where order matters. Call the operation once per connection when you want to compare routes side by side.
 
 ## Inputs
 
@@ -16,33 +16,149 @@ Grades one state against ordered rubric levels. Use it for sentiment, severity, 
 | Levels | Yes | Ordered list of 2 to 10 level descriptions. |
 | Request options | No | Model override, raw response, cache use, and trace step. |
 
+Incoming message attributes are explicit null metadata and are not read.
+
 ## Output
+
+The payload is a single Score answer. `legend` maps level index strings to the labels you supplied. `derived.level` is the most probable level index; `derived.levelLabel` is that label. Output attributes contain the shared decision metadata. Because this is a shortcut, `questionSetId` and `questionSetVersion` are null.
+
+The examples below use the [Set Up](../set-up#first-flow) ticket `T-1001` (production checkout outage) with the website sentiment levels.
+
+### TypeSafe
+
+Payload:
 
 ```json
 {
   "type": "score",
-  "score": 1.2,
-  "legend": ["very negative", "negative", "neutral", "positive", "very positive"],
-  "probabilities": {
-    "0": 0.12,
-    "1": 0.58,
-    "2": 0.20,
-    "3": 0.07,
-    "4": 0.03
+  "score": 0.22,
+  "confidence": 0.82,
+  "legend": {
+    "0": "very negative",
+    "1": "negative",
+    "2": "neutral",
+    "3": "positive",
+    "4": "very positive"
   },
-  "confidence": 0.74,
+  "probabilities": {
+    "0": 0.79,
+    "1": 0.21,
+    "2": 0,
+    "3": 0,
+    "4": 0
+  },
   "derived": {
-    "level": 1,
-    "levelLabel": "negative"
+    "level": 0,
+    "levelLabel": "very negative"
   }
 }
 ```
 
-Output attributes contain the shared decision metadata.
+Attributes:
 
-## Provider call
+```json
+{
+  "provider": "typesafe",
+  "requestedModel": "jev-latest",
+  "model": "jev-1.13.0",
+  "usage": {
+    "inputTokens": 354,
+    "outputTokens": 17
+  },
+  "estimatedCostUsd": 0.000014868,
+  "costSource": "ESTIMATE",
+  "latencyMs": 288,
+  "attempts": 1,
+  "failedOverFrom": [],
+  "cacheHit": false,
+  "questionSetId": null,
+  "questionSetVersion": null,
+  "stateHash": "bb4467d35c0ccfdfb0195925daf3eeef03f6128c209ad7f0c7a279853d10cc67",
+  "providerRequestId": "req_01a0e7e9c5b978deb291b7265f762138",
+  "traceEntry": {
+    "provider": "typesafe",
+    "step": "sentiment",
+    "model": "jev-1.13.0",
+    "questionSetId": null,
+    "latencyMs": 288,
+    "attempts": 1,
+    "estimatedCostUsd": 0.000014868,
+    "failedOverFrom": []
+  }
+}
+```
 
-One decision request: `POST /v1/systemone` in the current snapshot, or the equivalent Cloudflare route.
+### OpenRouter
+
+Payload:
+
+```json
+{
+  "type": "score",
+  "score": 0.25,
+  "legend": {
+    "0": "very negative",
+    "1": "negative",
+    "2": "neutral",
+    "3": "positive",
+    "4": "very positive"
+  },
+  "probabilities": {
+    "0": 0.75,
+    "1": 0.25,
+    "2": 0,
+    "3": 0,
+    "4": 0
+  },
+  "confidence": 0.79,
+  "derived": {
+    "level": 0,
+    "levelLabel": "very negative"
+  }
+}
+```
+
+Attributes:
+
+```json
+{
+  "provider": "openrouter",
+  "requestedModel": "~typesafe/jev-latest",
+  "model": "typesafe/jev-1.13-20260917",
+  "usage": {
+    "inputTokens": 354,
+    "outputTokens": 17
+  },
+  "estimatedCostUsd": 0.000014868,
+  "costSource": "PROVIDER",
+  "latencyMs": 324,
+  "attempts": 1,
+  "failedOverFrom": [],
+  "cacheHit": false,
+  "questionSetId": null,
+  "questionSetVersion": null,
+  "stateHash": "bb4467d35c0ccfdfb0195925daf3eeef03f6128c209ad7f0c7a279853d10cc67",
+  "providerRequestId": "gen-dec-1790597252-IIOAJXQeRjV9KyGlRTLa",
+  "traceEntry": {
+    "provider": "openrouter",
+    "step": "sentiment",
+    "model": "typesafe/jev-1.13-20260917",
+    "questionSetId": null,
+    "latencyMs": 324,
+    "attempts": 1,
+    "estimatedCostUsd": 0.000014868,
+    "failedOverFrom": []
+  }
+}
+```
+
+Both routes grade the outage ticket as **very negative** (`level` 0).
+
+## HTTP call
+
+`POST /{apiVersion}/systemone`
+
+The connector builds one inline Score question named `result` and sends one decision request. The API version comes from the connection configuration and defaults to `v1`. Cloudflare uses its Workers AI path instead.
 
 See the [TypeSafe API](https://docs.typesafe.ai/api).
 
@@ -63,3 +179,10 @@ See the [TypeSafe API](https://docs.typesafe.ai/api).
     </typesafe:levels>
 </typesafe:score>
 ```
+
+## See also
+
+- [Evaluate](./evaluate)
+- [Choose](./choose)
+- [Ask Yes/No](./ask-noul)
+- [Set Up](../set-up)

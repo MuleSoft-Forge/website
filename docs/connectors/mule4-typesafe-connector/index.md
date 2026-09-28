@@ -101,6 +101,6 @@ See [Sources](./sources) for payloads and configuration.
 - [Sources](./sources)
 - [Jev introduction](https://docs.typesafe.ai/introduction)
 - [TypeSafe API](https://docs.typesafe.ai/api)
-- [Maven Central `1.0.0`](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.0)
+- [Maven Central `1.0.1`](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.1)
 - [Set Up — Central and Exchange install](./set-up)
 - [GitHub repository](https://github.com/MuleSoft-Forge/mule4-typesafe-connector)

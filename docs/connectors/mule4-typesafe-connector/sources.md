@@ -33,11 +33,11 @@ Payload:
   "windowSize": 500,
   "questionSetId": "ticket-triage",
   "questionId": "team",
-  "windowEnd": "2026-09-27T18:00:00Z"
+  "windowEnd": 1758996000000
 }
 ```
 
-At least `min(30, windowSize)` current samples are required. The source fires once per breach and re-arms after recovery.
+`windowEnd` is epoch milliseconds (not an ISO-8601 string). At least `min(30, windowSize)` current samples are required. The source fires once per breach and re-arms after recovery.
 
 ```xml
 <typesafe:on-drift-detected
@@ -70,9 +70,11 @@ Payload:
   "percent": 81,
   "threshold": 80,
   "estimatedCostUsd": 0.18,
-  "windowStart": "2026-09-27T00:00:00Z"
+  "windowStart": 1758996000000
 }
 ```
+
+`windowStart` is the rolling window start as epoch milliseconds (not an ISO-8601 string). `estimatedCostUsd` is derived from configured price per million input tokens and token usage in the window; it may be a small decimal when only a few calls have run. Attributes are null.
 
 The matching budget limit must be set on the global connector configuration.
 
@@ -99,9 +101,11 @@ Payload:
   "to": "openrouter",
   "reason": "FAILOVER",
   "errorType": null,
-  "timestamp": "2026-09-27T18:00:00Z"
+  "timestamp": 1758996000000
 }
 ```
+
+`timestamp` is epoch milliseconds (not an ISO-8601 string). `errorType` is currently always null. Attributes are null.
 
 The source polls stored failover events using a watermark. Events are recorded only after the fallback successfully answers a stats-enabled decision.
 

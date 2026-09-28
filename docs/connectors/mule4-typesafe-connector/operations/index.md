@@ -60,7 +60,7 @@ Provider-backed decision operations return metadata separately from the payload:
 
 ## Provider endpoints
 
-- TypeSafe, OpenRouter, Vercel, and compatible decision routes use `POST /v1/systemone` in the current snapshot.
+- TypeSafe, OpenRouter, Vercel, and compatible decision routes use `POST /{apiVersion}/systemone` (connection **API version**, default `v1`).
 - Cloudflare uses `POST /client/v4/accounts/{accountId}/ai/run/{model}`.
 - Model discovery uses `GET /{apiVersion}/models`.
 - The mock route, Apply Policy, Get Capabilities, and Validate Question Set make no HTTP request.

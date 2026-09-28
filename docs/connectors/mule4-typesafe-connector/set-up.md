@@ -1,22 +1,17 @@
 ---
 title: Set Up the TypeSafe Connector
-description: Install TypeSafe Connector 1.0.0 from Maven Central or Anypoint Exchange and configure a Jev route.
+description: Install TypeSafe Connector 1.0.1 from Maven Central and configure a Jev route.
 ---
 
 # Set Up
 
-## Release 1.0.0
-
-| Channel | Coordinates / location | Notes |
-| --- | --- | --- |
-| **Maven Central** | [`com.mulesoftforge:mule4-typesafe-connector:1.0.0`](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.0) (`mule-plugin`) | Open Maven coordinate for apps and CI |
-| **Anypoint Exchange** | Search **TypeSafe Connector - Mule 4** in your Anypoint org | Studio / ACB install surface. Private org smoke uses Exchange **1.0.1** with the same bits as Central **1.0.0** (Exchange cannot reuse a hard-deleted `1.0.0` version). |
+## Release 1.0.1
 
 | Version | Minimum Mule Runtime | Java |
 | --- | --- | --- |
-| **1.0.0** | 4.9.0 | 17 |
+| **1.0.1** | 4.9.0 | 17 |
 
-Full operation docs on this site are the source of truth. Exchange Home only points here.
+Full operation docs on this site are the source of truth.
 
 ## Install from Maven Central
 
@@ -26,7 +21,7 @@ Add the dependency to the Mule app `pom.xml`:
 <dependency>
     <groupId>com.mulesoftforge</groupId>
     <artifactId>mule4-typesafe-connector</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <classifier>mule-plugin</classifier>
 </dependency>
 ```
@@ -35,25 +30,11 @@ In Anypoint Studio, run **Maven → Update Project** after the dependency resolv
 
 ### Local build (optional)
 
-From the [GitHub repository](https://github.com/MuleSoft-Forge/mule4-typesafe-connector) on the `1.0.0` release:
+From the [GitHub repository](https://github.com/MuleSoft-Forge/mule4-typesafe-connector) on the `1.0.1` / `v1.0.1` release:
 
 ```bash
 mvn clean install
 ```
-
-## Install from Anypoint Exchange
-
-Use this when you want Studio or Anypoint Code Builder to pull the connector from your org’s Exchange (private or public asset), not from Central.
-
-1. In Studio / ACB, open **Add Modules** / **Search in Exchange**.
-2. Select your organization (the asset is published under that org’s id as `groupId`).
-3. Search for **TypeSafe Connector - Mule 4**, version **1.0.0**.
-4. Add it to the project.
-
-The Exchange card should show the TypeSafe icon. If Studio still shows a generic plug after add, refresh modules / restart Studio — the palette icon comes from the packed `icon/icon.svg` inside the `mule-plugin`.
-
-Maintainer publish steps (Facade v3, icon PUT, Home pointer): see the connector repo
-[`docs/exchange-publish.md`](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/blob/develop/docs/exchange-publish.md).
 
 ## Configure a route
 
@@ -144,7 +125,7 @@ Do not log state, raw provider responses, or keys. `includeRawResponse` is disab
 
 Create `src/main/resources/questions/support-ticket-triage.json`:
 
-Use an application-specific file name. Connector `1.0.0` contains its own `ticket-triage.json` sample, which can take precedence over an application file with the same classpath path. This collision is tracked in [connector issue 15](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/issues/15).
+Use an application-specific file name. Connector `1.0.1` contains its own `ticket-triage.json` sample, which can take precedence over an application file with the same classpath path. This collision is tracked in [connector issue 15](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/issues/15).
 
 ```json
 {
@@ -225,7 +206,7 @@ State text is not stored in budget or drift statistics.
 
 ### Connector does not appear in the palette
 
-1. Confirm `com.mulesoftforge:mule4-typesafe-connector:1.0.0` is on the classpath (from [Maven Central](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.0) or Exchange).
+1. Confirm `com.mulesoftforge:mule4-typesafe-connector:1.0.1` is on the classpath (from [Maven Central](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.1) or Exchange).
 2. Confirm the dependency includes `<classifier>mule-plugin</classifier>`.
 3. Run **Maven → Update Project**, then clean the Mule application.
 

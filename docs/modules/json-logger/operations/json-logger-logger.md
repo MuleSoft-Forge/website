@@ -48,7 +48,7 @@ Here's how to call this operation in a MuleSoft flow:
 
 == Anypoint Code Builder
 
-![Anypoint Code Builder](/images/pdfbox-module/screenshot-2025-05-07-15-13-51.png)
+![Anypoint Code Builder](/images/json-logger/screenshot-2026-09-29-12-47-03.png)
 
 ```xml
 <mule

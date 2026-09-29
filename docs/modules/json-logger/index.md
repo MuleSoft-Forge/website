@@ -7,7 +7,7 @@ description: Unified logging in JSON format
 
 Standardize and enforce consistent logging across your MuleSoft flows with a drop-in replacement for the default Mule Logger. Output logs in structured JSON format based on customizable schemas, making them instantly compatible with log aggregation platforms like Splunk and ELK.
 
-<img src="/images/json-logger.svg" alt="JSON Logger Module Icon" width="80" />
+<img src="/images/json-logger/json-logger.svg" alt="JSON Logger Module Icon" width="80" />
 
 ### Structured Logging
 

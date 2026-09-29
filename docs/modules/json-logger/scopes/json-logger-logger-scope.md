@@ -1,25 +1,22 @@
 ---
-title: Apache PDFBox - Extract Text
-description: Extract text content from PDF pages
+title: JSON Logger - Logger Scope
+description: Log scope timing and processing events in structured JSON format
 ---
 
-# Apache PDFBox - Extract Text
+# JSON Logger - Logger Scope
 
 ### Operation Name
 
-**Apache PDFBox - Extract Text**
-`extractTextWithPageRange`
+**JSON Logger - Logger Scope**
+`loggerScope`
 
 ---
 
 ### Description
 
-Extracts text content from one or more selected pages in a PDF. You can optionally define specific pages or ranges using a string like `"1,3,5-7"`.
+Wraps a group of Mule flow processors and writes structured JSON log entries before and after the scope executes. Use it to measure elapsed time for data transformations, outbound requests, or flow logic while preserving the wrapped processors' normal behavior.
 
-Utilize [Apache PDFBox®](https://pdfbox.apache.org/) to extract the text of PDF document to:
-
-* **Classify** a pdf before choosing which MuleSoft IDP Document Action to use
-* Feed an LLM prompt
+If a processor in the scope fails, the operation writes an exception log entry and propagates the original error.
 
 ---
 
@@ -27,21 +24,22 @@ Utilize [Apache PDFBox®](https://pdfbox.apache.org/) to extract the text of PDF
 
 | Parameter | Type | Required | Description |
 | --------- | ---- | -------- | ----------- |
-| `PDF File [Binary]` | `InputStream` (Binary) | Required | The PDF file whose text content you want to extract. |
-| `Page Range` | `String` | Optional | Comma-separated list of individual pages and ranges (e.g., `2,4,9-12`). If omitted, **all pages** are used. |
+| `configurationRef` | `String` | Required | Name of the global JSON Logger configuration associated with the scope. |
+| `priority` | `String` | Optional | Logger priority. Allowed values: `DEBUG`, `TRACE`, `INFO`, `WARN`, or `ERROR`. Defaults to `INFO`. |
+| `scopeTracePoint` | `String` | Optional | Type of processing being measured. Allowed values: `DATA_TRANSFORM_SCOPE`, `OUTBOUND_REQUEST_SCOPE`, or `FLOW_LOGIC_SCOPE`. Defaults to `OUTBOUND_REQUEST_SCOPE`. |
+| `category` | `String` | Optional | Logger category. If omitted, uses `org.mule.extension.jsonlogger.JsonLogger`. |
+| `correlationId` | `String` | Optional | Correlation identifier for the scope logs. Defaults to the Mule `correlationId`. |
 
 ---
 
 ### Output
 
-* **Payload**: `String`
-  Contains the **extracted text** from the specified pages.
-* **Attributes**: `PdfBoxFileAttributes`
-  Includes metadata such as:
-  * `numberOfPages`
-  * `pdfSize`
-  * `title`, `author`, `subject`, `keywords`
-  * `creationDate`, `modificationDate`
+The scope returns the result of the wrapped processors unchanged:
+
+* **Payload**: The payload produced by the inner scope.
+* **Attributes**: The attributes produced by the inner scope.
+
+The logger writes structured JSON entries with the correlation ID, trace point, priority, elapsed time, scope elapsed time, timestamp, application metadata, and optional location information. A normal execution produces `*_BEFORE` and `*_AFTER` trace points; a failed execution produces an `EXCEPTION_SCOPE` entry.
 
 ---
 
@@ -53,47 +51,36 @@ Here's how to call this operation in a MuleSoft flow:
 
 == Anypoint Code Builder
 
-![Anypoint Code Builder](/images/pdfbox-module/screenshot-2025-05-07-15-13-51.png)
-
 ```xml
 <mule
 	xmlns="http://www.mulesoft.org/schema/mule/core"
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:pdfbox="http://www.mulesoft.org/schema/mule/pdfbox"
+	xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
 	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core
 	http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-	http://www.mulesoft.org/schema/mule/pdfbox
-	http://www.mulesoft.org/schema/mule/pdfbox/current/mule-pdfbox.xsd
-	http://www.mulesoft.org/schema/mule/ee/core
-	http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	http://www.mulesoft.org/schema/mule/http
+	http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+	http://www.mulesoft.org/schema/mule/json-logger
+	http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd">
+
+	<json-logger:config name="JSON_Logger_Config"
+		doc:name="JSON Logger Config"
+		environment="dev"
+		applicationName="example-app"
+		applicationVersion="1.0.0" />
 
 	<flow name="main">
-		<scheduler doc:name="Scheduler" doc:id="dsgkfy" >
-			<scheduling-strategy>
-				<fixed-frequency timeUnit="HOURS"/>
-			</scheduling-strategy>
-		</scheduler>
-		<flow-ref name="Apache PDFBox - Extract Text" />
+		<json-logger:logger-scope
+			doc:name="JSON Logger Scope"
+			configurationRef="JSON_Logger_Config"
+			scopeTracePoint="OUTBOUND_REQUEST_SCOPE"
+			priority="INFO">
+			<http:request method="GET" url="https://api.example.com/customers" />
+		</json-logger:logger-scope>
 	</flow>
-
-	<sub-flow name="Apache PDFBox - Extract Text">
-		<set-payload doc:id="vxsfk1" doc:name="Set payload" mimeType="application/octet-stream" value='#[%dw 2.0
-output application/java
----readUrl("https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf", "application/octet-stream") as Binary]'></set-payload>
-		<pdfbox:extract-text-with-page-range doc:id="vicbr1" doc:name="Apache PDFBox - Extract Text" pageRange="1,3-4"></pdfbox:extract-text-with-page-range>
-		<logger doc:name="Logger" doc:id="ecdqss" message='#[%dw 2.0
-output text
----
-"\n\n Apache PDFBox - Extract Text "
-++ "\n\n⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄⌄"
-++ "\n\nExtracted Text Attributes: " ++ (write(attributes, "application/json")) as String
-++ "\n\nExtracted Text Response: " ++ payload as String
-++ "\n\n^^^^^^^^^^^^^^^^^^^^"
-++ "\n\n Apache PDFBox - Extract Text"
-++ "\n\n"]'/>
-	</sub-flow>
 
 </mule>
 ```
@@ -104,79 +91,57 @@ output text
 
 ### Notes
 
-* **Page Indexing**: Page numbers are **1-based** (i.e., `1` = first page).
-* **If `pageRange` is omitted**, the connector will extract text from **all pages**.
-* **Text is returned as plain text (`text/plain`)**, suitable for logging, displaying in UIs, or further transformation.
+* The scope logs a `*_BEFORE` entry immediately before the inner processors execute.
+* The `*_AFTER` entry includes the elapsed time for the wrapped processors in `scopeElapsed`.
+* `OUTBOUND_REQUEST_SCOPE` is intended for outbound calls, `DATA_TRANSFORM_SCOPE` for transformations, and `FLOW_LOGIC_SCOPE` for general flow logic.
+* If the inner processors fail, the scope logs `EXCEPTION_SCOPE` with priority `ERROR` and propagates the original error.
+* If the selected priority is disabled, the inner processors still execute without logger processing.
+* External destinations receive the before and after entries when configured for the selected logger category.
 
 ---
 
-### Underlying Application Interface:
+### Underlying Application Interface
 
-See [Apache PDFBox JavaDoc](https://javadoc.io/doc/org.apache.pdfbox/pdfbox/latest/index.html)
+The scope is implemented by the `loggerScope` method in the JSON Logger Java SDK extension. Its scope-specific parameter is generated from the [`loggerScopeProcessor.json` schema](https://github.com/anypointcloud/json-logger/blob/main/src/main/resources/schema/loggerScopeProcessor.json).
 
 <details>
 
 <summary>Pseudo Code</summary>
 
 ```
-Operation: extractTextWithPageRange
+Operation: loggerScope
 
 Input:
-  pdfFile: Binary content of the PDF (InputStream)
-  pageRange: Comma-separated string of pages or ranges (Optional)
-  streamingHelper: MuleSoft StreamingHelper (for context/utilities)
+	configurationRef: Required global JSON Logger configuration name
+	priority: Optional Priority, default INFO
+	scopeTracePoint: Optional ScopeTracePoint, default OUTBOUND_REQUEST_SCOPE
+	category: Optional logger category
+	correlationId: Optional Mule correlationId expression
+	operations: The processors wrapped by the scope
 
 Output:
-  Result containing:
-    - Extracted text (String) as output
-    - PDF file attributes as attributes
-
-Errors:
-  PDF_LOAD_FAILED: If the PDF document cannot be loaded (corrupt or invalid).
-  PDF_TEXT_EXTRACTION_FAILED: If there is an error extracting text from a specific page.
-  PDF_INVALID_PAGE_RANGE: If the provided pageRange format is invalid.
+	The result of the wrapped operations
+	The original error if a wrapped operation fails
 
 Steps:
-1. Convert the input `pdfFile` InputStream to a byte array.
-2. Get the size of the byte array (pdfSize).
-3. Try to load the PDF document from the byte array using PDFBox Loader.
-4. If loading fails, throw a ModuleException with PDF_LOAD_FAILED.
-5. Get the total number of pages from the loaded PDF document.
-6. Parse the `pageRange` string into a Set of unique page numbers to process.
-   - If `pageRange` is null or empty, include all pages.
-   - Validate the format of each segment in `pageRange` (e.g., "1", "3-5").
-   - Validate that page numbers are within the total number of pages.
-   - If parsing or validation fails, throw a ModuleException with PDF_INVALID_PAGE_RANGE.
-7. Create a new PDFTextStripper instance.
-8. Initialize an empty StringBuilder to accumulate the extracted text.
-9. Iterate through each page number in the parsed Set of pages:
-   a. Set the start page for the stripper to the current page number.
-   b. Set the end page for the stripper to the current page number.
-   c. Try to extract text from the current page using the stripper and the loaded PDF document.
-   d. Append the extracted text to the StringBuilder, followed by a newline character.
-   e. If text extraction for a page fails, throw a ModuleException with PDF_TEXT_EXTRACTION_FAILED, including the page number.
-10. After iterating through all selected pages, convert the accumulated text in the StringBuilder to a String.
-11. Extract metadata from the loaded PDF document (title, author, dates, page count, size).
-12. Create a Result object containing:
-    - The extracted text string as the output.
-    - Set the media type to TEXT_PLAIN.
-    - The extracted PDF file attributes.
-13. Return the Result object.
-14. Ensure the loaded PDF document is closed properly after processing (using try-with-resources or a finally block).
+1. Resolve the referenced JSON Logger configuration and correlation ID.
+2. Record the initial timestamp used to calculate elapsed time.
+3. Write the before entry with the selected scope trace point and zero `scopeElapsed`.
+4. Execute the wrapped processors.
+5. On success, calculate elapsed and scope elapsed time, write the after entry, and return the wrapped result.
+6. On failure, write an `EXCEPTION_SCOPE` entry with priority `ERROR` and propagate the error.
+7. Forward generated scope entries to configured external destinations when applicable.
 ```
 
 </details>
 
 <details>
 
-<summary>Methods used from the Apache PDFBox library</summary>
+<summary>JSON Logger scope implementation details</summary>
 
-* `org.apache.pdfbox.Loader.loadPDF(byte[] input)`: Used to load the PDF document from a byte array.
-* `org.apache.pdfbox.pdmodel.PDDocument.getNumberOfPages()`: Used to get the total number of pages in the loaded PDF document.
-* `org.apache.pdfbox.text.PDFTextStripper()`: Constructor for creating a new text stripper object.
-* `org.apache.pdfbox.text.PDFTextStripper.setStartPage(int startPage)`: Used to set the starting page for text extraction.
-* `org.apache.pdfbox.text.PDFTextStripper.setEndPage(int endPage)`: Used to set the ending page for text extraction.
-* `org.apache.pdfbox.text.PDFTextStripper.getText(PDDocument doc)`: Used to extract text from the specified pages of the document.
-* `org.apache.pdfbox.pdmodel.PDDocument.close()`: Used to close the loaded PDF document and release resources.
+* `JsonloggerOperations.loggerScope(...)`: Executes the scope and reports completion or failure through the Mule callback.
+* `ScopeTracePoint`: Defines the type of work being measured.
+* `FlowListener`: Removes the cached initial timestamp when the flow completes.
+* `LogEventSingleton`: Publishes before and after scope entries to configured external destinations.
 
 </details>

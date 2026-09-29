@@ -7,8 +7,8 @@ description: Installation and configuration guide for the MuleSoft JSON Logger
 
 | Version | Min runtime version | Compatible Java versions | Description |
 | ------- | ------------------- | ------------------------ | ----------- |
-| [3.1.0](https://central.sonatype.com/artifact/cloud.anypoint/json-logger/3.1.0) | 4.3.0 | Java 17, Java 11 | Stable release with JSON Serializer for JDK 8 datatypes |
-| [3.0.2](https://central.sonatype.com/artifact/cloud.anypoint/json-logger/3.0.2) | 4.3.0 | Java 17, Java 11 | Security and dependency fixes |
+| [3.1.2](https://central.sonatype.com/artifact/cloud.anypoint/json-logger/3.1.2) | 4.6.0 | Java 17, Java 11 | Stable release with JSON Serializer for JDK 8 datatypes (improved error handling) |
+| [3.0.2](https://central.sonatype.com/artifact/cloud.anypoint/json-logger/3.0.2) | 4.3.0 | Java 17, Java 11 | Made queue dependencies optional to reduce size |
 | [2.2.3](https://central.sonatype.com/artifact/cloud.anypoint/json-logger/2.2.3) | 4.3.0 | Java 17, Java 11 | Compatibility and stability updates |
 
 [![Maven Central](https://img.shields.io/maven-metadata/v.svg?label=maven-central&metadataUrl=https://repo1.maven.org/maven2/cloud/anypoint/json-logger/maven-metadata.xml)](https://central.sonatype.com/artifact/cloud.anypoint/json-logger)
@@ -42,7 +42,7 @@ Add a global JSON Logger configuration to your `global.xml` or flow file:
 <json-logger:config name="json-logger-config"
     environment="dev" applicationName="test-app" applicationVersion="1.0.0"
     disabledFields="content" contentFieldsDataMasking="password">
-    
+
     <!-- Optional: Configure external destination -->
     <json-logger:external-destination>
         <json-logger:amq-destination queueOrExchangeDestination="logs-queue"

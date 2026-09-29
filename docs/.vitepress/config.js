@@ -204,7 +204,7 @@ export default defineConfig({
         items: [
           {
             text: 'JSON Logger',
-            icon: '/images/json-logger.svg',
+            icon: '/images/json-logger/json-logger.svg',
             collapsed: true,
             items: [
               { text: 'Overview', link: '/modules/json-logger/' },

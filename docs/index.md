@@ -88,7 +88,7 @@ features:
     linkText: Learn More →
 
   - icon:
-      src: /images/json-logger.svg
+      src: /images/json-logger/json-logger.svg
       alt: JSON Logger
     title: JSON Logger
     details: Drop-in replacement for the standard MuleSoft logger, enabling unified logging in JSON format. Also supports seamless log forwarding to Anypoint MQ, JMS, or AMQP destinations.

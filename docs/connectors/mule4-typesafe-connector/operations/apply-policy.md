@@ -77,7 +77,7 @@ Decision answers fall below thresholds (billing 0.55, urgent 0.55):
   "routeKey": "billing",
   "reasons": [
     "team: probability 0.55 < 0.7",
-    "urgent: noul 0.55 between noBelow 0.3 and yesAbove 0.7"
+    "urgent: noul 0.55 is between 0.3 and 0.7"
   ],
   "perQuestion": {
     "team": {
@@ -86,7 +86,7 @@ Decision answers fall below thresholds (billing 0.55, urgent 0.55):
     },
     "urgent": {
       "action": "REVIEW",
-      "reasons": ["urgent: noul 0.55 between noBelow 0.3 and yesAbove 0.7"]
+      "reasons": ["urgent: noul 0.55 is between 0.3 and 0.7"]
     }
   }
 }

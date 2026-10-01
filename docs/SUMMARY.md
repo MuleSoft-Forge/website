@@ -10,6 +10,7 @@
 ## Connectors
 
 * [mule4-typesafe-connector](connectors/mule4-typesafe-connector/index.md)
+  * [How Decisions Work](connectors/mule4-typesafe-connector/how-decisions-work.md)
   * [Set Up](connectors/mule4-typesafe-connector/set-up.md)
   * [Operations](connectors/mule4-typesafe-connector/operations/index.md)
     * [\[Decide\] Evaluate](connectors/mule4-typesafe-connector/operations/evaluate.md)

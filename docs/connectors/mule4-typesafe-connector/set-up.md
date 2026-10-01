@@ -1,17 +1,18 @@
 ---
 title: Set Up the TypeSafe Connector
-description: Install TypeSafe Connector 1.0.1 from Maven Central and configure a Jev route.
+description: Install TypeSafe Connector 1.0.2 from Maven Central and configure a Jev route.
 ---
 
 # Set Up
 
-## Release 1.0.1
+## Release 1.0.2
 
 | Version | Minimum Mule Runtime | Java |
 | --- | --- | --- |
-| **1.0.1** | 4.9.0 | 17 |
+| **1.0.2** | 4.9.0 | 17 |
+| 1.0.1 | 4.9.0 | 17 |
 
-Full operation docs on this site are the source of truth.
+Full operation docs on this site are the source of truth. See the [GitHub 1.0.2 release](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/releases/tag/v1.0.2) for the changelog.
 
 ## Install from Maven Central
 
@@ -21,7 +22,7 @@ Add the dependency to the Mule app `pom.xml`:
 <dependency>
     <groupId>com.mulesoftforge</groupId>
     <artifactId>mule4-typesafe-connector</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <classifier>mule-plugin</classifier>
 </dependency>
 ```
@@ -30,7 +31,7 @@ In Anypoint Studio, run **Maven → Update Project** after the dependency resolv
 
 ### Local build (optional)
 
-From the [GitHub repository](https://github.com/MuleSoft-Forge/mule4-typesafe-connector) on the `1.0.1` / `v1.0.1` release:
+From the [GitHub repository](https://github.com/MuleSoft-Forge/mule4-typesafe-connector) on the `1.0.2` / `v1.0.2` release:
 
 ```bash
 mvn clean install
@@ -148,13 +149,31 @@ Create `src/main/resources/questions/support-ticket-triage.json`:
         "false": "A routine request with no time pressure."
       }
     }
+  },
+  "policy": {
+    "routeQuestion": "team",
+    "team": {
+      "minProbability": 0.7,
+      "minMargin": 0.15,
+      "onNoMatch": "REVIEW",
+      "options": {
+        "other": { "action": "REVIEW", "minConfidence": 0.7 }
+      }
+    },
+    "urgent": {
+      "yesAbove": 0.7,
+      "noBelow": 0.3,
+      "onYes": "ACCEPT",
+      "onNo": "ACCEPT",
+      "onUncertain": "REVIEW"
+    }
   }
 }
 ```
 
-The default classpath folder is `questions/`. File-backed question sets populate the **Question set** selector and let DataSense describe named answers such as `payload.answers.team.choice`.
+The default classpath folder is `questions/`. File-backed question sets populate the **Question set** selector and let DataSense describe named answers such as `payload.answers.team.choice`. The optional `policy` block is what [Apply Policy](./operations/apply-policy) uses after Evaluate — three-band Noul so a clear “no” on urgency does not reject the whole ticket, and `routeQuestion` so `routeKey` stays on `team`. See [How Decisions Work](./how-decisions-work).
 
-Run **[Util] Validate Question Set** before the first billed call to catch malformed questions and risky option sets.
+Run **[Util] Validate Question Set** before the first billed call to catch malformed questions, risky option sets, and invalid `policy` keys.
 
 ## First flow
 
@@ -183,11 +202,18 @@ This flow runs once when the application starts and then once per hour. Evaluate
         <typesafe:state>#[payload]</typesafe:state>
     </typesafe:evaluate>
 
-    <logger message="#[payload.answers.team.choice]" />
+    <typesafe:apply-policy
+        config-ref="TypeSafe_Config"
+        questionSet="support-ticket-triage.json"
+        target="policyResult">
+        <typesafe:decision>#[payload]</typesafe:decision>
+    </typesafe:apply-policy>
+
+    <logger message="#['action=' ++ vars.policyResult.action ++ ' team=' ++ (vars.policyResult.routeKey default '')]" />
 </flow>
 ```
 
-For an inline question set, leave **Question set** empty and provide the **Questions** JSON object instead.
+For an inline question set, leave **Question set** empty and provide the **Questions** JSON object instead. Skip Apply Policy until the file includes a `policy` block (as in the sample above).
 
 ## Optional governance
 
@@ -204,7 +230,7 @@ State text is not stored in budget or drift statistics.
 
 ### Connector does not appear in the palette
 
-1. Confirm `com.mulesoftforge:mule4-typesafe-connector:1.0.1` is on the classpath from [Maven Central](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.1).
+1. Confirm `com.mulesoftforge:mule4-typesafe-connector:1.0.2` is on the classpath from [Maven Central](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.2).
 2. Confirm the dependency includes `<classifier>mule-plugin</classifier>`.
 3. Run **Maven → Update Project**, then clean the Mule application.
 

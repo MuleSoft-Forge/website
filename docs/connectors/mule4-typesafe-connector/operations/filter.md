@@ -5,7 +5,7 @@ description: Retain JSON items whose TypeSafe Noul probability meets a threshold
 
 # [Select] Filter
 
-Asks one yes/no question about every item and keeps the items whose Noul probability reaches the configured threshold. Call the operation once per connection when you want to compare routes side by side.
+Asks one yes/no question about every item and keeps the items whose Noul probability reaches the configured threshold. Optionally set **Drop below** lower than **Threshold** to leave a middle **uncertain** band instead of forcing every item into keep or drop. Call the operation once per connection when you want to compare routes side by side.
 
 ## Inputs
 
@@ -105,6 +105,25 @@ Payload:
 
 Attributes matched TypeSafe on this run (`total` 2, `succeeded` 1, same usage). Noul floats can differ slightly between routes; the keep/drop decision agreed.
 
+### Uncertain band
+
+With `threshold="0.7"` and `dropBelow="0.3"`, a middle score lands in `uncertain` (not kept, not dropped):
+
+```json
+{
+  "kept": [ /* noul >= 0.7 */ ],
+  "dropped": [ /* noul < 0.3 */ ],
+  "uncertain": [ /* 0.3 <= noul < 0.7 */ ],
+  "scores": [
+    { "index": 0, "noul": 0.88, "band": "kept", "kept": true },
+    { "index": 1, "noul": 0.45, "band": "uncertain", "kept": false },
+    { "index": 2, "noul": 0.21, "band": "dropped", "kept": false }
+  ]
+}
+```
+
+When **Drop below** equals **Threshold** (the default), `uncertain` is always empty.
+
 ## HTTP call
 
 `POST /{apiVersion}/systemone` once per chunk (up to **Chunk size** items per call, **Max concurrency** chunks in flight). The API version comes from the connection configuration and defaults to `v1`. Any chunk failure fails the operation. A budget refusal during filtering raises `TYPESAFE:BUDGET_EXCEEDED`.
@@ -118,6 +137,7 @@ See the [TypeSafe API](https://docs.typesafe.ai/api).
     config-ref="TypeSafe_Config"
     question="Is this ticket urgent?"
     threshold="0.7"
+    dropBelow="0.3"
     chunkSize="20"
     textField="body"
     maxConcurrency="4">
@@ -127,6 +147,7 @@ See the [TypeSafe API](https://docs.typesafe.ai/api).
 
 ## See also
 
+- [How Decisions Work](../how-decisions-work)
 - [Ask Yes/No](./ask-noul)
 - [Evaluate Batch](./evaluate-batch)
 - [Set Up](../set-up)

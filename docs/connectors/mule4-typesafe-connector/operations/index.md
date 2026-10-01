@@ -22,16 +22,18 @@ The connector exposes 11 operations. Provider-backed operations call Jev through
 | Operation | Alias | Provider calls | Purpose |
 | --- | --- | ---: | --- |
 | [\[Decide\] Evaluate Batch](./evaluate-batch) | `evaluate-batch` | One per unique cache miss | Apply one question set to many states with bounded concurrency. |
-| [\[Select\] Filter](./filter) | `filter` | One per chunk | Retain items whose Noul probability clears a threshold. |
+| [\[Select\] Filter](./filter) | `filter` | One per chunk | Partition items into kept / uncertain / dropped by Noul. |
 
 ## Policy and utility operations
 
 | Operation | Alias | Provider calls | Purpose |
 | --- | --- | ---: | --- |
-| [\[Policy\] Apply](./apply-policy) | `apply-policy` | 0 | Convert answers to `ACCEPT`, `REVIEW`, or `REJECT`. |
+| [\[Policy\] Apply](./apply-policy) | `apply-policy` | 0 | Convert answers to `ACCEPT`, `REVIEW`, or `REJECT` (fails closed). |
 | [\[Util\] Connection Get Capabilities](./connection-get-capabilities) | `get-capabilities` | 0 | Describe primary and fallback route capabilities. |
 | [\[Util\] Connection List Models](./connection-list-models) | `list-models` | One per supporting route | Merge model cards across the connection. |
-| [\[Util\] Validate Question Set](./validate-question-set) | `validate-question-set` | 0 | Validate questions before a billed call. |
+| [\[Util\] Validate Question Set](./validate-question-set) | `validate-question-set` | 0 | Validate questions and file `policy` before a billed call. |
+
+See [How Decisions Work](../how-decisions-work) for policy bands, fail-closed behavior, filter bands, and drift expectations.
 
 ## Shared request options
 

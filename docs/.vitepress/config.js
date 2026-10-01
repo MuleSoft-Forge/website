@@ -76,6 +76,7 @@ export default defineConfig({
             collapsed: true,
             items: [
               { text: 'Overview', link: '/connectors/mule4-typesafe-connector/' },
+              { text: 'How Decisions Work', link: '/connectors/mule4-typesafe-connector/how-decisions-work' },
               { text: 'Set Up', link: '/connectors/mule4-typesafe-connector/set-up' },
               {
                 text: 'Operations',

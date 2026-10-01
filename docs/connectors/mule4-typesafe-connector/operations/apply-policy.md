@@ -80,6 +80,43 @@ Decision answers fall below thresholds (billing 0.55, urgent 0.55):
 
 `routeKey` is still the Choice answer (`billing`) so a router can branch on the selected team even when the overall action is `REVIEW`.
 
+### Fails closed
+
+Since 1.0.2, a policy that has nothing to judge returns `REVIEW`, never `ACCEPT`:
+
+| Situation | Reason in the payload |
+| --- | --- |
+| The decision has no answers, for example `{}` or the wrong variable | `decision has no answers to judge` |
+| A policy rule's question has no answer | `urgent: no answer to judge` |
+| A rule's keys do not fit the answer's type | `team: rule does not fit a 'choice' answer` |
+
+The second case catches a common mistake. A shortcut operation (`ask-noul`, `choose`, `score`) returns a single answer, which is judged as the question `result`. A question-set policy keyed by real question ids therefore finds no answer to judge.
+
+## Policy validation
+
+The policy is checked before it is applied, and an invalid policy raises `TYPESAFE:INVALID_QUESTION_SET` listing every problem. A policy from a question-set file is checked against that file's questions. An inline policy is checked for structure only.
+
+- A rule for a question id that does not exist
+- An unknown or misspelt key, such as `minProbabilty`
+- A key for a different question type, such as `acceptAbove` on a Choice
+- A threshold that is not a number from 0 to 1
+- An `onNoMatch` other than `ACCEPT`, `REVIEW`, or `REJECT`
+- `rejectBelow` greater than `acceptAbove`
+- A Score level out of range, not a number, or in both `acceptLevels` and `reviewLevels`
+- A Score rule with neither `acceptLevels` nor `reviewLevels`, which would reject every answer
+
+Run [Validate Question Set](./validate-question-set) on the file to see the same errors, plus warnings, before deploying.
+
+## Errors
+
+| Error | When |
+| --- | --- |
+| `TYPESAFE:INVALID_QUESTION_SET` | The decision or policy is not JSON, both or neither of Policy and Question set are given, the file has no `policy` block, or the policy fails validation. |
+| `TYPESAFE:BELOW_THRESHOLD` | Raise on review is `true` and the action is `REVIEW`. |
+| `TYPESAFE:REJECTED` | Raise on reject is `true` and the action is `REJECT`. |
+
+Before 1.0.2 these errors were not declared on the operation, so Mule raised `MULE:UNKNOWN` in their place.
+
 ## Provider call
 
 None. The operation is deterministic and runs entirely inside Mule. It does not read the connection or API version.

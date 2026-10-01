@@ -9,6 +9,8 @@ description: "Think: Smart If Statements. Typed Jev decisions in Mule flows."
 
 [Jev](https://docs.typesafe.ai/introduction) is [TypeSafe](https://typesafe.ai)'s System One model. It turns unstructured JSON **state** and typed **questions** into a value a Choice router, filter, or expression can read. The flow owns the if: the threshold, the route, and the side effect. This connector exists to make that if possible in Mule.
 
+Start with **[How Decisions Work](./how-decisions-work)** for connector behavior (policy bands, fail-closed Apply Policy, filter keep/uncertain/drop, drift on Noul) without needing deep Jev reading.
+
 ## Jev
 
 Use these pages when you need the official project behind a connector concept:
@@ -31,9 +33,9 @@ Use these pages when you need the official project behind a connector concept:
 - **Native DataSense** — JSON input and output metadata, including answer-specific metadata for reusable question sets.
 - **Six routes** — TypeSafe, OpenRouter, Vercel AI Gateway, Cloudflare Workers AI, compatible gateways, and an in-process mock.
 - **Resilient execution** — ordered provider fallbacks, retry handling, optional caching, budgets, and usage statistics.
-- **Flow-ready governance** — local policy evaluation returns `ACCEPT`, `REVIEW`, or `REJECT`.
-- **Scale operations** — bounded-concurrency batch evaluation and cost-efficient filtering.
-- **Operational signals** — polling sources for drift, budget thresholds, and successful provider failovers.
+- **Flow-ready governance** — local policy returns `ACCEPT`, `REVIEW`, or `REJECT`; fails closed and validates rules before applying.
+- **Scale operations** — bounded-concurrency batch evaluation and filtering with optional keep / uncertain / drop bands.
+- **Operational signals** — polling sources for drift (including Noul certainty), budget thresholds, and successful provider failovers.
 
 ## Core concepts
 
@@ -44,7 +46,7 @@ Use these pages when you need the official project behind a connector concept:
 | Choice | A classification question that returns one option and a probability distribution. |
 | Score | An ordered rubric that returns a score, level distribution, and derived level. |
 | Question set | A reusable JSON file under `src/main/resources/questions/`. |
-| Policy | Local thresholds that convert answers into an `ACCEPT`, `REVIEW`, or `REJECT` action. |
+| Policy | Local thresholds that convert answers into an `ACCEPT`, `REVIEW`, or `REJECT` action (three-band Noul, per-option Choice, named `routeQuestion`). |
 
 ## Routes
 
@@ -69,11 +71,11 @@ Keyed routes can define ordered fallback routes. A fallback is attempted for con
 - **[\[Decide\] Score](./operations/score)** — grade state against ordered levels.
 - **[\[Select\] Candidate](./operations/select-candidate)** — select and rank the best upstream row.
 - **[\[Decide\] Evaluate Batch](./operations/evaluate-batch)** — evaluate one question set across many states.
-- **[\[Select\] Filter](./operations/filter)** — retain items that clear a Noul threshold.
+- **[\[Select\] Filter](./operations/filter)** — partition items into kept, uncertain, and dropped by Noul.
 
 ### Policy and utilities
 
-- **[\[Policy\] Apply](./operations/apply-policy)** — turn answers into a routing action locally.
+- **[\[Policy\] Apply](./operations/apply-policy)** — turn answers into a routing action locally (fails closed; validates policy).
 - **[\[Util\] Connection Get Capabilities](./operations/connection-get-capabilities)** — report route capabilities locally.
 - **[\[Util\] Connection List Models](./operations/connection-list-models)** — enumerate models across supporting routes.
 - **[\[Util\] Validate Question Set](./operations/validate-question-set)** — validate a question set before a billed call.
@@ -82,7 +84,7 @@ See the [operations overview](./operations/) for inputs, outputs, and provider-c
 
 ## Sources
 
-- **On Drift Detected** — watches no-match rate, confidence, and answer-distribution changes.
+- **On Drift Detected** — watches no-match rate, confidence (or Noul certainty), and answer-distribution changes.
 - **On Budget Threshold** — fires when calls or input tokens cross a configured percentage.
 - **On Provider Failover** — emits successful fallback events.
 
@@ -96,6 +98,7 @@ See [Sources](./sources) for payloads and configuration.
 
 ## Learn more
 
+- [How Decisions Work](./how-decisions-work)
 - [Set Up](./set-up)
 - [Operations Reference](./operations/)
 - [Sources](./sources)

@@ -149,13 +149,31 @@ Create `src/main/resources/questions/support-ticket-triage.json`:
         "false": "A routine request with no time pressure."
       }
     }
+  },
+  "policy": {
+    "routeQuestion": "team",
+    "team": {
+      "minProbability": 0.7,
+      "minMargin": 0.15,
+      "onNoMatch": "REVIEW",
+      "options": {
+        "other": { "action": "REVIEW", "minConfidence": 0.7 }
+      }
+    },
+    "urgent": {
+      "yesAbove": 0.7,
+      "noBelow": 0.3,
+      "onYes": "ACCEPT",
+      "onNo": "ACCEPT",
+      "onUncertain": "REVIEW"
+    }
   }
 }
 ```
 
-The default classpath folder is `questions/`. File-backed question sets populate the **Question set** selector and let DataSense describe named answers such as `payload.answers.team.choice`.
+The default classpath folder is `questions/`. File-backed question sets populate the **Question set** selector and let DataSense describe named answers such as `payload.answers.team.choice`. The optional `policy` block is what [Apply Policy](./operations/apply-policy) uses after Evaluate — three-band Noul so a clear “no” on urgency does not reject the whole ticket, and `routeQuestion` so `routeKey` stays on `team`. See [How Decisions Work](./how-decisions-work).
 
-Run **[Util] Validate Question Set** before the first billed call to catch malformed questions and risky option sets.
+Run **[Util] Validate Question Set** before the first billed call to catch malformed questions, risky option sets, and invalid `policy` keys.
 
 ## First flow
 
@@ -184,11 +202,18 @@ This flow runs once when the application starts and then once per hour. Evaluate
         <typesafe:state>#[payload]</typesafe:state>
     </typesafe:evaluate>
 
-    <logger message="#[payload.answers.team.choice]" />
+    <typesafe:apply-policy
+        config-ref="TypeSafe_Config"
+        questionSet="support-ticket-triage.json"
+        target="policyResult">
+        <typesafe:decision>#[payload]</typesafe:decision>
+    </typesafe:apply-policy>
+
+    <logger message="#['action=' ++ vars.policyResult.action ++ ' team=' ++ (vars.policyResult.routeKey default '')]" />
 </flow>
 ```
 
-For an inline question set, leave **Question set** empty and provide the **Questions** JSON object instead.
+For an inline question set, leave **Question set** empty and provide the **Questions** JSON object instead. Skip Apply Policy until the file includes a `policy` block (as in the sample above).
 
 ## Optional governance
 

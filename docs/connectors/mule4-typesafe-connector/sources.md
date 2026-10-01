@@ -11,7 +11,7 @@ All three sources require a connector configuration, connection, and Mule schedu
 
 ## On Drift Detected
 
-Detects a change in no-match rate, mean confidence, or Choice/Score distribution.
+Detects a change in no-match rate, mean confidence, or answer distribution. For Choice and Score answers, confidence is the provider value. For Noul answers (which have no confidence field), the recorder uses certainty `|noul − 0.5| × 2` (1 at a clear yes/no, 0 at 0.5) and buckets the distribution as `yes` / `no` / `uncertain`, so Noul-only question sets still drive drift.
 
 | Parameter | Default | Description |
 | --- | --- | --- |
@@ -20,7 +20,7 @@ Detects a change in no-match rate, mean confidence, or Choice/Score distribution
 | Window size | `500` | Decisions in each comparison window. |
 | Baseline | `FIRST_WINDOW` | Compare with the first or previous full window. |
 | Max no-match rate increase | `0.10` | Allowed increase above baseline. |
-| Max mean confidence drop | `0.10` | Allowed decrease below baseline. |
+| Max mean confidence drop | `0.10` | Allowed decrease below baseline (includes Noul certainty). |
 | Max distribution shift | `0.10` | Jensen–Shannon divergence threshold from 0 to 1. |
 
 Payload:

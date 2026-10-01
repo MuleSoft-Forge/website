@@ -92,7 +92,7 @@ Decision answers fall below thresholds (billing 0.55, urgent 0.55):
 }
 ```
 
-`routeKey` is still the Choice answer (`billing`) so a router can branch on the selected team even when the overall action is `REVIEW`.
+`routeKey` is the Choice answer for `policy.routeQuestion` when that key is set (for example `"routeQuestion": "team"`), otherwise the first Choice answer in the decision. Reordering questions no longer silently changes the route. A router can still branch on `routeKey` when the overall action is `REVIEW`.
 
 ### Fails closed
 

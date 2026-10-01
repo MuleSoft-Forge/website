@@ -115,7 +115,9 @@ Run [Validate Question Set](./validate-question-set) on the file to see the same
 | `TYPESAFE:BELOW_THRESHOLD` | Raise on review is `true` and the action is `REVIEW`. |
 | `TYPESAFE:REJECTED` | Raise on reject is `true` and the action is `REJECT`. |
 
-Before 1.0.2 these errors were not declared on the operation, so Mule raised `MULE:UNKNOWN` in their place.
+Before 1.0.2, `raiseOnReject` and `raiseOnReview` never worked as typed errors: the operation threw
+`TYPESAFE:REJECTED` / `TYPESAFE:BELOW_THRESHOLD`, but those types were not declared on the operation, so Mule raised
+`MULE:UNKNOWN` and handlers for the typed errors never matched.
 
 ## Provider call
 

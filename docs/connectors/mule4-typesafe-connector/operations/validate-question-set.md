@@ -73,6 +73,28 @@ Warnings include:
 - More than 20 Choice options
 - Fewer than 3 Score levels
 
+### Policy block
+
+Since 1.0.2, when **Question set** names a file with a `policy` block, the policy is checked against the file's questions. Its messages are prefixed `policy.<id>`. [Apply Policy](./apply-policy#policy-validation) raises the same errors before it evaluates.
+
+Errors include:
+
+- A rule for a question id that does not exist
+- An unknown key, or a key for a different question type
+- A threshold that is not a number from 0 to 1
+- An action other than `ACCEPT`, `REVIEW`, or `REJECT`
+- Mixing three-band and legacy Noul forms, or inverted bands
+- A Score level out of range or in both lists, or a Score rule with no levels listed
+
+Warnings include:
+
+- A yes/no rule with legacy `rejectBelow`, which turns a clear "no" into `REJECT` for the whole decision (prefer
+  three-band with `onNo: ACCEPT`)
+- Score levels that are neither accepted nor reviewed, which also reject the decision
+- `onNoMatch` on a Choice that declares no `noMatchOption`
+
+Inline **Questions** carry no policy, so only the questions are checked.
+
 ## Provider call
 
 None. The operation does not read the connection or API version.

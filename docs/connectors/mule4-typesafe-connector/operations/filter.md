@@ -13,17 +13,20 @@ Asks one yes/no question about every item and keeps the items whose Noul probabi
 | --- | :---: | --- | --- |
 | Items | Yes | — | JSON array to evaluate. |
 | Question | Yes | — | Yes/no question asked of each item. |
-| Threshold | No | `0.5` | Minimum probability of “yes” required to keep an item. |
+| Threshold | No | `0.5` | Keep items whose probability of “yes” is at least this. |
+| Drop below | No | Same as Threshold | Drop items below this. Set lower than Threshold to leave a middle **uncertain** band. |
 | Chunk size | No | `20` | Items packed into one provider call, clamped to 1–100. |
-| Text field | No | Entire item | Field shown to the model instead of the full item. |
+| Text field | No | Entire item | Field placed in `state.items[i]` instead of the full item. |
 | Max concurrency | No | `4` | Concurrent chunks, clamped to 1–32. |
 | Request options | No | — | Shared model, response, cache, and trace settings. |
 
 Incoming message attributes are explicit null metadata and are not read.
 
+Items are packed in `state.items`; each Noul only references `items[i]` (TypeSafe’s packing pattern). Item text is not concatenated into the instructions.
+
 ## Output
 
-The payload partitions the original items into `kept` and `dropped`, and lists a `scores` row per input index. Batch attributes report `total` (input size), `succeeded` (**kept count** on this operation), `failed`, `skippedBudget`, `cached`, token usage, and estimated cost.
+The payload partitions the original items into `kept`, `dropped`, and `uncertain`, and lists a `scores` row per input index (`index`, `noul`, `band`, `kept`). Batch attributes report `total` (input size), `succeeded` (**kept count** on this operation), `failed`, `skippedBudget`, `cached`, token usage, and estimated cost.
 
 The examples below use two tickets — an outage (`T-1001`) and a routine password request (`T-1002`) — with `question="Is this ticket urgent?"`, `threshold=0.7`, and `textField="body"`.
 
@@ -47,9 +50,10 @@ Payload:
       "body": "I forgot my password and would like a reset link when you have a moment."
     }
   ],
+  "uncertain": [],
   "scores": [
-    { "index": 0, "noul": 0.88, "kept": true },
-    { "index": 1, "noul": 0.21, "kept": false }
+    { "index": 0, "noul": 0.88, "band": "kept", "kept": true },
+    { "index": 1, "noul": 0.21, "band": "dropped", "kept": false }
   ]
 }
 ```
@@ -91,9 +95,10 @@ Payload:
       "body": "I forgot my password and would like a reset link when you have a moment."
     }
   ],
+  "uncertain": [],
   "scores": [
-    { "index": 0, "noul": 0.9, "kept": true },
-    { "index": 1, "noul": 0.21, "kept": false }
+    { "index": 0, "noul": 0.9, "band": "kept", "kept": true },
+    { "index": 1, "noul": 0.21, "band": "dropped", "kept": false }
   ]
 }
 ```

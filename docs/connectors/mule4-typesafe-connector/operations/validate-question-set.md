@@ -82,13 +82,14 @@ Errors include:
 - A rule for a question id that does not exist
 - An unknown key, or a key for a different question type
 - A threshold that is not a number from 0 to 1
-- An `onNoMatch` other than `ACCEPT`, `REVIEW`, or `REJECT`
-- `rejectBelow` greater than `acceptAbove`
+- An action other than `ACCEPT`, `REVIEW`, or `REJECT`
+- Mixing three-band and legacy Noul forms, or inverted bands
 - A Score level out of range or in both lists, or a Score rule with no levels listed
 
 Warnings include:
 
-- A yes/no rule with `rejectBelow`, which turns a clear "no" into `REJECT` for the whole decision
+- A yes/no rule with legacy `rejectBelow`, which turns a clear "no" into `REJECT` for the whole decision (prefer
+  three-band with `onNo: ACCEPT`)
 - Score levels that are neither accepted nor reviewed, which also reject the decision
 - `onNoMatch` on a Choice that declares no `noMatchOption`
 

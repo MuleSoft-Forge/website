@@ -24,19 +24,33 @@ The payload is `{ action, routeKey, reasons, perQuestion }`. The action is the m
 
 Policies can test:
 
-- Choice probability, confidence, margin, and no-match behavior
-- Noul accept and reject thresholds
+- Choice probability, confidence, margin, no-match behavior, and **per-option** thresholds / actions (`options`,
+  `otherOptions`) so a riskier option can demand more certainty
+- Noul **three-band** rules (`yesAbove` / `noBelow` with `onYes` / `onNo` / `onUncertain`), or legacy
+  `acceptAbove` / `rejectBelow`
 - Score accepted and review levels plus confidence
 
 The examples below use `support-ticket-triage.json` with:
 
 ```json
 "policy": {
-  "team": { "minProbability": 0.7, "minMargin": 0.15, "onNoMatch": "REVIEW" },
-  "urgent": { "acceptAbove": 0.7, "rejectBelow": 0.3 }
+  "team": {
+    "minProbability": 0.7,
+    "minMargin": 0.15,
+    "onNoMatch": "REVIEW",
+    "options": {
+      "other": { "action": "REVIEW", "minConfidence": 0.7 }
+    }
+  },
+  "urgent": {
+    "yesAbove": 0.7,
+    "noBelow": 0.3,
+    "onYes": "ACCEPT",
+    "onNo": "ACCEPT",
+    "onUncertain": "REVIEW"
+  }
 }
 ```
-
 ### ACCEPT
 
 Decision answers clear both thresholds (billing 0.89, urgent 0.98):
@@ -100,10 +114,11 @@ The policy is checked before it is applied, and an invalid policy raises `TYPESA
 - An unknown or misspelt key, such as `minProbabilty`
 - A key for a different question type, such as `acceptAbove` on a Choice
 - A threshold that is not a number from 0 to 1
-- An `onNoMatch` other than `ACCEPT`, `REVIEW`, or `REJECT`
-- `rejectBelow` greater than `acceptAbove`
+- An action (`onNoMatch`, `otherOptions`, `onYes`, `onNo`, `onUncertain`) other than `ACCEPT`, `REVIEW`, or `REJECT`
+- Mixing three-band Noul (`yesAbove` / `noBelow`) with legacy `acceptAbove` / `rejectBelow`, or inverted bands
 - A Score level out of range, not a number, or in both `acceptLevels` and `reviewLevels`
 - A Score rule with neither `acceptLevels` nor `reviewLevels`, which would reject every answer
+- An `options.<id>` entry that is not a criteria option, or that carries an unknown key
 
 Run [Validate Question Set](./validate-question-set) on the file to see the same errors, plus warnings, before deploying.
 

@@ -1,17 +1,18 @@
 ---
 title: Set Up the TypeSafe Connector
-description: Install TypeSafe Connector 1.0.1 from Maven Central and configure a Jev route.
+description: Install TypeSafe Connector 1.0.2 from Maven Central and configure a Jev route.
 ---
 
 # Set Up
 
-## Release 1.0.1
+## Release 1.0.2
 
 | Version | Minimum Mule Runtime | Java |
 | --- | --- | --- |
-| **1.0.1** | 4.9.0 | 17 |
+| **1.0.2** | 4.9.0 | 17 |
+| 1.0.1 | 4.9.0 | 17 |
 
-Full operation docs on this site are the source of truth.
+Full operation docs on this site are the source of truth. See the [GitHub 1.0.2 release](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/releases/tag/v1.0.2) for the changelog.
 
 ## Install from Maven Central
 
@@ -21,7 +22,7 @@ Add the dependency to the Mule app `pom.xml`:
 <dependency>
     <groupId>com.mulesoftforge</groupId>
     <artifactId>mule4-typesafe-connector</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <classifier>mule-plugin</classifier>
 </dependency>
 ```
@@ -30,7 +31,7 @@ In Anypoint Studio, run **Maven → Update Project** after the dependency resolv
 
 ### Local build (optional)
 
-From the [GitHub repository](https://github.com/MuleSoft-Forge/mule4-typesafe-connector) on the `1.0.1` / `v1.0.1` release:
+From the [GitHub repository](https://github.com/MuleSoft-Forge/mule4-typesafe-connector) on the `1.0.2` / `v1.0.2` release:
 
 ```bash
 mvn clean install
@@ -204,7 +205,7 @@ State text is not stored in budget or drift statistics.
 
 ### Connector does not appear in the palette
 
-1. Confirm `com.mulesoftforge:mule4-typesafe-connector:1.0.1` is on the classpath from [Maven Central](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.1).
+1. Confirm `com.mulesoftforge:mule4-typesafe-connector:1.0.2` is on the classpath from [Maven Central](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.2).
 2. Confirm the dependency includes `<classifier>mule-plugin</classifier>`.
 3. Run **Maven → Update Project**, then clean the Mule application.
 

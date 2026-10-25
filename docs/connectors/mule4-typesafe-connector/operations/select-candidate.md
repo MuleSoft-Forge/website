@@ -18,6 +18,7 @@ Turns runtime rows—such as database records, queues, products, or search resul
 | Description field | No | — | Candidate field containing additional matching context. |
 | Instructions | No | Best-match question | Choice instructions sent to the model. |
 | Include no match | No | `true` | Allow the model to reject all candidates. |
+| Images | No | — | Reference → PNG or JPEG binary, sent as multipart. See [Images](./index#images). |
 | Request options | No | — | Model override, raw response, cache use, and trace step. |
 
 The operation accepts at most 254 candidates. IDs must be nonempty and unique. Incoming message attributes are explicit null metadata and are not read.
@@ -150,9 +151,9 @@ Both routes return the original Billing candidate object in `selected`, so downs
 
 `POST /{apiVersion}/systemone`
 
-The candidates become one Choice question named `result`. The API version comes from the connection configuration and defaults to `v1`. Cloudflare uses its Workers AI path instead.
+The candidates become one Choice question named `result`. With images, the call is `multipart/form-data` with `TypeSafe-Danger-Zone-Images: true`. The API version comes from the connection configuration and defaults to `v1`. Cloudflare uses its Workers AI path instead.
 
-See the [TypeSafe API](https://docs.typesafe.ai/api).
+See the [TypeSafe API](https://docs.typesafe.ai/api) and [Images](./index#images).
 
 ## XML example
 
@@ -170,6 +171,7 @@ See the [TypeSafe API](https://docs.typesafe.ai/api).
 
 ## See also
 
+- [Images](./index#images)
 - [Choose](./choose)
 - [Filter](./filter)
 - [Set Up](../set-up)

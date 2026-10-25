@@ -23,8 +23,11 @@ A typical governance flow is: **Evaluate** (or a shortcut) → **Apply Policy** 
 | **Noul** (yes/no) | `noul` = probability of “yes” (`0`–`1`) | Compare to a threshold, or three bands (yes / no / middle) |
 | **Choice** | `choice`, option probabilities, optional confidence | Route on the label; demand higher certainty for riskier options |
 | **Score** | `score`, level, level distribution | Accept or review named levels |
+| **Box** | `box` edges (`0`–`1` from top/left) plus `derived` geometry | Crop, redact, or check placement; needs images and Jev 1.14+ |
 
-[Evaluate](./operations/evaluate) returns named answers under `payload.answers.<id>`. Shortcuts (`ask-noul`, `choose`, `score`) return a **single** answer shaped as question id `result`. A question-set policy keyed by real ids will not see that shortcut answer — see [fails closed](#policy-fails-closed) below.
+[Evaluate](./operations/evaluate) returns named answers under `payload.answers.<id>`. Shortcuts (`ask-noul`, `choose`, `score`, `locate`) return a **single** answer shaped as question id `result`. A question-set policy keyed by real ids will not see that shortcut answer — see [fails closed](#policy-fails-closed) below.
+
+PNG/JPEG assets go on the **Images** map of Decide and Select operations. See [Images](./operations/#images). Box and image requests need a route with `supportsImages` / `supportsBox` (TypeSafe, compatible, or mock).
 
 ## Policy: ACCEPT, REVIEW, REJECT
 
@@ -109,13 +112,17 @@ Items are sent in `state.items` and each question refers to `items[i]`. Item tex
 - Policy and validation do **not** call the provider.
 - Apply Policy does **not** invent answers — wire Evaluate (or the matching shortcut shape) first.
 - Filter does **not** apply a question-set `policy` block; use Apply Policy after Evaluate for full governance.
+- Evaluate Batch and Filter do **not** take images.
+- OpenRouter, Vercel, and Cloudflare do **not** carry multipart images; those routes raise `TYPESAFE:UNSUPPORTED_BY_PROVIDER` up front.
 - Official Jev docs describe the model and API; this connector’s thresholds, fail-closed rules, and band behavior are documented here and on the operation pages.
 
 ## See also
 
+- [Images](./operations/#images) — multipart assets, limits, route support
+- [Locate](./operations/locate) — Box shortcut
 - [Apply Policy](./operations/apply-policy) — actions, fail-closed, validation, `routeQuestion`
 - [Filter](./operations/filter) — packing and three bands
 - [Validate Question Set](./operations/validate-question-set) — questions and `policy` checks
 - [Sources](./sources) — drift, budget, failover
-- [Set Up](./set-up) — install and first question set
+- [Set Up](./set-up) — install, first question set, and images
 - [Jev introduction](https://docs.typesafe.ai/introduction) — optional deeper reading on System One

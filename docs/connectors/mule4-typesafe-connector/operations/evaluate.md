@@ -5,7 +5,7 @@ description: Evaluate a complete TypeSafe question set against one JSON state.
 
 # [Decide] Evaluate
 
-Evaluates one JSON state against a complete set of named Noul, Choice, and Score questions. Call the operation once per connection when you want to compare routes side by side.
+Evaluates one JSON state against a complete set of named Noul, Choice, Score, and Box questions. Call the operation once per connection when you want to compare routes side by side. Pass PNG or JPEG binaries under **Images** when questions refer to pictures; see [Images](./index#images).
 
 ## Inputs
 
@@ -15,6 +15,7 @@ Evaluates one JSON state against a complete set of named Noul, Choice, and Score
 | Questions | Conditional | Inline JSON object keyed by question ID. |
 | Question set | Conditional | File name under the configured classpath question-set folder. |
 | Question set ID / version | No | Audit identifiers used when questions are inline. |
+| Images | No | Reference → PNG or JPEG binary, sent as multipart. See [Images](./index#images). |
 | Request options | No | Model override, raw response, cache use, and trace step. |
 
 Supply exactly one of **Questions** or **Question set**. Incoming message attributes are explicit null metadata and are not read.
@@ -163,9 +164,11 @@ OpenRouter reports provider cost (`costSource`: `PROVIDER`) and a generation id 
 
 `POST /{apiVersion}/systemone`
 
+With images (or a Box question), the call is `multipart/form-data` with `TypeSafe-Danger-Zone-Images: true` — a `request` JSON part plus one file part per image. Without images it is a normal JSON body.
+
 The API version comes from the connection configuration and defaults to `v1`. Cloudflare uses its Workers AI path instead. The mock route stays in-process.
 
-See the [TypeSafe API](https://docs.typesafe.ai/api).
+See the [TypeSafe API](https://docs.typesafe.ai/api) and [TypeSafe images](https://docs.typesafe.ai/images).
 
 ## XML example
 
@@ -182,6 +185,8 @@ File-backed question sets drive answer-specific DataSense, for example `payload.
 
 ## See also
 
+- [Images](./index#images)
+- [Locate](./locate)
 - [Validate Question Set](./validate-question-set)
 - [Evaluate Batch](./evaluate-batch)
 - [Apply Policy](./apply-policy)

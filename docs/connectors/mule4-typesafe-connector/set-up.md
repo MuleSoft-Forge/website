@@ -1,18 +1,19 @@
 ---
 title: Set Up the TypeSafe Connector
-description: Install TypeSafe Connector 1.0.2 from Maven Central and configure a Jev route.
+description: Install TypeSafe Connector 1.0.3 from Maven Central and configure a Jev route.
 ---
 
 # Set Up
 
-## Release 1.0.2
+## Release 1.0.3
 
 | Version | Minimum Mule Runtime | Java |
 | --- | --- | --- |
-| **1.0.2** | 4.9.0 | 17 |
+| **1.0.3** | 4.9.0 | 17 |
+| 1.0.2 | 4.9.0 | 17 |
 | 1.0.1 | 4.9.0 | 17 |
 
-Full operation docs on this site are the source of truth. See the [GitHub 1.0.2 release](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/releases/tag/v1.0.2) for the changelog.
+Full operation docs on this site are the source of truth. See the [GitHub 1.0.3 release](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/releases/tag/v1.0.3) for the changelog. **1.0.3** adds images (multipart PNG/JPEG), Box questions, and **[\[Decide\] Locate](./operations/locate)**.
 
 ## Install from Maven Central
 
@@ -22,7 +23,7 @@ Add the dependency to the Mule app `pom.xml`:
 <dependency>
     <groupId>com.mulesoftforge</groupId>
     <artifactId>mule4-typesafe-connector</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <classifier>mule-plugin</classifier>
 </dependency>
 ```
@@ -31,7 +32,7 @@ In Anypoint Studio, run **Maven → Update Project** after the dependency resolv
 
 ### Local build (optional)
 
-From the [GitHub repository](https://github.com/MuleSoft-Forge/mule4-typesafe-connector) on the `1.0.2` / `v1.0.2` release:
+From the [GitHub repository](https://github.com/MuleSoft-Forge/mule4-typesafe-connector) on the `1.0.3` / `v1.0.3` release:
 
 ```bash
 mvn clean install
@@ -175,6 +176,33 @@ The default classpath folder is `questions/`. File-backed question sets populate
 
 Run **[Util] Validate Question Set** before the first billed call to catch malformed questions, risky option sets, and invalid `policy` keys.
 
+## Playground
+
+The verification sample app includes an embedded Jev playground. Import [`demo/mule4-typesafe-connector-app`](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/tree/main/demo/mule4-typesafe-connector-app) into Studio (not the parent `demo/` folder), set `typesafe.apiKey` and optional `http.port` in `local.properties`, run the app, and open `http://localhost:8081/playground`.
+
+The page is served by Mule (`parse-template`) and posts to connector operations under `/playground/api/` — Evaluate, Ask Yes/No, Choose, Score, Locate, Validate Question Set, Apply Policy, List Models, and Get Capabilities. **+ Examples** leads with integration scenarios (CRM → ERP dedup, EDI buyer notes, AP GL coding, DLQ triage, PII egress, ticket routing) with Apply Policy ready on the Policy tab; images / Locate and TypeSafe console examples follow. Details: sample app [`VERIFICATION.md`](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/blob/main/demo/mule4-typesafe-connector-app/VERIFICATION.md).
+
+## Images
+
+Evaluate, Ask Yes/No, Choose, Score, Select Candidate, and [Locate](./operations/locate) take an optional **Images** map: reference string → PNG or JPEG binary. Put each reference in the state (or in instructions / criteria), for example:
+
+```xml
+<set-variable variableName="photoRef" value="&lt;claim_photo&gt;" />
+
+<typesafe:evaluate
+    config-ref="TypeSafe_Config"
+    questionSet="phone-damage-claim.json"
+    step="claim-photo">
+    <typesafe:state>#[output application/json --- {
+        claim: payload.claim,
+        photo: vars.photoRef
+    }]</typesafe:state>
+    <typesafe:images>#[{ (vars.photoRef): payload.photo }]</typesafe:images>
+</typesafe:evaluate>
+```
+
+Limits, multipart encoding, and route support (`supportsImages` / `supportsBox` on TypeSafe, compatible, and mock) are on the [Images](./operations/#images) page. Box questions need Jev 1.14 or later; use [Locate](./operations/locate) for a single Box shortcut. Evaluate Batch and Filter do not take images. OpenRouter, Vercel, and Cloudflare raise `TYPESAFE:UNSUPPORTED_BY_PROVIDER` for image or Box requests.
+
 ## First flow
 
 This flow runs once when the application starts and then once per hour. Evaluate makes a billed provider call.
@@ -230,7 +258,7 @@ State text is not stored in budget or drift statistics.
 
 ### Connector does not appear in the palette
 
-1. Confirm `com.mulesoftforge:mule4-typesafe-connector:1.0.2` is on the classpath from [Maven Central](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.2).
+1. Confirm `com.mulesoftforge:mule4-typesafe-connector:1.0.3` is on the classpath from [Maven Central](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.3).
 2. Confirm the dependency includes `<classifier>mule-plugin</classifier>`.
 3. Run **Maven → Update Project**, then clean the Mule application.
 

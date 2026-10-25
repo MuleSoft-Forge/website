@@ -15,6 +15,7 @@ Classifies one state into a fixed set of options and returns the selected option
 | Instructions | Yes | The classification question. |
 | Options | Yes | Map of stable option IDs to descriptions. |
 | No-match option | No | Option ID used when none of the options applies. |
+| Images | No | Reference → PNG or JPEG binary, sent as multipart. See [Images](./index#images). |
 | Request options | No | Model override, raw response, cache use, and trace step. |
 
 A Choice supports up to 255 options. If the no-match key is absent from **Options**, the connector adds it with a default description. Incoming message attributes are explicit null metadata and are not read.
@@ -143,9 +144,9 @@ Both routes selected `billing` with `technical` as runner-up, matching [Evaluate
 
 `POST /{apiVersion}/systemone`
 
-The connector builds one inline Choice question named `result` and sends one decision request. The API version comes from the connection configuration and defaults to `v1`. Cloudflare uses its Workers AI path instead.
+The connector builds one inline Choice question named `result` and sends one decision request. With images, the call is `multipart/form-data` with `TypeSafe-Danger-Zone-Images: true`. The API version comes from the connection configuration and defaults to `v1`. Cloudflare uses its Workers AI path instead.
 
-See the [TypeSafe API](https://docs.typesafe.ai/api).
+See the [TypeSafe API](https://docs.typesafe.ai/api) and [Images](./index#images).
 
 ## XML example
 

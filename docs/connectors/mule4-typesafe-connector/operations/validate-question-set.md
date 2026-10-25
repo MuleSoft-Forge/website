@@ -42,7 +42,7 @@ A deliberately broken file can return both arrays. Example payload from `support
 {
   "valid": false,
   "errors": [
-    "broken: type must be one of noul, choice, score",
+    "broken: type must be one of noul, choice, score, box",
     "broken: instructions are required",
     "broken: 'options' is not a TypeSafe question field; put it under 'criteria'"
   ],
@@ -60,8 +60,9 @@ A deliberately broken file can return both arrays. Example payload from `support
 Errors include:
 
 - Missing or empty questions
-- Unknown question types
+- Unknown question types (allowed: `noul`, `choice`, `score`, `box`)
 - Missing instructions
+- Box questions that include `criteria` (Box takes instructions only)
 - Missing Choice criteria or more than 255 options
 - Fewer than 2 or more than 10 Score levels
 - Legacy `options`, `levels`, `legend`, `criteriaTrue`, or `criteriaFalse` fields outside `criteria`

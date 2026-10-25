@@ -21,7 +21,9 @@ Use these pages when you need the official project behind a connector concept:
 | System One | [System One](https://docs.typesafe.ai/concepts/system-one) |
 | How to design the if | [How to build with System One](https://docs.typesafe.ai/concepts/how-to-build-with-system-one) |
 | State | [State](https://docs.typesafe.ai/concepts/state) |
-| Choice, Score, and Noul | [Primitives](https://docs.typesafe.ai/primitives) |
+| Choice, Score, Noul, and Box | [Primitives](https://docs.typesafe.ai/primitives) |
+| Images (multipart assets) | [Images](https://docs.typesafe.ai/images) |
+| Box coordinates | [Box](https://docs.typesafe.ai/primitives/box) |
 | When to act on an answer | [Confidence](https://docs.typesafe.ai/confidence) |
 | `jev-latest` and model cards | [Models](https://docs.typesafe.ai/models) |
 | `POST /{apiVersion}/systemone` | [HTTP API](https://docs.typesafe.ai/api) |
@@ -29,7 +31,10 @@ Use these pages when you need the official project behind a connector concept:
 
 ## Why use it?
 
-- **Typed decisions** — Noul (yes/no probability), Choice (classification), and Score (ordered rubric) answers.
+Jev is one System One HTTP call. The connector turns that call into Studio-ready Decide shortcuts, scale patterns, local policy, utilities, and sources — see **[Why a Connector](./why-a-connector)**.
+
+- **Typed decisions** — Noul (yes/no probability), Choice (classification), Score (ordered rubric), and Box (image coordinates) answers.
+- **Images** — PNG/JPEG assets on Decide and Select calls (multipart); [Locate](./operations/locate) for Box. See [Images](./operations/#images).
 - **Native DataSense** — JSON input and output metadata, including answer-specific metadata for reusable question sets.
 - **Six routes** — TypeSafe, OpenRouter, Vercel AI Gateway, Cloudflare Workers AI, compatible gateways, and an in-process mock.
 - **Resilient execution** — ordered provider fallbacks, retry handling, optional caching, budgets, and usage statistics.
@@ -45,6 +50,8 @@ Use these pages when you need the official project behind a connector concept:
 | Noul | A yes/no question whose answer is the probability of “yes.” |
 | Choice | A classification question that returns one option and a probability distribution. |
 | Score | An ordered rubric that returns a score, level distribution, and derived level. |
+| Box | An image question that returns a bounding box (`top` / `bottom` / `left` / `right` as 0–1 fractions) plus derived geometry. Needs Jev 1.14+. |
+| Images | Reference → PNG or JPEG binary on Decide / Select operations; each reference must appear in state, instructions, or criteria. |
 | Question set | A reusable JSON file under `src/main/resources/questions/`. |
 | Policy | Local thresholds that convert answers into an `ACCEPT`, `REVIEW`, or `REJECT` action (three-band Noul, per-option Choice, named `routeQuestion`). |
 
@@ -52,12 +59,12 @@ Use these pages when you need the official project behind a connector concept:
 
 | Route | Authentication | Notes |
 | --- | --- | --- |
-| TypeSafe | API key | Direct System One access and model listing. |
-| OpenRouter | API key | Jev through OpenRouter, including provider-reported cost. |
-| Vercel AI Gateway | Gateway key or OIDC token | Jev through Vercel AI Gateway. |
-| Cloudflare Workers AI | Account ID and API token | Cloudflare model endpoint; model listing is unavailable. |
-| Compatible Gateway | Optional bearer key | A configurable endpoint that implements the System One contract. |
-| Mock | None | In-process, deterministic answers for development and tests. |
+| TypeSafe | API key | Direct System One access, model listing, and images / Box (`supportsImages`, `supportsBox`). |
+| OpenRouter | API key | Jev through OpenRouter, including provider-reported cost. No multipart images. |
+| Vercel AI Gateway | Gateway key or OIDC token | Jev through Vercel AI Gateway. No multipart images. |
+| Cloudflare Workers AI | Account ID and API token | Cloudflare model endpoint; model listing and images unavailable. |
+| Compatible Gateway | Optional bearer key | A configurable endpoint that implements the System One contract; images when the gateway supports them. |
+| Mock | None | In-process, deterministic answers for development and tests, including images / Box. |
 
 Keyed routes can define ordered fallback routes. A fallback is attempted for connectivity, timeout, rate-limit, and overload failures—not for invalid requests or authorization failures.
 
@@ -65,10 +72,11 @@ Keyed routes can define ordered fallback routes. A fallback is attempted for con
 
 ### Decide and select
 
-- **[\[Decide\] Evaluate](./operations/evaluate)** — evaluate a complete question set.
+- **[\[Decide\] Evaluate](./operations/evaluate)** — evaluate a complete question set (including Box).
 - **[\[Decide\] Ask Yes/No](./operations/ask-noul)** — ask one Noul question.
 - **[\[Decide\] Choose](./operations/choose)** — classify state into one option.
 - **[\[Decide\] Score](./operations/score)** — grade state against ordered levels.
+- **[\[Decide\] Locate](./operations/locate)** — return the bounding box of a target in an image.
 - **[\[Select\] Candidate](./operations/select-candidate)** — select and rank the best upstream row.
 - **[\[Decide\] Evaluate Batch](./operations/evaluate-batch)** — evaluate one question set across many states.
 - **[\[Select\] Filter](./operations/filter)** — partition items into kept, uncertain, and dropped by Noul.
@@ -98,13 +106,15 @@ See [Sources](./sources) for payloads and configuration.
 
 ## Learn more
 
+- [Why a Connector](./why-a-connector)
 - [How Decisions Work](./how-decisions-work)
 - [Set Up](./set-up)
+- [Images](./operations/#images)
 - [Operations Reference](./operations/)
 - [Sources](./sources)
 - [Jev introduction](https://docs.typesafe.ai/introduction)
 - [TypeSafe API](https://docs.typesafe.ai/api)
-- [Maven Central `1.0.2`](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.2)
-- [GitHub release `v1.0.2`](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/releases/tag/v1.0.2)
+- [Maven Central `1.0.3`](https://central.sonatype.com/artifact/com.mulesoftforge/mule4-typesafe-connector/1.0.3)
+- [GitHub release `v1.0.3`](https://github.com/MuleSoft-Forge/mule4-typesafe-connector/releases/tag/v1.0.3)
 - [Set Up — Maven Central install](./set-up)
 - [GitHub repository](https://github.com/MuleSoft-Forge/mule4-typesafe-connector)

@@ -10,6 +10,7 @@
 ## Connectors
 
 * [mule4-typesafe-connector](connectors/mule4-typesafe-connector/index.md)
+  * [Why a Connector](connectors/mule4-typesafe-connector/why-a-connector.md)
   * [How Decisions Work](connectors/mule4-typesafe-connector/how-decisions-work.md)
   * [Set Up](connectors/mule4-typesafe-connector/set-up.md)
   * [Operations](connectors/mule4-typesafe-connector/operations/index.md)
@@ -17,6 +18,7 @@
     * [\[Decide\] Ask Yes/No](connectors/mule4-typesafe-connector/operations/ask-noul.md)
     * [\[Decide\] Choose](connectors/mule4-typesafe-connector/operations/choose.md)
     * [\[Decide\] Score](connectors/mule4-typesafe-connector/operations/score.md)
+    * [\[Decide\] Locate](connectors/mule4-typesafe-connector/operations/locate.md)
     * [\[Select\] Candidate](connectors/mule4-typesafe-connector/operations/select-candidate.md)
     * [\[Decide\] Evaluate Batch](connectors/mule4-typesafe-connector/operations/evaluate-batch.md)
     * [\[Select\] Filter](connectors/mule4-typesafe-connector/operations/filter.md)

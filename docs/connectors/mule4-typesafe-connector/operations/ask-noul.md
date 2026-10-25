@@ -15,6 +15,7 @@ Asks one Noul question about a JSON state. Use it when a flow needs a probabilis
 | Instructions | Yes | The yes/no question. |
 | Criteria true | No | Guidance describing evidence for “yes.” |
 | Criteria false | No | Guidance describing evidence for “no.” |
+| Images | No | Reference → PNG or JPEG binary, sent as multipart. See [Images](./index#images). |
 | Request options | No | Model override, raw response, cache use, and trace step. |
 
 Incoming message attributes are explicit null metadata and are not read.
@@ -121,9 +122,9 @@ Route on the result with an explicit threshold, for example `payload.noul >= 0.7
 
 `POST /{apiVersion}/systemone`
 
-The connector builds one inline question named `result` and sends one decision request. The API version comes from the connection configuration and defaults to `v1`. Cloudflare uses its Workers AI path instead.
+The connector builds one inline question named `result` and sends one decision request. With images, the call is `multipart/form-data` with `TypeSafe-Danger-Zone-Images: true`. The API version comes from the connection configuration and defaults to `v1`. Cloudflare uses its Workers AI path instead.
 
-See the [TypeSafe API](https://docs.typesafe.ai/api).
+See the [TypeSafe API](https://docs.typesafe.ai/api) and [Images](./index#images).
 
 ## XML example
 
@@ -140,6 +141,8 @@ See the [TypeSafe API](https://docs.typesafe.ai/api).
 
 ## See also
 
+- [Images](./index#images)
 - [Evaluate](./evaluate)
 - [Choose](./choose)
+- [Locate](./locate)
 - [Set Up](../set-up)

@@ -32,7 +32,9 @@ Payload:
       "supportsModelList": true,
       "supportsStructuredInstructions": true,
       "maxChoiceOptions": 255,
-      "maxScoreLevels": 10
+      "maxScoreLevels": 10,
+      "supportsImages": true,
+      "supportsBox": true
     }
   }
 ]
@@ -65,7 +67,9 @@ Payload:
       "supportsModelList": true,
       "supportsStructuredInstructions": true,
       "maxChoiceOptions": 255,
-      "maxScoreLevels": 10
+      "maxScoreLevels": 10,
+      "supportsImages": false,
+      "supportsBox": false
     }
   }
 ]
@@ -85,7 +89,9 @@ With no fallbacks configured, each connection returns one entry and `count` is `
 
 None. Capabilities are derived locally from the configured route types. They are not fetched from the vendor.
 
-Cloudflare and the mock route set `supportsModelList` to `false`. A compatible gateway reports model listing only when that option is enabled on the connection. TypeSafe, OpenRouter, and Vercel report the full contract above.
+Cloudflare and the mock route set `supportsModelList` to `false`. A compatible gateway reports model listing only when that option is enabled on the connection. TypeSafe, OpenRouter, and Vercel report the full text contract above.
+
+`supportsImages` and `supportsBox` are `true` on TypeSafe, compatible, and mock routes, and `false` on OpenRouter, Vercel, and Cloudflare, which do not carry multipart images. A request with images or a Box question on a route without them raises `TYPESAFE:UNSUPPORTED_BY_PROVIDER` before any HTTP call. See [Images](./index#images).
 
 ## XML example
 

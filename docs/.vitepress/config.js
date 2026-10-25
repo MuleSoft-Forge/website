@@ -76,6 +76,7 @@ export default defineConfig({
             collapsed: true,
             items: [
               { text: 'Overview', link: '/connectors/mule4-typesafe-connector/' },
+              { text: 'Why a Connector', link: '/connectors/mule4-typesafe-connector/why-a-connector' },
               { text: 'How Decisions Work', link: '/connectors/mule4-typesafe-connector/how-decisions-work' },
               { text: 'Set Up', link: '/connectors/mule4-typesafe-connector/set-up' },
               {
@@ -87,6 +88,7 @@ export default defineConfig({
                   { text: '[Decide] Ask Yes/No', link: '/connectors/mule4-typesafe-connector/operations/ask-noul' },
                   { text: '[Decide] Choose', link: '/connectors/mule4-typesafe-connector/operations/choose' },
                   { text: '[Decide] Score', link: '/connectors/mule4-typesafe-connector/operations/score' },
+                  { text: '[Decide] Locate', link: '/connectors/mule4-typesafe-connector/operations/locate' },
                   { text: '[Select] Candidate', link: '/connectors/mule4-typesafe-connector/operations/select-candidate' },
                   { text: '[Decide] Evaluate Batch', link: '/connectors/mule4-typesafe-connector/operations/evaluate-batch' },
                   { text: '[Select] Filter', link: '/connectors/mule4-typesafe-connector/operations/filter' },

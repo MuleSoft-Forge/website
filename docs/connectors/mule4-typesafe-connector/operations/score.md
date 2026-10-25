@@ -14,6 +14,7 @@ Grades one state against ordered rubric levels. Use it for sentiment, severity, 
 | State | Yes | JSON state to grade. |
 | Instructions | Yes | The scoring question. |
 | Levels | Yes | Ordered list of 2 to 10 level descriptions. |
+| Images | No | Reference → PNG or JPEG binary, sent as multipart. See [Images](./index#images). |
 | Request options | No | Model override, raw response, cache use, and trace step. |
 
 Incoming message attributes are explicit null metadata and are not read.
@@ -158,9 +159,9 @@ Both routes grade the outage ticket as **very negative** (`level` 0).
 
 `POST /{apiVersion}/systemone`
 
-The connector builds one inline Score question named `result` and sends one decision request. The API version comes from the connection configuration and defaults to `v1`. Cloudflare uses its Workers AI path instead.
+The connector builds one inline Score question named `result` and sends one decision request. With images, the call is `multipart/form-data` with `TypeSafe-Danger-Zone-Images: true`. The API version comes from the connection configuration and defaults to `v1`. Cloudflare uses its Workers AI path instead.
 
-See the [TypeSafe API](https://docs.typesafe.ai/api).
+See the [TypeSafe API](https://docs.typesafe.ai/api) and [Images](./index#images).
 
 ## XML example
 

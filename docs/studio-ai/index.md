@@ -7,9 +7,9 @@ description: AI helper for Mule source, DataWeave, Problems and Console in Anypo
 
 MuleSoftForge AI is a helper for the source you already have open in Anypoint Studio. It sits beside your project so you can ask about flows, DataWeave, Problems view markers, and Console output, and — when you want a change — review proposed edits before anything is written.
 
-![MuleSoftForge AI in Anypoint Studio: asked how to improve a flow's error handling, the AI read the project, explained what to change, and proposed an edit to employees-api.xml for review](/images/studio-ai/overview-agent-review.png)
+![MuleSoftForge AI in Anypoint Studio: asked to fix a Transform Message script, the AI returned the corrected DataWeave, explained the missing comma, and offered Review diff and Apply to the DataWeave editor](/images/studio-ai/overview-dataweave-fix.png)
 
-*Asked "How can I improve the error handling", the AI read the project in 10 steps, explained what to change, and proposed an edit to `employees-api.xml`. Nothing is written until you click **Accept**. The column on the right shows the model and what this chat, today and this month have cost.*
+*Asked to fix a Transform Message script with a parse error, the AI returned the corrected DataWeave and explained what changed: a missing comma. **Review diff** compares it with your script, and **Apply to the DataWeave editor** puts it in place; nothing changes until you choose. The column on the right shows the model and what this chat, today and this month have cost.*
 
 Studio remains how you create, scaffold, import, run, deploy, and test. The helper does not replace those workflows. It reads the project you are working in, explains what is there, and helps you fix and improve it.
 

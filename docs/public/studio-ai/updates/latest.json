@@ -1,4 +1,4 @@
 {
-  "version": "0.2.0",
-  "notes": "Paste screenshots and images into the chat (Cmd/Ctrl+V or + Context > Clipboard image) for the AI to look at."
+  "version": "0.4.0",
+  "notes": "Agent-mode proposals are checked before you review them: XML, schema locations, pom dependencies, references, properties, error types and error-handler placement. The AI fixes what its change broke. New connector lookup: the AI reads the operations, parameters and error types of the exact connector versions in pom.xml, and proposals are checked against them."
 }

@@ -11,6 +11,10 @@ Tested with Anypoint Studio 7.28 (Eclipse 4.31, Java 17) on macOS. It needs no o
 
 ## Install
 
+::: warning Installed from the dropins folder before?
+Delete `com.mulesoftforge.studio.ai.jar` from Studio's `dropins` folder (on macOS, `AnypointStudio.app/Contents/Eclipse/dropins`) and restart Studio before installing from the update site. Two copies conflict, and Studio cannot update a dropins copy.
+:::
+
 1. In Anypoint Studio choose **Help > Install New Software…**
 
    ![Help menu with Install New Software selected](/images/studio-ai/install-1-help-menu.png)
@@ -39,11 +43,25 @@ Tested with Anypoint Studio 7.28 (Eclipse 4.31, Java 17) on macOS. It needs no o
 
    ![MuleSoftForge AI view opened from the toolbar button, showing v0.1.0](/images/studio-ai/install-6-open-view.png)
 
-You can also open the view with **Window > Show View > Other… > MuleSoftForge > MuleSoftForge AI**, or **Cmd/Ctrl+Alt+I**. Then click **Settings** in the view to choose a provider and paste its API key. Keys are kept in Eclipse secure storage.
+You can also open the view with **Window > Show View > Other… > MuleSoftForge > MuleSoftForge AI**, or **Cmd/Ctrl+Alt+I**.
 
-::: warning Installed from the dropins folder before?
-Delete `com.mulesoftforge.studio.ai.jar` from Studio's `dropins` folder (on macOS, `AnypointStudio.app/Contents/Eclipse/dropins`) and restart Studio before installing from the update site. Two copies conflict, and Studio cannot update a dropins copy.
-:::
+## Set up a provider
+
+Choose which AI provider to use and enter its API key. Keys are saved in Eclipse secure storage, which on macOS is protected by the Keychain, never in Studio's plain settings files.
+
+1. On macOS choose **Anypoint Studio > Settings…** (Cmd+,). On Windows choose **Window > Preferences**. You can also click **Settings** in the MuleSoftForge AI view.
+
+   ![Anypoint Studio menu with Settings selected](/images/studio-ai/setup-1-settings-menu.png)
+
+2. Select **MuleSoftForge AI** in the list on the left. Pick a **Provider**; the **Base URL** fills in for it. Choose a **Model** (or type any model id; **Refresh models** lists what your account offers), paste your **API key**, and click **Test connection**.
+
+   ![MuleSoftForge AI preferences with OpenAI selected and the API key masked](/images/studio-ai/setup-2-preferences.png)
+
+3. **Test connection** sends a one-word request to the model. **Connected. Model replied: ok** means the provider, model and key work. If it fails, the message shows the exact HTTP status and response from the provider. When it works, click **Apply and Close**.
+
+   ![Test connection result: Connected. Model replied: ok](/images/studio-ai/setup-3-test-connection.png)
+
+   The same page has the **Chat view**, **Network** (corporate certificates) and **Chat history** settings. Chats are saved in your Studio workspace, never in your Mule projects, and API keys are never written to them.
 
 ## Update
 

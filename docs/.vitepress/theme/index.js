@@ -1,8 +1,10 @@
 // https://vitepress.dev/guide/custom-theme
 import { h } from 'vue'
+import { inBrowser } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { enhanceAppWithTabs } from 'vitepress-plugin-tabs/client'
 import Layout from './Layout.vue'
+import { installImageZoom } from './imageZoom.js'
 
 // Import custom components
 import Hint from './components/Hint.vue'
@@ -23,5 +25,9 @@ export default {
 
     // Enhance app with tabs functionality
     enhanceAppWithTabs(app)
+
+    if (inBrowser) {
+      installImageZoom()
+    }
   }
 }

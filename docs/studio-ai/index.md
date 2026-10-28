@@ -63,6 +63,14 @@ Choose which AI provider to use and enter its API key. Keys are saved in Eclipse
 
    The same page has the **Chat view**, **Network** (corporate certificates) and **Chat history** settings. Chats are saved in your Studio workspace, never in your Mule projects, and API keys are never written to them.
 
+## Paste screenshots and images
+
+Copy a screenshot or picture, click in the chat view and press **Cmd+V** (Ctrl+V on Windows). It is attached as **pasted image 1** instead of pasting text; text on the clipboard still pastes as text. **+ Context > Clipboard image** does the same. On a Mac, Cmd+Ctrl+Shift+4 takes a screenshot straight to the clipboard; on Windows, use Windows+Shift+S.
+
+- Up to 5 images go with one message. Large screenshots are scaled down to 1568 pixels on the longest side.
+- An image is sent only with the message it was pasted into. Later messages and saved chats keep just its name, so it is not paid for again.
+- The model must be able to read images. Claude, GPT-4o, GPT-5 and Gemini models can; in Ollama, use a vision model such as llava. If the model refuses the image, the error says so.
+
 ## Update
 
 The chat view shows the installed version in its header, for example `v0.1.0`. Once per Studio session it reads a small `latest.json` from this site. When a newer release exists, the label reads **Update to x.y.z**; clicking it opens **Help > Check for Updates**, which installs the new version. You can also run **Help > Check for Updates** at any time.

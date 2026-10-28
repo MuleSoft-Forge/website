@@ -26,10 +26,6 @@ Tested with Anypoint Studio 7.28 (Eclipse 4.31, Java 17) on macOS. It needs no o
 
 ## Install
 
-::: warning Installed from the dropins folder before?
-Delete `com.mulesoftforge.studio.ai.jar` from Studio's `dropins` folder (on macOS, `AnypointStudio.app/Contents/Eclipse/dropins`) and restart Studio before installing from the update site. Two copies conflict, and Studio cannot update a dropins copy.
-:::
-
 1. In Anypoint Studio choose **Help > Install New Software…**
 
    ![Help menu with Install New Software selected](/images/studio-ai/install-1-help-menu.png)

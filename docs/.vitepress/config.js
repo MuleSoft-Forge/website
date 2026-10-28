@@ -254,6 +254,15 @@ export default defineConfig({
             ]
           }
         ]
+      },
+
+      // Tools
+      {
+        text: 'Tools',
+        collapsed: false,
+        items: [
+          { text: 'MuleSoftForge Studio AI', icon: '/images/favicon.png', link: '/studio-ai/' }
+        ]
       }
     ],
 

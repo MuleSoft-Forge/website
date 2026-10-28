@@ -51,6 +51,26 @@ In Agent mode the AI can list and read the files of the open project and propose
 - Accept refuses if the file has unsaved edits or changed on disk after the proposal was made.
 - Edits must stay inside the project. Build output and settings folders such as `target/` and `.settings/` are off limits.
 
+### Checks before you review
+
+Every proposal to Mule XML, `pom.xml` or a properties file is checked against the whole project before you see it. If the change would break something, the AI is told and fixes it first. The checks catch:
+
+- XML that is not well-formed, or a prefix such as `db:` used without its namespace.
+- A namespace missing from `xsi:schemaLocation`, or a connector with no dependency in `pom.xml`.
+- A `config-ref` or `flow-ref` that points at a name that does not exist.
+- A `${property}` that no `.properties` or `.yaml` file defines.
+- Error types that do not exist, such as `MULE:NOT_FOUND`, or custom errors that reuse a connector's namespace.
+- Connector operations, attributes and error types that the connector version in your `pom.xml` does not have, such as `<db:selekt>` or `SFTP:NOT_REAL`.
+- Anything placed after a flow's `<error-handler>`, or an error handler inside a sub-flow.
+
+Only problems the proposal adds count, so issues already in your project are not blamed on it. Anything the AI leaves unfixed is shown in a note under its answer. You can also ask, in any mode, "check this project": the AI runs the same checks over every file. They read the files only and do not build or run the app.
+
+### Connector lookup
+
+Before the AI writes a connector element, it looks the connector up in the models Studio generates for each connector in your `pom.xml`. That gives it the configs, operations, sources, parameters, default values and error types of the exact version your project uses, rather than what it remembers from training. You can use this in any mode too, for example "what parameters does `sftp:listener` take?" or "which error types can `db:select` raise?".
+
+Studio generates a model once it has resolved a dependency. If you have just added a connector and the AI says no model is available, save `pom.xml` or refresh the project, then ask again.
+
 ## Speak instead of typing
 
 The microphone button next to **Send** starts the operating system's dictation in the message box: macOS Dictation (turn it on in **System Settings > Keyboard > Dictation**) or Windows voice typing (Windows+H). The plugin never records audio and sends none to the provider; the system turns speech into text, and the text is sent like typing.

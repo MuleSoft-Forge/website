@@ -79,6 +79,6 @@ The microphone button next to **Send** starts the operating system's dictation i
 
 Chats save automatically after every answer, in your Studio workspace, never in your Mule projects. File contents, images and API keys are not saved. **History ▾** in the view lists recent chats so you can open, rename, export as Markdown, or delete them. Proposals you have not reviewed expire when a chat is closed.
 
-The line under the provider name shows what this chat, today and this month have cost; hover for the Studio session, all time, and the project. To turn saving off or change how long chats are kept, open **Preferences > MuleSoftForge AI > Chat history**.
+The column to the right of the answers shows the model in use and its list price, and what this chat, today and this month have cost; hover for the Studio session, all time, and the project. To turn saving off or change how long chats are kept, open **Preferences > MuleSoftForge AI > Chat history**.
 
 If you cancel a request, the AI is told with your next message that it was dropped, so it does not assume the work was done.

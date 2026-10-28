@@ -27,7 +27,9 @@ The next box picks the model. Choose a suggestion or type any model id and press
 - **Console**: a console's text, such as Maven output from a failed build or a running Mule app's log. Long output keeps its last part, where errors usually are.
 - **Clipboard image**: see [Screenshots and images](#screenshots-and-images).
 
-**Ask MuleSoftForge AI** does the same from where you are working: the MuleSoftForge button on the toolbar, the right-click menu in editors, Package Explorer, Problems and Console, or **Cmd/Ctrl+Alt+I**. It opens the view with the selected lines, files, problems, or console text attached.
+**Send to MuleSoftForge AI** does the same from where you are working: the MuleSoftForge button on the toolbar, the right-click menu in editors (including the Configuration XML tab), Package Explorer, Problems and Console, or **Cmd/Ctrl+Alt+I**. It opens the view with the selected lines, files, problems, or console text attached.
+
+On the **Message Flow** canvas, select one or more processors, scopes or flows (Shift- or Cmd/Ctrl-click for several), right-click, and choose **Send to MuleSoftForge AI**. Their XML is attached, for example **canvas selection in src/main/mule/employees-api.xml (2 elements: logger "Log request", http:request)**. A processor inside a selected flow is sent once, with its flow.
 
 When you attach problems with errors, or console output that shows a failure, and the message box is empty, the helper fills in a request to fix them and switches from Ask to Agent mode, so the fix comes back as a change you can review.
 

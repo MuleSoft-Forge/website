@@ -31,7 +31,7 @@ description: Install MuleSoftForge Studio AI into Anypoint Studio from the updat
 
    ![Software Updates dialog asking to restart Anypoint Studio](/images/studio-ai/install-5-restart.png)
 
-6. After the restart, click the MuleSoftForge button on the toolbar (**Ask MuleSoftForge AI about the selection**). The **MuleSoftForge AI** view opens, with the installed version in its header.
+6. After the restart, click the MuleSoftForge button on the toolbar (**Send the selection to MuleSoftForge AI**). The **MuleSoftForge AI** view opens, with the installed version in its header.
 
    ![MuleSoftForge AI view opened from the toolbar button, showing v0.1.0](/images/studio-ai/install-6-open-view.png)
 

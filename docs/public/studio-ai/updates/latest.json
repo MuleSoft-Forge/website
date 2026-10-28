@@ -1,4 +1,4 @@
 {
-  "version": "0.1.1",
-  "notes": "Clearer message when Eclipse secure storage has no master password (No password provided), with steps to fix it."
+  "version": "0.2.0",
+  "notes": "Paste screenshots and images into the chat (Cmd/Ctrl+V or + Context > Clipboard image) for the AI to look at."
 }

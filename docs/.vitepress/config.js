@@ -261,7 +261,20 @@ export default defineConfig({
         text: 'Tools',
         collapsed: false,
         items: [
-          { text: 'MuleSoftForge Studio AI', icon: '/images/favicon.png', link: '/studio-ai/' }
+          {
+            text: 'MuleSoftForge Studio AI',
+            icon: '/images/favicon.png',
+            collapsed: true,
+            items: [
+              { text: 'Overview', link: '/studio-ai/' },
+              { text: 'Install', link: '/studio-ai/install' },
+              { text: 'Set Up', link: '/studio-ai/set-up' },
+              { text: 'Use the Chat', link: '/studio-ai/use-the-chat' },
+              { text: 'Update and Roll Back', link: '/studio-ai/update' },
+              { text: 'Build It Yourself', link: '/studio-ai/build-it-yourself' },
+              { text: 'Troubleshooting', link: '/studio-ai/troubleshooting' }
+            ]
+          }
         ]
       }
     ],

@@ -31,6 +31,15 @@ The next box picks the model. Choose a suggestion or type any model id and press
 
 When you attach problems with errors, or console output that shows a failure, and the message box is empty, the helper fills in a request to fix them and switches from Ask to Agent mode, so the fix comes back as a change you can review.
 
+## DataWeave scripts
+
+Right-click in a DataWeave script, such as the script of a **Transform Message**, for two items under **Format**:
+
+- **Send to MuleSoftForge AI** attaches the selected DataWeave, or the whole script when nothing is selected, to your next message. It sends the text as you see it, even before you save.
+- **Fix with MuleSoftForge AI** sends the whole script and the errors and warnings Studio marks in it, straight away. If you selected part of the script, the AI is asked to focus there. When the answer contains a corrected script, click **Review diff** to see it beside the current one, then **Apply to the DataWeave editor** to replace the script. **Cmd/Ctrl+Z** in the DataWeave editor undoes it; save the Mule file to keep it.
+
+Apply refuses if you changed the script, or closed its editor, after choosing Fix. Choose Fix again on the current script.
+
 ## Screenshots and images
 
 Copy a screenshot or picture, click in the chat view and press **Cmd+V** (Ctrl+V on Windows). It is attached as **pasted image 1** instead of pasting text; text on the clipboard still pastes as text. **+ Context > Clipboard image** does the same. On a Mac, Cmd+Ctrl+Shift+4 takes a screenshot straight to the clipboard; on Windows, use Windows+Shift+S.

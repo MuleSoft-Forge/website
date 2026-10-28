@@ -283,6 +283,52 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* Screenshots open full-window on click; see theme/imageZoom.js. Links and small icons are left alone. */
+.vp-doc :not(a) > img[src*='/images/'] {
+  cursor: zoom-in;
+}
+
+/* Screenshots inside numbered steps use the full text width rather than the list's indent. */
+.vp-doc li > p > img,
+.vp-doc li > img {
+  margin-left: -1.5rem;
+  max-width: calc(100% + 1.5rem);
+}
+
+.image-zoom-open {
+  overflow: hidden;
+}
+
+.image-zoom {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.85);
+  cursor: zoom-out;
+  outline: none;
+}
+
+/* Fills the window, scaling the screenshot up when the window is larger than the image. */
+.image-zoom img {
+  width: 100%;
+  height: calc(100vh - 96px);
+  object-fit: contain;
+}
+
+.image-zoom p {
+  max-width: 60rem;
+  margin: 0;
+  color: #e5e7eb;
+  font-size: 14px;
+  text-align: center;
+}
+
 /* Tables */
 .vp-doc table {
   width: 100%;

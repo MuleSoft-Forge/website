@@ -21,7 +21,7 @@ Use it to:
 - Attach Console output (build failures, runtime logs) and ask what went wrong
 - Paste a screenshot, such as an error dialog or a design, and ask about it
 
-Open a project file (or select the project in Explorer) so the helper can see it. Attach more with **+ Context**, or use **Ask MuleSoftForge AI** from the editor, Problems, or Console.
+Open a project file (or select the project in Explorer) so the helper can see it. Attach more with **+ Context**, or use **Send to MuleSoftForge AI** from the editor, the canvas, Problems, or Console.
 
 It works with OpenRouter, the MuleSoft AI Gateway LLM Proxy, OpenAI, Anthropic, Ollama, and other OpenAI-compatible endpoints, using your own API key.
 

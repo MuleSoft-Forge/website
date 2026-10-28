@@ -1,4 +1,4 @@
 {
-  "version": "0.4.0",
-  "notes": "Agent-mode proposals are checked before you review them: XML, schema locations, pom dependencies, references, properties, error types and error-handler placement. The AI fixes what its change broke. New connector lookup: the AI reads the operations, parameters and error types of the exact connector versions in pom.xml, and proposals are checked against them."
+  "version": "0.4.1",
+  "notes": "Fixes saving API keys: switching provider in Settings no longer loses what you typed, and Apply saves every provider you edited. The settings page shows the start and end of each key and warns when it looks like another provider's key. The chat view now updates its provider and models when settings change, and offers the models Refresh models found."
 }

@@ -12,17 +12,34 @@ Tested with Anypoint Studio 7.28 (Eclipse 4.31, Java 17) on macOS. It needs no o
 ## Install
 
 1. In Anypoint Studio choose **Help > Install New Software…**
-2. Click **Add…**, name it `MuleSoftForge`, and paste this location:
+
+   ![Help menu with Install New Software selected](/images/studio-ai/install-1-help-menu.png)
+
+2. Click **Add…**, name it `MuleSoftForge Studio AI`, paste this location, and click **Add**:
 
    ```text
    https://docs.mulesoftforge.com/studio-ai/updates/
    ```
 
-3. Tick **MuleSoftForge > MuleSoftForge Studio AI** and click **Next** until **Finish**.
-4. Studio warns that the content is unsigned. Choose **Install Anyway**.
-5. Restart Studio when asked.
+   ![Add Repository dialog with the MuleSoftForge Studio AI update site](/images/studio-ai/install-2-add-repository.png)
 
-Open the view with **Window > Show View > Other… > MuleSoftForge > MuleSoftForge AI**, the anvil on the toolbar, or **Cmd/Ctrl+Alt+I**. Then open **Settings** in the view to choose a provider and paste its API key. Keys are kept in Eclipse secure storage.
+3. Tick **MuleSoftForge > MuleSoftForge Studio AI** and click **Next** until **Finish**.
+
+   ![Install dialog with MuleSoftForge Studio AI selected](/images/studio-ai/install-3-select-feature.png)
+
+4. Studio asks whether you trust unsigned content. Leave the **Unsigned** row ticked and click **Trust Selected**. The items listed should be `com.mulesoftforge.studio.ai` and `com.mulesoftforge.studio.ai.feature`. Leave **Always trust all content** cleared.
+
+   ![Trust Artifacts dialog listing the MuleSoftForge Studio AI plugin and feature](/images/studio-ai/install-4-trust-artifacts.png)
+
+5. When Studio asks to restart, click **Restart Now**.
+
+   ![Software Updates dialog asking to restart Anypoint Studio](/images/studio-ai/install-5-restart.png)
+
+6. After the restart, click the MuleSoftForge button on the toolbar (**Ask MuleSoftForge AI about the selection**). The **MuleSoftForge AI** view opens, with the installed version in its header.
+
+   ![MuleSoftForge AI view opened from the toolbar button, showing v0.1.0](/images/studio-ai/install-6-open-view.png)
+
+You can also open the view with **Window > Show View > Other… > MuleSoftForge > MuleSoftForge AI**, or **Cmd/Ctrl+Alt+I**. Then click **Settings** in the view to choose a provider and paste its API key. Keys are kept in Eclipse secure storage.
 
 ::: warning Installed from the dropins folder before?
 Delete `com.mulesoftforge.studio.ai.jar` from Studio's `dropins` folder (on macOS, `AnypointStudio.app/Contents/Eclipse/dropins`) and restart Studio before installing from the update site. Two copies conflict, and Studio cannot update a dropins copy.

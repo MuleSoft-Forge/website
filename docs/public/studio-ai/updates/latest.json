@@ -1,4 +1,4 @@
 {
-  "version": "0.4.4",
-  "notes": "Send to MuleSoftForge AI (renamed from Ask MuleSoftForge AI) now works on the Mule editor's canvas: select one or more processors, scopes or flows, right-click, and their XML is attached to the chat."
+  "version": "0.4.5",
+  "notes": "Chat view styling: AI answers sit in a grey card, the message box has a grey panel, and a divider bar separates the model and cost column."
 }

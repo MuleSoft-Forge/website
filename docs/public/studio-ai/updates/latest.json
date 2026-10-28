@@ -1,4 +1,4 @@
 {
-  "version": "0.4.2",
-  "notes": "A fresher chat view: a green Send button (red while it cancels), the provider and Settings link on the left of the top row, and a column beside the answers showing the model in use, its price, and what this chat, today and this month have cost."
+  "version": "0.4.3",
+  "notes": "Right-click in a DataWeave script (Transform Message and other DataWeave editors) for Send to MuleSoftForge AI, which attaches the selection or the whole script, and Fix with MuleSoftForge AI, which sends the script with the errors Studio marks in it, then lets you review the corrected script as a diff and apply it to the editor."
 }

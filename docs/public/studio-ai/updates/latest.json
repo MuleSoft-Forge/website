@@ -1,4 +1,4 @@
 {
-  "version": "0.4.5",
-  "notes": "Chat view styling: AI answers sit in a grey card, the message box has a grey panel, and a divider bar separates the model and cost column."
+  "version": "0.4.6",
+  "notes": "Composer on one row: mode and model pickers fixed on the left, Include open file next to + Context."
 }

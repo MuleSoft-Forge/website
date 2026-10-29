@@ -1,4 +1,4 @@
 {
-  "version": "0.4.6",
-  "notes": "Composer on one row: mode and model pickers fixed on the left, Include open file next to + Context."
+  "version": "0.4.7",
+  "notes": "Pick which suggestions to make: reviews, answers and plans now end with a checklist of the changes the AI can make, and Make selected changes has Agent mode propose just those. New providers: Google Gemini, Azure OpenAI and Amazon Bedrock."
 }

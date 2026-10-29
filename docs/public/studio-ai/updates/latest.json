@@ -1,4 +1,4 @@
 {
-  "version": "0.4.8",
-  "notes": "Prices per 1M tokens for every model in the picker, below Cost, with a Refresh link and clear messages when prices are unavailable."
+  "version": "0.4.9",
+  "notes": "Clarify Prices source: Public list prices via OpenRouter, with a help icon explaining guide rates vs Cost above."
 }

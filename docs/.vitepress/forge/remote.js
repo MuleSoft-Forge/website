@@ -6,6 +6,16 @@ import { assets } from './catalog.js'
 const PUBLIC_DIR = resolve(dirname(fileURLToPath(import.meta.url)), '../../public')
 const TIMEOUT_MS = 8000
 const OFFLINE = process.env.FORGE_OFFLINE === '1'
+const LEAD_CONTRIBUTOR = 'jeffcock'
+// People who build MuleSoftForge without commits in its repos, so GitHub's contributor lists miss them.
+const CREDITED_CONTRIBUTORS = [
+  {
+    login: 'rlexen',
+    avatar: 'https://avatars.githubusercontent.com/u/94212824?v=4',
+    url: 'https://github.com/rlexen',
+    role: 'Co-lead, MuleSoft IDP Connector'
+  }
+]
 
 let cachedAssets
 let cachedContributors
@@ -93,7 +103,11 @@ async function resolveContributors() {
       })
     }
   }
-  return [...byLogin.values()].sort((a, b) => b.contributions - a.contributions)
+  for (const person of CREDITED_CONTRIBUTORS) {
+    byLogin.set(person.login, { contributions: 0, ...person, ...byLogin.get(person.login) })
+  }
+  return [...byLogin.values()]
+    .sort((a, b) => (b.login === LEAD_CONTRIBUTOR) - (a.login === LEAD_CONTRIBUTOR) || b.contributions - a.contributions)
 }
 
 export function loadAssets() {

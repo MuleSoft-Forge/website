@@ -14,7 +14,7 @@ const shown = data.contributors.slice(0, props.limit)
       :href="person.url"
       target="_blank"
       rel="noopener"
-      :title="`${person.login} · ${person.contributions} contributions`"
+      :title="person.role ? `${person.login} · ${person.role}` : `${person.login} · ${person.contributions} contributions`"
     >
       <img :src="`${person.avatar}&s=96`" :alt="person.login" width="48" height="48" loading="lazy" />
     </a>

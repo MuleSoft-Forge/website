@@ -3,9 +3,11 @@ title: MuleSoft IDP Connector
 description: A Universal IDP Connector to rule them All
 ---
 
-# mule-idp-connector
+# MuleSoft IDP Connector
 
 This connector provides a unified interface for MuleSoft Intelligent Document Processing (IDP) actions, reducing connector sprawl and reconfiguration overhead when [integrating IDP with Anypoint Studio](#integrating-idp-with-anypoint-studio).
+
+<AtAGlance id="idp" />
 
 ## Key Benefits
 

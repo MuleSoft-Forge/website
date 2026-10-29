@@ -11,6 +11,8 @@ description: "Think: Smart If Statements. Typed Jev decisions in Mule flows."
 
 Start with **[How Decisions Work](./how-decisions-work)** for connector behavior (policy bands, fail-closed Apply Policy, filter keep/uncertain/drop, drift on Noul) without needing deep Jev reading.
 
+<AtAGlance id="typesafe" />
+
 ## Jev
 
 Use these pages when you need the official project behind a connector concept:

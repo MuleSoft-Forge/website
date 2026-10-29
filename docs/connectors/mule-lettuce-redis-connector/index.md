@@ -9,6 +9,8 @@ A low-level connector providing Mule applications with direct access to Redis co
 
 The connector's goal is to provide full coverage of all documented Redis commands, organized by Redis data structure. For commands not yet implemented as dedicated operations, the [Send Command](./operations/send-command) operation lets you execute any arbitrary Redis command.
 
+<AtAGlance id="lettuce-redis" />
+
 ## Features
 
 - **Broad command coverage**: Dedicated operations for strings, hashes, lists, sets, sorted sets, geospatial indexes, and streams

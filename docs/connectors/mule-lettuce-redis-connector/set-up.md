@@ -26,7 +26,7 @@ Add the following dependency to your Mule application's `pom.xml`:
 <dependency>
     <groupId>cloud.anypoint</groupId>
     <artifactId>mule-lettuce-redis-connector</artifactId>
-    <version>0.1.24</version>
+    <version>@forge:version:lettuce-redis@</version>
     <classifier>mule-plugin</classifier>
 </dependency>
 ```

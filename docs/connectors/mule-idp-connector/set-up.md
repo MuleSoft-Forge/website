@@ -35,7 +35,7 @@ PREFERRED METHOD TO ADD DEPENDENCY IS TO USE [Add Custom Modules to Your Project
 
 <Hint type="info">
 
-The MuleSoft Forge connectors are constantly updated, and the version is regularly changed. Make sure to replace `{version}` with the latest release from [Maven Central](https://central.sonatype.com/artifact/io.github.mulesoft-forge/mule-idp-connector/overview).
+The snippet below always shows the latest release on [Maven Central](https://central.sonatype.com/artifact/io.github.mulesoft-forge/mule-idp-connector), currently `@forge:version:idp@`.
 
 </Hint>
 
@@ -45,7 +45,7 @@ Copy and paste the following Maven Dependency into your Mule application pom fil
 <dependency>
     <groupId>io.github.mulesoft-forge</groupId>
     <artifactId>mule-idp-connector</artifactId>
-    <version>{version}</version>
+    <version>@forge:version:idp@</version>
     <classifier>mule-plugin</classifier>
 </dependency>
 ```

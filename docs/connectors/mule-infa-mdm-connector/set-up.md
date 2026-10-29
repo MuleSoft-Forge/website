@@ -7,9 +7,9 @@ description: Installation and configuration guide for the Informatica MDM - Busi
 
 | Version | Min runtime version | Compatible Java versions | Description |
 | ------- | ------------------- | ------------------------ | ----------- |
-| [1.0.0](https://central.sonatype.com/artifact/com.mulesoftforge/mule-infa-b360-connector/1.0.0) | 4.6.0 | Java 17, Java 11, Java 8 | Initial release |
-| [1.0.4](https://central.sonatype.com/artifact/com.mulesoftforge/mule-infa-b360-connector/1.0.4) | 4.6.0 | Java 17, Java 11, Java 8 | Passthrough auth, 401 auto-reconnect, MetaData Read, Http Request (renamed from Generic) |
 | [1.0.5](https://central.sonatype.com/artifact/com.mulesoftforge/mule-infa-b360-connector/1.0.5) | 4.6.0 | Java 17, Java 11, Java 8 | Async 401 re-auth: re-authentication runs asynchronously (non-blocking); HTTP requester thread no longer blocked; flow completes when async login and retry finish |
+| [1.0.4](https://central.sonatype.com/artifact/com.mulesoftforge/mule-infa-b360-connector/1.0.4) | 4.6.0 | Java 17, Java 11, Java 8 | Passthrough auth, 401 auto-reconnect, MetaData Read, Http Request (renamed from Generic) |
+| [1.0.0](https://central.sonatype.com/artifact/com.mulesoftforge/mule-infa-b360-connector/1.0.0) | 4.6.0 | Java 17, Java 11, Java 8 | Initial release |
 
 ## Requirements
 
@@ -24,7 +24,7 @@ description: Installation and configuration guide for the Informatica MDM - Busi
 
 <Hint type="info">
 
-The MuleSoft Forge connectors are constantly updated, and the version is regularly changed. Make sure to replace `{version}` with the latest release from [Maven Central](https://central.sonatype.com/artifact/com.mulesoftforge/mule-infa-b360-connector).
+The snippet below always shows the latest release on [Maven Central](https://central.sonatype.com/artifact/com.mulesoftforge/mule-infa-b360-connector), currently `@forge:version:infa-mdm@`.
 
 </Hint>
 
@@ -34,7 +34,7 @@ Add the following dependency to your Mule application's `pom.xml`:
 <dependency>
     <groupId>com.mulesoftforge</groupId>
     <artifactId>mule-infa-b360-connector</artifactId>
-    <version>{version}</version>
+    <version>@forge:version:infa-mdm@</version>
     <classifier>mule-plugin</classifier>
 </dependency>
 ```

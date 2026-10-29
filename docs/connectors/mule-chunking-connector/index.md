@@ -3,9 +3,11 @@ title: MuleSoft Chunking Connector
 description: Stream large binary files into chunks for streaming processing in mule
 ---
 
-# mule-chunking-connector
+# Mule Chunking Connector
 
 Stream large binary files into chunks for streaming processing in mule, maintaining constant memory regardless of the size of the incoming stream.
+
+<AtAGlance id="chunking" />
 
 ## Features
 

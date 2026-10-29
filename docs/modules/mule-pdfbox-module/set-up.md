@@ -21,7 +21,7 @@ description: Installation and configuration guide for the MuleSoft PDFBox Module
 
 <Hint type="info">
 
-The MuleSoft Forge connectors are constantly updated, and the version is regularly changed. Make sure to replace `{version}` with the latest release from [Maven Central](https://central.sonatype.com/artifact/io.github.mulesoft-forge/mule-pdfbox-module).
+The snippet below always shows the latest release on [Maven Central](https://central.sonatype.com/artifact/io.github.mulesoft-forge/mule-pdfbox-module), currently `@forge:version:pdfbox@`.
 
 </Hint>
 
@@ -33,7 +33,7 @@ Copy and paste the following Maven Dependency Snippet into your Mule application
     <dependency>
         <groupId>io.github.mulesoft-forge</groupId>
         <artifactId>mule-pdfbox-module</artifactId>
-        <version>1.0.2</version>
+        <version>@forge:version:pdfbox@</version>
         <classifier>mule-plugin</classifier>
     </dependency>
 

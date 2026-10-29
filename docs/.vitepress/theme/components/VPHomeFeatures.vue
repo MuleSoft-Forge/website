@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useData } from 'vitepress'
 import { withBase } from 'vitepress'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
 const { frontmatter: fm } = useData()
 const features = computed(() => (fm?.value?.features ?? []))
@@ -73,8 +73,60 @@ const featureVideos = computed(() =>
   features.value.map((f) => renderVideo(f.video))
 )
 
-function cardBind(feature: { link?: string; target?: string; rel?: string; video?: unknown }) {
-  if (feature.video) return {}
+type MediaFrame = { src: string; alt: string; caption: string }
+
+function renderMedia(media: unknown) {
+  if (!media || typeof media !== 'object') return null
+  const o = media as Record<string, unknown>
+  const frames = (Array.isArray(o.frames) ? o.frames : [])
+    .filter((f): f is Record<string, unknown> => !!f && typeof f === 'object' && typeof f.src === 'string')
+    .map((f) => ({
+      src: withBase(String(f.src)),
+      alt: typeof f.alt === 'string' ? f.alt : '',
+      caption: typeof f.caption === 'string' ? f.caption : '',
+    }))
+  if (!frames.length) return null
+  return {
+    heading: typeof o.heading === 'string' ? o.heading : '',
+    frames: frames as MediaFrame[],
+  }
+}
+
+const featureMedia = computed(() =>
+  features.value.map((f) => renderMedia(f.media))
+)
+
+const MEDIA_INTERVAL_MS = 3500
+const mediaFrame = ref<Record<number, number>>({})
+let mediaTimer: ReturnType<typeof setInterval> | undefined
+
+function showFrame(cardIndex: number, frameIndex: number) {
+  mediaFrame.value = { ...mediaFrame.value, [cardIndex]: frameIndex }
+}
+
+function stopMediaTimer() {
+  if (mediaTimer) clearInterval(mediaTimer)
+  mediaTimer = undefined
+}
+
+onMounted(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  mediaTimer = setInterval(() => {
+    featureMedia.value.forEach((media, i) => {
+      if (media) showFrame(i, ((mediaFrame.value[i] ?? 0) + 1) % media.frames.length)
+    })
+  }, MEDIA_INTERVAL_MS)
+})
+
+onBeforeUnmount(stopMediaTimer)
+
+function selectFrame(cardIndex: number, frameIndex: number) {
+  stopMediaTimer()
+  showFrame(cardIndex, frameIndex)
+}
+
+function cardBind(feature: { link?: string; target?: string; rel?: string; video?: unknown; media?: unknown }) {
+  if (feature.video || feature.media) return {}
   return {
     href: feature.link || '#',
     target: feature.target,
@@ -102,7 +154,7 @@ function cardBind(feature: { link?: string; target?: string; rel?: string; video
         @scroll="onScroll"
       >
         <component
-          :is="feature.video ? 'div' : 'a'"
+          :is="feature.video || feature.media ? 'div' : 'a'"
           v-for="(feature, i) in features"
           :key="feature.title + i"
           class="carousel-card"
@@ -144,9 +196,36 @@ function cardBind(feature: { link?: string; target?: string; rel?: string; video
                 />
               </div>
             </div>
+            <div v-if="featureMedia[i]" class="card-media">
+              <p v-if="featureMedia[i].heading" class="card-video-heading">{{ featureMedia[i].heading }}</p>
+              <a class="card-media-frame" :href="feature.link || '#'" :aria-label="feature.linkText || feature.title">
+                <img
+                  v-for="(frame, f) in featureMedia[i].frames"
+                  :key="frame.src"
+                  :src="frame.src"
+                  :alt="frame.alt"
+                  :class="{ active: (mediaFrame[i] ?? 0) === f }"
+                  loading="lazy"
+                />
+              </a>
+              <div class="card-media-steps" role="tablist" :aria-label="`${feature.title} steps`">
+                <button
+                  v-for="(frame, f) in featureMedia[i].frames"
+                  :key="frame.caption + f"
+                  type="button"
+                  role="tab"
+                  class="card-media-step"
+                  :class="{ active: (mediaFrame[i] ?? 0) === f }"
+                  :aria-selected="(mediaFrame[i] ?? 0) === f"
+                  @click="selectFrame(i, f)"
+                >
+                  <span class="card-media-step-num">{{ f + 1 }}</span>{{ frame.caption }}
+                </button>
+              </div>
+            </div>
             <div v-if="feature.linkText" class="card-link-text">
               <a
-                v-if="feature.video"
+                v-if="feature.video || feature.media"
                 class="card-link-value"
                 :href="feature.link || '#'"
                 :target="feature.target"
@@ -369,6 +448,85 @@ function cardBind(feature: { link?: string; target?: string; rel?: string; video
   width: 100%;
   height: 100%;
   border: 0;
+}
+
+.card-media {
+  padding-top: 12px;
+}
+
+.card-media-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 575 / 350;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-media-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.card-media-frame img.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card-media-steps {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.card-media-step {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-2);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+}
+
+.card-media-step.active {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
+.card-media-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--vp-c-default-soft);
+  font-size: 11px;
+}
+
+.card-media-step.active .card-media-step-num {
+  background: var(--vp-c-brand-1);
+  color: var(--vp-c-white);
 }
 
 .card-link-text {

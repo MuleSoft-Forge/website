@@ -1,0 +1,53 @@
+name: Propose a new asset
+description: Suggest a connector, module, policy or tool for MuleSoftForge
+title: "[Proposal] "
+labels: ["proposal"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Asset name
+      placeholder: e.g. Mule Kafka Schema Registry Connector
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      options:
+        - Connector
+        - Module
+        - Policy
+        - Tool
+        - App
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does it solve?
+      description: Who needs it, and what do they do today without it?
+    validations:
+      required: true
+  - type: input
+    id: repo
+    attributes:
+      label: Source repository (if it already exists)
+      placeholder: https://github.com/...
+  - type: dropdown
+    id: status
+    attributes:
+      label: Current status
+      options:
+        - Idea only
+        - Prototype
+        - Working, not yet published
+        - Published (Maven Central, Exchange or similar)
+    validations:
+      required: true
+  - type: checkboxes
+    id: maintainer
+    attributes:
+      label: Maintenance
+      options:
+        - label: I am willing to maintain this asset and answer issues

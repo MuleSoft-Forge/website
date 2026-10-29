@@ -23,7 +23,7 @@ Add the dependency to the Mule app `pom.xml`:
 <dependency>
     <groupId>com.mulesoftforge</groupId>
     <artifactId>mule4-typesafe-connector</artifactId>
-    <version>1.0.3</version>
+    <version>@forge:version:typesafe@</version>
     <classifier>mule-plugin</classifier>
 </dependency>
 ```

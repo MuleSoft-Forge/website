@@ -6,19 +6,36 @@ description: Community-Driven MuleSoft Assets
 hero:
   name: MuleSoftForge
   text: Community-Driven MuleSoft Assets
-  tagline: Open-source MuleSoft connectors and modules, built by the community for the community
+  tagline: Open-source MuleSoft connectors, modules and tools, built by the community for the community
   actions:
     - theme: brand
-      text: Browse Connectors
-      link: /connectors/mule4-typesafe-connector/
+      text: Browse All Assets
+      link: /assets
+    - theme: alt
+      text: What's New
+      link: /whats-new
     - theme: alt
       text: Get Involved
       link: /forge-initiative/how-to-contribute
-    - theme: alt
-      text: View on GitHub
-      link: https://github.com/MuleSoft-Forge
 
 features:
+  - icon:
+      src: /images/favicon.png
+      alt: MuleSoftForge Studio AI
+    title: "MuleSoftForge Studio AI"
+    details: "Broken DataWeave? Right-click and choose <strong>Fix with MuleSoftForge AI</strong>. It explains what went wrong and hands back the fix, and you review the diff before anything changes."
+    media:
+      heading: AI inside Anypoint Studio
+      frames:
+        - src: /images/studio-ai/fix-with-ai-menu-card.png
+          alt: "Right-click menu in the Anypoint Studio DataWeave editor showing Send to MuleSoftForge AI and Fix with MuleSoftForge AI"
+          caption: Right-click
+        - src: /images/studio-ai/fix-with-ai-result.png
+          alt: "MuleSoftForge AI returns the corrected DataWeave, explains the missing comma, and offers Review diff and Apply to the DataWeave editor"
+          caption: Fixed
+    link: /studio-ai/install
+    linkText: Install in Studio
+
   - icon:
       src: /images/typesafe-connector-icon.svg
       alt: TypeSafe Connector for Mule 4
@@ -29,7 +46,7 @@ features:
       src: https://www.youtube.com/embed/FJ5od66CSEs
       title: "Rick & Morty Explain Jev AI: Stop Using LLMs for Tiny Decisions!"
     link: /connectors/mule4-typesafe-connector/
-    linkText: Learn More →
+    linkText: Learn More
 
   - icon:
       src: /images/agent-network-studio-icon.png
@@ -37,7 +54,7 @@ features:
     title: "Agent Network Studio"
     details: "Build, ship, and observe MuleSoft Agent Networks from the browser — visually compose brokers, publish and deploy with the real Anypoint CLI lifecycle, then trace every task, hop, and LLM decision live."
     link: https://www.agentnetworktracer.com
-    linkText: Launch Studio →
+    linkText: Launch Studio
 
   - icon:
       src: /images/salesforce-userinfo-claims-enrichment-icon.png
@@ -45,7 +62,7 @@ features:
     title: "Salesforce UserInfo Claims Enrichment Policy"
     details: "Flex Gateway PDK policy that enriches the Authentication principal with per-user Salesforce custom attributes from the UserInfo endpoint — the missing piece for per-user MCP tool authorization and ABAC, since Salesforce doesn't put custom attributes in access tokens."
     link: https://p4a.up.railway.app/dashboard/policies/bb58ed5d-6881-440a-a08b-69160eab5b37
-    linkText: View on P4A →
+    linkText: View on P4A
 
   - icon:
       src: /images/infa-mdm-connector-icon.svg
@@ -53,7 +70,7 @@ features:
     title: "Informatica MDM - B360 Connector"
     details: "Native MuleSoft connector for Informatica MDM Business 360 REST API — Master Read, Search, Source Read, and Source Submit with full DataSense support"
     link: /connectors/mule-infa-mdm-connector/
-    linkText: Learn More →
+    linkText: Learn More
 
   - icon:
       src: /images/idp-connector-icon.svg
@@ -61,7 +78,7 @@ features:
     title: MuleSoft IDP Connector
     details: Intelligent Document Processing for extracting structured data from PDFs, images, and scanned documents using AI-powered classification and extraction
     link: /connectors/mule-idp-connector/
-    linkText: Learn More →
+    linkText: Learn More
 
   - icon:
       src: /images/pdfbox-module-icon.svg
@@ -69,7 +86,7 @@ features:
     title: MuleSoft PDFBox Module
     details: Comprehensive PDF manipulation operations including text extraction, page filtering, rotation, splitting, merging, and conversion powered by Apache PDFBox
     link: /modules/mule-pdfbox-module/
-    linkText: Learn More →
+    linkText: Learn More
 
   - icon:
       src: /images/chunking-connector-icon.png
@@ -77,7 +94,7 @@ features:
     title: Mule Chunking Connector
     details: Stream large binary files into chunks for streaming processing in Mule, maintaining constant memory regardless of incoming stream size. Ideal for S3 multipart upload, ETL, and checksums.
     link: /connectors/mule-chunking-connector/
-    linkText: Learn More →
+    linkText: Learn More
 
   - icon:
       src: /images/lettuce-redis-connector-icon.png
@@ -85,7 +102,7 @@ features:
     title: Lettuce Redis Connector
     details: Direct access to Redis commands from Mule applications, built on the Lettuce reactive client. Full coverage of strings, hashes, lists, sets, streams, Pub/Sub sources, and arbitrary commands.
     link: /connectors/mule-lettuce-redis-connector/
-    linkText: Learn More →
+    linkText: Learn More
 
   - icon:
       src: /images/json-logger/json-logger.svg
@@ -93,7 +110,7 @@ features:
     title: JSON Logger
     details: Drop-in replacement for the standard MuleSoft logger, enabling unified logging in JSON format. Also supports seamless log forwarding to Anypoint MQ, JMS, or AMQP destinations.
     link: /modules/json-logger/
-    linkText: Learn More →
+    linkText: Learn More
 
   - icon:
       src: /images/community-icon.png
@@ -101,111 +118,53 @@ features:
     title: Open Source & Community-Driven
     details: All assets are open source and maintained by the MuleSoft community. Contributions, bug reports, and feature requests are welcome!
     link: /forge-initiative/overview
-    linkText: Learn About Forge Initiative →
+    linkText: Learn About Forge Initiative
 ---
 
 ## Welcome to MuleSoftForge
 
 <Hint type="success">
 
-**New** — **[TypeSafe Connector for Mule 4](./connectors/mule4-typesafe-connector/)** — Think: Smart If Statements. [Jev](https://docs.typesafe.ai/introduction) returns a typed decision; the flow owns the if. [Explore the connector →](./connectors/mule4-typesafe-connector/)
-
-**New** — **[Salesforce UserInfo Claims Enrichment Policy](https://p4a.up.railway.app/dashboard/policies/bb58ed5d-6881-440a-a08b-69160eab5b37)** — Flex Gateway PDK policy enriching the Authentication principal with per-user Salesforce custom attributes, for MCP tool authorization and ABAC. [View on P4A →](https://p4a.up.railway.app/dashboard/policies/bb58ed5d-6881-440a-a08b-69160eab5b37)
+**New** — **[MuleSoftForge Studio AI](./studio-ai/)**: an AI helper inside Anypoint Studio for flows, DataWeave, Problems and Console. You review every proposed edit before it is written. [Install and set up →](./studio-ai/install)
 
 </Hint>
 
-<Stepper>
-<Step title="Purpose: The one-stop shop for Community Assets">
+MuleSoftForge is the one-stop shop for community-built MuleSoft assets. Connectors, modules and tools that used to be scattered across personal and partner repositories live here, documented the same way, with versions straight from Maven Central.
 
-MuleSoftForge is a centralized open-source repository for community-contributed MuleSoft assets. This hub consolidates connectors, modules, and other resources that have been scattered across the ecosystem, providing a single location for both existing and future community contributions.
+## All Assets
+
+Filter by type or search by purpose. Every card opens the asset's docs, with its own sidebar for set-up and operations.
+
+<AssetCatalog />
+
+## What's New
+
+<WhatsNew :limit="5" />
+
+[See every release →](./whats-new) · [Subscribe via RSS](/feed.xml){target="_self"}
+
+## Built by the Community
+
+These are the people who build and maintain MuleSoftForge assets. Your face could be here.
+
+<Contributors />
+
+<Stepper>
+<Step title="Use an asset">
+
+Pick an asset above, copy its Maven dependency from the **At a glance** box, and follow its Set Up page.
 
 </Step>
+<Step title="Report or improve">
 
-<Step title="Your invitation to Build">
+Found a bug or a gap in the docs? Open an issue on the asset's GitHub repository, or use **Edit this page on GitHub** at the bottom of any page.
 
-Join us on [GitHub](https://github.com/MuleSoft-Forge). Your contributions help build a valuable resource for the entire MuleSoft community.
+</Step>
+<Step title="Build the next one">
+
+Have an asset the community needs? [Propose a new asset](./forge-initiative/how-to-contribute#propose-a-new-asset) and we will help you publish it.
 
 ![We Need You](/images/weneedyou.png)
 
 </Step>
 </Stepper>
-
----
-
-## Available Assets
-
-### Connectors
-
-- **[TypeSafe Connector for Mule 4](./connectors/mule4-typesafe-connector/)** — *New* — Think: Smart If Statements with [Jev](https://docs.typesafe.ai/introduction)
-  - Noul, Choice, and Score decisions with native DataSense
-  - TypeSafe, OpenRouter, Vercel, Cloudflare, compatible, and mock routes
-  - Provider failover, local policy routing, batch evaluation, budgets, and drift sources
-
-- **[Informatica MDM - B360 Connector](./connectors/mule-infa-mdm-connector/)** — *New* — Informatica MDM Business 360 REST API integration
-  - Master Read, Search, Source Read, and Source Submit operations
-  - Dynamic DataSense with entity-aware metadata resolution
-  - Automatic IICS authentication and JWT session management
-
-- **[MuleSoft IDP Connector](./connectors/mule-idp-connector/)** - Intelligent Document Processing with AI-powered extraction and classification
-  - Extract structured data from PDFs, images, and scans
-  - Pre-built actions for common document types (invoices, receipts, forms)
-  - Custom training for specialized document workflows
-
-- **[Mule Chunking Connector](./connectors/mule-chunking-connector/)** - Stream large binary files into chunks for constant-memory processing
-  - True streaming with lazy iteration and raw binary access
-  - Use cases: S3 multipart upload, streaming ETL, checksum calculation
-
-- **[Lettuce Redis Connector](./connectors/mule-lettuce-redis-connector/)** - Direct Redis access from Mule via the Lettuce reactive client
-  - Dedicated operations for keys, hashes, lists, sets, sorted sets, streams, Pub/Sub
-  - Send Command for arbitrary Redis commands; search operations with cursor handling
-
-### Modules
-
-- **[MuleSoft JSON Logger](./modules/json-logger/)** - Powerful logger replacement
-  - Log in a unified JSON format
-  - Forward logs to Anypoint MQ, JMS, or AMQP destinations
-
-- **[MuleSoft PDFBox Module](./modules/mule-pdfbox-module/)** - Complete PDF manipulation toolkit
-  - Extract text and metadata from PDFs
-  - Filter, rotate, split, and merge PDF documents
-  - Convert images to PDF format
-  - Built on Apache PDFBox 3.x
-
-### Policies
-
-- **[Salesforce UserInfo Claims Enrichment Policy](https://p4a.up.railway.app/dashboard/policies/bb58ed5d-6881-440a-a08b-69160eab5b37)** — *New* — Flex Gateway PDK policy for per-user authorization with Salesforce
-  - Calls the Salesforce UserInfo endpoint to pull custom attributes not present in access tokens
-  - Enriches `principal.properties` for downstream ABAC/Cedar rules (e.g. per-user MCP tool access)
-  - Smart caching bounded by token expiry, fail-safe error handling, structured observability
-
----
-
-## Get Started
-
-<Hint type="success">
-
-**Ready to contribute?** Check out our [How to Contribute](./forge-initiative/how-to-contribute) guide to learn how you can help build the future of MuleSoftForge!
-
-</Hint>
-
-<Hint type="info">
-
-**Looking for documentation?** Each connector and module has comprehensive setup guides, operation references, and working examples to get you started quickly.
-
-</Hint>
-
----
-
-## Community
-
-![MuleSoft Community](/images/community-icon.png)
-
-MuleSoftForge is maintained by the MuleSoft community:
-
-- **GitHub Organization**: [MuleSoft-Forge](https://github.com/MuleSoft-Forge)
-- **Issues & Support**: Report issues or request features on the respective GitHub repositories
-- **Contributions**: Pull requests are welcome! See our [contribution guidelines](./forge-initiative/how-to-contribute)
-
----
-
-**Join us in building a comprehensive resource center for the MuleSoft community.**

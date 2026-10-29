@@ -18,7 +18,7 @@ description: Installation and configuration guide for the MuleSoft JSON Logger
 
 <Hint type="info">
 
-Use the latest JSON Logger version from Maven Central. Replace the version placeholder with the newest value available.
+The snippet below always shows the latest release on [Maven Central](https://central.sonatype.com/artifact/cloud.anypoint/json-logger), currently `@forge:version:json-logger@`.
 
 </Hint>
 
@@ -28,7 +28,7 @@ Copy and paste the following Maven dependency snippet into your Mule application
 <dependency>
     <groupId>cloud.anypoint</groupId>
     <artifactId>json-logger</artifactId>
-    <version>{version}</version>
+    <version>@forge:version:json-logger@</version>
     <classifier>mule-plugin</classifier>
 </dependency>
 ```

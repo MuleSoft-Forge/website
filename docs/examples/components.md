@@ -1,4 +1,13 @@
+---
+title: Component Examples
+search: false
+prev: false
+next: false
+---
+
 # Component Examples
+
+> Internal reference page — not linked from site navigation.
 
 This page demonstrates all custom components available in the MuleSoft Forge documentation. These components enable rich, interactive documentation that mirrors the functionality previously provided by GitBook.
 

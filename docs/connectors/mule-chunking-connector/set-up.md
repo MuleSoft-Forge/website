@@ -7,6 +7,7 @@ description: Installation and configuration guide for the MuleSoft Chunking Conn
 
 | Version | Min runtime version | Compatible Java versions | Description |
 | ------- | ------------------- | ------------------------ | ----------- |
+| [0.2.0](https://central.sonatype.com/artifact/com.mulesoftforge/mule-chunking-connector/0.2.0) | 4.9.0 | Java 17 | Published to Maven Central |
 | [0.1.0](https://github.com/MuleSoft-Forge/mule-chunking-connector/releases/tag/v0.1.0) | 4.9.0 | Java 17 | Initial release |
 
 ## Requirements
@@ -25,13 +26,13 @@ Add the following dependency to your Mule application's `pom.xml`:
 <dependency>
     <groupId>com.mulesoftforge</groupId>
     <artifactId>mule-chunking-connector</artifactId>
-    <version>0.1.0</version>
+    <version>@forge:version:chunking@</version>
     <classifier>mule-plugin</classifier>
 </dependency>
 ```
 
 ::: tip
-The connector will be published to Maven Central soon. Until then, you can build and install it locally from the [GitHub repository](https://github.com/MuleSoft-Forge/mule-chunking-connector).
+The snippet below always shows the latest release on [Maven Central](https://central.sonatype.com/artifact/com.mulesoftforge/mule-chunking-connector), currently `@forge:version:chunking@`. To build from source instead, see the [GitHub repository](https://github.com/MuleSoft-Forge/mule-chunking-connector).
 :::
 
 ### Step 2: Configure the Connector

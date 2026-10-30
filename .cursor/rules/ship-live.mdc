@@ -1,0 +1,15 @@
+---
+description: Always ship website changes all the way to production
+alwaysApply: true
+---
+
+# Always push completely live
+
+This is George Jeffcock's website. When he asks to commit, push, ship, or go live: finish production — not just staging.
+
+1. Push `main` → staging (`Deploy to Cloudflare Pages` → https://mulesoftforge.nonprod.app).
+2. Run `gh workflow run "Deploy to Production" --ref main`.
+3. If the run waits on the `production` environment, approve the pending deployment via the GitHub API (`pending_deployments` → `state: approved`).
+4. Verify https://docs.mulesoftforge.com (or https://mulesoftforge.pages.dev).
+
+Do not open a PR for review unless he asks. Staging alone is not live.

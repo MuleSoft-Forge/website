@@ -2,6 +2,13 @@
 
 export const news = [
   {
+    date: '2026-10-30',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.0: passwords and secrets scrubbed before the model sees them',
+    summary: 'Passwords, API keys, tokens and client ids in properties, YAML, Mule XML, URLs, console output and your messages are hidden from the model as «masked-N». Proposed edits still apply with the real values. .env files, private keys and keystores are never sent.',
+    link: '/studio-ai/update'
+  },
+  {
     date: '2026-10-28',
     asset: 'studio-ai',
     title: 'Studio AI 0.4: proposal checks, connector lookup and Send to MuleSoftForge AI everywhere',

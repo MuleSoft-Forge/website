@@ -33,6 +33,10 @@ On the **Message Flow** canvas, select one or more processors, scopes or flows (
 
 When you attach problems with errors, or console output that shows a failure, and the message box is empty, the helper fills in a request to fix them and switches from Ask to Agent mode, so the fix comes back as a change you can review.
 
+## Secrets stay off the model
+
+Passwords, API keys, tokens and client ids in properties, YAML, Mule XML, URLs, console output and your messages are replaced with «masked-N» before anything is sent to the model. Proposed edits still apply with the real values. `.env` files, private keys and keystores are never sent.
+
 ## DataWeave scripts
 
 Right-click in a DataWeave script, such as the script of a **Transform Message**, for two items under **Format**:

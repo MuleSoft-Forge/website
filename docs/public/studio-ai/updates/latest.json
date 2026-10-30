@@ -1,4 +1,4 @@
 {
-  "version": "0.5.0",
-  "notes": "Security: passwords, API keys, tokens and client ids in properties, YAML, Mule XML, URLs, console output and your messages are now hidden from the model as «masked-N». Edits still get the real values. .env files, private keys and keystores are never sent."
+  "version": "0.5.1",
+  "notes": "Raw toggle in the chat view: every request and response, turn by turn, collapsed under each answer. Exact HTTP bodies, URL and status for OpenAI-compatible, Anthropic, Gemini and Ollama; never headers or API keys."
 }

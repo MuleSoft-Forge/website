@@ -97,3 +97,11 @@ Chats save automatically after every answer, in your Studio workspace, never in 
 The column to the right of the answers shows the model in use and its list price, and what this chat, today and this month have cost; hover for the Studio session, all time, and the project. To turn saving off or change how long chats are kept, open **Preferences > MuleSoftForge AI > Chat history**.
 
 If you cancel a request, the AI is told with your next message that it was dropped, so it does not assume the work was done.
+
+## See exactly what was sent
+
+Tick **Raw** in the top bar of the view to record every request and response from your next message on. Each answer then gets a collapsed **Raw · N calls** section with one entry per model call, tool rounds included. Each entry shows the method, URL, HTTP status, model and time, and expands to the exact request and response bodies.
+
+For OpenRouter, MuleSoft AI Gateway, OpenAI, Anthropic, Gemini, Ollama and other OpenAI-compatible endpoints, the body is exactly what went over the wire, after secrets are masked. Azure OpenAI and Bedrock use their own clients, so for them you see the request and response as the plugin built and read them. Headers are never recorded, so API keys and gateway client secrets stay out of the log.
+
+Raw logs are kept per chat next to the saved chats, so a reopened chat shows its raw sections again. **Open raw log**, in the section or in **History ▾**, opens the whole log in Studio's text editor. Untick **Raw** to hide the sections and stop recording. Raw logs are deleted with their chat.

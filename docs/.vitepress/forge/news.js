@@ -4,6 +4,13 @@ export const news = [
   {
     date: '2026-10-30',
     asset: 'studio-ai',
+    title: 'Studio AI 0.5.1: see the raw request and response of every turn',
+    summary: 'Tick Raw in the chat view and each answer gets a collapsed section with every model call it made: method, URL, HTTP status and the exact request and response bodies. Headers and API keys are never recorded.',
+    link: '/studio-ai/use-the-chat#see-exactly-what-was-sent'
+  },
+  {
+    date: '2026-10-30',
+    asset: 'studio-ai',
     title: 'Studio AI 0.5.0: passwords and secrets scrubbed before the model sees them',
     summary: 'Passwords, API keys, tokens and client ids in properties, YAML, Mule XML, URLs, console output and your messages are hidden from the model as «masked-N». Proposed edits still apply with the real values. .env files, private keys and keystores are never sent.',
     link: '/studio-ai/update'

@@ -2,10 +2,10 @@
 <?compositeArtifactRepository version='1.0.0'?>
 <repository name='MuleSoftForge Studio AI' type='org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository' version='1.0.0'>
   <properties size='2'>
-    <property name='p2.timestamp' value='1793280009000'/>
+    <property name='p2.timestamp' value='1793348244000'/>
     <property name='p2.atomic.composite.loading' value='true'/>
   </properties>
-  <children size='13'>
+  <children size='14'>
     <child location='0.1.0'/>
     <child location='0.1.1'/>
     <child location='0.2.0'/>
@@ -19,5 +19,6 @@
     <child location='0.4.7'/>
     <child location='0.4.8'/>
     <child location='0.4.9'/>
+    <child location='0.5.0'/>
   </children>
 </repository>

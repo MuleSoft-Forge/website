@@ -12,8 +12,10 @@ Open a Mule file, type a question in the MuleSoftForge AI view, and press Enter 
 The first drop-down under the message box picks the mode:
 
 - **Ask** answers and explains. It can read the project but never changes files. When you ask for a review or a fix, it lists possible fixes, collapsed and unticked, for Agent mode to make.
-- **Agent** reads the project and proposes changes for you to review.
-- **Plan** reads the project and writes a plan: the goal, the changes per file, the risks, and how to test. **Build this plan in Agent mode** under the answer switches to Agent and asks it to propose those changes.
+- **Agent** reads the project and proposes changes for you to review. If it writes the code in its answer instead, it is asked once, straight away, to turn that code into proposed changes, so the diffs arrive with the answer.
+- **Plan** reads the project and writes a plan: the goal, the changes per file, the risks, and how to test. **Draft this plan for review in Agent mode** under the answer switches to Agent and asks it to propose those changes.
+
+Buttons under an answer that start with **Draft** only prepare changes. They appear under **Proposed changes** with a diff for each file, and nothing is written until you accept them there.
 
 The next box picks the model. Choose a suggestion or type any model id and press Enter. The list price per 1M input and output tokens shows underneath. You can switch models mid-chat and the conversation carries on.
 

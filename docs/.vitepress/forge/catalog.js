@@ -66,7 +66,7 @@ export const assets = [
     summary: 'AI helper for Anypoint Studio. Ask about flows, DataWeave, Problems and Console, then review proposed edits before anything is written.',
     link: '/studio-ai/',
     repo: 'https://github.com/MuleSoft-Forge/mulesoftforge-studio-ai',
-    install: { kind: 'update-site', url: 'https://docs.mulesoftforge.com/studio-ai/updates/', versionsDir: 'studio-ai/updates', version: '0.5.2' },
+    install: { kind: 'update-site', url: 'https://docs.mulesoftforge.com/studio-ai/updates/', versionsDir: 'studio-ai/updates', version: '0.5.3' },
     requires: 'Anypoint Studio 7.28+',
     java: 'Java 17',
     tags: ['AI', 'Anypoint Studio', 'DataWeave']

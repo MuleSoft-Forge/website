@@ -1,4 +1,4 @@
 {
-  "version": "0.5.2",
-  "notes": "Auto model: picks a fast or strong model per message and moves to the other on rate limits or server errors. Ask mode only offers fixes when you ask for a review or a fix."
+  "version": "0.5.3",
+  "notes": "Draft buttons and diffs: in Agent mode, code pasted instead of proposed is turned into reviewable changes in the same turn. Buttons under answers now say Draft, since nothing is written until you accept."
 }

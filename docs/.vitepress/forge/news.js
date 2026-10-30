@@ -4,6 +4,13 @@ export const news = [
   {
     date: '2026-10-30',
     asset: 'studio-ai',
+    title: 'Studio AI 0.5.3: every suggested change arrives as a diff',
+    summary: 'In Agent mode, code the model writes in its answer is turned into proposed changes in the same turn, so you review diffs instead of copying code. Buttons under answers now say Draft, because nothing is written until you accept.',
+    link: '/studio-ai/use-the-chat#modes'
+  },
+  {
+    date: '2026-10-30',
+    asset: 'studio-ai',
     title: 'Studio AI 0.5.2: Auto picks the model for you',
     summary: 'Choose Auto and each message goes to a fast model for simple questions or a strong one for changes, reviews, fixes and images. If the chosen model is rate-limited or down, Auto tries the other. Ask mode now only lists fixes when you ask for a review or a fix.',
     link: '/studio-ai/use-the-chat#auto'

@@ -46,6 +46,15 @@ On the **Message Flow** canvas, select one or more processors, scopes or flows (
 
 When you attach problems with errors, or console output that shows a failure, and the message box is empty, the helper fills in a request to fix them and switches from Ask to Agent mode, so the fix comes back as a change you can review.
 
+## Give it standing instructions
+
+Two places, both sent with every message:
+
+- **`AGENTS.md`** at the root of the Mule project, for team conventions such as "log with the JSON Logger connector" or "error types use the APP namespace". It is the same file other AI coding tools read. Put anything meant only for Studio under a `## Studio AI` heading.
+- **Your instructions**, in **Preferences > MuleSoftForge AI > Instructions**, for your own preferences in every project, such as "use British English" or "keep answers short".
+
+Both go below the built-in prompt, after secrets are masked, up to 8,000 characters each; longer text is cut with a note. They can change the built-in guidance (persona, style, Mule conventions). They cannot switch off the rules the helper relies on: masked values stay masked, and changes are still proposals you review. The first message of a chat shows a step such as **Following AGENTS.md (1,240 characters) and your instructions (85 characters)**. **Show built-in prompt**, under the box, shows what is sent before them.
+
 ## Secrets stay off the model
 
 Passwords, API keys, tokens and client ids in properties, YAML, Mule XML, URLs, console output and your messages are replaced with «masked-N» before anything is sent to the model. Proposed edits still apply with the real values. `.env` files, private keys and keystores are never sent.

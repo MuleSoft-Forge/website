@@ -1,4 +1,4 @@
 {
-  "version": "0.5.3",
-  "notes": "Draft buttons and diffs: in Agent mode, code pasted instead of proposed is turned into reviewable changes in the same turn. Buttons under answers now say Draft, since nothing is written until you accept."
+  "version": "0.5.4",
+  "notes": "Your own instructions in Preferences and the project's AGENTS.md are sent with every message, masked and capped at 8,000 characters each. Built-in rules always apply; Show built-in prompt shows them."
 }

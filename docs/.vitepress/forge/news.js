@@ -4,6 +4,13 @@ export const news = [
   {
     date: '2026-10-30',
     asset: 'studio-ai',
+    title: 'Studio AI 0.5.4: standing instructions from AGENTS.md and Preferences',
+    summary: 'Team conventions in the project\'s AGENTS.md and your own instructions in Preferences go with every message, with secrets masked. They shape style and Mule conventions; the rules that keep secrets masked and changes reviewable always apply. Show built-in prompt shows what the helper sends.',
+    link: '/studio-ai/use-the-chat#give-it-standing-instructions'
+  },
+  {
+    date: '2026-10-30',
+    asset: 'studio-ai',
     title: 'Studio AI 0.5.3: every suggested change arrives as a diff',
     summary: 'In Agent mode, code the model writes in its answer is turned into proposed changes in the same turn, so you review diffs instead of copying code. Buttons under answers now say Draft, because nothing is written until you accept.',
     link: '/studio-ai/use-the-chat#modes'

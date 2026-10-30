@@ -17,12 +17,51 @@ export const ASSET_TYPES_PLURAL = {
   app: 'Apps'
 }
 
+/** Named people referenced by asset `owners` (display order is the owners array). */
+export const PEOPLE = {
+  jeffcock: {
+    login: 'jeffcock',
+    name: 'George Jeffcock',
+    avatar: 'https://avatars.githubusercontent.com/u/203402018?v=4',
+    url: 'https://github.com/jeffcock'
+  },
+  'amirkhan-ak-sf': {
+    login: 'amirkhan-ak-sf',
+    name: 'Amir Khan',
+    avatar: 'https://avatars.githubusercontent.com/u/86777111?v=4',
+    url: 'https://github.com/amirkhan-ak-sf'
+  },
+  rlexen: {
+    login: 'rlexen',
+    name: 'Reza Lexén',
+    avatar: 'https://avatars.githubusercontent.com/u/94212824?v=4',
+    url: 'https://github.com/rlexen'
+  },
+  rhoegg: {
+    login: 'rhoegg',
+    name: 'Ryan Hoegg',
+    avatar: 'https://avatars.githubusercontent.com/u/44559?v=4',
+    url: 'https://github.com/rhoegg'
+  },
+  mtransier: {
+    login: 'mtransier',
+    name: 'Matthias Transier',
+    avatar: 'https://avatars.githubusercontent.com/u/6918951?v=4',
+    url: 'https://github.com/mtransier'
+  }
+}
+
+export function resolveOwners(logins = []) {
+  return logins.map((login) => PEOPLE[login]).filter(Boolean)
+}
+
 export const assets = [
   {
     id: 'studio-ai',
     name: 'MuleSoftForge Studio AI',
     type: 'tool',
     isNew: true,
+    owners: ['jeffcock'],
     icon: '/images/favicon.png',
     summary: 'AI helper for Anypoint Studio. Ask about flows, DataWeave, Problems and Console, then review proposed edits before anything is written.',
     link: '/studio-ai/',
@@ -37,6 +76,7 @@ export const assets = [
     name: 'TypeSafe Connector for Mule 4',
     type: 'connector',
     isNew: true,
+    owners: ['jeffcock', 'amirkhan-ak-sf'],
     icon: '/images/typesafe-connector-icon.svg',
     summary: 'Think: Smart If Statements. Jev turns JSON state into a typed decision your flow can branch on: Yes/No, Choice, Score and Box.',
     link: '/connectors/mule4-typesafe-connector/',
@@ -51,6 +91,7 @@ export const assets = [
     id: 'infa-mdm',
     name: 'Informatica MDM - B360 Connector',
     type: 'connector',
+    owners: ['jeffcock'],
     icon: '/images/infa-mdm-connector-icon.svg',
     summary: 'Informatica MDM Business 360 REST API: Master Read, Search, Source Read and Source Submit with entity-aware DataSense.',
     link: '/connectors/mule-infa-mdm-connector/',
@@ -65,6 +106,7 @@ export const assets = [
     id: 'idp',
     name: 'MuleSoft IDP Connector',
     type: 'connector',
+    owners: ['rlexen', 'jeffcock'],
     icon: '/images/idp-connector-icon.svg',
     summary: 'Intelligent Document Processing: submit documents, retrieve extraction results and manage review tasks from your flows.',
     link: '/connectors/mule-idp-connector/',
@@ -79,6 +121,7 @@ export const assets = [
     id: 'chunking',
     name: 'Mule Chunking Connector',
     type: 'connector',
+    owners: ['rhoegg'],
     icon: '/images/chunking-connector-icon.png',
     summary: 'Stream large binary files into fixed-size chunks with constant memory. Built for S3 multipart upload, streaming ETL and checksums.',
     link: '/connectors/mule-chunking-connector/',
@@ -93,6 +136,7 @@ export const assets = [
     id: 'lettuce-redis',
     name: 'Lettuce Redis Connector',
     type: 'connector',
+    owners: ['rhoegg'],
     icon: '/images/lettuce-redis-connector-icon.png',
     summary: 'Direct Redis access on the Lettuce reactive client: keys, hashes, lists, sets, sorted sets, streams, Pub/Sub sources and raw commands.',
     link: '/connectors/mule-lettuce-redis-connector/',
@@ -107,6 +151,7 @@ export const assets = [
     id: 'json-logger',
     name: 'JSON Logger',
     type: 'module',
+    owners: ['mtransier'],
     icon: '/images/json-logger/json-logger.svg',
     summary: 'Drop-in logger replacement that writes structured JSON and can forward logs to Anypoint MQ, JMS or AMQP.',
     link: '/modules/json-logger/',
@@ -121,6 +166,7 @@ export const assets = [
     id: 'pdfbox',
     name: 'MuleSoft PDFBox Module',
     type: 'module',
+    owners: ['jeffcock'],
     icon: '/images/pdfbox-module-icon.svg',
     summary: 'PDF toolkit on Apache PDFBox: extract text and metadata, filter, rotate, split and merge pages, and convert images to PDF.',
     link: '/modules/mule-pdfbox-module/',
@@ -136,6 +182,7 @@ export const assets = [
     name: 'Salesforce UserInfo Claims Enrichment Policy',
     type: 'policy',
     isNew: true,
+    owners: ['jeffcock'],
     icon: '/images/salesforce-userinfo-claims-enrichment-icon.png',
     summary: 'Flex Gateway PDK policy that adds per-user Salesforce custom attributes to the Authentication principal for MCP tool authorization and ABAC.',
     link: 'https://p4a.up.railway.app/dashboard/policies/bb58ed5d-6881-440a-a08b-69160eab5b37',
@@ -147,6 +194,7 @@ export const assets = [
     id: 'agent-network-studio',
     name: 'Agent Network Studio',
     type: 'app',
+    owners: ['jeffcock'],
     icon: '/images/agent-network-studio-icon.png',
     summary: 'Build, ship and observe MuleSoft Agent Networks from the browser, then trace every task, hop and LLM decision live.',
     link: 'https://www.agentnetworktracer.com',

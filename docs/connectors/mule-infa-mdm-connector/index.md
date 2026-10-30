@@ -5,6 +5,8 @@ description: MuleSoft connector for Informatica MDM Business 360 REST API — Ma
 
 # Informatica MDM - Business 360 Connector
 
+<AtAGlance id="infa-mdm" />
+
 A MuleSoft Java SDK Connector (ain't no REST wrapper ;) ) for the [Informatica MDM Business 360 REST API](https://onlinehelp.informatica.com/IICS/prod/b360/en/index.htm#page/wz-b360-rest-api/Business_360_REST_API.html), providing native Anypoint Studio and Anypoint Code Builder integration with full DataSense metadata resolution.
 
 <Hint type="info">
@@ -12,8 +14,6 @@ A MuleSoft Java SDK Connector (ain't no REST wrapper ;) ) for the [Informatica M
 **New to MDM?** Read the [Design Concept](./concept) page first — it explains *why* the operations are named the way they are and how this connector bridges the gap between MDM terminology and Application Integration patterns.
 
 </Hint>
-
-<AtAGlance id="infa-mdm" />
 
 ## Key Benefits
 

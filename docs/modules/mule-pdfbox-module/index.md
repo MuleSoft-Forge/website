@@ -5,11 +5,11 @@ description: PDF Utilities for MuleSoft powered by Apache PDFBox
 
 # MuleSoft PDFBox Module
 
+<AtAGlance id="pdfbox" />
+
 Empower your MuleSoft flows with native PDF manipulation powered by [Apache PDFBox](https://pdfbox.apache.org/). This connector provides high-performance PDF operations with no external dependencies.
 
 <img src="/images/pdfbox-module/icon.svg" alt="PDFBox Module Icon" width="80" />
-
-<AtAGlance id="pdfbox" />
 
 ### PDF Manipulation
 

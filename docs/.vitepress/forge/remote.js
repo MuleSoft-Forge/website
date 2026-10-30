@@ -13,7 +13,7 @@ const CREDITED_CONTRIBUTORS = [
     login: 'rlexen',
     avatar: 'https://avatars.githubusercontent.com/u/94212824?v=4',
     url: 'https://github.com/rlexen',
-    role: 'Co-lead, MuleSoft IDP Connector'
+    role: 'Lead, MuleSoft IDP Connector'
   }
 ]
 

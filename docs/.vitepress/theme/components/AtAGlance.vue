@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { data } from '../../forge/forge.data.js'
-import { ASSET_TYPES, mavenUrl } from '../../forge/catalog.js'
+import { ASSET_TYPES, mavenUrl, resolveOwners } from '../../forge/catalog.js'
 
 const props = defineProps<{ id: string }>()
 
 const asset = computed(() => data.assets.find((a) => a.id === props.id))
+const owners = computed(() => resolveOwners(asset.value?.owners))
+const ownerLabel = computed(() => (owners.value.length > 1 ? 'Owners' : 'Owner'))
 
 const dependency = computed(() => {
   const a = asset.value
@@ -29,6 +31,33 @@ async function copy() {
 
 <template>
   <aside v-if="asset" class="glance" aria-label="At a glance">
+    <div v-if="owners.length" class="glance-owners">
+      <span class="glance-owners-label">{{ ownerLabel }}</span>
+      <ul class="glance-owners-list">
+        <li v-for="person in owners" :key="person.login">
+          <a
+            class="glance-owner"
+            :href="person.url"
+            target="_blank"
+            rel="noopener"
+            :title="person.name"
+          >
+            <img
+              :src="`${person.avatar}&s=96`"
+              :alt="person.name"
+              width="48"
+              height="48"
+              loading="lazy"
+            />
+            <span class="glance-owner-text">
+              <span class="glance-owner-name">{{ person.name }}</span>
+              <span class="glance-owner-login">@{{ person.login }}</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
     <div class="glance-head">
       <span class="glance-title">At a glance</span>
       <span v-if="asset.isNew" class="glance-new">New</span>
@@ -87,6 +116,72 @@ async function copy() {
   border-left: 4px solid var(--vp-c-brand-1);
   border-radius: 10px;
   background: var(--vp-c-bg-soft);
+}
+
+.glance-owners {
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.glance-owners-label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--vp-c-text-1);
+}
+
+.glance-owners-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.glance-owner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  text-decoration: none !important;
+}
+
+.glance-owner img {
+  display: block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--vp-c-bg);
+  object-fit: cover;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.glance-owner:hover img {
+  transform: scale(1.06);
+  border-color: var(--vp-c-brand-1);
+}
+
+.glance-owner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1.25;
+}
+
+.glance-owner-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+.glance-owner-login {
+  font-size: 12px;
+  color: var(--vp-c-text-3);
 }
 
 .glance-head {

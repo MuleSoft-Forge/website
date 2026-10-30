@@ -5,9 +5,9 @@ description: Stream large binary files into chunks for streaming processing in m
 
 # Mule Chunking Connector
 
-Stream large binary files into chunks for streaming processing in mule, maintaining constant memory regardless of the size of the incoming stream.
-
 <AtAGlance id="chunking" />
+
+Stream large binary files into chunks for streaming processing in mule, maintaining constant memory regardless of the size of the incoming stream.
 
 ## Features
 

@@ -33,7 +33,7 @@ In February 2025, a LinkedIn outreach seeking help to build a MuleSoft Java SDK 
 >
 > [View LinkedIn Post](https://www.linkedin.com/posts/georgejeffcock_mulesoft-opensource-communitypower-activity-7295776860934709248-GBzb)
 
-Personal and partner-hosted assets are valuable, but scattered across the ecosystem they cause **asset sprawl**: hard to find, inconsistently documented, and easy to abandon. A central home fixes that. The MuleSoft IDP Connector, led by [George Jeffcock](https://www.linkedin.com/in/georgejeffcock) and [Reza Lexén](https://www.linkedin.com/in/reznas/), was the first asset built this way.
+Personal and partner-hosted assets are valuable, but scattered across the ecosystem they cause **asset sprawl**: hard to find, inconsistently documented, and easy to abandon. A central home fixes that. The MuleSoft IDP Connector, led by [Reza Lexén](https://www.linkedin.com/in/reznas/) and [George Jeffcock](https://www.linkedin.com/in/georgejeffcock), was the first asset built this way.
 
 ## Contributors
 

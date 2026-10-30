@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { withBase } from 'vitepress'
 import { data } from '../../forge/forge.data.js'
-import { ASSET_TYPES, ASSET_TYPES_PLURAL, isExternal } from '../../forge/catalog.js'
+import { ASSET_TYPES, ASSET_TYPES_PLURAL, isExternal, resolveOwners } from '../../forge/catalog.js'
 
 const query = ref('')
 const activeType = ref('all')
@@ -31,6 +31,14 @@ const visible = computed(() => {
 
 function href(link: string) {
   return isExternal(link) ? link : withBase(link)
+}
+
+function ownersOf(asset: { owners?: string[] }) {
+  return resolveOwners(asset.owners)
+}
+
+function ownerNames(asset: { owners?: string[] }) {
+  return ownersOf(asset).map((p) => p.name).join(', ')
 }
 </script>
 
@@ -75,6 +83,17 @@ function href(link: string) {
             <span v-if="asset.isNew" class="badge badge-new">New</span>
             <span class="badge">{{ ASSET_TYPES[asset.type] }}</span>
           </div>
+        </div>
+        <div v-if="ownersOf(asset).length" class="catalog-card-owners" :title="ownerNames(asset)">
+          <img
+            v-for="person in ownersOf(asset)"
+            :key="person.login"
+            :src="`${person.avatar}&s=64`"
+            :alt="person.name"
+            width="28"
+            height="28"
+            loading="lazy"
+          />
         </div>
         <h3 class="catalog-card-title">{{ asset.name }}</h3>
         <p class="catalog-card-summary">{{ asset.summary }}</p>
@@ -194,6 +213,25 @@ function href(link: string) {
 .catalog-card-badges {
   display: flex;
   gap: 6px;
+}
+
+.catalog-card-owners {
+  display: flex;
+  align-items: center;
+  margin: 0 0 10px;
+}
+
+.catalog-card-owners img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--vp-c-bg-soft);
+  object-fit: cover;
+  background: var(--vp-c-bg);
+}
+
+.catalog-card-owners img + img {
+  margin-left: -8px;
 }
 
 .badge {

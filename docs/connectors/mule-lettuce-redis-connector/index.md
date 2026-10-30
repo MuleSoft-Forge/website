@@ -5,11 +5,11 @@ description: Direct access to Redis commands from Mule applications, built on th
 
 # Lettuce Redis Connector
 
+<AtAGlance id="lettuce-redis" />
+
 A low-level connector providing Mule applications with direct access to Redis commands, built on the [Lettuce](https://lettuce.io/) reactive Redis client library. Published on Maven Central under `cloud.anypoint`.
 
 The connector's goal is to provide full coverage of all documented Redis commands, organized by Redis data structure. For commands not yet implemented as dedicated operations, the [Send Command](./operations/send-command) operation lets you execute any arbitrary Redis command.
-
-<AtAGlance id="lettuce-redis" />
 
 ## Features
 

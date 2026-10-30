@@ -5,13 +5,13 @@ description: "Think: Smart If Statements. Typed Jev decisions in Mule flows."
 
 # TypeSafe Connector for Mule 4
 
+<AtAGlance id="typesafe" />
+
 **Think: Smart If Statements.**
 
 [Jev](https://docs.typesafe.ai/introduction) is [TypeSafe](https://typesafe.ai)'s System One model. It turns unstructured JSON **state** and typed **questions** into a value a Choice router, filter, or expression can read. The flow owns the if: the threshold, the route, and the side effect. This connector exists to make that if possible in Mule.
 
 Start with **[How Decisions Work](./how-decisions-work)** for connector behavior (policy bands, fail-closed Apply Policy, filter keep/uncertain/drop, drift on Noul) without needing deep Jev reading.
-
-<AtAGlance id="typesafe" />
 
 ## Jev
 

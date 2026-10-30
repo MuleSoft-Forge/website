@@ -5,6 +5,8 @@ description: AI helper for Mule source, DataWeave, Problems and Console in Anypo
 
 # MuleSoftForge Studio AI
 
+<AtAGlance id="studio-ai" />
+
 MuleSoftForge AI is a helper for the source you already have open in Anypoint Studio. It sits beside your project so you can ask about flows, DataWeave, Problems view markers, and Console output, and — when you want a change — review proposed edits before anything is written.
 
 ![Right-click in the DataWeave editor of a Transform Message with two errors: the menu shows Send to MuleSoftForge AI and Fix with MuleSoftForge AI](/images/studio-ai/fix-with-ai-context-menu.png)
@@ -30,8 +32,6 @@ Open a project file (or select the project in Explorer) so the helper can see it
 It works with OpenRouter, the MuleSoft AI Gateway LLM Proxy, OpenAI, Anthropic, Ollama, and other OpenAI-compatible endpoints, using your own API key.
 
 Tested with Anypoint Studio 7.28 (Eclipse 4.31, Java 17) on macOS. It needs no other Studio extensions.
-
-<AtAGlance id="studio-ai" />
 
 ## Get started
 

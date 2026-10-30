@@ -1,4 +1,4 @@
 {
-  "version": "0.5.1",
-  "notes": "Raw toggle in the chat view: every request and response, turn by turn, collapsed under each answer. Exact HTTP bodies, URL and status for OpenAI-compatible, Anthropic, Gemini and Ollama; never headers or API keys."
+  "version": "0.5.2",
+  "notes": "Auto model: picks a fast or strong model per message and moves to the other on rate limits or server errors. Ask mode only offers fixes when you ask for a review or a fix."
 }

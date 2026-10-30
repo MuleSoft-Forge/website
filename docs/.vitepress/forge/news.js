@@ -4,6 +4,13 @@ export const news = [
   {
     date: '2026-10-30',
     asset: 'studio-ai',
+    title: 'Studio AI 0.5.2: Auto picks the model for you',
+    summary: 'Choose Auto and each message goes to a fast model for simple questions or a strong one for changes, reviews, fixes and images. If the chosen model is rate-limited or down, Auto tries the other. Ask mode now only lists fixes when you ask for a review or a fix.',
+    link: '/studio-ai/use-the-chat#auto'
+  },
+  {
+    date: '2026-10-30',
+    asset: 'studio-ai',
     title: 'Studio AI 0.5.1: see the raw request and response of every turn',
     summary: 'Tick Raw in the chat view and each answer gets a collapsed section with every model call it made: method, URL, HTTP status and the exact request and response bodies. Headers and API keys are never recorded.',
     link: '/studio-ai/use-the-chat#see-exactly-what-was-sent'

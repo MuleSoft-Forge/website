@@ -11,11 +11,22 @@ Open a Mule file, type a question in the MuleSoftForge AI view, and press Enter 
 
 The first drop-down under the message box picks the mode:
 
-- **Ask** answers and explains. It can read the project but never proposes changes.
+- **Ask** answers and explains. It can read the project but never changes files. When you ask for a review or a fix, it lists possible fixes, collapsed and unticked, for Agent mode to make.
 - **Agent** reads the project and proposes changes for you to review.
 - **Plan** reads the project and writes a plan: the goal, the changes per file, the risks, and how to test. **Build this plan in Agent mode** under the answer switches to Agent and asks it to propose those changes.
 
 The next box picks the model. Choose a suggestion or type any model id and press Enter. The list price per 1M input and output tokens shows underneath. You can switch models mid-chat and the conversation carries on.
+
+### Auto
+
+**Auto**, at the top of the model list, picks a model for each message so you don't have to:
+
+- The **fast** model handles Ask-mode questions with little context, such as "what does this flow do?".
+- The **strong** model handles Agent and Plan mode, reviews, fixes, errors, new code and tests, images, long messages, and large attachments.
+
+A step under your message says which model Auto picked and why. If that model fails before answering, with a rate limit, a server error or a timeout, Auto runs the message once on the other model and says so. Errors you need to fix yourself, such as a bad key or an unknown model, are not retried. A message never switches model part-way, so all the steps of one answer come from the same model.
+
+Choose the two models under **Preferences > MuleSoftForge AI**, below **Model**. Each provider starts with a sensible pair, such as Claude Haiku and Claude Sonnet for Anthropic. With OpenRouter you can also pick `openrouter/auto`, which lets OpenRouter choose. The step under each answer then names the model that actually replied.
 
 ## Give it context
 

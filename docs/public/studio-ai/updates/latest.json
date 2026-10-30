@@ -1,4 +1,4 @@
 {
-  "version": "0.4.9",
-  "notes": "Clarify Prices source: Public list prices via OpenRouter, with a help icon explaining guide rates vs Cost above."
+  "version": "0.5.0",
+  "notes": "Security: passwords, API keys, tokens and client ids in properties, YAML, Mule XML, URLs, console output and your messages are now hidden from the model as «masked-N». Edits still get the real values. .env files, private keys and keystores are never sent."
 }

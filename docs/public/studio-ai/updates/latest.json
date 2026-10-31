@@ -1,4 +1,4 @@
 {
-  "version": "0.5.5",
-  "notes": "Review diff for a DataWeave fix opens in a dialog, so Transform Message keeps its editor. Apply finds the rebuilt editor if Studio replaced it, as long as the same Mule file is active and the script is unchanged."
+  "version": "0.5.6",
+  "notes": "Eclipse and OSGi compliance: cancellable chat jobs, Studio light/dark themes, shared HTTP clients, workspace-ruled Accept all, clearer errors, and optional Xtext."
 }

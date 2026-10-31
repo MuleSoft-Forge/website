@@ -1,4 +1,4 @@
 {
-  "version": "0.5.6",
-  "notes": "Eclipse and OSGi compliance: cancellable chat jobs, Studio light/dark themes, shared HTTP clients, workspace-ruled Accept all, clearer errors, and optional Xtext."
+  "version": "0.5.7",
+  "notes": "Debug with AI on live Mule debugger stops; DataWeave CLI for proposal checks and run/validate; Accept correctly creates new files and folders."
 }

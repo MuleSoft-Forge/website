@@ -2,6 +2,20 @@
 
 export const news = [
   {
+    date: '2026-10-31',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.7: debug with AI, and DataWeave checked with MuleSoft\'s CLI',
+    summary: 'When Studio\'s Mule debugger stops, Ask about this event attaches the live payload, attributes, variables and error, and the AI tests its fix against that event before proposing it. With MuleSoft\'s DataWeave CLI, proposed DataWeave is compiled and scripts are run on sample input. Accept now works for proposals that create files or folders.',
+    link: '/studio-ai/use-the-chat#debug-with-ai'
+  },
+  {
+    date: '2026-10-31',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.6: cancel from the Progress view, Studio themes, clearer errors',
+    summary: 'Each answer runs as a Studio job you can cancel from the chat or the Progress view. The view follows Studio\'s light and dark themes, with its colours under Colors and Fonts. Accept all writes every file in one step, and network errors say what to fix.',
+    link: '/studio-ai/use-the-chat#review-proposed-changes'
+  },
+  {
     date: '2026-10-30',
     asset: 'studio-ai',
     title: 'Studio AI 0.5.4: standing instructions from AGENTS.md and Preferences',

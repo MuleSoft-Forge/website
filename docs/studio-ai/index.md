@@ -25,6 +25,7 @@ Use it to:
 - Work through DataWeave transformations
 - Attach Problems view errors and warnings and ask for fixes
 - Attach Console output (build failures, runtime logs) and ask what went wrong
+- Ask about the live event when Studio's Mule debugger stops at a breakpoint or an error
 - Paste a screenshot, such as an error dialog or a design, and ask about it
 
 Open a project file (or select the project in Explorer) so the helper can see it. Attach more with **+ Context**, or use **Send to MuleSoftForge AI** from the editor, the canvas, Problems, or Console.

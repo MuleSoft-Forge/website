@@ -19,7 +19,7 @@ Choose which AI provider to use and enter its API key. Keys are saved in Eclipse
 
    ![Test connection result: Connected. Model replied: ok](/images/studio-ai/setup-3-test-connection.png)
 
-The same page has the **Chat view**, **Network** (company certificates) and **Chat history** settings. Chats are saved in your Studio workspace, never in your Mule projects, and API keys are never written to them.
+The same page has the **Chat view**, **Network** (company certificates), [**DataWeave CLI**](./use-the-chat#run-dataweave-with-mulesoft-s-cli) and **Chat history** settings. Chats are saved in your Studio workspace, never in your Mule projects, and API keys are never written to them.
 
 If saving fails with **No password provided**, see [Troubleshooting](./troubleshooting#could-not-save-settings-no-password-provided).
 

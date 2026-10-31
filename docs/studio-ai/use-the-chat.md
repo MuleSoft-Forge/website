@@ -68,6 +68,28 @@ Right-click in a DataWeave script, such as the script of a **Transform Message**
 
 Apply refuses if you changed the script, or closed its editor, after choosing Fix. Choose Fix again on the current script.
 
+### Run DataWeave with MuleSoft's CLI
+
+With MuleSoft's [DataWeave CLI](https://github.com/mulesoft/data-weave-cli) installed, the AI checks the DataWeave it writes instead of guessing:
+
+- When you give it sample input (attached, pasted, or a file such as `src/test/resources/sample.json`), it runs the script on that input before it answers. If you say what output you want, it fixes the script until the run matches, and says so, for example "Ran on the sample: matches the expected output".
+- Without a sample, it checks the script compiles and says it was not run.
+- DataWeave in a proposal, in Transform Message scripts, `#[...]` values and `.dwl` files, is compiled with the [checks before you review](#checks-before-you-review).
+
+Runs cannot read files or the network and stop after 20 seconds. Mule-only functions such as `p()` and `lookup()` return null in a run, so give the values they would return when they matter.
+
+Set it up in **Preferences > MuleSoftForge AI > DataWeave CLI**. Leave the path empty and the plugin looks for `dw` on the PATH, in `~/.dw/bin` and in Homebrew; **Check** shows the version it found. **Download** fetches MuleSoft's release (2.12.3) for macOS on Apple silicon, Windows x64 or Linux x64 from GitHub, verifies its published checksum, and uses it. Without the CLI the other proposal checks still run.
+
+## Debug with AI
+
+When Studio's Mule debugger stops at a breakpoint or an error, a row above the message box says where, for example **Debugger stopped on an error at Transform Message**. Click **Ask about this event**, or the MuleSoftForge button on Studio's **Mule Debugger** view, to attach the live event to your next message: where it stopped, any error, the payload, attributes, variables, and the processor's settings as the runtime evaluated them. In the **Mule Debug** perspective, the AI view sits beside **Evaluate**; reset the perspective if it is missing.
+
+The AI explains from that event first, naming the processor, the value and the setting at fault. It checks what it is unsure of by evaluating DataWeave against the event, such as `typeOf(payload)` or `attributes.queryParams`, and loads fields Studio has not sent yet. Before it proposes a DataWeave fix, it runs the fixed expression against the event and says what it returned.
+
+Evaluations are read-only: the AI cannot change the event, set breakpoints or step the debugger, and tells you what to do in Studio instead. It can only evaluate while the debugger is stopped; if the app has moved on, stop at the breakpoint again.
+
+The event is real data, so secrets in it are masked as usual, and email addresses and phone numbers become «email-N» and «phone-N». To send those as they are, clear **Hide email addresses and phone numbers in live debug events** under **Preferences > MuleSoftForge AI**.
+
 ## Screenshots and images
 
 Copy a screenshot or picture, click in the chat view and press **Cmd+V** (Ctrl+V on Windows). It is attached as **pasted image 1** instead of pasting text; text on the clipboard still pastes as text. **+ Context > Clipboard image** does the same. On a Mac, Cmd+Ctrl+Shift+4 takes a screenshot straight to the clipboard; on Windows, use Windows+Shift+S.
@@ -83,7 +105,7 @@ In Agent mode the AI can list and read the files of the open project and propose
 ![Proposed changes panel under the answer, listing src/main/mule/employees-api.xml with 45 lines added and 12 removed, and Review diff, Accept, Reject buttons](/images/studio-ai/overview-agent-review.png)
 
 - Proposals appear under **Proposed changes**. **Review diff** (or double-click) opens Studio's compare editor: the current file on the left, the proposal on the right.
-- **Accept** writes the file and keeps local history. To undo, right-click the file and choose **Replace With > Local History**.
+- **Accept** writes the file, creating it and any missing folders when the proposal adds a file, and keeps local history. **Accept all** writes every pending proposal in one step. To undo an edit, right-click the file and choose **Replace With > Local History**.
 - **Reject** discards the proposal. With your next message the AI is told what you accepted and rejected.
 - Accept refuses if the file has unsaved edits or changed on disk after the proposal was made.
 - Edits must stay inside the project. Build output and settings folders such as `target/` and `.settings/` are off limits.
@@ -99,6 +121,7 @@ Every proposal to Mule XML, `pom.xml` or a properties file is checked against th
 - Error types that do not exist, such as `MULE:NOT_FOUND`, or custom errors that reuse a connector's namespace.
 - Connector operations, attributes and error types that the connector version in your `pom.xml` does not have, such as `<db:selekt>` or `SFTP:NOT_REAL`.
 - Anything placed after a flow's `<error-handler>`, or an error handler inside a sub-flow.
+- DataWeave that does not compile, when the [DataWeave CLI](#run-dataweave-with-mulesoft-s-cli) is set up. Only scripts the proposal changed are compiled.
 
 Only problems the proposal adds count, so issues already in your project are not blamed on it. Anything the AI leaves unfixed is shown in a note under its answer. You can also ask, in any mode, "check this project": the AI runs the same checks over every file. They read the files only and do not build or run the app.
 
@@ -118,7 +141,9 @@ Chats save automatically after every answer, in your Studio workspace, never in 
 
 The column to the right of the answers shows the model in use and its list price, and what this chat, today and this month have cost; hover for the Studio session, all time, and the project. To turn saving off or change how long chats are kept, open **Preferences > MuleSoftForge AI > Chat history**.
 
-If you cancel a request, the AI is told with your next message that it was dropped, so it does not assume the work was done.
+Each answer runs as a Studio job named **MuleSoftForge AI**, so you can cancel it with **Cancel** in the view or from Studio's **Progress** view. If you cancel a request, the AI is told with your next message that it was dropped, so it does not assume the work was done.
+
+The view follows Studio's light and dark themes. To change its colours, open **Preferences > General > Appearance > Colors and Fonts** and expand **MuleSoftForge AI**.
 
 ## See exactly what was sent
 

@@ -4,6 +4,13 @@ export const news = [
   {
     date: '2026-10-31',
     asset: 'studio-ai',
+    title: 'Studio AI 0.5.8: Feedback in the view',
+    summary: 'Feedback in the MuleSoftForge AI header opens a bug or feedback form. Open on GitHub fills a public issue on the plugin\'s repository for you to create. Secrets are masked; leave out customer data.',
+    link: '/studio-ai/use-the-chat#feedback-and-bug-reports'
+  },
+  {
+    date: '2026-10-31',
+    asset: 'studio-ai',
     title: 'Studio AI 0.5.7: debug with AI, and DataWeave checked with MuleSoft\'s CLI',
     summary: 'When Studio\'s Mule debugger stops, Ask about this event attaches the live payload, attributes, variables and error, and the AI tests its fix against that event before proposing it. With MuleSoft\'s DataWeave CLI, proposed DataWeave is compiled and scripts are run on sample input. Accept now works for proposals that create files or folders.',
     link: '/studio-ai/use-the-chat#debug-with-ai'

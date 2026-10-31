@@ -145,6 +145,10 @@ Each answer runs as a Studio job named **MuleSoftForge AI**, so you can cancel i
 
 The view follows Studio's light and dark themes. To change its colours, open **Preferences > General > Appearance > Colors and Fonts** and expand **MuleSoftForge AI**.
 
+## Feedback and bug reports
+
+**Feedback** in the view's header opens a form for a bug report or feedback. Fill in a title and what happened (or what you would like), leave the environment details ticked if you want, and click **Open on GitHub**. Your browser opens a public issue on [the plugin's GitHub repository](https://github.com/MuleSoft-Forge/mulesoftforge-studio-ai/issues), already filled in; click **Create** there to send it. The form masks values that look like secrets before it opens the page. Never paste API keys, and leave out customer data.
+
 ## See exactly what was sent
 
 Tick **Raw** in the top bar of the view to record every request and response from your next message on. Each answer then gets a collapsed **Raw · N calls** section with one entry per model call, tool rounds included. Each entry shows the method, URL, HTTP status, model and time, and expands to the exact request and response bodies.

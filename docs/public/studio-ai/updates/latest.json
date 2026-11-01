@@ -1,4 +1,4 @@
 {
-  "version": "0.5.8",
-  "notes": "Feedback in the view: report a bug or send feedback as a prefilled GitHub issue"
+  "version": "0.5.9",
+  "notes": "Call the running app (list and curl localhost endpoints) and fetch allowlisted MuleSoft docs. Draft-as-diffs only for project code; curl answers offer possible improvements instead."
 }

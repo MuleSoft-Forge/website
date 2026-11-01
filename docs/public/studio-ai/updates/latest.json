@@ -1,4 +1,4 @@
 {
-  "version": "0.5.10",
-  "notes": "Fix Grok replies that return several choices (text + tool calls). What can you do answers as MuleSoftForge AI with the tools available this turn."
+  "version": "0.5.11",
+  "notes": "Diagnose mode: reproduce a problem, read the console and Mule XML, find the cause with evidence, then offer fixes for Agent. call_endpoint includes what the app console printed while the request ran."
 }

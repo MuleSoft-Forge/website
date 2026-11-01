@@ -14,6 +14,7 @@ import AssetCatalog from './components/AssetCatalog.vue'
 import AtAGlance from './components/AtAGlance.vue'
 import Contributors from './components/Contributors.vue'
 import WhatsNew from './components/WhatsNew.vue'
+import StudioAiLanding from './components/studio-ai/StudioAiLanding.vue'
 
 // Import custom styles
 import './styles/custom.css'
@@ -30,6 +31,7 @@ export default {
     app.component('AtAGlance', AtAGlance)
     app.component('Contributors', Contributors)
     app.component('WhatsNew', WhatsNew)
+    app.component('StudioAiLanding', StudioAiLanding)
 
     // Enhance app with tabs functionality
     enhanceAppWithTabs(app)

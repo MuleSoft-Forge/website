@@ -7,7 +7,7 @@ const IGNORE_CLOSE_MS = 400
 
 function zoomable(target) {
   return target instanceof HTMLImageElement
-    && target.closest('.vp-doc')
+    && target.closest('.vp-doc, [data-zoomable]')
     && !target.closest('a')
     && target.naturalWidth >= MIN_WIDTH
 }

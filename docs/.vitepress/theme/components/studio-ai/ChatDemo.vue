@@ -134,7 +134,7 @@ watch(
   })
 )
 
-const canvasFocus = computed(() => ({ agent: 'errors', dataweave: 'transform', debug: 'transform' })[scenario.value.id])
+const canvasFocus = computed(() => ({ agent: 'errors', diagnose: 'transform', dataweave: 'transform', debug: 'transform' })[scenario.value.id])
 </script>
 
 <template>

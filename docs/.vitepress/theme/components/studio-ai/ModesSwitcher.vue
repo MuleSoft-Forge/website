@@ -7,7 +7,9 @@ const mode = computed(() => modes[current.value])
 const rights = [
   ['read', 'Reads the project'],
   ['propose', 'Proposes edits as diffs'],
-  ['plan', 'Writes a plan']
+  ['plan', 'Writes a plan'],
+  ['diagnose', 'Finds the cause, with evidence'],
+  ['writes', 'Sends POST, PUT and DELETE to your local app']
 ]
 </script>
 
@@ -64,13 +66,13 @@ const rights = [
           </div>
         </div>
 
-        <div v-else key="plan" class="panel">
-          <div class="panel-head">Plan · employees-app</div>
+        <div v-else :key="mode.id" class="panel">
+          <div class="panel-head">{{ mode.preview.title }}</div>
           <div v-for="([h, body], i) in mode.preview.sections" :key="h" class="plan-row" :style="{ animationDelay: `${i * 120}ms` }">
             <span class="plan-h">{{ h }}</span>
-            <span>{{ body }}</span>
+            <span class="plan-body">{{ body }}</span>
           </div>
-          <div class="cta">Draft this plan for review in Agent mode</div>
+          <div class="cta">{{ mode.preview.cta }}</div>
         </div>
       </transition>
     </div>
@@ -94,7 +96,7 @@ const rights = [
 }
 
 .tabs button {
-  padding: 7px 22px;
+  padding: 7px 18px;
   border-radius: 999px;
   font-weight: 600;
   font-size: 14px;
@@ -273,6 +275,11 @@ const rights = [
   flex: none;
   font-weight: 700;
   color: #a99cff;
+}
+
+.plan-body {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .swap-enter-active, .swap-leave-active { transition: opacity 0.25s, transform 0.25s; }

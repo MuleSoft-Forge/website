@@ -14,6 +14,9 @@ The first drop-down under the message box picks the mode:
 - **Ask** answers and explains. It can read the project but never changes files. When you ask for a review or a fix, it lists possible fixes, collapsed and unticked, for Agent mode to make.
 - **Agent** reads the project and proposes changes for you to review. If it writes the code in its answer instead, it is asked once, straight away, to turn that code into proposed changes, so the diffs arrive with the answer.
 - **Plan** reads the project and writes a plan: the goal, the changes per file, the risks, and how to test. **Draft this plan for review in Agent mode** under the answer switches to Agent and asks it to propose those changes.
+- **Diagnose** finds why something goes wrong, with evidence. It reproduces the problem by calling the running app or reading its console, reads the Mule XML at the file and line the error names, and checks the cause with a second call, the debugger, a DataWeave run or the project checks before it states it. Every answer has the same shape: symptom, quoted evidence, cause, and how it was checked, then the fixes as a checklist for Agent mode. Once Agent has drafted the fixes, **After you accept and Studio redeploys, check the fix in Diagnose mode** repeats the reproduction.
+
+Ask, Plan and Diagnose only get read tools and never change files. Diagnose is the one read-only mode that can send POST, PUT, PATCH and DELETE to the app on this machine, so it can reproduce a failing write. Attaching a console that shows a failure switches Ask or Agent to Diagnose, and when an Ask or Agent message describes an error, the answer offers **Find the cause in Diagnose mode (reproduces it and reads the console)** once per chat.
 
 Buttons under an answer that start with **Draft** only prepare changes. They appear under **Proposed changes** with a diff for each file, and nothing is written until you accept them there.
 

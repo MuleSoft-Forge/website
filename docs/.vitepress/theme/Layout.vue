@@ -8,6 +8,8 @@ import VPLocalNav from 'vitepress/dist/client/theme-default/components/VPLocalNa
 import VPNav from 'vitepress/dist/client/theme-default/components/VPNav.vue'
 import VPSidebar from './components/VPSidebar.vue'
 import VPSkipLink from 'vitepress/dist/client/theme-default/components/VPSkipLink.vue'
+import StudioAiDocHeader from './components/studio-ai/StudioAiDocHeader.vue'
+import StudioAiDocFooter from './components/studio-ai/StudioAiDocFooter.vue'
 import { useData } from 'vitepress'
 import { useCloseSidebarOnEscape, useSidebar } from 'vitepress/dist/client/theme-default/composables/sidebar.js'
 
@@ -24,6 +26,8 @@ useCloseSidebarOnEscape(isSidebarOpen, closeSidebar)
 
 const { frontmatter } = useData()
 
+const isStudioAi = computed(() => route.path.startsWith('/studio-ai/'))
+
 const slots = useSlots()
 const heroImageSlotExists = computed(() => !!slots['home-hero-image'])
 
@@ -31,7 +35,7 @@ provide('hero-image-slot-exists', heroImageSlotExists)
 </script>
 
 <template>
-  <div v-if="frontmatter.layout !== false" class="Layout" :class="frontmatter.pageClass" >
+  <div v-if="frontmatter.layout !== false" class="Layout" :class="[frontmatter.pageClass, { 'studio-ai-product': isStudioAi }]">
     <slot name="layout-top" />
     <VPSkipLink />
     <VPBackdrop class="backdrop" :show="isSidebarOpen" @click="closeSidebar" />
@@ -66,8 +70,8 @@ provide('hero-image-slot-exists', heroImageSlotExists)
       <template #home-features-after><slot name="home-features-after" /></template>
 
       <template #doc-footer-before><slot name="doc-footer-before" /></template>
-      <template #doc-before><slot name="doc-before" /></template>
-      <template #doc-after><slot name="doc-after" /></template>
+      <template #doc-before><StudioAiDocHeader v-if="isStudioAi" /><slot name="doc-before" /></template>
+      <template #doc-after><StudioAiDocFooter v-if="isStudioAi" /><slot name="doc-after" /></template>
       <template #doc-top><slot name="doc-top" /></template>
       <template #doc-bottom><slot name="doc-bottom" /></template>
 

@@ -2,6 +2,20 @@
 
 export const news = [
   {
+    date: '2026-11-01',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.11: Diagnose mode',
+    summary: 'A new Diagnose mode finds why something goes wrong, with evidence: it reproduces the problem against your running app, reads the console and the Mule XML at the line the error names, checks the cause, and offers the fixes for Agent mode. Calls to the running app now include what its console printed.',
+    link: '/studio-ai/use-the-chat#modes'
+  },
+  {
+    date: '2026-11-01',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.9: call the running app and read MuleSoft docs',
+    summary: 'The AI can list your app\'s HTTP endpoints, call the app you are running in Studio on localhost, and compare the response with what you expect. It reads MuleSoft documentation pages to check a connector\'s parameters instead of answering from memory.',
+    link: '/studio-ai/use-the-chat'
+  },
+  {
     date: '2026-10-31',
     asset: 'studio-ai',
     title: 'Studio AI 0.5.8: Feedback in the view',

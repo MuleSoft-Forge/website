@@ -3,6 +3,19 @@
 
 export const UPDATE_SITE = 'https://docs.mulesoftforge.com/studio-ai/updates/'
 
+export const REPO = 'https://github.com/MuleSoft-Forge/mulesoftforge-studio-ai'
+
+// The doc pages under /studio-ai/; heading replaces each page's Markdown h1, which the product skin hides.
+export const docPages = [
+  { link: '/studio-ai/', text: 'Overview' },
+  { link: '/studio-ai/install', text: 'Install', heading: 'Install', kicker: 'Step 1 of 3' },
+  { link: '/studio-ai/set-up', text: 'Set up', heading: 'Set up a provider', kicker: 'Step 2 of 3' },
+  { link: '/studio-ai/use-the-chat', text: 'Use the chat', heading: 'Use the chat', kicker: 'Step 3 of 3' },
+  { link: '/studio-ai/update', text: 'Update', heading: 'Update and roll back', kicker: 'Stay current' },
+  { link: '/studio-ai/troubleshooting', text: 'Help', heading: 'Troubleshooting', kicker: 'Help' },
+  { link: '/studio-ai/build-it-yourself', text: 'Source', heading: 'Build it yourself', kicker: 'Open source' }
+]
+
 export const scenarios = [
   {
     id: 'agent',
@@ -33,6 +46,28 @@ export const scenarios = [
     proposal: { file: 'src/main/mule/employees-api.xml', add: 45, del: 12 },
     actions: ['Review diff', 'Accept', 'Reject'],
     done: 'Accepted · written with local history'
+  },
+  {
+    id: 'diagnose',
+    tab: 'Diagnose a 500',
+    mode: 'Diagnose',
+    model: 'Auto',
+    file: 'get-employees.xml',
+    context: ['Problems in employees-app'],
+    prompt: 'GET /api/employees returns 500. Why?',
+    steps: [
+      'list_endpoints: GET http://localhost:8081/api/employees',
+      'call_endpoint GET /api/employees → 500 · console attached',
+      'Read src/main/mule/get-employees.xml around line 23',
+      'call_endpoint GET /api/employees?limit=1 → 500 again'
+    ],
+    answer:
+      'Symptom: every GET returns 500. Evidence: the console shows `Element: get-employees/processors/2 @ employees-app:get-employees.xml:23` and `Couldn\'t find configuration property value for key ${hr.db.host}`. Cause: `hr.db.host` is not in `config-local.yaml`. Checked with a second call and check_project.',
+    diffLang: 'xml',
+    diff: [],
+    proposal: null,
+    actions: ['Draft selected changes for review'],
+    done: 'Agent drafts the fix as a diff for you to review'
   },
   {
     id: 'dataweave',
@@ -103,7 +138,7 @@ export const sources = [
     id: 'console',
     title: 'Console',
     how: 'Failed build or runtime log',
-    chip: 'Explain the error in this console output and fix its cause.'
+    chip: 'Find the cause of the error in this console output. · switches to Diagnose'
   },
   {
     id: 'debugger',
@@ -127,7 +162,7 @@ export const sources = [
     id: 'app',
     title: 'Your running app',
     how: 'Calls localhost endpoints only',
-    chip: 'call_endpoint GET http://localhost:8081/api/employees → 200'
+    chip: 'call_endpoint GET http://localhost:8081/api/employees → 500 · with the console lines it printed'
   },
   {
     id: 'voice',
@@ -144,7 +179,7 @@ export const modes = [
     tagline: 'Explains. Never changes a file.',
     detail:
       'Reads the project and answers. When you ask for a review or a fix, it lists the changes it could make, unticked, so you choose what Agent mode drafts.',
-    can: { read: true, propose: false, plan: false },
+    can: { read: true, propose: false, plan: false, diagnose: false, writes: false },
     preview: {
       kind: 'checklist',
       title: 'Changes it can make',
@@ -162,7 +197,7 @@ export const modes = [
     tagline: 'Proposes edits as diffs you review.',
     detail:
       'Reads, proposes and checks its own changes. Nothing is written until you Accept, and Accept refuses if the file changed since the proposal.',
-    can: { read: true, propose: true, plan: false },
+    can: { read: true, propose: true, plan: false, diagnose: false, writes: true },
     preview: {
       kind: 'proposals',
       title: 'Proposed changes · nothing is written until you accept',
@@ -179,15 +214,36 @@ export const modes = [
     tagline: 'Writes the plan before the code.',
     detail:
       'Reads the project and writes a plan: goal, changes per file, risks, and how to test. Its changes come back as a checklist for Agent mode.',
-    can: { read: true, propose: false, plan: true },
+    can: { read: true, propose: false, plan: true, diagnose: false, writes: false },
     preview: {
       kind: 'plan',
+      title: 'Plan · employees-app',
       sections: [
         ['Goal', 'One JSON error contract for every API error'],
         ['Changes', 'employees-api.xml: shared error handler · global.xml: error flow'],
         ['Risks', 'Clients that parse the old error body'],
         ['How to test', 'GET /api/employees/999 returns 404 with the new body']
-      ]
+      ],
+      cta: 'Draft this plan for review in Agent mode'
+    }
+  },
+  {
+    id: 'diagnose',
+    name: 'Diagnose',
+    tagline: 'Finds the cause, with evidence.',
+    detail:
+      'Reproduces the problem against your running app, reads the console and the Mule XML at the line the error names, and checks the cause before it states it. The fixes come back as a checklist for Agent mode.',
+    can: { read: true, propose: false, plan: false, diagnose: true, writes: true },
+    preview: {
+      kind: 'plan',
+      title: 'Diagnosis · GET /api/employees',
+      sections: [
+        ['Symptom', 'Every GET /api/employees returns 500'],
+        ['Evidence', 'Element: get-employees/processors/2 @ get-employees.xml:23'],
+        ['Cause', '${hr.db.host} is not defined in config-local.yaml'],
+        ['Checked', 'A second call with ?limit=1 fails the same way']
+      ],
+      cta: 'Draft selected changes for review'
     }
   }
 ]

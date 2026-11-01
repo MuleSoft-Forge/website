@@ -1,0 +1,232 @@
+/**
+ * MuleSoftForge Studio AI product skin.
+ * Applies to every page under /studio-ai/ (Layout.vue adds .studio-ai-product).
+ * The doc pages get their title from StudioAiDocHeader, so the Markdown h1 is hidden.
+ * -------------------------------------------------------------------------- */
+
+.studio-ai-product {
+  --sai-blue: #00a3e0;
+  --sai-violet: #6d5dfc;
+  --sai-grad: linear-gradient(135deg, #00a3e0, #6d5dfc);
+  --vp-c-brand-1: #0091c9;
+  --vp-c-brand-2: #6d5dfc;
+  --vp-c-brand-soft: rgba(0, 163, 224, 0.12);
+  background: var(--vp-c-bg);
+}
+
+.dark .studio-ai-product {
+  --vp-c-bg: #070b14;
+  --vp-c-bg-alt: #0a0f1c;
+  --vp-c-bg-elv: #0f1626;
+  --vp-c-bg-soft: #0f1626;
+  --vp-c-divider: rgba(255, 255, 255, 0.08);
+  --vp-c-gutter: rgba(255, 255, 255, 0.06);
+  --vp-c-text-1: #e6ecf5;
+  --vp-c-text-2: #a9b8ce;
+  --vp-c-text-3: #6e7f98;
+  --vp-c-brand-1: #38bdf8;
+  --vp-c-brand-2: #a99cff;
+  --vp-c-brand-soft: rgba(56, 189, 248, 0.14);
+  --vp-code-block-bg: #0b0f18;
+  --vp-sidebar-bg-color: #0a0f1c;
+  --vp-nav-bg-color: #070b14;
+}
+
+/* Soft glow behind the top of every doc page */
+.studio-ai-product .VPDoc {
+  position: relative;
+  isolation: isolate;
+}
+
+.studio-ai-product .VPDoc::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 520px;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 60% at 20% 0%, rgba(0, 163, 224, 0.12), transparent 70%),
+    radial-gradient(35% 50% at 85% 10%, rgba(109, 93, 252, 0.12), transparent 70%);
+}
+
+.dark .studio-ai-product .VPDoc::before {
+  background:
+    radial-gradient(40% 60% at 20% 0%, rgba(0, 119, 182, 0.28), transparent 70%),
+    radial-gradient(35% 50% at 85% 10%, rgba(91, 63, 214, 0.26), transparent 70%);
+}
+
+/* The header card carries the title */
+.studio-ai-product .vp-doc > div > h1:first-child {
+  display: none;
+}
+
+.studio-ai-product .vp-doc > div > h1:first-child + p {
+  margin-top: 0;
+  font-size: 17px;
+  color: var(--vp-c-text-1);
+}
+
+/* Headings */
+.studio-ai-product .vp-doc h2 {
+  margin-top: 56px;
+  padding-top: 0;
+  border-top: none;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.studio-ai-product .vp-doc h2::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 4px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  background: var(--sai-grad);
+}
+
+.studio-ai-product .vp-doc h3 {
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+/* Links */
+.studio-ai-product .vp-doc a:not(.header-anchor) {
+  font-weight: 500;
+  text-decoration: none;
+  background-image: linear-gradient(90deg, var(--sai-blue), var(--sai-violet));
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+}
+
+.studio-ai-product .vp-doc a:not(.header-anchor):hover {
+  text-decoration: none;
+  background-size: 100% 2px;
+}
+
+/* Numbered steps as a timeline */
+.studio-ai-product .vp-doc > div > ol {
+  list-style: none;
+  counter-reset: sai-step;
+  padding-left: 0;
+  margin: 28px 0;
+}
+
+.studio-ai-product .vp-doc > div > ol > li {
+  position: relative;
+  counter-increment: sai-step;
+  margin: 0;
+  padding: 2px 0 28px 52px;
+}
+
+.studio-ai-product .vp-doc > div > ol > li::before {
+  content: counter(sai-step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  background: var(--sai-grad);
+  box-shadow: 0 6px 18px -6px rgba(0, 163, 224, 0.8);
+}
+
+.studio-ai-product .vp-doc > div > ol > li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 40px;
+  bottom: 6px;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, rgba(0, 163, 224, 0.5), rgba(109, 93, 252, 0.15));
+}
+
+.studio-ai-product .vp-doc li > img {
+  margin-left: 0;
+  max-width: 100%;
+}
+
+/* Bullets */
+.studio-ai-product .vp-doc ul > li::marker {
+  color: var(--sai-blue);
+}
+
+/* Screenshots */
+.studio-ai-product .vp-doc img {
+  display: block;
+  margin: 18px 0 6px;
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-divider);
+  box-shadow:
+    0 24px 50px -24px rgba(0, 40, 100, 0.45),
+    0 0 0 1px rgba(0, 163, 224, 0.06);
+}
+
+.dark .studio-ai-product .vp-doc img {
+  box-shadow:
+    0 24px 60px -20px rgba(0, 0, 0, 0.8),
+    0 0 40px -10px rgba(0, 163, 224, 0.25);
+}
+
+/* Inline code */
+.studio-ai-product .vp-doc :not(pre) > code {
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-brand-soft);
+  border-radius: 5px;
+}
+
+/* Code blocks */
+.studio-ai-product .vp-doc div[class*='language-'] {
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-divider);
+}
+
+/* Tables */
+.studio-ai-product .vp-doc table {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--vp-c-divider);
+}
+
+.studio-ai-product .vp-doc th {
+  background: var(--vp-c-brand-soft);
+}
+
+/* Callouts */
+.studio-ai-product .vp-doc .custom-block,
+.studio-ai-product .vp-doc .hint {
+  border-radius: 12px;
+}
+
+/* Sidebar: active page as a gradient pill */
+.studio-ai-product .VPSidebarItem.is-active > .item .text {
+  font-weight: 700;
+  background: var(--sai-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.studio-ai-product .VPSidebarItem.is-active > .item .indicator {
+  background: var(--sai-grad);
+}
+
+/* Prev / next */
+.studio-ai-product .VPDocFooter .pager-link {
+  border-radius: 14px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.studio-ai-product .VPDocFooter .pager-link:hover {
+  transform: translateY(-2px);
+  border-color: var(--sai-blue);
+}

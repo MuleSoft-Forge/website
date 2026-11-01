@@ -23,7 +23,7 @@ async function copyUrl() {
 }
 
 const proof = [
-  ['Ask · Agent · Plan', 'three modes, one view'],
+  ['Ask · Agent · Plan · Diagnose', 'four modes, one view'],
   ['Checked first', 'Mule XML, connectors, DataWeave'],
   ['Secrets masked', 'before anything is sent'],
   ['You accept', 'nothing is written until then']
@@ -45,7 +45,7 @@ const steps = [
       <div class="wrap hero-inner">
         <a class="eyebrow" :href="withBase('/whats-new')">
           <span class="pill">New</span>
-          <span v-if="version" class="eyebrow-ver">v{{ version }} · </span>Debug with AI, call your running app
+          <span v-if="version" class="eyebrow-ver">v{{ version }} · </span>Diagnose mode: find the cause, with evidence
           <span class="chev">→</span>
         </a>
         <h1>
@@ -93,8 +93,8 @@ const steps = [
       <div class="wrap">
         <header class="head">
           <span class="kicker">Modes</span>
-          <h2>Ask it. Let it act. Or make it plan first.</h2>
-          <p>Ask and Plan only get read tools, and the tool layer refuses edits in those modes as well.</p>
+          <h2>Ask it. Diagnose it. Let it act. Or plan first.</h2>
+          <p>Ask, Plan and Diagnose only get read tools, and the tool layer refuses edits in those modes as well.</p>
         </header>
         <ModesSwitcher />
       </div>

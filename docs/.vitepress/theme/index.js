@@ -18,6 +18,7 @@ import StudioAiLanding from './components/studio-ai/StudioAiLanding.vue'
 
 // Import custom styles
 import './styles/custom.css'
+import './styles/studio-ai.css'
 
 export default {
   extends: DefaultTheme,

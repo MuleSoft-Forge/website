@@ -33,8 +33,8 @@ features:
         - src: /images/studio-ai/fix-with-ai-result.png
           alt: "MuleSoftForge AI returns the corrected DataWeave, explains the missing comma, and offers Review diff and Apply to the DataWeave editor"
           caption: Fixed
-    link: /studio-ai/install
-    linkText: Install in Studio
+    link: /studio-ai/
+    linkText: See Studio AI
 
   - icon:
       src: /images/typesafe-connector-icon.svg

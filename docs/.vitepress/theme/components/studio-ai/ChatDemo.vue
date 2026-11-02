@@ -177,7 +177,7 @@ const canvasFocus = computed(() => ({ agent: 'errors', diagnose: 'transform', da
 
         <div class="chat">
           <div class="chat-head">
-            <span class="chat-title"><span class="anvil" />MuleSoftForge AI</span>
+            <span class="chat-title"><span class="anvil" />MuleSoftForge Studio AI</span>
             <span class="chat-links"><span v-if="props.version">v{{ props.version }}</span><span>History ▾</span><span>Settings</span></span>
           </div>
 

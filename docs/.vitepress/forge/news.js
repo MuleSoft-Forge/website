@@ -19,7 +19,7 @@ export const news = [
     date: '2026-10-31',
     asset: 'studio-ai',
     title: 'Studio AI 0.5.8: Feedback in the view',
-    summary: 'Feedback in the MuleSoftForge AI header opens a bug or feedback form. Open on GitHub fills a public issue on the plugin\'s repository for you to create. Secrets are masked; leave out customer data.',
+    summary: 'Feedback in the MuleSoftForge Studio AI header opens a bug or feedback form. Open on GitHub fills a public issue on the plugin\'s repository for you to create. Secrets are masked; leave out customer data.',
     link: '/studio-ai/use-the-chat#feedback-and-bug-reports'
   },
   {
@@ -74,7 +74,7 @@ export const news = [
   {
     date: '2026-10-28',
     asset: 'studio-ai',
-    title: 'Studio AI 0.4: proposal checks, connector lookup and Send to MuleSoftForge AI everywhere',
+    title: 'Studio AI 0.4: proposal checks, connector lookup and Send to MuleSoftForge Studio AI everywhere',
     summary: 'Proposed edits are checked before you apply them, the helper can look up connectors, and you can send a selection to the chat from DataWeave editors and the flow canvas. 0.4.6 tidies the chat composer onto one row.',
     link: '/studio-ai/update'
   },

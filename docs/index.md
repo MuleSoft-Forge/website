@@ -23,15 +23,15 @@ features:
       src: /images/favicon.png
       alt: MuleSoftForge Studio AI
     title: "MuleSoftForge Studio AI"
-    details: "Broken DataWeave? Right-click and choose <strong>Fix with MuleSoftForge AI</strong>. It explains what went wrong and hands back the fix, and you review the diff before anything changes."
+    details: "Broken DataWeave? Right-click and choose <strong>Fix with MuleSoftForge Studio AI</strong>. It explains what went wrong and hands back the fix, and you review the diff before anything changes."
     media:
       heading: AI inside Anypoint Studio
       frames:
         - src: /images/studio-ai/fix-with-ai-menu-card.png
-          alt: "Right-click menu in the Anypoint Studio DataWeave editor showing Send to MuleSoftForge AI and Fix with MuleSoftForge AI"
+          alt: "Right-click menu in the Anypoint Studio DataWeave editor showing Send to MuleSoftForge Studio AI and Fix with MuleSoftForge Studio AI"
           caption: Right-click
         - src: /images/studio-ai/fix-with-ai-result.png
-          alt: "MuleSoftForge AI returns the corrected DataWeave, explains the missing comma, and offers Review diff and Apply to the DataWeave editor"
+          alt: "MuleSoftForge Studio AI returns the corrected DataWeave, explains the missing comma, and offers Review diff and Apply to the DataWeave editor"
           caption: Fixed
     link: /studio-ai/
     linkText: See Studio AI

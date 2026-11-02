@@ -53,7 +53,7 @@ const steps = [
           <span class="grad">that knows Mule.</span>
         </h1>
         <p class="lede">
-          MuleSoftForge AI lives inside Anypoint Studio. Ask about flows, DataWeave, Problems, Console output and live debugger
+          MuleSoftForge Studio AI lives inside Anypoint Studio. Ask about flows, DataWeave, Problems, Console output and live debugger
           events. Every change comes back as a diff, checked against your project, and nothing is written until you accept.
         </p>
         <div class="ctas">

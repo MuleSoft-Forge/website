@@ -9,7 +9,7 @@ description: Update, roll back, or remove MuleSoftForge Studio AI
 
 The chat view shows the installed version in its header, for example `v0.2.0`. Once per Studio session it reads a small `latest.json` from this site. When a newer release exists, the label reads **Update to x.y.z**; clicking it opens **Help > Check for Updates**, which installs the new version. You can also run **Help > Check for Updates** at any time.
 
-To turn the check off, open **Preferences > MuleSoftForge AI** and clear **Check for updates**. The check sends no project data; it is one HTTPS GET of `latest.json`.
+To turn the check off, open **Preferences > MuleSoftForge Studio AI** and clear **Check for updates**. The check sends no project data; it is one HTTPS GET of `latest.json`.
 
 ## Roll back or remove
 

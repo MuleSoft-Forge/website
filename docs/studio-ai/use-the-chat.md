@@ -5,7 +5,7 @@ description: Modes, context, screenshots, and reviewing proposed changes in Mule
 
 # Use the chat
 
-Open a Mule file, type a question in the MuleSoftForge AI view, and press Enter (Shift+Enter adds a line). **Include open file** sends the active editor's content, unsaved edits included, with your message. **New chat** starts over.
+Open a Mule file, type a question in the MuleSoftForge Studio AI view, and press Enter (Shift+Enter adds a line). **Include open file** sends the active editor's content, unsaved edits included, with your message. **New chat** starts over.
 
 ## Modes
 
@@ -31,7 +31,7 @@ The next box picks the model. Choose a suggestion or type any model id and press
 
 A step under your message says which model Auto picked and why. If that model fails before answering, with a rate limit, a server error or a timeout, Auto runs the message once on the other model and says so. Errors you need to fix yourself, such as a bad key or an unknown model, are not retried. A message never switches model part-way, so all the steps of one answer come from the same model.
 
-Choose the two models under **Preferences > MuleSoftForge AI**, below **Model**. Each provider starts with a sensible pair, such as Claude Haiku and Claude Sonnet for Anthropic. With OpenRouter you can also pick `openrouter/auto`, which lets OpenRouter choose. The step under each answer then names the model that actually replied.
+Choose the two models under **Preferences > MuleSoftForge Studio AI**, below **Model**. Each provider starts with a sensible pair, such as Claude Haiku and Claude Sonnet for Anthropic. With OpenRouter you can also pick `openrouter/auto`, which lets OpenRouter choose. The step under each answer then names the model that actually replied.
 
 ## Give it context
 
@@ -43,9 +43,9 @@ Choose the two models under **Preferences > MuleSoftForge AI**, below **Model**.
 - **Console**: a console's text, such as Maven output from a failed build or a running Mule app's log. Long output keeps its last part, where errors usually are.
 - **Clipboard image**: see [Screenshots and images](#screenshots-and-images).
 
-**Send to MuleSoftForge AI** does the same from where you are working: the MuleSoftForge button on the toolbar, the right-click menu in editors (including the Configuration XML tab), Package Explorer, Problems and Console, or **Cmd/Ctrl+Alt+I**. It opens the view with the selected lines, files, problems, or console text attached.
+**Send to MuleSoftForge Studio AI** does the same from where you are working: the MuleSoftForge button on the toolbar, the right-click menu in editors (including the Configuration XML tab), Package Explorer, Problems and Console, or **Cmd/Ctrl+Alt+I**. It opens the view with the selected lines, files, problems, or console text attached.
 
-On the **Message Flow** canvas, select one or more processors, scopes or flows (Shift- or Cmd/Ctrl-click for several), right-click, and choose **Send to MuleSoftForge AI**. Their XML is attached, for example **canvas selection in src/main/mule/employees-api.xml (2 elements: logger "Log request", http:request)**. A processor inside a selected flow is sent once, with its flow.
+On the **Message Flow** canvas, select one or more processors, scopes or flows (Shift- or Cmd/Ctrl-click for several), right-click, and choose **Send to MuleSoftForge Studio AI**. Their XML is attached, for example **canvas selection in src/main/mule/employees-api.xml (2 elements: logger "Log request", http:request)**. A processor inside a selected flow is sent once, with its flow.
 
 When you attach problems with errors, or console output that shows a failure, and the message box is empty, the helper fills in a request to fix them and switches from Ask to Agent mode, so the fix comes back as a change you can review.
 
@@ -54,7 +54,7 @@ When you attach problems with errors, or console output that shows a failure, an
 Two places, both sent with every message:
 
 - **`AGENTS.md`** at the root of the Mule project, for team conventions such as "log with the JSON Logger connector" or "error types use the APP namespace". It is the same file other AI coding tools read. Put anything meant only for Studio under a `## Studio AI` heading.
-- **Your instructions**, in **Preferences > MuleSoftForge AI > Instructions**, for your own preferences in every project, such as "use British English" or "keep answers short".
+- **Your instructions**, in **Preferences > MuleSoftForge Studio AI > Instructions**, for your own preferences in every project, such as "use British English" or "keep answers short".
 
 Both go below the built-in prompt, after secrets are masked, up to 8,000 characters each; longer text is cut with a note. They can change the built-in guidance (persona, style, Mule conventions). They cannot switch off the rules the helper relies on: masked values stay masked, and changes are still proposals you review. The first message of a chat shows a step such as **Following AGENTS.md (1,240 characters) and your instructions (85 characters)**. **Show built-in prompt**, under the box, shows what is sent before them.
 
@@ -66,8 +66,8 @@ Passwords, API keys, tokens and client ids in properties, YAML, Mule XML, URLs, 
 
 Right-click in a DataWeave script, such as the script of a **Transform Message**, for two items under **Format**:
 
-- **Send to MuleSoftForge AI** attaches the selected DataWeave, or the whole script when nothing is selected, to your next message. It sends the text as you see it, even before you save.
-- **Fix with MuleSoftForge AI** sends the whole script and the errors and warnings Studio marks in it, straight away. If you selected part of the script, the AI is asked to focus there. When the answer contains a corrected script, click **Review diff** to see it beside the current one, then **Apply to the DataWeave editor** to replace the script. **Cmd/Ctrl+Z** in the DataWeave editor undoes it; save the Mule file to keep it.
+- **Send to MuleSoftForge Studio AI** attaches the selected DataWeave, or the whole script when nothing is selected, to your next message. It sends the text as you see it, even before you save.
+- **Fix with MuleSoftForge Studio AI** sends the whole script and the errors and warnings Studio marks in it, straight away. If you selected part of the script, the AI is asked to focus there. When the answer contains a corrected script, click **Review diff** to see it beside the current one, then **Apply to the DataWeave editor** to replace the script. **Cmd/Ctrl+Z** in the DataWeave editor undoes it; save the Mule file to keep it.
 
 Apply refuses if you changed the script, or closed its editor, after choosing Fix. Choose Fix again on the current script.
 
@@ -81,7 +81,7 @@ With MuleSoft's [DataWeave CLI](https://github.com/mulesoft/data-weave-cli) inst
 
 Runs cannot read files or the network and stop after 20 seconds. Mule-only functions such as `p()` and `lookup()` return null in a run, so give the values they would return when they matter.
 
-Set it up in **Preferences > MuleSoftForge AI > DataWeave CLI**. Leave the path empty and the plugin looks for `dw` on the PATH, in `~/.dw/bin` and in Homebrew; **Check** shows the version it found. **Download** fetches MuleSoft's release (2.12.3) for macOS on Apple silicon, Windows x64 or Linux x64 from GitHub, verifies its published checksum, and uses it. Without the CLI the other proposal checks still run.
+Set it up in **Preferences > MuleSoftForge Studio AI > DataWeave CLI**. Leave the path empty and the plugin looks for `dw` on the PATH, in `~/.dw/bin` and in Homebrew; **Check** shows the version it found. **Download** fetches MuleSoft's release (2.12.3) for macOS on Apple silicon, Windows x64 or Linux x64 from GitHub, verifies its published checksum, and uses it. Without the CLI the other proposal checks still run.
 
 ## Debug with AI
 
@@ -91,7 +91,7 @@ The AI explains from that event first, naming the processor, the value and the s
 
 Evaluations are read-only: the AI cannot change the event, set breakpoints or step the debugger, and tells you what to do in Studio instead. It can only evaluate while the debugger is stopped; if the app has moved on, stop at the breakpoint again.
 
-The event is real data, so secrets in it are masked as usual, and email addresses and phone numbers become «email-N» and «phone-N». To send those as they are, clear **Hide email addresses and phone numbers in live debug events** under **Preferences > MuleSoftForge AI**.
+The event is real data, so secrets in it are masked as usual, and email addresses and phone numbers become «email-N» and «phone-N». To send those as they are, clear **Hide email addresses and phone numbers in live debug events** under **Preferences > MuleSoftForge Studio AI**.
 
 ## Screenshots and images
 
@@ -142,11 +142,11 @@ The microphone button next to **Send** starts the operating system's dictation i
 
 Chats save automatically after every answer, in your Studio workspace, never in your Mule projects. File contents, images and API keys are not saved. **History ▾** in the view lists recent chats so you can open, rename, export as Markdown, or delete them. Proposals you have not reviewed expire when a chat is closed.
 
-The column to the right of the answers shows the model in use and its list price, and what this chat, today and this month have cost; hover for the Studio session, all time, and the project. To turn saving off or change how long chats are kept, open **Preferences > MuleSoftForge AI > Chat history**.
+The column to the right of the answers shows the model in use and its list price, and what this chat, today and this month have cost; hover for the Studio session, all time, and the project. To turn saving off or change how long chats are kept, open **Preferences > MuleSoftForge Studio AI > Chat history**.
 
-Each answer runs as a Studio job named **MuleSoftForge AI**, so you can cancel it with **Cancel** in the view or from Studio's **Progress** view. If you cancel a request, the AI is told with your next message that it was dropped, so it does not assume the work was done.
+Each answer runs as a Studio job named **MuleSoftForge Studio AI**, so you can cancel it with **Cancel** in the view or from Studio's **Progress** view. If you cancel a request, the AI is told with your next message that it was dropped, so it does not assume the work was done.
 
-The view follows Studio's light and dark themes. To change its colours, open **Preferences > General > Appearance > Colors and Fonts** and expand **MuleSoftForge AI**.
+The view follows Studio's light and dark themes. To change its colours, open **Preferences > General > Appearance > Colors and Fonts** and expand **MuleSoftForge Studio AI**.
 
 ## Feedback and bug reports
 

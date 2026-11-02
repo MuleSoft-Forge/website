@@ -8,7 +8,7 @@ import { REPO } from './content.js'
     <div class="glow" aria-hidden="true" />
     <div class="copy">
       <b>Something not right?</b>
-      <span>Click <strong>Feedback</strong> in the MuleSoftForge AI view. It fills in your versions and masks secrets for you.</span>
+      <span>Click <strong>Feedback</strong> in the MuleSoftForge Studio AI view. It fills in your versions and masks secrets for you.</span>
     </div>
     <div class="links">
       <a :href="withBase('/studio-ai/troubleshooting')">Troubleshooting</a>

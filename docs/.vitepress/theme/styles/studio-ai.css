@@ -190,6 +190,13 @@
   border: 1px solid var(--vp-c-divider);
 }
 
+/* Prompts to copy: wrap instead of scrolling sideways */
+.studio-ai-product .vp-doc .prompt-block pre,
+.studio-ai-product .vp-doc .prompt-block code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 /* Tables */
 .studio-ai-product .vp-doc table {
   border-radius: 12px;

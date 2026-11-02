@@ -54,7 +54,7 @@ When you attach problems with errors, or console output that shows a failure, an
 Two places, both sent with every message:
 
 - **`AGENTS.md`** at the root of the Mule project, for team conventions such as "log with the JSON Logger connector" or "error types use the APP namespace". It is the same file other AI coding tools read. Put anything meant only for Studio under a `## Studio AI` heading.
-- **Your instructions**, in **Preferences > MuleSoftForge Studio AI > Instructions**, for your own preferences in every project, such as "use British English" or "keep answers short".
+- **Your instructions**, in **Preferences > MuleSoftForge Studio AI > Instructions**, for your own preferences in every project, such as "use British English" or "keep answers short". [Set Up](./set-up#your-instructions) has an example set of rules for Mule 4 metadata.
 
 Both go below the built-in prompt, after secrets are masked, up to 8,000 characters each; longer text is cut with a note. They can change the built-in guidance (persona, style, Mule conventions). They cannot switch off the rules the helper relies on: masked values stay masked, and changes are still proposals you review. The first message of a chat shows a step such as **Following AGENTS.md (1,240 characters) and your instructions (85 characters)**. **Show built-in prompt**, under the box, shows what is sent before them.
 
@@ -142,7 +142,7 @@ The microphone button next to **Send** starts the operating system's dictation i
 
 Chats save automatically after every answer, in your Studio workspace, never in your Mule projects. File contents, images and API keys are not saved. **History ▾** in the view lists recent chats so you can open, rename, export as Markdown, or delete them. Proposals you have not reviewed expire when a chat is closed.
 
-The column to the right of the answers shows the model in use and its list price, and what this chat, today and this month have cost; hover for the Studio session, all time, and the project. To turn saving off or change how long chats are kept, open **Preferences > MuleSoftForge Studio AI > Chat history**.
+The column to the right of the answers shows the model in use and its list price, and what this chat, today and this month have cost; hover for the Studio session, all time, and the project. In a new install, all costs show $0.00 until you send a message. **Show prices** lists the price per 1M tokens of each model. These are public list prices from OpenRouter; your provider or endpoint can set different prices, so use them as a guide. To turn saving off or change how long chats are kept, open **Preferences > MuleSoftForge Studio AI > Chat history**.
 
 Each answer runs as a Studio job named **MuleSoftForge Studio AI**, so you can cancel it with **Cancel** in the view or from Studio's **Progress** view. If you cancel a request, the AI is told with your next message that it was dropped, so it does not assume the work was done.
 

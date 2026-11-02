@@ -8,9 +8,10 @@ export const REPO = 'https://github.com/MuleSoft-Forge/mulesoftforge-studio-ai'
 // The doc pages under /studio-ai/; heading replaces each page's Markdown h1, which the product skin hides.
 export const docPages = [
   { link: '/studio-ai/', text: 'Overview' },
-  { link: '/studio-ai/install', text: 'Install', heading: 'Install', kicker: 'Step 1 of 3' },
-  { link: '/studio-ai/set-up', text: 'Set up', heading: 'Set up a provider', kicker: 'Step 2 of 3' },
-  { link: '/studio-ai/use-the-chat', text: 'Use the chat', heading: 'Use the chat', kicker: 'Step 3 of 3' },
+  { link: '/studio-ai/install', text: 'Install', heading: 'Install', kicker: 'Step 1 of 4' },
+  { link: '/studio-ai/set-up', text: 'Set up', heading: 'Set up a provider', kicker: 'Step 2 of 4' },
+  { link: '/studio-ai/discover', text: 'Discover', heading: 'Discover Studio AI', kicker: 'Step 3 of 4' },
+  { link: '/studio-ai/use-the-chat', text: 'Use the chat', heading: 'Use the chat', kicker: 'Step 4 of 4' },
   { link: '/studio-ai/update', text: 'Update', heading: 'Update and roll back', kicker: 'Stay current' },
   { link: '/studio-ai/troubleshooting', text: 'Help', heading: 'Troubleshooting', kicker: 'Help' },
   { link: '/studio-ai/build-it-yourself', text: 'Source', heading: 'Build it yourself', kicker: 'Open source' }

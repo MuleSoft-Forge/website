@@ -188,6 +188,7 @@ const studioAi = {
     { text: 'Overview', link: '/studio-ai/' },
     { text: 'Install', link: '/studio-ai/install' },
     { text: 'Set Up', link: '/studio-ai/set-up' },
+    { text: 'Discover Studio AI', link: '/studio-ai/discover' },
     { text: 'Use the Chat', link: '/studio-ai/use-the-chat' },
     { text: 'Update and Roll Back', link: '/studio-ai/update' },
     { text: 'Build It Yourself', link: '/studio-ai/build-it-yourself' },

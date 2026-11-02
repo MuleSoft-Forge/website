@@ -15,6 +15,7 @@ import AtAGlance from './components/AtAGlance.vue'
 import Contributors from './components/Contributors.vue'
 import WhatsNew from './components/WhatsNew.vue'
 import StudioAiLanding from './components/studio-ai/StudioAiLanding.vue'
+import StepCarousel from './components/studio-ai/StepCarousel.vue'
 
 // Import custom styles
 import './styles/custom.css'
@@ -33,6 +34,7 @@ export default {
     app.component('Contributors', Contributors)
     app.component('WhatsNew', WhatsNew)
     app.component('StudioAiLanding', StudioAiLanding)
+    app.component('StepCarousel', StepCarousel)
 
     // Enhance app with tabs functionality
     enhanceAppWithTabs(app)

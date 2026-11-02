@@ -32,7 +32,8 @@ const proof = [
 const steps = [
   { n: 1, title: 'Install', body: 'Help > Install New Software, paste the update site, restart Studio.', link: '/studio-ai/install' },
   { n: 2, title: 'Set up', body: 'Pick a provider, paste your API key, click Test connection.', link: '/studio-ai/set-up' },
-  { n: 3, title: 'Use the chat', body: 'Open a Mule file and ask. Modes, context and reviewing changes.', link: '/studio-ai/use-the-chat' }
+  { n: 3, title: 'Discover', body: 'Create a project and ask for your first flow in Plan mode.', link: '/studio-ai/discover' },
+  { n: 4, title: 'Use the chat', body: 'Open a Mule file and ask. Modes, context and reviewing changes.', link: '/studio-ai/use-the-chat' }
 ]
 </script>
 
@@ -171,7 +172,7 @@ const steps = [
       <div class="wrap">
         <header class="head light">
           <span class="kicker">Get started</span>
-          <h2>Running in Studio in three steps</h2>
+          <h2>Running in Studio in four steps</h2>
         </header>
         <div class="steps">
           <a v-for="s in steps" :key="s.n" class="step" :href="withBase(s.link)">
@@ -494,7 +495,7 @@ h2 {
 
 .steps {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }
 

@@ -5,35 +5,17 @@ description: Install MuleSoftForge Studio AI into Anypoint Studio from the updat
 
 # Install
 
-1. In Anypoint Studio choose **Help > Install New Software…**
+Install the plugin from the MuleSoftForge update site in Anypoint Studio. Use the arrows, the step numbers or the arrow keys to go through the steps. Click a screenshot to see it full size.
 
-   ![Help menu with Install New Software selected](/images/studio-ai/install-1-help-menu.png)
+<StepCarousel set="install" />
 
-2. Click **Add…**, name it `MuleSoftForge Studio AI`, paste this location, and click **Add**:
+The update site location for step 4:
 
-   ```text
-   https://docs.mulesoftforge.com/studio-ai/updates/
-   ```
+```text
+https://docs.mulesoftforge.com/studio-ai/updates/
+```
 
-   ![Add Repository dialog with the MuleSoftForge Studio AI update site](/images/studio-ai/install-2-add-repository.png)
-
-3. Tick **MuleSoftForge > MuleSoftForge Studio AI** and click **Next** until **Finish**.
-
-   ![Install dialog with MuleSoftForge Studio AI selected](/images/studio-ai/install-3-select-feature.png)
-
-4. Studio asks whether you trust unsigned content. Leave the **Unsigned** row ticked and click **Trust Selected**. The items listed should be `com.mulesoftforge.studio.ai` and `com.mulesoftforge.studio.ai.feature`. Leave **Always trust all content** cleared.
-
-   ![Trust Artifacts dialog listing the MuleSoftForge Studio AI plugin and feature](/images/studio-ai/install-4-trust-artifacts.png)
-
-   Beta releases are not signed yet, so Studio asks on every install and update. The source is on GitHub, so you can review it and [build it yourself](./build-it-yourself).
-
-5. When Studio asks to restart, click **Restart Now**.
-
-   ![Software Updates dialog asking to restart Anypoint Studio](/images/studio-ai/install-5-restart.png)
-
-6. After the restart, click the MuleSoftForge button on the toolbar (**Send the selection to MuleSoftForge Studio AI**). The **MuleSoftForge Studio AI** view opens, with the installed version in its header.
-
-   ![MuleSoftForge Studio AI view opened from the toolbar button, showing v0.1.0](/images/studio-ai/install-6-open-view.png)
+Beta releases are not signed yet, so Studio asks you to trust them on each install and update. The source is on GitHub, so you can review it and [build it yourself](./build-it-yourself).
 
 You can also open the view with **Window > Show View > Other… > MuleSoftForge > MuleSoftForge Studio AI**, or **Cmd/Ctrl+Alt+I**.
 

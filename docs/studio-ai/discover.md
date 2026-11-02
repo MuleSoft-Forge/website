@@ -7,6 +7,12 @@ description: Build your first Mule flow with MuleSoftForge Studio AI, from an em
 
 Build a small Mule flow from an empty project. You ask in Plan mode first, so you see what the AI wants to do before any file changes. You need the plugin [installed](./install) and a provider [set up](./set-up).
 
+<div class="doc-video">
+  <video controls playsinline preload="metadata" src="/videos/studio-ai/discover-preview.mp4">
+    Your browser does not play this video.
+  </video>
+</div>
+
 ## 1. Plan the flow
 
 Create the project `mymulesoftforge-studio-ai-app`, open MuleSoftForge Studio AI, select **Plan**, and paste this prompt:

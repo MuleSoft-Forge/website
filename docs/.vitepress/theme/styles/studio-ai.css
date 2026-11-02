@@ -197,23 +197,6 @@
   word-break: break-word;
 }
 
-/* Hosted screen recordings */
-.studio-ai-product .vp-doc .doc-video {
-  margin: 22px 0 28px;
-}
-
-.studio-ai-product .vp-doc .doc-video video {
-  display: block;
-  width: 100%;
-  max-width: 920px;
-  border-radius: 12px;
-  border: 1px solid var(--vp-c-divider);
-  background: #070b14;
-  box-shadow:
-    0 24px 50px -24px rgba(0, 40, 100, 0.45),
-    0 0 0 1px rgba(0, 163, 224, 0.06);
-}
-
 /* Tables */
 .studio-ai-product .vp-doc table {
   border-radius: 12px;

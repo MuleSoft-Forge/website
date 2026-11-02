@@ -1,4 +1,4 @@
 {
-  "version": "0.5.11",
-  "notes": "Diagnose mode: reproduce a problem, read the console and Mule XML, find the cause with evidence, then offer fixes for Agent. call_endpoint includes what the app console printed while the request ran."
+  "version": "0.5.12",
+  "notes": "New look: the message box and Proposed changes are cards in the chat view, in the MuleSoftForge navy (dark) and Forge blue (light). The price list folds away under Show prices. A missing or broken DataWeave CLI no longer stops a chat: Preferences shows why in red and the DataWeave tools stay off until it runs."
 }

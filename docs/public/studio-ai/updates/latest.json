@@ -1,4 +1,4 @@
 {
-  "version": "0.5.15",
-  "notes": "Create MUnit tests from a flow or sub-flow (right-click on the canvas), with scenarios to pick and static checks for suites and the pom. New run_munit tool: in Agent and Diagnose mode the AI runs your MUnit suites in Studio, reads each test's result and explains the failures."
+  "version": "0.5.16",
+  "notes": "MUnit suites are now checked against MUnit's own schemas and the AI is given the exact element shapes, so drafted tests parse first time. run_munit now waits for its own run to finish and no longer reports the previous run's results or an empty pass."
 }

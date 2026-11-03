@@ -77,8 +77,28 @@ const steps = [
       </div>
     </section>
 
-    <!-- Send from anywhere -->
+    <!-- Launch video -->
     <section class="band">
+      <div class="wrap">
+        <header class="head">
+          <span class="kicker">Launch</span>
+          <h2>See it in Anypoint Studio</h2>
+          <p>A short look at MuleSoftForge Studio AI from the first release.</p>
+        </header>
+        <div class="launch-video">
+          <iframe
+            src="https://www.youtube.com/embed/ReHluN9BF0w"
+            title="MuleSoftForge Studio AI launch"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Send from anywhere -->
+    <section class="band alt">
       <div class="wrap">
         <header class="head">
           <span class="kicker">Context</span>
@@ -90,7 +110,7 @@ const steps = [
     </section>
 
     <!-- Modes -->
-    <section class="band alt">
+    <section class="band">
       <div class="wrap">
         <header class="head">
           <span class="kicker">Modes</span>
@@ -102,7 +122,7 @@ const steps = [
     </section>
 
     <!-- Checks -->
-    <section class="band">
+    <section class="band alt">
       <div class="wrap split">
         <div class="split-copy">
           <span class="kicker">Checks</span>
@@ -122,7 +142,7 @@ const steps = [
     </section>
 
     <!-- Secrets -->
-    <section class="band alt">
+    <section class="band">
       <div class="wrap split reverse">
         <SecretMaskDemo />
         <div class="split-copy">
@@ -143,7 +163,7 @@ const steps = [
     </section>
 
     <!-- Providers and cost -->
-    <section class="band">
+    <section class="band alt">
       <div class="wrap">
         <header class="head">
           <span class="kicker">Models</span>
@@ -155,7 +175,7 @@ const steps = [
     </section>
 
     <!-- Gallery -->
-    <section class="band alt">
+    <section class="band">
       <div class="wrap">
         <header class="head">
           <span class="kicker">The real thing</span>
@@ -391,6 +411,27 @@ h1 {
 
 .proof b { font-size: 16px; color: #fff; }
 .proof span { font-size: 13px; color: #7d8ca3; }
+
+.launch-video {
+  position: relative;
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #070b14;
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: 0 28px 60px -28px rgba(0, 40, 100, 0.55);
+}
+
+.launch-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
 
 /* Bands */
 .band {

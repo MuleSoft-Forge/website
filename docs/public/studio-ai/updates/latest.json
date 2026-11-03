@@ -1,4 +1,4 @@
 {
-  "version": "0.5.13",
-  "notes": "Renamed to MuleSoftForge Studio AI everywhere: the view tab, Preferences, menus, chat speaker label, and the system prompt persona."
+  "version": "0.5.14",
+  "notes": "The AI can run or debug your app (Agent and Diagnose mode), like Run As / Debug As > Mule Application, and waits on Studio's own deployment events; it only starts the app and does not call a flow unless you ask. Calling an endpoint while debugging no longer hangs the chat: a request held at a breakpoint comes back as PAUSED, Cancel works at once, and late answers arrive with your next message."
 }

@@ -8,7 +8,6 @@ import ModesSwitcher from './ModesSwitcher.vue'
 import ChecksPipeline from './ChecksPipeline.vue'
 import SecretMaskDemo from './SecretMaskDemo.vue'
 import ProvidersAndCost from './ProvidersAndCost.vue'
-import ScreenshotGallery from './ScreenshotGallery.vue'
 import AtAGlance from '../AtAGlance.vue'
 import { UPDATE_SITE } from './content.js'
 
@@ -171,18 +170,6 @@ const steps = [
           <p>Switch models mid-chat and the conversation carries over. The cost column shows what this chat, today and this month have cost.</p>
         </header>
         <ProvidersAndCost />
-      </div>
-    </section>
-
-    <!-- Gallery -->
-    <section class="band">
-      <div class="wrap">
-        <header class="head">
-          <span class="kicker">The real thing</span>
-          <h2>Straight from Anypoint Studio</h2>
-          <p>Click a screenshot to see it full size.</p>
-        </header>
-        <ScreenshotGallery />
       </div>
     </section>
 

@@ -287,21 +287,3 @@ export const providers = [
   'Ollama (local)',
   'Any OpenAI-compatible endpoint'
 ]
-
-export const gallery = [
-  {
-    src: '/images/studio-ai/overview-agent-review.png',
-    alt: 'MuleSoftForge Studio AI in Anypoint Studio reviewing error handling in Agent mode, with a proposed change to employees-api.xml waiting for Review diff, Accept or Reject',
-    caption: 'Agent mode reviews the error handling and proposes a change. Nothing is written until you accept.'
-  },
-  {
-    src: '/images/studio-ai/overview-dataweave-fix.png',
-    alt: 'MuleSoftForge Studio AI returns the corrected DataWeave, explains the missing comma, and offers Review diff and Apply to the DataWeave editor',
-    caption: 'Fix with MuleSoftForge Studio AI explains the parse error and hands back the script. The cost column shows what this chat cost.'
-  },
-  {
-    src: '/images/studio-ai/fix-with-ai-context-menu.png',
-    alt: 'Right-click in the DataWeave editor of a Transform Message: the menu shows Send to MuleSoftForge Studio AI and Fix with MuleSoftForge Studio AI',
-    caption: 'Right-click in any DataWeave editor to send the script, or fix it.'
-  }
-]

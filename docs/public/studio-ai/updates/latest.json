@@ -1,4 +1,4 @@
 {
-  "version": "0.5.16",
-  "notes": "MUnit suites are now checked against MUnit's own schemas and the AI is given the exact element shapes, so drafted tests parse first time. run_munit now waits for its own run to finish and no longer reports the previous run's results or an empty pass."
+  "version": "0.5.17",
+  "notes": "MUnit mock payloads that stay Java maps or Strings (object literals, write(), bare readUrl) are rejected, and the prompt teaches JSON-typed mocks so suites pass first time. DataWeave checks accept one-line output headers and #[...] values, and explanation turns no longer trigger a false draft nudge."
 }

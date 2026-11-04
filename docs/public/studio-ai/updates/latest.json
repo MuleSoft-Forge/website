@@ -1,4 +1,4 @@
 {
-  "version": "0.5.21",
-  "notes": "A reopened chat keeps working on its project after a restart, even with no file open or selected. When no project is available, the AI says to open or select one instead of telling you to switch modes. Also includes 0.5.20: replies cut off at the output limit no longer loop, and large files are changed with small edits."
+  "version": "0.5.22",
+  "notes": "When a reply is cut off at the output limit, the finished edits in it still run and only the cut-off one is retried. The latest tool result is cached, and every mode offers the same tools, so switching from Ask to Agent keeps the prompt cache and costs less."
 }

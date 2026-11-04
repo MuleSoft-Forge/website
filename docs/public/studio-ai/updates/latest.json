@@ -1,4 +1,4 @@
 {
-  "version": "0.5.19",
-  "notes": "Tokens, passwords and API keys pasted into a message (for example \"call with token ...\") are now hidden from the model; calls to your app still use the real value. Auto keeps short run and call requests on the fast model even when they include a long token."
+  "version": "0.5.20",
+  "notes": "Stops runaway edit loops: a reply cut off at the output limit is no longer run or retried endlessly, large files are changed with small edits instead of full rewrites, an empty reply is retried once, and the system prompt stays cached between turns."
 }

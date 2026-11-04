@@ -1,4 +1,4 @@
 {
-  "version": "0.5.22",
-  "notes": "When a reply is cut off at the output limit, the finished edits in it still run and only the cut-off one is retried. The latest tool result is cached, and every mode offers the same tools, so switching from Ask to Agent keeps the prompt cache and costs less."
+  "version": "0.5.23",
+  "notes": "Cheaper follow-up questions: switching modes no longer invalidates the cached conversation, and earlier turns keep only the names of attached files (the open file is attached again each turn), so each new turn reads the whole earlier chat from the prompt cache."
 }

@@ -1,4 +1,4 @@
 {
-  "version": "0.5.18",
-  "notes": "Prompt caching for Claude models, so long chats cost far less. Auto sends simple run and call requests (run tests, test again, call the flow) to the fast model. The AI now remembers which tools it used each turn, and is asked to make changes if it says it proposed some but didn't. Help for Studio metadata (application-types.xml), checked against Studio's own format, and the DataWeave Fix says when a warning is missing metadata rather than a bad script. MUnit test data uses getResourceAsString so set-event no longer fails with Stream closed. Example files that a suite references count as present once they're proposed. A clear message when the app closes the connection after a breakpoint."
+  "version": "0.5.19",
+  "notes": "Tokens, passwords and API keys pasted into a message (for example \"call with token ...\") are now hidden from the model; calls to your app still use the real value. Auto keeps short run and call requests on the fast model even when they include a long token."
 }

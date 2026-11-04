@@ -1,4 +1,4 @@
 {
-  "version": "0.5.20",
-  "notes": "Stops runaway edit loops: a reply cut off at the output limit is no longer run or retried endlessly, large files are changed with small edits instead of full rewrites, an empty reply is retried once, and the system prompt stays cached between turns."
+  "version": "0.5.21",
+  "notes": "A reopened chat keeps working on its project after a restart, even with no file open or selected. When no project is available, the AI says to open or select one instead of telling you to switch modes. Also includes 0.5.20: replies cut off at the output limit no longer loop, and large files are changed with small edits."
 }

@@ -1,4 +1,4 @@
 {
-  "version": "0.5.25",
-  "notes": "Bedrock: inference-profile model defaults, Region label, Refresh models from AWS, and cost estimates for us./global. ids. Azure OpenAI: use the SDK latest api-version and max_completion_tokens so GPT-5.x deployments work. Gemini: default to gemini-3-flash-preview (2.5 is gone for new keys)."
+  "version": "0.5.26",
+  "notes": "Interactive chat (follow-ups, todos, retry/edit, queue, sticky, quote, starters) and Azure Refresh via /openai/models."
 }

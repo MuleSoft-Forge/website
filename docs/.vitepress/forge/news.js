@@ -2,6 +2,90 @@
 
 export const news = [
   {
+    date: '2026-11-05',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.24: streaming replies',
+    summary: 'Replies stream into the chat with a live status line, a seconds counter and the answer text as it arrives. edit_file takes several edits at once, long chats are compacted automatically, failed calls are retried, and a Continue button appears at the step limit. Prompt caching also works on native Anthropic and Bedrock.',
+    link: '/studio-ai/use-the-chat'
+  },
+  {
+    date: '2026-11-04',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.23: cheaper follow-up questions',
+    summary: 'Switching modes no longer clears the cached conversation. Earlier turns keep only the names of attached files, and the open file is attached again each turn, so each new message reuses the prompt cache.',
+    link: '/studio-ai/use-the-chat'
+  },
+  {
+    date: '2026-11-04',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.22: finish cut-off edits, keep the cache',
+    summary: 'When a reply hits the output limit, finished edits in it still run and only the cut-off one is retried. Every mode offers the same tools, so switching from Ask to Agent keeps the prompt cache and costs less.',
+    link: '/studio-ai/use-the-chat'
+  },
+  {
+    date: '2026-11-04',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.21: reopened chats keep their project',
+    summary: 'A reopened chat keeps working on its project after a restart, even with no file open. When no project is available, the AI asks you to open or select one. Also includes 0.5.20: cut-off replies no longer loop, and large files use small edits.',
+    link: '/studio-ai/use-the-chat'
+  },
+  {
+    date: '2026-11-04',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.19: secrets in pasted messages',
+    summary: 'Tokens, passwords and API keys pasted into a message are hidden from the model; calls to your app still use the real value. Auto keeps short run and call requests on the fast model even when they include a long token.',
+    link: '/studio-ai/use-the-chat#secrets-stay-off-the-model'
+  },
+  {
+    date: '2026-11-04',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.18: prompt caching and metadata help',
+    summary: 'Prompt caching for Claude models cuts the cost of long chats. Auto sends simple run and call requests to the fast model. Help for Studio metadata (application-types.xml), clearer DataWeave Fix messages when metadata is missing, and MUnit test data that no longer fails with Stream closed.',
+    link: '/studio-ai/set-up#your-instructions'
+  },
+  {
+    date: '2026-11-03',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.17: MUnit mocks that pass first time',
+    summary: 'MUnit mock payloads that stay as Java maps or Strings are rejected, and the prompt teaches JSON-typed mocks so suites pass first time. DataWeave checks accept one-line output headers and #[...] values.',
+    link: '/studio-ai/use-the-chat'
+  },
+  {
+    date: '2026-11-03',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.16: MUnit shapes and accurate run results',
+    summary: 'MUnit suites are checked against MUnit\'s own schemas, so drafted tests parse first time. run_munit waits for its own run to finish and no longer reports the previous run\'s results.',
+    link: '/studio-ai/use-the-chat'
+  },
+  {
+    date: '2026-11-03',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.15: MUnit from a flow',
+    summary: 'Create MUnit tests from a flow or sub-flow on the canvas, with scenarios to pick and static checks for suites and the pom. In Agent and Diagnose mode, run_munit runs your suites in Studio and explains the failures.',
+    link: '/studio-ai/use-the-chat'
+  },
+  {
+    date: '2026-11-03',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.14: run or debug the app from chat',
+    summary: 'The AI can run or debug your app in Agent and Diagnose mode, like Run As / Debug As > Mule Application. Calling an endpoint while debugging no longer hangs the chat: a request held at a breakpoint comes back as PAUSED, and Cancel works at once.',
+    link: '/studio-ai/discover'
+  },
+  {
+    date: '2026-11-02',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.13: renamed to MuleSoftForge Studio AI',
+    summary: 'Renamed to MuleSoftForge Studio AI everywhere: the view tab, Preferences, menus, chat speaker label, and the system prompt persona.',
+    link: '/studio-ai/'
+  },
+  {
+    date: '2026-11-02',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.12: card-style chat and DataWeave CLI fallback',
+    summary: 'The message box and Proposed changes are cards in the chat view. The price list folds under Show prices. A missing or broken DataWeave CLI no longer stops a chat: Preferences shows why, and the DataWeave tools stay off until it runs.',
+    link: '/studio-ai/install'
+  },
+  {
     date: '2026-11-01',
     asset: 'studio-ai',
     title: 'Studio AI 0.5.11: Diagnose mode',

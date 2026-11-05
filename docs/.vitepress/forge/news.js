@@ -4,6 +4,13 @@ export const news = [
   {
     date: '2026-11-05',
     asset: 'studio-ai',
+    title: 'Studio AI 0.5.25: Bedrock, Azure and Gemini',
+    summary: 'Amazon Bedrock uses inference-profile defaults, can Refresh models from AWS, labels the Region field, and estimates cost for us./global. ids. Azure OpenAI works with GPT-5.x (SDK latest api-version and max_completion_tokens). Gemini defaults to gemini-3-flash-preview for new Google AI Studio keys.',
+    link: '/studio-ai/set-up'
+  },
+  {
+    date: '2026-11-05',
+    asset: 'studio-ai',
     title: 'Studio AI 0.5.24: streaming replies',
     summary: 'Replies stream into the chat with a live status line, a seconds counter and the answer text as it arrives. edit_file takes several edits at once, long chats are compacted automatically, failed calls are retried, and a Continue button appears at the step limit. Prompt caching also works on native Anthropic and Bedrock.',
     link: '/studio-ai/use-the-chat'

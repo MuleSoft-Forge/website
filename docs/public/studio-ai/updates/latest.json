@@ -1,4 +1,4 @@
 {
-  "version": "0.5.23",
-  "notes": "Cheaper follow-up questions: switching modes no longer invalidates the cached conversation, and earlier turns keep only the names of attached files (the open file is attached again each turn), so each new turn reads the whole earlier chat from the prompt cache."
+  "version": "0.5.24",
+  "notes": "Replies stream into the chat: a live line shows what the model is doing (Thinking…, writing the answer or a tool call), a seconds counter, and the answer text as it arrives. edit_file takes several edits at once and matches text more tolerantly. Tool calls and results stay in the chat history within a budget, and long chats are compacted automatically. Failed calls are retried with growing waits, repeated identical tool calls are stopped, and a Continue button appears at the step limit. Prompt caching now also works on native Anthropic and Bedrock."
 }

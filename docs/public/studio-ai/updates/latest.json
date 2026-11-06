@@ -1,4 +1,4 @@
 {
-  "version": "0.5.26",
-  "notes": "Interactive chat (follow-ups, todos, retry/edit, queue, sticky, quote, starters) and Azure Refresh via /openai/models."
+  "version": "0.5.27",
+  "notes": "Thought blocks, shimmer and loading phrases; background alerts with optional sound; user hooks; thumbs open LinkedIn or feedback; starter cards use Studio icons and our round logo; multipart/binary call_endpoint and search_files."
 }

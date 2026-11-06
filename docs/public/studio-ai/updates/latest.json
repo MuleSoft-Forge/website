@@ -1,4 +1,4 @@
 {
-  "version": "0.5.27",
-  "notes": "Thought blocks, shimmer and loading phrases; background alerts with optional sound; user hooks; thumbs open LinkedIn or feedback; starter cards use Studio icons and our round logo; multipart/binary call_endpoint and search_files."
+  "version": "0.5.28",
+  "notes": "News from MuleSoftForge in the side panel (folded away until opened); Prices and News are now tidy section headers; tips and witty loading lines are on by default. The AI starts the app or debugger when asked but never stops it: stopping stays with you in Studio."
 }

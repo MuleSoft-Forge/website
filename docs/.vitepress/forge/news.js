@@ -2,6 +2,20 @@
 
 export const news = [
   {
+    date: '2026-11-06',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.27: chat polish, hooks and richer HTTP',
+    summary: 'Thought blocks, shimmer and loading phrases; background alerts with an optional sound; user hooks; thumbs open LinkedIn or feedback; starter cards use Studio icons and the Forge round logo. call_endpoint supports multipart and binary bodies, plus search_files and tighter Mule checks.',
+    link: '/studio-ai/use-the-chat'
+  },
+  {
+    date: '2026-11-05',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.26: interactive chat',
+    summary: 'ask_followup_question and update_todo_list, plus chat UX: clickable answers, live todos, retry/edit, message queue, sticky header, quote, starters, thumbs and plan approve. Azure Refresh uses /openai/models so listing no longer 404s on the data plane.',
+    link: '/studio-ai/use-the-chat'
+  },
+  {
     date: '2026-11-05',
     asset: 'studio-ai',
     title: 'Studio AI 0.5.25: Bedrock, Azure and Gemini',

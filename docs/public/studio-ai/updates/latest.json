@@ -1,4 +1,4 @@
 {
-  "version": "0.5.28",
-  "notes": "News from MuleSoftForge in the side panel (folded away until opened); Prices and News are now tidy section headers; tips and witty loading lines are on by default. The AI starts the app or debugger when asked but never stops it: stopping stays with you in Studio."
+  "version": "0.5.29",
+  "notes": "The chat can stop, restart and switch your app between run and debug again (0.5.28 removed that by mistake), and starts the right project when another one is running. Chat scrolling is steadier: it follows new output until you scroll up, and long answers open at their first line."
 }

@@ -1,4 +1,4 @@
 {
-  "version": "0.5.29",
-  "notes": "The chat can stop, restart and switch your app between run and debug again (0.5.28 removed that by mistake), and starts the right project when another one is running. Chat scrolling is steadier: it follows new output until you scroll up, and long answers open at their first line."
+  "version": "0.5.30",
+  "notes": "When an app, debug or MUnit run fails, the AI now reads the console's error lines (including ones in the middle of a long console) and diagnoses from them instead of guessing. MUnit failures keep every test's message and include the run's console. A new chat now starts at the top of the page."
 }

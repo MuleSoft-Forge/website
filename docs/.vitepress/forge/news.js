@@ -4,6 +4,13 @@ export const news = [
   {
     date: '2026-11-06',
     asset: 'studio-ai',
+    title: 'Studio AI 0.5.28: news feed and quieter side panel',
+    summary: 'News from MuleSoftForge in the side panel (folded away until opened); Prices and News are tidy section headers; tips and witty loading lines are on by default. The AI starts the app or debugger when asked but never stops it — stopping stays with you in Studio.',
+    link: '/studio-ai/use-the-chat'
+  },
+  {
+    date: '2026-11-06',
+    asset: 'studio-ai',
     title: 'Studio AI 0.5.27: chat polish, hooks and richer HTTP',
     summary: 'Thought blocks, shimmer and loading phrases; background alerts with an optional sound; user hooks; thumbs open LinkedIn or feedback; starter cards use Studio icons and the Forge round logo. call_endpoint supports multipart and binary bodies, plus search_files and tighter Mule checks.',
     link: '/studio-ai/use-the-chat'

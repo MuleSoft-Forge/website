@@ -2,6 +2,27 @@
 
 export const news = [
   {
+    date: '2026-11-07',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.31: Don\'t suggest unwanted offers',
+    summary: 'Stop unwanted suggestions with Don\'t suggest on each offered change: save a rule for you alone (memory.md) or for the project (AGENTS.md). Both are sent with every chat. Settings links open those files for editing.',
+    link: '/studio-ai/use-the-chat'
+  },
+  {
+    date: '2026-11-06',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.30: diagnose failed runs from the console',
+    summary: 'When an app, debug or MUnit run fails, the AI reads the console\'s error lines — including ones in the middle of a long console — and diagnoses from them instead of guessing. MUnit failures keep every test\'s message and the run\'s console. A new chat starts at the top of the page.',
+    link: '/studio-ai/use-the-chat'
+  },
+  {
+    date: '2026-11-06',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.29: stop the app again, steadier scrolling',
+    summary: 'The chat can stop, restart and switch your app between run and debug again (0.5.28 removed that by mistake), and starts the right project when another one is running. Chat scrolling follows new output until you scroll up, and long answers open at their first line.',
+    link: '/studio-ai/use-the-chat'
+  },
+  {
     date: '2026-11-06',
     asset: 'studio-ai',
     title: 'Studio AI 0.5.28: news feed and quieter side panel',

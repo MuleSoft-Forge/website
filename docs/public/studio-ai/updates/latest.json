@@ -1,4 +1,4 @@
 {
-  "version": "0.5.31",
-  "notes": "Stop unwanted suggestions with Don't suggest on each offered change: save a rule for you alone (memory.md) or for the project (AGENTS.md). Both are sent with every chat. Settings links open those files for editing. Offer rows stay tidy with Don't suggest on the right."
+  "version": "0.5.32",
+  "notes": "Rules, skills and workflows: add your own at three levels (built-in, global in ~/.mulesoftforge/studio-ai, and the project's .mulesoftforge folder, plus .agents/skills). Rule files are sent with every message; the AI loads a skill when a task matches it; type /name to run a workflow. Two built-in skills: build-mule-integration and generate-doc-description. Enforces correctness: when the project checks still fail on proposed changes, the AI is sent the problems (up to twice) before it may finish, and Accept asks you to confirm if they still fail. New page: Preferences > MuleSoftForge Studio AI > Rules, Skills, Workflows and Hooks."
 }

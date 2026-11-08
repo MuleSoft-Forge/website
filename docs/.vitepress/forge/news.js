@@ -2,6 +2,27 @@
 
 export const news = [
   {
+    date: '2026-11-08',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.34: MCP servers',
+    summary: 'Turn on the hosted MuleSoft Platform server and ask about your APIs, policies, environments, governance and monitoring — it signs in with Studio\'s Anypoint login. Add your own remote servers in mcp.json. Tools that change your account run only in Agent mode, and Studio asks you to allow each call.',
+    link: '/studio-ai/set-up'
+  },
+  {
+    date: '2026-11-08',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.33: search Exchange for connectors',
+    summary: 'search_connectors finds the Exchange connector for a named system (Salesforce, ServiceNow, Slack…) and proposes its pom.xml dependency. Uses Studio\'s Anypoint login when signed in so private org connectors are found too; otherwise the public Exchange.',
+    link: '/studio-ai/use-the-chat'
+  },
+  {
+    date: '2026-11-08',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.32: rules, skills and workflows',
+    summary: 'Add rules, skills and workflows at built-in, global and project levels. Rules go with every message; skills load when a task matches; type /name to run a workflow. Failing project checks are sent back (up to twice) before the AI may finish, and Accept asks you to confirm if they still fail.',
+    link: '/studio-ai/set-up'
+  },
+  {
     date: '2026-11-07',
     asset: 'studio-ai',
     title: 'Studio AI 0.5.31: Don\'t suggest unwanted offers',

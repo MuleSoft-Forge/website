@@ -1,4 +1,4 @@
 {
-  "version": "0.5.32",
-  "notes": "Rules, skills and workflows: add your own at three levels (built-in, global in ~/.mulesoftforge/studio-ai, and the project's .mulesoftforge folder, plus .agents/skills). Rule files are sent with every message; the AI loads a skill when a task matches it; type /name to run a workflow. Two built-in skills: build-mule-integration and generate-doc-description. Enforces correctness: when the project checks still fail on proposed changes, the AI is sent the problems (up to twice) before it may finish, and Accept asks you to confirm if they still fail. New page: Preferences > MuleSoftForge Studio AI > Rules, Skills, Workflows and Hooks."
+  "version": "0.5.33",
+  "notes": "AI now searches Exchange for the right connector for a named system (Salesforce, ServiceNow, Slack…) and proposes its pom.xml dependency, instead of hand-built HTTP calls. Uses Studio's Anypoint login when you are signed in, so your organization's private connectors are found too; otherwise the public Exchange."
 }

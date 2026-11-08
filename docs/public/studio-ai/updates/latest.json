@@ -1,4 +1,4 @@
 {
-  "version": "0.5.33",
-  "notes": "AI now searches Exchange for the right connector for a named system (Salesforce, ServiceNow, Slack…) and proposes its pom.xml dependency, instead of hand-built HTTP calls. Uses Studio's Anypoint login when you are signed in, so your organization's private connectors are found too; otherwise the public Exchange."
+  "version": "0.5.34",
+  "notes": "MCP servers. Turn on the hosted MuleSoft Platform server (Settings > Rules, Skills, Workflows, Hooks and MCP) and ask about your APIs, policies, environments, governance and monitoring; it signs in with Studio's Anypoint login, so there is nothing to install. Add your own remote servers in mcp.json. Tools that change your account run only in Agent mode, and Studio asks you to allow each call."
 }

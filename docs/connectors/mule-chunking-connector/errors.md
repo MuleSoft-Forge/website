@@ -5,10 +5,11 @@ description: The errors the Mule Chunking Connector's read-chunked operation rai
 
 # Errors
 
-A flow can meet two kinds of failure from the Chunking Connector:
+A flow can meet two kinds of failure from the Chunking Connector.
 
-- **Errors the operation raises**, when `read-chunked` runs and before any chunk is read. They carry the connector's `CHUNKING` error types, and a flow handles them by type.
-- **Failures while the chunks are read**, after `read-chunked` has returned and while `foreach` or an expression reads the chunks. Mule reports them with its own error types, and a flow handles them with `ANY`.
+[Errors the operation raises](#errors-the-operation-raises) happen when `read-chunked` runs, before any chunk is read. They carry the connector's `CHUNKING` error types, and a flow handles them by type.
+
+[Failures while the chunks are read](#failures-while-the-chunks-are-read) happen after `read-chunked` has returned, while `foreach` or an expression reads the chunks. Mule reports them with its own error types, and a flow handles them with `ANY`.
 
 ## Errors the operation raises
 
@@ -24,7 +25,7 @@ These are raised by `read-chunked` itself, before any chunk is read, so a flow c
 
 Each message says what was wrong and ends with the value received, for example `recordsPerChunk must be a positive number of records (got: 0)`.
 
-### Handling them
+### Handling CHUNKING errors
 
 A handler for `CHUNKING:INVALID_PARAMETER` catches it and its three children:
 
@@ -66,7 +67,7 @@ The sample application has a flow for each of these errors; see [Set Up](./set-u
 
 ## Failures while the chunks are read
 
-The content is read while the flow reads the chunks, after `read-chunked` has returned. A failure then is raised to the flow at once, after the chunks before it, and the content is never reported as having ended early. Mule reports these failures with its own error types, not the connector's:
+The content is read while the flow reads the chunks, after `read-chunked` has returned. A failure then is raised to the flow at once, after the chunks before it, and the content is never reported as having ended early. Mule reports these failures with its own error types:
 
 - inside `foreach`, `MULE:UNKNOWN`;
 - inside a DataWeave expression that reads the chunks, `MULE:EXPRESSION`.
@@ -79,7 +80,7 @@ The error's `description` ends with the connector's message, which says what hap
 
 - the content cannot be read, for example the source stream fails part-way;
 - a record is larger than `maxChunkSize` (by delimiter; see [A record larger than the maximum](./chunking-strategies#a-record-larger-than-the-maximum));
-- one of the three `sliding-window` failures under [When the read fails](./sliding-window-readers#when-the-read-fails);
+- one of the three `sliding-window` failures under [Failures and what to change](./sliding-window-readers#failures-and-what-to-change);
 - `in-memory` reaches its limit;
 - `file-store` cannot write or read its temporary file;
 - the chunks are read after they were released (see [When the chunks are released](./streaming-strategies#when-the-chunks-are-released)).
@@ -106,4 +107,4 @@ The sample application's `error-failure-while-reading` flow shows this with a re
 
 ## Logging
 
-Failures a flow must handle are raised as errors, not logged. What the connector does log is described under [Logging](./set-up#logging).
+Failures a flow must handle are raised as errors and are not logged. What the connector logs is described under [Logging](./set-up#logging).

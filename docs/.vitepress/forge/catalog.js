@@ -123,7 +123,7 @@ export const assets = [
     type: 'connector',
     owners: ['rhoegg'],
     icon: '/images/chunking-connector-icon.svg',
-    summary: 'Read content of any size one chunk at a time with foreach, cut by size or by delimited records, with four streaming strategies for how the chunks are held.',
+    summary: 'Process any stream in chunks, by size or by record, without holding the whole content in memory.',
     link: '/connectors/mule-chunking-connector/',
     repo: 'https://github.com/MuleSoft-Forge/mule-chunking-connector',
     maven: { groupId: 'com.mulesoftforge', artifactId: 'mule-chunking-connector', version: '1.0.0' },

@@ -92,7 +92,7 @@ features:
       src: /images/chunking-connector-icon.svg
       alt: Mule Chunking Connector
     title: Mule Chunking Connector
-    details: Read content of any size one chunk at a time with foreach. Cut chunks by size or by delimited records, such as 1000 lines each, and choose how they are held, from read-once to repeatable in memory or on disk.
+    details: Process any stream in chunks, by size or by record, without holding the whole content in memory.
     link: /connectors/mule-chunking-connector/
     linkText: Learn More
 

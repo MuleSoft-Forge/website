@@ -5,7 +5,7 @@ export const news = [
     date: '2026-11-11',
     asset: 'chunking',
     title: 'Mule Chunking Connector 1.0.0: chunking by delimiter',
-    summary: 'Cut content into chunks of delimited records, such as 1000 lines each, as well as by size. Four streaming strategies with limits counted in chunks, including a sliding window for readers at the same time, and typed errors for invalid settings. 1.0.0 changes the operation\'s settings: 0.2.0 applications need the upgrade steps.',
+    summary: 'Process any stream in chunks, by size or by record, without holding the whole content in memory. 1.0.0 adds chunking by delimited records, such as 1000 lines each. Its four streaming strategies count their limits in chunks, one of them a sliding window for several readers at the same time, and invalid settings raise typed errors. 1.0.0 changes the operation\'s settings: 0.2.0 applications need the upgrade steps.',
     link: '/connectors/mule-chunking-connector/upgrading'
   },
   {

@@ -7,8 +7,6 @@ description: What counts as a reader under the Mule Chunking Connector's sliding
 
 The `sliding-window` [streaming strategy](./streaming-strategies) lets several readers read the chunks while holding only a few of them in memory. Each chunk is let go once the readers no longer need it, and never more than `maxInMemoryChunks` are held. Nothing is written to disk.
 
-How the sliding window decides when a chunk can go is the thing to understand before using it. This page covers what counts as a reader, what happens with and without the `readers` setting, the three failures a flow can meet and what to change for each, how the routes of a `scatter-gather` behave, and when to choose another strategy.
-
 ## Settings
 
 | Setting | Default | Description |
@@ -22,8 +20,7 @@ How the sliding window decides when a chunk can go is the thing to understand be
 
 A reader is anything that reads at least one of the chunks: a `foreach`, a route of a `scatter-gather` that reads them, a DataWeave expression such as `sizeOf(payload)` or `payload[0]`.
 
-- **Each time the chunks are read from the start counts as one reader.** Two `foreach` over the same chunks are two readers.
-- **Something that opens the chunks and reads none of them is not a reader** and holds nothing back.
+Each time the chunks are read from the start counts as one reader, so two `foreach` over the same chunks are two readers. Something that opens the chunks and reads none of them is not a reader and holds nothing back.
 
 ## With readers set
 
@@ -31,7 +28,7 @@ Say `readers` is 2. A chunk is let go as soon as 2 readers have read it, and nev
 
 - Readers that run at the same time keep memory to the chunks between the slowest and the fastest.
 - A reader that starts late still finds every chunk, because none is let go until it has read it.
-- But the others can get no more than `maxInMemoryChunks` ahead of it, and one that would fails with the [first message below](#when-the-read-fails).
+- But the others can get no more than `maxInMemoryChunks` ahead of it, and one that would fails with the [first message below](#failures-and-what-to-change).
 
 This is the sample application's `streaming-sliding-window` flow: both routes of a `scatter-gather` read all the chunks, and with `readers="2"` each chunk is let go as soon as both routes have read it. The limit of 10 leaves room for one route to run ahead.
 
@@ -72,7 +69,7 @@ The window does not know how many readers to wait for. It keeps chunks until `ma
 
 When you know how many readers there are, set `readers`: each chunk is then let go as soon as that many readers have read it, and a reader that starts late still finds every chunk, within the limit described [above](#with-readers-set).
 
-## When the read fails
+## Failures and what to change
 
 There are three failures. Each fails the reader that meets it, with a message that starts as shown and says what to change:
 

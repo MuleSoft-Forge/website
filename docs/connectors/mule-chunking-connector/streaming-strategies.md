@@ -5,7 +5,7 @@ description: How the Mule Chunking Connector holds chunks, when it releases them
 
 # Streaming Strategies
 
-The `streaming-strategy` child element of [read-chunked](./operations/read-chunked) says how the chunks are held: whether they can be read more than once, by how many readers, and how many are kept in memory. Left unset (**None** in Anypoint Studio, the box left unticked in Anypoint Code Builder), the chunks are `non-repeatable`.
+The `streaming-strategy` child element of [read-chunked](./operations/read-chunked) says how the chunks are held: whether they can be read more than once, by how many readers, and how many are kept in memory. Left unset ("None" in Anypoint Studio, the box left unticked in Anypoint Code Builder), the chunks are `non-repeatable`.
 
 | Strategy | The chunks can be read | Chunks held in memory |
 |----------|------------------------|-----------------------|
@@ -68,8 +68,8 @@ Several readers read the chunks, and each chunk is let go once the readers no lo
 | `maxInMemoryChunks` | `3` | The most chunks held in memory, a positive number; a read that would hold more fails |
 | `readers` | not set | How many readers read the chunks |
 
-::: warning Read about readers before using the sliding window
-How the sliding window decides when a chunk can go is the thing to understand before using it: what counts as a reader, what `readers` changes, the three failures a flow can meet, and how a `scatter-gather`'s routes behave. See **[Sliding Window Readers](./sliding-window-readers)**.
+::: warning Before using the sliding window
+When the sliding window lets a chunk go depends on what counts as a reader and on the `readers` setting. [Sliding Window Readers](./sliding-window-readers) describes both, the three failures a flow can meet and what to change for each, and how the routes of a `scatter-gather` behave.
 :::
 
 ## in-memory
@@ -120,7 +120,7 @@ The chunks can be read any number of times, by any number of readers, with at mo
 - The file is deleted when the event that read the chunks ends, as described under [When the chunks are released](#when-the-chunks-are-released).
 - The connector writes the file itself, so this strategy does not need the Mule Enterprise runtime.
 
-## The strategies beside Mule's own
+## Comparison with Mule's streaming strategies
 
 The connector's strategies and settings have the connector's own names. Where one corresponds to a Mule streaming setting, it works like it, with these differences:
 

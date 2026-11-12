@@ -1,11 +1,11 @@
 ---
 title: Upgrade from 0.2.0
-description: Every change a Mule application using Chunking Connector 0.2.0 must make to use 1.0.0, and what else behaves differently.
+description: Every change a Mule application using Chunking Connector 0.2.0 must make to use 1.0.0, and the other changes in behaviour.
 ---
 
 # Upgrade from 0.2.0
 
-1.0.0 changes the operation's settings. This page lists every change a 0.2.0 application must make, then what else behaves differently. 1.0.0 also includes the changes made after 0.2.0 that were never released as 0.2.1. The full record is the connector's [changelog](https://github.com/MuleSoft-Forge/mule-chunking-connector/blob/v1.0.0/CHANGELOG.md).
+1.0.0 changes the operation's settings. It also includes the changes made after 0.2.0 that were never released as 0.2.1. The full record is the connector's [changelog](https://github.com/MuleSoft-Forge/mule-chunking-connector/blob/v1.0.0/CHANGELOG.md).
 
 Before you start, check that the application runs on Mule 4.9.6 or later with Java 17, then change the dependency's version to `1.0.0` (see [Set Up](./set-up)).
 
@@ -97,18 +97,20 @@ The 0.2.0 documentation showed `payload.isFirst` and `payload.isLast`, which giv
 
 The `Chunk` Java type is now read-only: its public constructor and `update(...)` method are gone.
 
-## What else behaves differently
+## Other changes in behaviour
 
-These need no change to an application, but you may notice them.
+These need no change to an application.
 
-- **Chunking by delimiter is new.** `by-delimiter` cuts the content into chunks of `recordsPerChunk` delimited records, and each chunk's `recordCount` says how many it holds. See [Chunking Strategies](./chunking-strategies).
-- **New error types.** `CHUNKING:INVALID_PARAMETER` is the parent of `CHUNKING:INVALID_CHUNK_SIZE` and of the new `CHUNKING:INVALID_RECORDS_PER_CHUNK` and `CHUNKING:INVALID_DELIMITER`. A flow that already handles `CHUNKING:INVALID_CHUNK_SIZE` is unaffected.
-- **Chunks are released when the event ends.** What `sliding-window`, `in-memory` and `file-store` hold is released when the event that read the chunks ends, and `file-store` deletes its temporary file then. A read after that fails rather than finding no chunks.
-- **`file-store` no longer needs the Mule Enterprise runtime.**
-- **A reader is only what reads a chunk.** The sliding window counts as a reader only what has read a chunk, so a cursor that DataWeave opens to check the chunks' type, and never reads, no longer holds chunks back, and no warning is logged for it.
-- **Nothing is logged at INFO.** The line each invocation writes with its settings is now at DEBUG, with the detail of each chunk; 0.2.0 wrote it at INFO. See [Logging](./set-up#logging).
-- **Fixes.**
-  - Under the non-repeatable strategy, a chunk shorter than the chunk size (such as the last) had `data` holding bytes left over from the chunk before. Every chunk's `data` now holds exactly its bytes.
-  - A failure of the source while `foreach` read the chunks under the non-repeatable strategy left the flow waiting forever. It is now raised to the flow.
-  - A failure while checking for more data was taken for the end of the data, so the chunks stopped early with no error. It is now raised.
-  - Under the sliding window, the second route of a `scatter-gather` could find the chunks gone because it started a moment after the first.
+- Chunking by delimiter is new. `by-delimiter` cuts the content into chunks of `recordsPerChunk` delimited records, and each chunk's `recordCount` says how many it holds. See [Chunking Strategies](./chunking-strategies).
+- There are new error types. `CHUNKING:INVALID_PARAMETER` is the parent of `CHUNKING:INVALID_CHUNK_SIZE` and of the new `CHUNKING:INVALID_RECORDS_PER_CHUNK` and `CHUNKING:INVALID_DELIMITER`. A flow that already handles `CHUNKING:INVALID_CHUNK_SIZE` is unaffected.
+- What `sliding-window`, `in-memory` and `file-store` hold is released when the event that read the chunks ends, and `file-store` deletes its temporary file then. A read after that fails rather than finding no chunks.
+- `file-store` no longer needs the Mule Enterprise runtime.
+- The sliding window counts as a reader only what has read a chunk, so a cursor that DataWeave opens to check the chunks' type, and never reads, no longer holds chunks back, and no warning is logged for it.
+- Nothing is logged at INFO. The line each invocation writes with its settings is now at DEBUG, with the detail of each chunk; 0.2.0 wrote it at INFO. See [Logging](./set-up#logging).
+
+### Fixes
+
+- Under the non-repeatable strategy, a chunk shorter than the chunk size (such as the last) had `data` holding bytes left over from the chunk before. Every chunk's `data` now holds exactly its bytes.
+- A failure of the source while `foreach` read the chunks under the non-repeatable strategy left the flow waiting forever. It is now raised to the flow.
+- A failure while checking for more data was taken for the end of the data, so the chunks stopped early with no error. It is now raised.
+- Under the sliding window, the second route of a `scatter-gather` could find the chunks gone because it started a moment after the first.

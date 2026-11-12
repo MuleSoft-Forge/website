@@ -1,13 +1,13 @@
 ---
 title: read-chunked
-description: Read content as a sequence of chunks, by size or by delimited records, for processing one chunk at a time with foreach.
+description: Settings, output and errors of read-chunked, which processes any stream in chunks, by size or by record, without holding the whole content in memory.
 ---
 
 # read-chunked
 
-Reads content as a sequence of chunks, so that a flow can process content of any size one chunk at a time with `foreach`. In Anypoint Studio the operation is shown as **Read Chunked**.
+Reads content of any size, from any source, as a sequence of chunks, cut by size or by record, so the flow never needs the whole of it in memory. In Anypoint Studio the operation is shown as "Read Chunked".
 
-## XML shape
+## Syntax
 
 Both child elements are optional. This example, from the connector's sample application, cuts the content into chunks of 5 records and keeps up to 20 chunks in memory so that they can be read more than once:
 
@@ -32,7 +32,7 @@ The operation needs no `config-ref`.
 | `chunking-strategy` | Chunking Strategy | No | By size, in chunks of 1 MB | How the content is cut into chunks: `by-size` or `by-delimiter`. See [Chunking Strategies](../chunking-strategies). |
 | `streaming-strategy` | Streaming Strategy | No | `non-repeatable` | How the chunks are held: `non-repeatable`, `sliding-window`, `in-memory` or `file-store`. See [Streaming Strategies](../streaming-strategies). |
 
-In Anypoint Studio a strategy left as **None**, and in Anypoint Code Builder one whose box is left unticked, means the default.
+In Anypoint Studio a strategy left as "None", and in Anypoint Code Builder one whose box is left unticked, means the default.
 
 ### Chunking strategy settings
 
@@ -58,7 +58,7 @@ Every size is in bytes, and every limit on what is held is counted in chunks. Ev
 
 ## Output
 
-The chunks, ready for `foreach` or another reader. Whether they can be read more than once, and by how many readers, depends on the [streaming strategy](../streaming-strategies).
+The operation returns the chunks, for `foreach` or another reader. Whether they can be read more than once, and by how many readers, depends on the [streaming strategy](../streaming-strategies).
 
 Each chunk has these properties:
 
@@ -102,7 +102,7 @@ With no settings, the operation cuts the message payload into chunks of 1 MB, an
 
 ### By delimiter
 
-With a newline delimiter, the default, and 1000 records per chunk, each chunk is 1000 lines, whatever number of bytes that is:
+With a newline delimiter, the default, and 1000 records per chunk, each chunk is 1000 lines, regardless of their size in bytes:
 
 ```xml
 <chunking:read-chunked>

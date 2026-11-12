@@ -13,8 +13,7 @@ Earlier versions remain on [Maven Central](https://central.sonatype.com/artifact
 
 ## Requirements
 
-- **Mule Runtime**: 4.9.6 or later
-- **Java**: 17
+Mule Runtime 4.9.6 or later, and Java 17.
 
 ## Installation
 
@@ -52,8 +51,7 @@ To choose how the content is cut and how the chunks are held, see [read-chunked]
 
 The connector repository includes a [sample application](https://github.com/MuleSoft-Forge/mule-chunking-connector/tree/v1.0.0/examples/chunking-sample-app) with one flow for each feature. It needs no external system, credential or network service: its input data is bundled with it, and each flow is started by an HTTP request to `localhost`.
 
-- **Anypoint Studio**: **File > Import > Anypoint Studio > Anypoint Studio project from File System**, and choose the `examples/chunking-sample-app` directory.
-- **Anypoint Code Builder**: open the `examples/chunking-sample-app` directory as a folder; it is recognised as a Mule project.
+In Anypoint Studio, use File > Import > Anypoint Studio > Anypoint Studio project from File System, and choose the `examples/chunking-sample-app` directory. In Anypoint Code Builder, open the `examples/chunking-sample-app` directory as a folder; it is recognised as a Mule project.
 
 Run the application, then open `http://localhost:8081/<flow name>` in a browser. Each flow answers with a JSON summary of what it saw, and logs each chunk at INFO. Each flow also has an MUnit test.
 
@@ -78,17 +76,13 @@ Run the application, then open `http://localhost:8081/<flow name>` in a browser.
 
 ## Logging
 
-The connector logs nothing at INFO: what is worth an INFO line is for your application's flow to decide.
+The connector logs nothing at INFO; INFO lines are left to your application's flows.
 
-- **DEBUG**: one line for each invocation of `read-chunked`, with its chunking and streaming strategies and their settings; a line for each chunk read; when `file-store` starts writing to its temporary file, and when it deletes it; and what `sliding-window` held when it lets go of the chunks.
-- **WARN**: the content could not be closed after reading, or `file-store` could not delete its temporary file.
-- Failures a flow must handle are raised as errors, not logged. See [Errors](./errors).
+| Level | What the connector logs |
+|-------|-------------------------|
+| DEBUG | One line for each invocation of `read-chunked`, with its chunking and streaming strategies and their settings; a line for each chunk read; when `file-store` starts writing to its temporary file, and when it deletes it; and what `sliding-window` held when it lets go of the chunks |
+| WARN | The content could not be closed after reading, or `file-store` could not delete its temporary file |
+
+Failures a flow must handle are raised as errors and are not logged. See [Errors](./errors).
 
 To see the DEBUG lines, set the logger `com.mulesoftforge.mule.extension.chunking` to DEBUG in your application's `log4j2.xml`.
-
-## Next steps
-
-- [read-chunked](./operations/read-chunked): the operation and every setting
-- [Chunking Strategies](./chunking-strategies): by size and by delimiter
-- [Streaming Strategies](./streaming-strategies): how the chunks are held
-- [Errors](./errors): handling the operation's errors and failures while reading

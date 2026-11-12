@@ -5,7 +5,7 @@ description: How the Mule Chunking Connector cuts content into chunks, by size o
 
 # Chunking Strategies
 
-The `chunking-strategy` child element of [read-chunked](./operations/read-chunked) says how the content is cut into chunks. There are two: `by-size` and `by-delimiter`. Left unset (**None** in Anypoint Studio, the box left unticked in Anypoint Code Builder), the content is cut by size into chunks of 1 MB.
+The `chunking-strategy` child element of [read-chunked](./operations/read-chunked) says how the content is cut into chunks: `by-size` or `by-delimiter`. Left unset ("None" in Anypoint Studio, the box left unticked in Anypoint Code Builder), the content is cut by size into chunks of 1 MB.
 
 ## By size
 
@@ -30,7 +30,7 @@ When chunking by size, each chunk's `recordCount` is empty (`null`).
 
 ## By delimiter
 
-`by-delimiter` cuts the content into chunks of `recordsPerChunk` records, where a record ends with the delimiter. With a newline delimiter, the default, and 1000 records per chunk, each chunk is 1000 lines, whatever number of bytes that is:
+`by-delimiter` cuts the content into chunks of `recordsPerChunk` records, where a record ends with the delimiter. With a newline delimiter, the default, and 1000 records per chunk, each chunk is 1000 lines, regardless of their size in bytes:
 
 ```xml
 <chunking:read-chunked>
@@ -54,11 +54,11 @@ Each chunk's `recordCount` is the number of records it holds.
 
 ### How records are cut
 
-- **The delimiter stays in the data.** A chunk ends with the delimiter that ends its last record.
-- **Two delimiters in a row are an empty record**, and it counts.
-- **Content that ends with a delimiter** does not produce an extra, empty chunk. **Content that ends without one** still has its final record, and it counts.
-- **The last chunk holds whatever is left**, usually fewer records than `recordsPerChunk`.
-- **The delimiter is matched exactly.** Escape sequences are not interpreted: `delimiter="\n"` is a backslash followed by `n`. A character that cannot be typed is written as an expression.
+- The delimiter stays in the data. A chunk ends with the delimiter that ends its last record.
+- Two delimiters in a row make an empty record, which is counted like any other.
+- Content that ends with a delimiter does not produce an extra, empty chunk. Content that ends without one still has its final record, which is counted.
+- The last chunk holds whatever is left, usually fewer records than `recordsPerChunk`.
+- The delimiter is matched exactly. Escape sequences are not interpreted: `delimiter="\n"` is a backslash followed by `n`. A character that cannot be typed is written as an expression.
 
 ### Delimiter as text
 
@@ -75,7 +75,7 @@ Each chunk's `recordCount` is the number of records it holds.
 
 ### Delimiter as an expression
 
-Here a carriage return and line feed:
+This example uses a carriage return and line feed:
 
 ```xml
 <chunking:read-chunked>
@@ -100,7 +100,7 @@ The sample application's `by-delimiter-expression` flow uses the ASCII record se
 
 An empty delimiter fails with `CHUNKING:INVALID_DELIMITER`. Written as text it is rejected when the application loads, so in practice this comes from an expression that gives empty text. An `encoding` the runtime does not recognise fails with `CHUNKING:INVALID_PARAMETER`. See [Errors](./errors).
 
-## The maximum chunk size never cuts a record
+## Maximum chunk size
 
 `maxChunkSize` bounds the memory a chunk needs, and it never cuts a record. When the next record would take a chunk past `maxChunkSize` bytes, counting the delimiter that ends the record, the chunk ends before that record, and the record starts the next chunk whole.
 

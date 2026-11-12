@@ -1,66 +1,37 @@
 ---
 title: Operations
-description: Available operations for the MuleSoft Chunking Connector
+description: Available operations for the Mule Chunking Connector
 ---
 
 # Operations
 
-The Chunking Connector provides operations for streaming large binary files into manageable chunks.
+The Chunking Connector has one operation. It needs no global configuration element.
 
-## Available Operations
+## Available operations
 
-| Operation | Description | Output |
-|-----------|-------------|--------|
-| [read-chunked](./read-chunked) | Streams binary content into chunks | Stream of chunk objects |
+| Operation | Studio name | Description | Output |
+|-----------|-------------|-------------|--------|
+| [read-chunked](./read-chunked) | Read Chunked | Reads content as a sequence of chunks, by size or by delimited records | The chunks, for `foreach` or another reader |
 
-## Planned Future Operations
+## Syntax
 
-The connector is designed to support additional chunking strategies in future releases:
+`read-chunked` takes the content to chunk, the message payload by default, and two optional child elements.
 
-| Planned Operation | Description | Status |
-|-------------------|-------------|--------|
-| `reassemble` | Combine chunks back into original binary content | Planned |
-| `read-lines` | Stream text files line-by-line | Planned |
-| `read-delimited` | Split text by custom delimiter | Planned |
+`chunking-strategy` says how the content is cut into chunks: [`by-size`](../chunking-strategies#by-size) or [`by-delimiter`](../chunking-strategies#by-delimiter). Left unset, the content is cut by size in chunks of 1 MB.
 
-::: tip Contribution Welcome
-Interested in contributing? Check out our [GitHub repository](https://github.com/MuleSoft-Forge/mule-chunking-connector) for contribution guidelines.
-:::
+`streaming-strategy` says how the chunks are held: [`non-repeatable`](../streaming-strategies#non-repeatable), [`sliding-window`](../sliding-window-readers), [`in-memory`](../streaming-strategies#in-memory) or [`file-store`](../streaming-strategies#file-store). Left unset, it is `non-repeatable`: the chunks can be read once, in order.
 
-## Operation Details
-
-### read-chunked
-
-The primary operation for binary streaming. It reads an InputStream and returns a PagingProvider that yields Chunk objects lazily.
-
-**Key Features:**
-- Constant memory usage (O(chunkSize))
-- Lazy evaluation - chunks created on-demand
-- 1-byte probe technique for accurate last chunk detection
-- Compatible with Mule's `<foreach>` component
-
-**Learn More:** [read-chunked Operation Reference](./read-chunked)
-
-## Usage Pattern
-
-All operations follow a consistent pattern:
+A flow reads the chunks after the operation, usually with `foreach`:
 
 ```xml
-<!-- 1. Get input stream (from file, HTTP, etc.) -->
-<file:read path="/path/to/file"/>
-
-<!-- 2. Apply chunking operation -->
-<chunking:read-chunked chunkSize="1048576"/>
-
-<!-- 3. Process chunks with foreach -->
+<chunking:read-chunked>
+    <chunking:chunking-strategy>
+        <chunking:by-size chunkSize="65536"/>
+    </chunking:chunking-strategy>
+</chunking:read-chunked>
 <foreach>
-    <!-- Handle each chunk -->
-    <logger message="Processing chunk #[payload.index]"/>
+    <logger level="INFO" message="#['Chunk $(payload.index): $(payload.length) bytes from byte $(payload.offset)']"/>
 </foreach>
 ```
 
-This pattern ensures:
-- Memory-efficient processing
-- Consistent error handling
-- Progress tracking capabilities
-- Interoperability with other Mule connectors
+Every setting is described under [read-chunked](./read-chunked).

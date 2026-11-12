@@ -89,10 +89,10 @@ features:
     linkText: Learn More
 
   - icon:
-      src: /images/chunking-connector-icon.png
+      src: /images/chunking-connector-icon.svg
       alt: Mule Chunking Connector
     title: Mule Chunking Connector
-    details: Stream large binary files into chunks for streaming processing in Mule, maintaining constant memory regardless of incoming stream size. Ideal for S3 multipart upload, ETL, and checksums.
+    details: Process any stream in chunks, by size or by record, without holding the whole content in memory.
     link: /connectors/mule-chunking-connector/
     linkText: Learn More
 

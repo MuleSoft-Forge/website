@@ -5,7 +5,7 @@ description: How the Mule Chunking Connector cuts content into chunks, by size o
 
 # Chunking Strategies
 
-The `chunking-strategy` child element of [read-chunked](./operations/read-chunked) says how the content is cut into chunks: `by-size` or `by-delimiter`. Left unset ("None" in Anypoint Studio, the box left unticked in Anypoint Code Builder), the content is cut by size into chunks of 1 MB.
+The `chunking-strategy` child element of [read-chunked](./operations/read-chunked) says how the content is cut into chunks: `by-size` or `by-delimiter`. Left unset (**None** in Anypoint Studio, the box left unticked in Anypoint Code Builder), the content is cut by size into chunks of 1 MB.
 
 ## By size
 

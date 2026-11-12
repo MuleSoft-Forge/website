@@ -51,7 +51,7 @@ To choose how the content is cut and how the chunks are held, see [read-chunked]
 
 The connector repository includes a [sample application](https://github.com/MuleSoft-Forge/mule-chunking-connector/tree/v1.0.0/examples/chunking-sample-app) with one flow for each feature. It needs no external system, credential or network service: its input data is bundled with it, and each flow is started by an HTTP request to `localhost`.
 
-In Anypoint Studio, use File > Import > Anypoint Studio > Anypoint Studio project from File System, and choose the `examples/chunking-sample-app` directory. In Anypoint Code Builder, open the `examples/chunking-sample-app` directory as a folder; it is recognised as a Mule project.
+In Anypoint Studio, use **File > Import > Anypoint Studio > Anypoint Studio project from File System**, and choose the `examples/chunking-sample-app` directory. In Anypoint Code Builder, open the `examples/chunking-sample-app` directory as a folder; it is recognised as a Mule project.
 
 Run the application, then open `http://localhost:8081/<flow name>` in a browser. Each flow answers with a JSON summary of what it saw, and logs each chunk at INFO. Each flow also has an MUnit test.
 

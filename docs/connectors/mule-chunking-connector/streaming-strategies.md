@@ -5,7 +5,7 @@ description: How the Mule Chunking Connector holds chunks, when it releases them
 
 # Streaming Strategies
 
-The `streaming-strategy` child element of [read-chunked](./operations/read-chunked) says how the chunks are held: whether they can be read more than once, by how many readers, and how many are kept in memory. Left unset ("None" in Anypoint Studio, the box left unticked in Anypoint Code Builder), the chunks are `non-repeatable`.
+The `streaming-strategy` child element of [read-chunked](./operations/read-chunked) says how the chunks are held: whether they can be read more than once, by how many readers, and how many are kept in memory. Left unset (**None** in Anypoint Studio, the box left unticked in Anypoint Code Builder), the chunks are `non-repeatable`.
 
 | Strategy | The chunks can be read | Chunks held in memory |
 |----------|------------------------|-----------------------|

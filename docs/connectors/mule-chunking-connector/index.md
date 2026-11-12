@@ -60,7 +60,7 @@ To cut content into chunks of 1000 lines each, regardless of their size in bytes
 | `chunking-strategy` | How the content is cut into chunks | [`by-size`](./chunking-strategies#by-size), [`by-delimiter`](./chunking-strategies#by-delimiter) | By size, in chunks of 1 MB |
 | `streaming-strategy` | How the chunks are held | [`non-repeatable`](./streaming-strategies#non-repeatable), [`sliding-window`](./sliding-window-readers), [`in-memory`](./streaming-strategies#in-memory), [`file-store`](./streaming-strategies#file-store) | `non-repeatable`: the chunks can be read once, in order |
 
-In Anypoint Studio a strategy left as "None", and in Anypoint Code Builder one whose box is left unticked, means the default.
+In Anypoint Studio a strategy left as **None**, and in Anypoint Code Builder one whose box is left unticked, means the default.
 
 ## Chunk properties
 

@@ -1,107 +1,92 @@
 ---
-title: MuleSoft Chunking Connector
-description: Stream large binary files into chunks for streaming processing in mule
+title: Mule Chunking Connector
+description: Read content of any size as a sequence of chunks, cut by size or by delimited records, and process it one chunk at a time with foreach.
 ---
 
 # Mule Chunking Connector
 
 <AtAGlance id="chunking" />
 
-Stream large binary files into chunks for streaming processing in mule, maintaining constant memory regardless of the size of the incoming stream.
+The Chunking Connector reads content as a sequence of chunks, so that a flow can process content of any size one chunk at a time with `foreach`. Chunks are cut either by size, a number of bytes each, or by delimiter, a number of delimited records each, so that every chunk of a delimited file can be processed on its own.
+
+The connector has one operation, [read-chunked](./operations/read-chunked), and needs no global configuration element.
 
 ## Features
 
-- **True streaming**: uses one chunk of memory plus a small overhead
-- **Lazy iteration**: Chunks read on-demand
-- **Raw binary**: No encoding overhead - direct byte[] access
+- **Chunking by size**: chunks of a fixed number of bytes, 1 MB unless you say otherwise; the last chunk holds what is left. See [Chunking Strategies](./chunking-strategies#by-size).
+- **Chunking by delimiter**: chunks of a fixed number of records, each record ending with a delimiter you choose (a newline by default). A maximum chunk size bounds the memory a chunk needs, and it never cuts a record. See [Chunking Strategies](./chunking-strategies#by-delimiter).
+- **Four streaming strategies**: read the chunks once, in order (the default); by several readers at the same time, through a sliding window; or any number of times, from memory or from a temporary file. Every limit is counted in chunks. See [Streaming Strategies](./streaming-strategies).
+- **Exact chunks**: every chunk is an exact slice of the content. The chunks' data, taken in order, reproduce the content byte for byte.
+- **Errors you can handle**: invalid settings raise `CHUNKING` errors before any chunk is read, and a failure while the chunks are read is always raised, never reported as the content having ended early. See [Errors](./errors).
 
-## Usage
+## Quick example
 
-### Basic Example
+With no settings, `read-chunked` cuts the message payload into chunks of 1 MB, and `foreach` processes them one at a time:
 
 ```xml
-<!-- Read large file -->
-<file:read path="/path/to/large-file.bin"/>
-
-<!-- Chunk into pieces -->
-<chunking:read-chunked chunkSize="5242880"/>
-
-<!-- Process each chunk with constant memory -->
+<chunking:read-chunked/>
 <foreach>
-    <logger message="Chunk #[payload.index]: #[payload.length] bytes"/>
-
-    <!-- Example: S3 multipart upload -->
-    <s3:upload-part
-        partNumber="#[payload.index + 1]"
-        content="#[payload.data]"/>
+    <logger level="INFO" message="#['Chunk $(payload.index): $(payload.length) bytes, last: $(payload.last)']"/>
 </foreach>
 ```
 
-### Configuration
+To cut a delimited file into chunks of 1000 lines each, whatever number of bytes that is:
 
 ```xml
-<chunking:config name="Chunking_Config">
-    <chunking:connection/>
-</chunking:config>
+<chunking:read-chunked>
+    <chunking:chunking-strategy>
+        <chunking:by-delimiter recordsPerChunk="1000"/>
+    </chunking:chunking-strategy>
+</chunking:read-chunked>
+<foreach>
+    <logger level="INFO" message="#['Chunk $(payload.index) holds $(payload.recordCount) lines']"/>
+</foreach>
 ```
 
-### Operation: read-chunked
+## Two choices
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `chunkSize` | Integer | 65536 (64KB) | Size of each chunk in bytes |
-| `content` | InputStream | payload | Binary content to chunk |
+`read-chunked` has two optional child elements. Each is a choice, and leaving it unset means the default.
 
-### Chunk Properties
+| Child element | What it decides | Options | Left unset |
+|---------------|-----------------|---------|------------|
+| `chunking-strategy` | How the content is cut into chunks | [`by-size`](./chunking-strategies#by-size), [`by-delimiter`](./chunking-strategies#by-delimiter) | By size, in chunks of 1 MB |
+| `streaming-strategy` | How the chunks are held | [`non-repeatable`](./streaming-strategies#non-repeatable), [`sliding-window`](./sliding-window-readers), [`in-memory`](./streaming-strategies#in-memory), [`file-store`](./streaming-strategies#file-store) | `non-repeatable`: the chunks can be read once, in order |
 
-Each chunk has these properties:
+In Anypoint Studio a strategy left as **None**, and in Anypoint Code Builder one whose box is left unticked, means the default.
+
+## Each chunk
+
+Each chunk has these properties, read in a flow as shown:
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `payload.data` | `byte[]` | Raw binary chunk data |
-| `payload.index` | `int` | 0-based chunk number |
-| `payload.offset` | `long` | Byte position in source |
-| `payload.length` | `int` | Bytes in this chunk |
-| `payload.isFirst` | `boolean` | True for first chunk |
-| `payload.isLast` | `boolean` | True for final chunk |
+| `payload.data` | binary (`byte[]`) | Exactly the chunk's bytes |
+| `payload.index` | number | The chunk's position in the sequence, counting from 0 |
+| `payload.offset` | number | The position of the chunk's first byte in the content, counting from 0 |
+| `payload.length` | number | The number of bytes in the chunk |
+| `payload.first` | boolean | `true` for the first chunk |
+| `payload.last` | boolean | `true` for the last chunk, including when the content ends exactly at the end of this chunk |
+| `payload.recordCount` | number | When chunking by delimiter, the number of records the chunk holds; empty (`null`) when chunking by size |
 
-### DataWeave Examples
-
-```dataweave
-// Get chunk number (1-based for APIs)
-payload.index + 1
-
-// Check if processing last chunk
-payload.isLast
-```
-
-## Installation
-
-Add to your Mule project's `pom.xml`:
-
-```xml
-<dependency>
-    <groupId>com.mulesoftforge</groupId>
-    <artifactId>mule-chunking-connector</artifactId>
-    <version>0.1.0</version>
-    <classifier>mule-plugin</classifier>
-</dependency>
-```
-
-## Use Cases
-
-- **S3 Multipart Upload**: Split large files for parallel upload
-- **Streaming ETL**: Process large files without loading into memory
-- **Checksum Calculation**: Hash files in chunks
-- **Network Transfer**: Send large files in manageable pieces
+Empty content produces no chunks.
 
 ## Requirements
 
-- Mule Runtime 4.9.0 or later
-- Java 17
+- **Mule Runtime**: 4.9.6 or later
+- **Java**: 17
+- **Global configuration**: none needed
 
-## Learn More
+## Upgrading from 0.2.0
 
-- [Set Up Guide](./set-up) - Installation and configuration
-- [Operations Reference](./operations/) - Available operations and examples
-- [GitHub Repository](https://github.com/MuleSoft-Forge/mule-chunking-connector) - Source code and issues
+1.0.0 changes the operation's settings and the errors a flow can receive, and the chunk's flags are read as `payload.first` and `payload.last`, not the `payload.isFirst` and `payload.isLast` that 0.2.0's documentation showed. A 0.2.0 application needs changes before it runs on 1.0.0: see [Upgrade from 0.2.0](./upgrading) for every one.
+
+## Learn more
+
+- [Set Up](./set-up): installation, the sample application and logging
+- [read-chunked](./operations/read-chunked): the operation and every setting
+- [Chunking Strategies](./chunking-strategies): by size and by delimiter
+- [Streaming Strategies](./streaming-strategies): how the chunks are held, and how the settings compare with Mule's own streaming
+- [Sliding Window Readers](./sliding-window-readers): what a reader is, and how to choose the sliding window's settings
+- [Errors](./errors): the errors the operation raises, and failures while the chunks are read
+- [Upgrade from 0.2.0](./upgrading): every change a 0.2.0 application must make
+- [GitHub repository](https://github.com/MuleSoft-Forge/mule-chunking-connector): source code and issues

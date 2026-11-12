@@ -32,7 +32,7 @@ const typesafe = {
 
 const chunking = {
   text: 'Chunking Connector',
-  icon: '/images/chunking-connector-icon.png',
+  icon: '/images/chunking-connector-icon.svg',
   base: '/connectors/mule-chunking-connector/',
   items: [
     { text: 'Overview', link: '/connectors/mule-chunking-connector/' },
@@ -44,7 +44,12 @@ const chunking = {
         { text: 'Operations Overview', link: '/connectors/mule-chunking-connector/operations/' },
         { text: 'read-chunked', link: '/connectors/mule-chunking-connector/operations/read-chunked' }
       ]
-    }
+    },
+    { text: 'Chunking Strategies', link: '/connectors/mule-chunking-connector/chunking-strategies' },
+    { text: 'Streaming Strategies', link: '/connectors/mule-chunking-connector/streaming-strategies' },
+    { text: 'Sliding Window Readers', link: '/connectors/mule-chunking-connector/sliding-window-readers' },
+    { text: 'Errors', link: '/connectors/mule-chunking-connector/errors' },
+    { text: 'Upgrade from 0.2.0', link: '/connectors/mule-chunking-connector/upgrading' }
   ]
 }
 

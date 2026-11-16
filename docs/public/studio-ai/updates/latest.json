@@ -1,4 +1,4 @@
 {
-  "version": "0.5.34",
-  "notes": "MCP servers. Turn on the hosted MuleSoft Platform server (Settings > Rules, Skills, Workflows, Hooks and MCP) and ask about your APIs, policies, environments, governance and monitoring; it signs in with Studio's Anypoint login, so there is nothing to install. Add your own remote servers in mcp.json. Tools that change your account run only in Agent mode, and Studio asks you to allow each call."
+  "version": "0.5.35",
+  "notes": "Settings follow you to every workspace. Your provider, models, instructions and options are saved once for your user, so a new workspace starts ready; your existing settings are copied over the first time. Tick 'Use these settings in this workspace only' to give one workspace its own. Today and This month now count every workspace. Saved chats stay in their workspace unless you tick 'Show saved chats in every workspace' under Chat history."
 }

@@ -83,6 +83,18 @@ Runs cannot read files or the network and stop after 20 seconds. Mule-only funct
 
 Set it up in **Preferences > MuleSoftForge Studio AI > DataWeave CLI**. Leave the path empty and the plugin looks for `dw` on the PATH, in `~/.dw/bin` and in Homebrew; **Check** shows the version it found. **Download** fetches MuleSoft's release (2.12.3) for macOS on Apple silicon, Windows x64 or Linux x64 from GitHub, verifies its published checksum, and uses it. Without the CLI the other proposal checks still run.
 
+## Call your app, in Studio or deployed
+
+The AI can send requests to the app you run in Studio (`http://localhost:8081/...`) to test an endpoint, reproduce a bug or prove a fix. It shows each request as a `curl` command too.
+
+It can also call the same app once it's deployed, for example on CloudHub (`https://my-app.region.cloudhub.io/...`). Those calls go over HTTPS only, and Studio asks you before each one, showing the full request. Click **Allow** to send it. Secrets in the request show as `«masked-N»` in that dialog but are sent for real, so only allow apps you own. To stop being asked for one of your own apps, add its host under **Preferences > MuleSoftForge Studio AI > HTTP and documentation**, in **Deployed apps call_endpoint may call without asking**.
+
+Ask and Plan mode only send GET, HEAD and OPTIONS. Requests that change data (POST, PUT, PATCH, DELETE) need Agent or Diagnose mode.
+
+## Long tasks pause and offer Continue
+
+Each tool call, such as reading a file or running DataWeave or MUnit, is a step. After 25 steps in one message, the AI pauses with what it has so far and offers **Continue**, which picks up where it stopped. Change the number under **Preferences > MuleSoftForge Studio AI > Chat view**, from 1 to 200. Local models often need more steps; a lower number keeps the cost of one message down.
+
 ## Debug with AI
 
 When Studio's Mule debugger stops at a breakpoint or an error, a row above the message box says where, for example **Debugger stopped on an error at Transform Message**. Click **Ask about this event**, or the MuleSoftForge button on Studio's **Mule Debugger** view, to attach the live event to your next message: where it stopped, any error, the payload, attributes, variables, and the processor's settings as the runtime evaluated them. In the **Mule Debug** perspective, the AI view sits beside **Evaluate**; reset the perspective if it is missing.

@@ -4,6 +4,13 @@ export const news = [
   {
     date: '2026-11-16',
     asset: 'studio-ai',
+    title: 'Studio AI 0.5.37: call your deployed app, and longer tasks before a pause',
+    summary: 'The AI can now call your app on CloudHub or anywhere else over HTTPS, not only the one running in Studio. Studio asks you before each such request, unless you list the host in Preferences. Long tasks now run 25 steps before pausing for Continue, instead of 12, and you can set the number yourself.',
+    link: '/studio-ai/use-the-chat#call-your-app-in-studio-or-deployed'
+  },
+  {
+    date: '2026-11-16',
+    asset: 'studio-ai',
     title: 'Studio AI 0.5.36: updating keeps every workspace\'s settings',
     summary: 'A workspace set up differently from your others keeps its own settings after the update; one you never set up uses your shared settings. A one-off note in the chat view says which happened. API keys and saved chats are unchanged.',
     link: '/studio-ai/update#updating-to-0-5-36-or-later'

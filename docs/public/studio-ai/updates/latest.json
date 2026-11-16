@@ -1,4 +1,4 @@
 {
-  "version": "0.5.36",
-  "notes": "Updating no longer changes a workspace's settings. A workspace set up differently from your others keeps its own; one you never set up uses your shared settings, so new workspaces start ready. A one-off note in the chat view says which happened. API keys and saved chats are unchanged; Today and This month now add up every workspace."
+  "version": "0.5.37",
+  "notes": "Call your deployed app (CloudHub or any HTTPS host) after you allow each request, or list its host in Preferences. Long tasks run 25 steps before pausing for Continue, and you can set the number."
 }

@@ -1,4 +1,4 @@
 {
-  "version": "0.5.35",
-  "notes": "Settings follow you to every workspace. Your provider, models, instructions and options are saved once for your user, so a new workspace starts ready; your existing settings are copied over the first time. Tick 'Use these settings in this workspace only' to give one workspace its own. Today and This month now count every workspace. Saved chats stay in their workspace unless you tick 'Show saved chats in every workspace' under Chat history."
+  "version": "0.5.36",
+  "notes": "Updating no longer changes a workspace's settings. A workspace set up differently from your others keeps its own; one you never set up uses your shared settings, so new workspaces start ready. A one-off note in the chat view says which happened. API keys and saved chats are unchanged; Today and This month now add up every workspace."
 }

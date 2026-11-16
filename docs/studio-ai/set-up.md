@@ -22,7 +22,13 @@ The same page has more settings under the provider:
 - [**DataWeave CLI**](./use-the-chat#run-dataweave-with-mulesoft-s-cli): where to find `dw`, and a download button.
 - **Chat history**: save chats, how many days to keep them, and the raw log of each request and response.
 
-Chats are saved in your Studio workspace, never in your Mule projects, and API keys are never written to them.
+## Settings in every workspace
+
+From 0.5.35, these settings are shared by every Studio workspace on your computer, so a new workspace is ready to use. They are saved in `~/.mulesoftforge/studio-ai/settings.properties`. API keys stay in secure storage, which every workspace already shared.
+
+To give one workspace its own settings, for example a different provider for a client, tick **Use these settings in this workspace only** at the top of the page. It starts from your shared settings; changes you make then stay in that workspace. Clear it to go back to the shared settings.
+
+Chats are saved per workspace, never in your Mule projects, and API keys are never written to them. To see every workspace's chats in **History ▾**, tick **Show saved chats in every workspace** under **Chat history**.
 
 ![MuleSoftForge Studio AI preferences: Chat view, Instructions, HTTP and documentation, Network, DataWeave CLI and Chat history](/images/studio-ai/setup/07-other-settings.png)
 

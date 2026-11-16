@@ -2,6 +2,20 @@
 
 export const news = [
   {
+    date: '2026-11-16',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.36: updating keeps every workspace\'s settings',
+    summary: 'A workspace set up differently from your others keeps its own settings after the update; one you never set up uses your shared settings. A one-off note in the chat view says which happened. API keys and saved chats are unchanged.',
+    link: '/studio-ai/update#updating-to-0-5-36-or-later'
+  },
+  {
+    date: '2026-11-16',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.35: settings shared across workspaces',
+    summary: 'Set up once: provider, model, instructions and the other settings now apply in every Studio workspace, so a new workspace is ready to use. Tick "Use these settings in this workspace only" to give one workspace its own. Cost totals add up every workspace, and saved chats can be shown in every workspace too.',
+    link: '/studio-ai/set-up#settings-in-every-workspace'
+  },
+  {
     date: '2026-11-11',
     asset: 'chunking',
     title: 'Mule Chunking Connector 1.0.0: chunking by delimiter',

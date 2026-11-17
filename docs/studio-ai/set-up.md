@@ -11,6 +11,14 @@ Choose which AI provider to use and enter its API key. Keys are saved in Eclipse
 
 If saving fails with **No password provided**, see [Troubleshooting](./troubleshooting#could-not-save-settings-no-password-provided).
 
+## OpenAI Responses API
+
+OpenRouter, OpenAI, MuleSoft AI Gateway and **Other OpenAI-compatible** offer an **API** setting: **Chat Completions** (the default) or **Responses**.
+
+Choose **Responses** when the model needs the Responses API for tools with reasoning — for example GPT-5.6 and GPT-6 on OpenAI or Microsoft Foundry. Chat Completions rejects that combination unless reasoning is turned off. Point **Other OpenAI-compatible** at Foundry with base URL `https://{resource}.openai.azure.com/openai/v1`, set the model to your deployment name, and pick **Responses**. Keep **Chat Completions** for Claude behind a gateway: its prompt-cache marks are sent only on that path.
+
+The Azure OpenAI provider still uses Chat Completions through the Azure SDK. For Foundry Responses, use **Other OpenAI-compatible** as above.
+
 ## Other settings
 
 The same page has more settings under the provider:

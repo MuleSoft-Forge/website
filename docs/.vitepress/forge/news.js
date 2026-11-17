@@ -2,6 +2,13 @@
 
 export const news = [
   {
+    date: '2026-11-17',
+    asset: 'studio-ai',
+    title: 'Studio AI 0.5.38: Responses API, and large raw logs without exhausting Studio',
+    summary: 'OpenAI-compatible providers can use the Responses API, so GPT-5.6 and GPT-6 on OpenAI or Microsoft Foundry can call tools with reasoning. Opening a large raw log no longer loads every body into Studio\'s heap: saved chats show headings only, and oversized logs open in your system text editor.',
+    link: '/studio-ai/set-up#openai-responses-api'
+  },
+  {
     date: '2026-11-16',
     asset: 'studio-ai',
     title: 'Studio AI 0.5.37: call your deployed app, and longer tasks before a pause',

@@ -9,6 +9,12 @@ description: Fix common MuleSoftForge Studio AI problems
 
 If your company inspects HTTPS (Zscaler and similar), the plugin also trusts the operating system's certificates. If install or chat still fails with a certificate error, add your company's root certificate as a PEM file in **Preferences > MuleSoftForge Studio AI > Network**. Studio's own installer uses Studio's Java trust store, so the install step may also need that certificate added to Studio's JRE, or a proxy set in **Preferences > General > Network Connections**.
 
+## Function tools with reasoning_effort are not supported
+
+GPT-5.6, GPT-6 Luna and similar reasoning models on OpenAI or Microsoft Foundry reject Agent-mode requests that send tools on Chat Completions while reasoning is on (the default). The error names `/v1/responses` or `reasoning_effort: none`.
+
+In **Preferences > MuleSoftForge Studio AI**, pick **Other OpenAI-compatible** (or OpenAI), set **API** to **Responses**, and for Foundry use base URL `https://{resource}.openai.azure.com/openai/v1` with your deployment as the model. See [OpenAI Responses API](./set-up#openai-responses-api).
+
 ## 401, "User not found" or "invalid API key"
 
 The provider did not accept the key saved for it. Usually the key belongs to another provider, or it was revoked. Each provider keeps its own key, so pasting an OpenAI key while OpenRouter is selected saves it as the OpenRouter key.

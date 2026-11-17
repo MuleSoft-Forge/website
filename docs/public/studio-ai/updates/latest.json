@@ -1,4 +1,4 @@
 {
-  "version": "0.5.37",
-  "notes": "Call your deployed app (CloudHub or any HTTPS host) after you allow each request, or list its host in Preferences. Long tasks run 25 steps before pausing for Continue, and you can set the number."
+  "version": "0.5.38",
+  "notes": "Responses API for OpenAI-compatible providers (GPT-5.6 / GPT-6 tools with reasoning on OpenAI or Foundry). Opening a large raw log no longer exhausts Studio's heap."
 }

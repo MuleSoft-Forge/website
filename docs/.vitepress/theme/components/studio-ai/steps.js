@@ -117,7 +117,7 @@ export const stepSets = {
     {
       src: setup('03-provider-fields.png'),
       title: 'Paste your API key',
-      text: 'The <strong>Base URL</strong> fills in for the provider. Paste your <strong>API key</strong>. Under the field, Studio shows only the start, the last characters and the length of the key. <strong>Auto fast model</strong> and <strong>Auto strong model</strong> are the two models that <strong>Auto</strong> uses.',
+      text: 'The <strong>Base URL</strong> fills in for the provider. Paste your <strong>API key</strong>. Under the field, Studio shows only the start, the last characters and the length of the key. For OpenAI-compatible providers, <strong>API</strong> chooses Chat Completions or Responses (use Responses for GPT-5.6 / GPT-6 tools with reasoning on OpenAI or Foundry). <strong>Auto fast model</strong> and <strong>Auto strong model</strong> are the two models that <strong>Auto</strong> uses.',
       alt: 'OpenRouter selected, with Base URL, Model, Auto fast model, Auto strong model and a masked API key'
     },
     {

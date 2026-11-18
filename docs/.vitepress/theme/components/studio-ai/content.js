@@ -12,6 +12,7 @@ export const docPages = [
   { link: '/studio-ai/set-up', text: 'Set up', heading: 'Set up a provider', kicker: 'Step 2 of 4' },
   { link: '/studio-ai/discover', text: 'Discover', heading: 'Discover Studio AI', kicker: 'Step 3 of 4' },
   { link: '/studio-ai/use-the-chat', text: 'Use the chat', heading: 'Use the chat', kicker: 'Step 4 of 4' },
+  { link: '/studio-ai/harness', text: 'Harness', heading: 'MuleSoftForge Studio AI Harness', kicker: 'Under the hood' },
   { link: '/studio-ai/update', text: 'Update', heading: 'Update and roll back', kicker: 'Stay current' },
   { link: '/studio-ai/troubleshooting', text: 'Help', heading: 'Troubleshooting', kicker: 'Help' },
   { link: '/studio-ai/build-it-yourself', text: 'Source', heading: 'Build it yourself', kicker: 'Open source' }
@@ -286,4 +287,37 @@ export const providers = [
   'Amazon Bedrock',
   'Ollama (local)',
   'Any OpenAI-compatible endpoint'
+]
+
+export const harnessLayers = [
+  {
+    tag: 'Checks & finish gate',
+    title: 'Self-healing before you review',
+    body: 'Every edit runs Mule XML, MUnit, metadata, connector-version and DataWeave compiler checks. If checks still fail when the model tries to finish, the harness holds the turn open and sends the errors back to fix.'
+  },
+  {
+    tag: 'Grounding tools',
+    title: 'Project facts, not training memory',
+    body: 'connector_reference reads the exact connector schemas Studio generated from your pom.xml, search_connectors queries Anypoint Exchange live, and sandboxed runners test DataWeave and MUnit for real.'
+  },
+  {
+    tag: 'Forgiving edits',
+    title: 'Four-pass matching & code guards',
+    body: 'Tolerates whitespace, indent and smart-quote drift, re-indents replacements, blocks lazy <!-- ... --> omission comments before they delete code, and returns numbered closest lines on a miss.'
+  },
+  {
+    tag: 'Loop & nudge recovery',
+    title: 'Catches fumbles mid-turn',
+    body: 'Nudges pasted Agent code into diffs, challenges false edit claims, stops repeated or failing tool calls, salvages truncated tool batches, and steps down max_tokens automatically on 400 errors.'
+  },
+  {
+    tag: 'Context diet',
+    title: 'Lean windows, intact caches',
+    body: 'Injects MUnit and metadata rules only when needed, funnels 126+ Platform MCP tools through two lightweight search-and-call tools, prunes old tool output, and auto-compacts at 85%.'
+  },
+  {
+    tag: 'Auto routing',
+    title: 'Cheap where it wins, strong where it counts',
+    body: 'Routes quick Ask questions and test/endpoint runs to your fast model, and promotes Agent, Plan, Diagnose, DataWeave, MUnit and live debug events to your strong model — with automatic failover.'
+  }
 ]

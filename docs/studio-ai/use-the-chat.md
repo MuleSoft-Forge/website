@@ -33,6 +33,8 @@ A step under your message says which model Auto picked and why. If that model fa
 
 Choose the two models under **Preferences > MuleSoftForge Studio AI**, below **Model**. Each provider starts with a sensible pair, such as Claude Haiku and Claude Sonnet for Anthropic. With OpenRouter you can also pick `openrouter/auto`, which lets OpenRouter choose. The step under each answer then names the model that actually replied.
 
+For everything else that keeps faster, cheaper and local models accurate on Mule XML, DataWeave and MUnit, see [MuleSoftForge Studio AI Harness](./harness).
+
 ## Give it context
 
 **+ Context** attaches more to your next message. Attachments show above the message box and clear once sent.
@@ -138,7 +140,7 @@ Every proposal to Mule XML, `pom.xml` or a properties file is checked against th
 - Anything placed after a flow's `<error-handler>`, or an error handler inside a sub-flow.
 - DataWeave that does not compile, when the [DataWeave CLI](#run-dataweave-with-mulesoft-s-cli) is set up. Only scripts the proposal changed are compiled.
 
-Only problems the proposal adds count, so issues already in your project are not blamed on it. Anything the AI leaves unfixed is shown in a note under its answer. You can also ask, in any mode, "check this project": the AI runs the same checks over every file. They read the files only and do not build or run the app.
+Only problems the proposal adds count, so issues already in your project are not blamed on it. Anything the AI leaves unfixed is shown in a note under its answer. You can also ask, in any mode, "check this project": the AI runs the same checks over every file. They read the files only and do not build or run the app. See [MuleSoftForge Studio AI Harness](./harness) for how the finish gate, fuzzy diff matching and loop recovery fit together.
 
 ### Connector lookup
 

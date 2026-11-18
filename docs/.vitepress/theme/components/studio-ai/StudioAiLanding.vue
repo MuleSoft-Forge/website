@@ -9,7 +9,7 @@ import ChecksPipeline from './ChecksPipeline.vue'
 import SecretMaskDemo from './SecretMaskDemo.vue'
 import ProvidersAndCost from './ProvidersAndCost.vue'
 import AtAGlance from '../AtAGlance.vue'
-import { UPDATE_SITE } from './content.js'
+import { UPDATE_SITE, harnessLayers } from './content.js'
 
 const asset = computed(() => data.assets.find((a) => a.id === 'studio-ai'))
 const version = computed(() => asset.value?.version || '')
@@ -173,6 +173,32 @@ const steps = [
       </div>
     </section>
 
+    <!-- Studio AI Harness -->
+    <section class="band">
+      <div class="wrap">
+        <header class="head">
+          <span class="kicker">MuleSoftForge Studio AI Harness</span>
+          <h2>Why even faster, cheaper models stay on the rails</h2>
+          <p>
+            A prompt alone won't stop a smaller or local model from inventing Mule XML, breaking indentation, or looping on a bad call.
+            Every model sits inside a six-layer runtime harness built specifically for Mule 4, DataWeave and MUnit.
+          </p>
+        </header>
+        <div class="harness-grid">
+          <article v-for="layer in harnessLayers" :key="layer.tag" class="harness-card">
+            <span class="harness-tag">{{ layer.tag }}</span>
+            <h3>{{ layer.title }}</h3>
+            <p>{{ layer.body }}</p>
+          </article>
+        </div>
+        <div class="harness-cta">
+          <a class="cta-inline" :href="withBase('/studio-ai/harness')">
+            Inside the MuleSoftForge Studio AI Harness <span class="chev">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- Get started -->
     <section class="band start">
       <div class="glow soft" aria-hidden="true"><span class="g1" /><span class="g2" /></div>
@@ -192,6 +218,7 @@ const steps = [
           <AtAGlance id="studio-ai" />
         </div>
         <p class="more">
+          Under the hood: <a :href="withBase('/studio-ai/harness')">MuleSoftForge Studio AI Harness</a>.
           New releases arrive through Studio's own updates: see <a :href="withBase('/studio-ai/update')">Update and roll back</a>.
           Stuck? <a :href="withBase('/studio-ai/troubleshooting')">Troubleshooting</a>. Curious how it works?
           <a :href="withBase('/studio-ai/build-it-yourself')">Build it yourself</a>.
@@ -509,6 +536,83 @@ h2 {
   background: rgba(34, 197, 94, 0.15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8l3 3 5-6' fill='none' stroke='%2322c55e' stroke-width='2'/%3E%3C/svg%3E") center/13px no-repeat;
 }
 
+/* Harness */
+.harness-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.harness-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  border-radius: 16px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+.harness-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 163, 224, 0.55);
+  box-shadow: 0 20px 44px -26px rgba(0, 119, 182, 0.45);
+}
+
+.harness-tag {
+  align-self: flex-start;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+}
+
+.harness-card h3 {
+  margin: 4px 0 0;
+  font-size: 18px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+}
+
+.harness-card p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--vp-c-text-2);
+}
+
+.harness-cta {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.cta-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 999px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #fff !important;
+  text-decoration: none !important;
+  background: linear-gradient(135deg, #00a3e0, #5b5cf0);
+  box-shadow: 0 12px 30px -12px rgba(0, 163, 224, 0.8);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cta-inline:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px -10px rgba(0, 163, 224, 0.95);
+}
+
+.cta-inline:hover .chev { transform: translateX(3px); }
+
 /* Get started */
 .start {
   background: #070b14;
@@ -597,6 +701,7 @@ h2 {
   .proof { grid-template-columns: repeat(2, 1fr); }
   .split { grid-template-columns: 1fr; gap: 32px; }
   .split.reverse > :first-child { order: 2; }
+  .harness-grid { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; }
   .band { padding: 72px 0; }
 }
